@@ -83,7 +83,6 @@ function App() {
         <section className="grid gap-3 md:grid-cols-3">
           {quickStats.map((item) => (
             <Card key={item.label} className="js-stat relative overflow-hidden rounded-2xl border-border/70 bg-card/60">
-              <div className="absolute inset-x-0 top-0 h-px bg-primary/70" />
               <CardHeader>
                 <CardDescription className="mono flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase">
                   <span className="inline-block size-1.5 rounded-full bg-primary" />
