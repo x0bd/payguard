@@ -61,6 +61,6 @@
   },
   "artifacts": {
     "best_model_path": "..\\models\\fraud_model.joblib",
-    "versioned_model_path": "..\\models\\fraud_model_random_forest_20260315T171538Z.joblib"
+    "versioned_model_path": "..\\models\\fraud_model_random_forest_20260315T182310Z.joblib"
   }
 }

@@ -75,15 +75,15 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 6: End-to-End Integration
 
-- [ ] Connect frontend to Flask endpoints.
-- [ ] Run end-to-end flow:
+- [x] Connect frontend to Flask endpoints.
+- [x] Run end-to-end flow:
   - generate data
   - train model
   - start API
   - view dashboard
   - score a new transaction
-- [ ] Fix API/UX issues found during integration tests.
-- [ ] Add sample seed dataset for quick demo startup.
+- [x] Fix API/UX issues found during integration tests.
+- [x] Add sample seed dataset for quick demo startup.
 
 ## Phase 7: Deployment on Vercel
 
@@ -142,9 +142,14 @@ Use this section to log what was done each day.
   - Added alert feed tabs/filtering, risk trend chart, alert type chart, and live scoring form
   - Added loading, empty, and error states for operational dashboard UX
   - Added Vite dev proxy for `/api` to Flask backend (`127.0.0.1:5000`)
+  - Phase 6 end-to-end run completed (generate -> train -> seed -> API -> frontend proxy -> score)
+  - Verified frontend-to-Flask integration via `/api` proxy with live health/metrics/alerts/score calls
+  - Added `data/sample_transactions.csv` for quick demo seeding
+  - Validated sample seed flow in isolated DB (`600` rows, `12` fraud rows)
+  - Documented quick demo seed and end-to-end run order in `README.md`
 - In progress:
   - None
 - Blockers:
   - Frontend lint currently fails in generated shadcn ui files due `react-refresh/only-export-components` rule
 - Next step:
-  - Start Phase 6: full end-to-end integration run and UX/API hardening
+  - Start Phase 7: Vercel deployment configuration and validation

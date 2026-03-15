@@ -55,6 +55,15 @@ cd backend
 python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate
 ```
 
+### Quick Demo Seed (Phase 6)
+
+Use the lightweight sample dataset for faster demos:
+
+```powershell
+cd backend
+python seed_db_from_csv.py --csv ..\data\sample_transactions.csv --truncate
+```
+
 ### Train Fraud Models (Phase 3)
 
 ```powershell
@@ -78,6 +87,23 @@ npm run dev
 
 By default, the frontend calls relative `/api` routes and uses Vite proxy to `http://127.0.0.1:5000`.
 If needed, set `VITE_API_BASE_URL` to a deployed backend URL.
+
+### End-to-End Run Order
+
+```powershell
+cd backend
+python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv
+python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42
+python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate
+python app.py
+```
+
+In another terminal:
+
+```powershell
+cd frontend
+npm run dev
+```
 
 ### Phase 4 Endpoints
 
