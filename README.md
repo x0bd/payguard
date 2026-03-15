@@ -55,6 +55,13 @@ cd backend
 python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate
 ```
 
+### Train Fraud Models (Phase 3)
+
+```powershell
+cd backend
+python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42
+```
+
 ## Notes
 
 - `frontend/` is already scaffolded and running.

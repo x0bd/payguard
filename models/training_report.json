@@ -1,0 +1,66 @@
+{
+  "selected_model": {
+    "model_name": "random_forest",
+    "precision": 0.45394736842105265,
+    "recall": 0.8697478991596639,
+    "f1": 0.5965417867435159,
+    "roc_auc": 0.9911901674873265,
+    "train_rows": 79574,
+    "test_rows": 19894
+  },
+  "all_models": [
+    {
+      "model_name": "random_forest",
+      "precision": 0.45394736842105265,
+      "recall": 0.8697478991596639,
+      "f1": 0.5965417867435159,
+      "roc_auc": 0.9911901674873265,
+      "train_rows": 79574,
+      "test_rows": 19894
+    },
+    {
+      "model_name": "logistic_regression",
+      "precision": 0.3751004016064257,
+      "recall": 0.9810924369747899,
+      "f1": 0.5427077280650784,
+      "roc_auc": 0.9898202611974856,
+      "train_rows": 79574,
+      "test_rows": 19894
+    }
+  ],
+  "dataset": {
+    "path": "..\\data\\transactions.csv",
+    "rows": 99468,
+    "fraud_rows": 2380,
+    "fraud_rate_percent": 2.392729319982306
+  },
+  "feature_summary": {
+    "numeric_features": [
+      "amount",
+      "amount_log",
+      "hour",
+      "day_of_week",
+      "is_weekend",
+      "is_night",
+      "account_prior_tx_count",
+      "account_prior_avg_amount",
+      "amount_to_prior_avg_ratio",
+      "amount_delta_from_prior_avg",
+      "account_age_hours",
+      "seconds_since_prev_tx",
+      "tx_count_last_1h",
+      "tx_count_last_24h",
+      "device_change",
+      "location_change"
+    ],
+    "categorical_features": [
+      "transaction_type",
+      "currency",
+      "location"
+    ]
+  },
+  "artifacts": {
+    "best_model_path": "..\\models\\fraud_model.joblib",
+    "versioned_model_path": "..\\models\\fraud_model_random_forest_20260315T171538Z.joblib"
+  }
+}

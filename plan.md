@@ -43,13 +43,13 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 3: Feature Engineering + Model Training
 
-- [ ] Build feature engineering pipeline (`backend/ml/features.py`).
-- [ ] Define baseline feature set (velocity, avg amount, account age, etc.).
-- [ ] Train first model (Logistic Regression).
-- [ ] Train second model (Random Forest or Isolation Forest).
-- [ ] Evaluate with precision, recall, F1, ROC-AUC.
-- [ ] Save best model to `models/`.
-- [ ] Add training script (`python backend/train.py`).
+- [x] Build feature engineering pipeline (`backend/ml/features.py`).
+- [x] Define baseline feature set (velocity, avg amount, account age, etc.).
+- [x] Train first model (Logistic Regression).
+- [x] Train second model (Random Forest or Isolation Forest).
+- [x] Evaluate with precision, recall, F1, ROC-AUC.
+- [x] Save best model to `models/`.
+- [x] Add training script (`python backend/train.py`).
 
 ## Phase 4: Fraud Scoring API
 
@@ -126,9 +126,14 @@ Use this section to log what was done each day.
   - Generated dataset written to `data/transactions.csv` (99,468 rows)
   - CSV-to-SQLite seeding script added (`backend/seed_db_from_csv.py`)
   - Dataset and DB class balance validated (2.39% fraud rate)
+  - Phase 3 feature engineering pipeline added (`backend/ml/features.py`)
+  - Training script added (`backend/train.py`) with Logistic Regression and Random Forest
+  - Model evaluation completed with precision/recall/F1/ROC-AUC metrics
+  - Best model selected and saved to `models/fraud_model.joblib`
+  - Versioned model and training report generated in `models/`
 - In progress:
   - None
 - Blockers:
   - None (dependency compatibility issue resolved by installing newer Python 3.14-compatible versions)
 - Next step:
-  - Start Phase 3: feature engineering pipeline and baseline model training
+  - Start Phase 4: load trained model in API and add fraud scoring endpoints
