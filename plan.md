@@ -65,13 +65,13 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 5: Frontend Dashboard (Vite + React)
 
-- [ ] Scaffold dashboard layout and routing.
-- [ ] Build summary cards (total tx, fraud count, fraud rate).
-- [ ] Build alerts table with pagination/filtering.
-- [ ] Build charts for fraud trends and model performance (Plotly).
-- [ ] Add transaction scoring form to test live API predictions.
-- [ ] Add loading/error/empty states.
-- [ ] Validate responsive behavior (desktop + mobile).
+- [x] Scaffold dashboard layout and routing.
+- [x] Build summary cards (total tx, fraud count, fraud rate).
+- [x] Build alerts table with pagination/filtering.
+- [x] Build charts for fraud trends and model performance (Plotly).
+- [x] Add transaction scoring form to test live API predictions.
+- [x] Add loading/error/empty states.
+- [x] Validate responsive behavior (desktop + mobile).
 
 ## Phase 6: End-to-End Integration
 
@@ -137,9 +137,14 @@ Use this section to log what was done each day.
   - Alerts endpoint added (`GET /api/alerts`)
   - Dashboard metrics endpoint added (`GET /api/metrics`)
   - Phase 4 endpoints verified with Flask test client
+  - Phase 5 dashboard implemented with shadcn + react-icons + shadcn chart components
+  - Frontend connected to backend API endpoints (`/api/metrics`, `/api/alerts`, `/api/score`)
+  - Added alert feed tabs/filtering, risk trend chart, alert type chart, and live scoring form
+  - Added loading, empty, and error states for operational dashboard UX
+  - Added Vite dev proxy for `/api` to Flask backend (`127.0.0.1:5000`)
 - In progress:
   - None
 - Blockers:
-  - None (dependency compatibility issue resolved by installing newer Python 3.14-compatible versions)
+  - Frontend lint currently fails in generated shadcn ui files due `react-refresh/only-export-components` rule
 - Next step:
-  - Start Phase 5: frontend dashboard integration with API endpoints
+  - Start Phase 6: full end-to-end integration run and UX/API hardening

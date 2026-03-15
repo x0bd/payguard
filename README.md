@@ -69,6 +69,16 @@ cd backend
 python app.py
 ```
 
+### Run Frontend Dashboard (Phase 5)
+
+```powershell
+cd frontend
+npm run dev
+```
+
+By default, the frontend calls relative `/api` routes and uses Vite proxy to `http://127.0.0.1:5000`.
+If needed, set `VITE_API_BASE_URL` to a deployed backend URL.
+
 ### Phase 4 Endpoints
 
 - `GET /api/health` - service, database, and model readiness
