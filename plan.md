@@ -23,15 +23,15 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 1: Backend Foundation (Flask + SQLite)
 
-- [ ] Create Flask app entrypoint and health route (`GET /api/health`).
-- [ ] Add SQLite connection layer and initialization script.
-- [ ] Create database tables:
+- [x] Create Flask app entrypoint and health route (`GET /api/health`).
+- [x] Add SQLite connection layer and initialization script.
+- [x] Create database tables:
   - `transactions`
   - `alerts`
   - `model_runs`
-- [ ] Add transaction create/read endpoints.
-- [ ] Add basic error handling + request validation.
-- [ ] Verify API locally with sample requests.
+- [x] Add transaction create/read endpoints.
+- [x] Add basic error handling + request validation.
+- [x] Verify API locally with sample requests.
 
 ## Phase 2: Synthetic Data Generator
 
@@ -118,9 +118,12 @@ Use this section to log what was done each day.
   - Root `.gitignore` created
   - `backend/requirements.txt` added
   - Frontend scaffold verified as present and working
+  - Phase 1 Flask API foundation implemented (`/api/health`, create/list transactions)
+  - SQLite layer and schema created (`transactions`, `alerts`, `model_runs`)
+  - Local API verification run using Flask test client (health, create, list, validation error)
 - In progress:
   - None
 - Blockers:
-  - None
+  - `pandas==2.2.3` and `scikit-learn==1.6.1` failed to install on Python 3.14 in this environment (wheel/build compatibility issue)
 - Next step:
-  - Start Phase 1: Flask app entrypoint and `GET /api/health`
+  - Start Phase 2: synthetic transaction generator
