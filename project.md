@@ -2,80 +2,88 @@
 
 ## Project Description
 
-This project is a software-based fraud detection system designed for mobile-money platforms such as EcoCash-style payment systems. The goal is to simulate realistic mobile-money transactions, identify suspicious behaviour using machine learning, and present the results through a simple monitoring dashboard.
+This project is a fraud detection system for mobile-money platforms (EcoCash-style systems) built with a simpler full-stack setup. The platform will simulate realistic transactions, detect suspicious behavior with machine learning, and display fraud alerts in a clean web dashboard.
 
-Instead of relying only on fixed rules, the system will learn behavioural patterns from transaction data and flag anomalies such as unusual transaction frequency, sudden changes in spending behaviour, abnormal transaction amounts, or activity from unfamiliar devices and locations.
+Instead of relying only on fixed rules, the system will learn transaction behavior patterns and flag anomalies such as:
 
-The project focuses on building a complete fraud detection workflow: generating transaction data, preparing features, training machine learning models, scoring new transactions, and visualising fraud alerts in a way that is easy to understand. This makes it both a strong academic research project and a practical software product prototype.
+- unusually high transaction frequency
+- sudden spikes in transaction amount
+- suspicious device or location changes
+- account behavior that deviates from normal usage
 
-The final system will demonstrate how machine learning can be used to improve fraud detection in mobile-money environments, especially in contexts where digital payments are widely used and fraudulent behaviour can evolve over time.
+The project still covers a complete fraud detection workflow: data simulation, feature engineering, model training, API scoring, and fraud monitoring, but with fewer tools and less deployment overhead.
 
-## Best Simple Tech Stack
+## Simplified Tech Stack (Vercel-Friendly)
 
-This is the best simple stack for the project because it is practical, easy to build within a final-year timeline, and still strong enough to show real software engineering and machine learning skills.
+This stack is designed to keep development and hosting simple while still producing a strong academic and practical result.
 
 ### Core Stack
 
-- **Python** — main programming language for the entire project
-- **Pandas** — data cleaning, transformation, and feature engineering
-- **NumPy** — numerical operations
-- **scikit-learn** — machine learning models such as Logistic Regression, Random Forest, and Isolation Forest
-- **FastAPI** — backend API for scoring transactions and serving fraud results
-- **PostgreSQL** — database for storing transactions, alerts, and account records
-- **Streamlit** — simple dashboard for viewing fraud alerts and analytics
-- **Plotly** — charts and visual analytics
-- **SHAP** — explainability for showing why a transaction was flagged
+- **Frontend:** Vite + React — dashboard UI for transactions, alerts, and analytics
+- **Backend:** Python + Flask — API endpoints for fraud scoring and data access
+- **Database:** SQLite — lightweight local database for transactions and alerts
+- **Machine Learning:** scikit-learn — model training and fraud risk prediction
+- **Data Processing:** Pandas + NumPy — cleaning, transformation, and feature engineering
+- **Charts:** Plotly (via React) — fraud trends, model metrics, and alert visualizations
 
 ## Why This Stack Was Chosen
 
-This stack is the best balance between simplicity and quality.
+- It is significantly simpler to implement and maintain than a multi-service architecture.
+- It keeps machine learning and backend logic in Python, which is ideal for a final-year project.
+- It provides a modern web frontend without heavy frontend complexity.
+- It can be deployed on Vercel with a single repository structure.
+- SQLite removes database setup friction during development and demos.
 
-- It keeps the whole project mostly in **Python**, which reduces complexity.
-- It is strong for **machine learning research** and experimentation.
-- It allows the project to include a **real backend service**.
-- It makes it easy to build a **dashboard** without spending too much time on frontend engineering.
-- It is realistic for a final-year dissertation and still looks modern and professional.
+## Deployment Approach (Vercel)
+
+- **Vite frontend** is deployed as a static web app on Vercel.
+- **Flask backend** is exposed through Vercel Python serverless functions.
+- **SQLite** is used for lightweight persistence during development and demonstration.
+
+Note: SQLite on serverless platforms is fine for prototypes and academic demos, but production systems usually use a managed database.
 
 ## What the System Will Build
 
-The project will include the following main parts:
-
 ### 1. Transaction Simulator
-A Python-based system for generating realistic mobile-money transactions and injecting fraudulent patterns.
+
+A Python module that generates synthetic mobile-money transactions and injects realistic fraud patterns.
 
 ### 2. Feature Engineering Pipeline
-A data-processing layer that extracts useful features such as transaction frequency, average transaction amount, account age, and device changes.
+
+A preprocessing pipeline that builds features such as velocity, average amount, account age, and behavior drift.
 
 ### 3. Machine Learning Fraud Engine
-A fraud detection module that trains models and assigns a fraud risk score to each transaction.
 
-### 4. Backend API
-A FastAPI service that receives transactions, runs fraud checks, and returns fraud predictions.
+A model training and inference module that outputs fraud probabilities or risk scores for transactions.
 
-### 5. Monitoring Dashboard
-A Streamlit dashboard that displays transactions, fraud alerts, analytics, and model explanations.
+### 4. Flask API
+
+A backend API that receives transaction data, applies fraud scoring, stores results, and serves dashboard data.
+
+### 5. Vite Dashboard
+
+A React dashboard for viewing transactions, fraud alerts, summary metrics, and model performance charts.
 
 ## Deliverables
 
 By the end of the project, the system should include:
 
 - a synthetic mobile-money transaction dataset
-- trained fraud detection models
-- a backend API for fraud scoring
-- a dashboard for monitoring alerts
-- charts showing fraud patterns and model performance
-- explainability outputs showing why transactions were flagged
+- trained fraud detection model artifacts
+- a Flask API for fraud scoring and results retrieval
+- a Vite/React dashboard for monitoring fraud alerts
+- visual analytics for fraud patterns and model performance
+- end-to-end deployment on Vercel
 
 ## Final Stack Summary
 
 ```txt
-Python
+Vite + React
+Python + Flask
+SQLite
 Pandas
 NumPy
 scikit-learn
-FastAPI
-PostgreSQL
-Streamlit
 Plotly
-SHAP
+Vercel
 ```
