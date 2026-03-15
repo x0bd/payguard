@@ -41,7 +41,21 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+### Generate Synthetic Data (Phase 2)
+
+```powershell
+cd backend
+python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv
+```
+
+### Seed SQLite from CSV
+
+```powershell
+cd backend
+python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate
+```
+
 ## Notes
 
 - `frontend/` is already scaffolded and running.
-- Backend implementation begins in Phase 1 of `plan.md`.
+- Backend implementation status is tracked in `plan.md`.

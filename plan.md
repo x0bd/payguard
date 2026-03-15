@@ -35,11 +35,11 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 2: Synthetic Data Generator
 
-- [ ] Build transaction generator script for normal behavior.
-- [ ] Add fraud pattern injectors (amount spike, rapid bursts, device/location change).
-- [ ] Save generated data to `data/transactions.csv`.
-- [ ] Add script to seed SQLite from generated CSV.
-- [ ] Validate dataset shape and class balance.
+- [x] Build transaction generator script for normal behavior.
+- [x] Add fraud pattern injectors (amount spike, rapid bursts, device/location change).
+- [x] Save generated data to `data/transactions.csv`.
+- [x] Add script to seed SQLite from generated CSV.
+- [x] Validate dataset shape and class balance.
 
 ## Phase 3: Feature Engineering + Model Training
 
@@ -121,9 +121,14 @@ Use this section to log what was done each day.
   - Phase 1 Flask API foundation implemented (`/api/health`, create/list transactions)
   - SQLite layer and schema created (`transactions`, `alerts`, `model_runs`)
   - Local API verification run using Flask test client (health, create, list, validation error)
+  - Phase 2 synthetic data generator added (`backend/generate_data.py`)
+  - Fraud injectors implemented: amount spike, rapid burst, device/location change
+  - Generated dataset written to `data/transactions.csv` (99,468 rows)
+  - CSV-to-SQLite seeding script added (`backend/seed_db_from_csv.py`)
+  - Dataset and DB class balance validated (2.39% fraud rate)
 - In progress:
   - None
 - Blockers:
-  - `pandas==2.2.3` and `scikit-learn==1.6.1` failed to install on Python 3.14 in this environment (wheel/build compatibility issue)
+  - None (dependency compatibility issue resolved by installing newer Python 3.14-compatible versions)
 - Next step:
-  - Start Phase 2: synthetic transaction generator
+  - Start Phase 3: feature engineering pipeline and baseline model training
