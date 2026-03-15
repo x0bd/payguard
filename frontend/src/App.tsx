@@ -9,18 +9,17 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 const quickStats = [
-  { label: "Transactions Monitored", value: "12,841" },
-  { label: "Open Alerts", value: "37" },
-  { label: "Model Recall", value: "86.97%" },
+  { label: "Transactions Monitored", value: "12,841", tone: "blue" },
+  { label: "Open Alerts", value: "37", tone: "red" },
+  { label: "Model Recall", value: "86.97%", tone: "green" },
 ];
 
 const watchList = [
   { wallet: "ZW-EC-3382", event: "Amount spike", risk: "0.92", state: "critical" },
   { wallet: "ZW-EC-1046", event: "Device shift", risk: "0.81", state: "high" },
-  { wallet: "ZW-EC-7809", event: "Velocity burst", risk: "0.76", state: "high" },
+  { wallet: "ZW-EC-7809", event: "Velocity burst", risk: "0.76", state: "medium" },
 ];
 
 function App() {
@@ -42,13 +41,21 @@ function App() {
 
   return (
     <div ref={rootRef} className="app-shell relative min-h-screen overflow-hidden">
+      <div className="accent-orb accent-orb-green" />
+      <div className="accent-orb accent-orb-blue" />
+      <div className="accent-orb accent-orb-purple" />
+      <div className="accent-orb accent-orb-red" />
+
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 py-8 md:px-10 md:py-12">
-        <header className="js-hero space-y-6 border border-border/60 bg-card/60 p-6 backdrop-blur-sm md:p-10">
+        <header className="js-hero space-y-6 rounded-3xl border border-border/70 bg-card/65 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm md:p-10">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <Badge variant="outline" className="mono border-border bg-background/70 tracking-[0.2em]">
+            <Badge
+              variant="outline"
+              className="mono rounded-full border-border bg-background/70 tracking-[0.2em]"
+            >
               PAYGUARD / FRAUD OPS
             </Badge>
-            <Badge className="mono bg-primary text-primary-foreground tracking-[0.12em]">
+            <Badge className="mono rounded-full bg-primary text-primary-foreground tracking-[0.12em]">
               API READY
             </Badge>
           </div>
@@ -62,16 +69,16 @@ function App() {
 
           <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
             A Vercel-grade control plane for mobile-money risk detection. Clean hierarchy, aggressive
-            contrast, and one accent color for action.
+            contrast, and controlled color accents for fast scanning.
           </p>
 
           <div className="flex flex-wrap gap-2">
-            <Button className="mono bg-primary px-4 text-[11px] tracking-[0.14em] text-primary-foreground uppercase hover:bg-primary/90">
+            <Button className="mono rounded-xl bg-primary px-4 text-[11px] tracking-[0.14em] text-primary-foreground uppercase hover:bg-primary/90">
               Open Console
             </Button>
             <Button
               variant="outline"
-              className="mono border-border bg-background/70 px-4 text-[11px] tracking-[0.14em] uppercase hover:border-primary/60 hover:text-primary"
+              className="mono rounded-xl border-border bg-background/70 px-4 text-[11px] tracking-[0.14em] uppercase hover:border-primary/60 hover:text-primary"
             >
               Run Sample Score
             </Button>
@@ -80,9 +87,27 @@ function App() {
 
         <section className="grid gap-3 md:grid-cols-3">
           {quickStats.map((item) => (
-            <Card key={item.label} className="js-stat border-border/60 bg-card/50">
+            <Card key={item.label} className="js-stat relative overflow-hidden rounded-2xl border-border/70 bg-card/60">
+              <div
+                className={
+                  item.tone === "green"
+                    ? "absolute inset-x-0 top-0 h-px bg-emerald-300/80"
+                    : item.tone === "red"
+                      ? "absolute inset-x-0 top-0 h-px bg-rose-300/80"
+                      : "absolute inset-x-0 top-0 h-px bg-sky-300/80"
+                }
+              />
               <CardHeader>
-                <CardDescription className="mono text-[11px] tracking-[0.16em] uppercase">
+                <CardDescription className="mono flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase">
+                  <span
+                    className={
+                      item.tone === "green"
+                        ? "inline-block size-1.5 rounded-full bg-emerald-300"
+                        : item.tone === "red"
+                          ? "inline-block size-1.5 rounded-full bg-rose-300"
+                          : "inline-block size-1.5 rounded-full bg-sky-300"
+                    }
+                  />
                   {item.label}
                 </CardDescription>
                 <CardTitle className="text-3xl leading-none font-semibold tracking-[-0.03em]">
@@ -94,7 +119,7 @@ function App() {
         </section>
 
         <section className="grid gap-3 lg:grid-cols-[1.2fr,0.8fr]">
-          <Card className="js-panel border-border/60 bg-card/50">
+          <Card className="js-panel rounded-2xl border-border/70 bg-card/60">
             <CardHeader>
               <CardDescription className="mono text-[11px] tracking-[0.16em] uppercase">
                 Live Watchlist
@@ -104,7 +129,7 @@ function App() {
             <CardContent className="space-y-2 pb-2">
               {watchList.map((item, index) => (
                 <div key={item.wallet}>
-                  <div className="flex items-center justify-between gap-3 py-2">
+                  <div className="flex items-center justify-between gap-3 rounded-xl px-2 py-2">
                     <div>
                       <p className="mono text-[11px] text-muted-foreground uppercase tracking-[0.14em]">
                         {item.wallet}
@@ -115,20 +140,22 @@ function App() {
                       variant="outline"
                       className={
                         item.state === "critical"
-                          ? "border-primary/70 text-primary"
-                          : "border-border text-muted-foreground"
+                          ? "rounded-full border-rose-300/70 bg-rose-300/10 text-rose-200"
+                          : item.state === "high"
+                            ? "rounded-full border-violet-300/70 bg-violet-300/10 text-violet-200"
+                            : "rounded-full border-sky-300/70 bg-sky-300/10 text-sky-200"
                       }
                     >
                       risk {item.risk}
                     </Badge>
                   </div>
-                  {index < watchList.length - 1 ? <Separator className="bg-border/70" /> : null}
+                  {index < watchList.length - 1 ? <div className="h-px bg-border/70" /> : null}
                 </div>
               ))}
             </CardContent>
           </Card>
 
-          <Card className="js-panel border-border/60 bg-card/50">
+          <Card className="js-panel rounded-2xl border-border/70 bg-card/60">
             <CardHeader>
               <CardDescription className="mono text-[11px] tracking-[0.16em] uppercase">
                 Engineering Notes
@@ -136,14 +163,13 @@ function App() {
               <CardTitle className="text-xl tracking-[-0.02em]">Signal over noise</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 pb-2">
-              <div className="space-y-1">
+              <div className="space-y-1 rounded-xl border border-blue-300/30 bg-blue-300/8 p-3">
                 <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                   Detection
                 </p>
                 <p className="text-sm text-foreground">Random forest model, calibrated for high recall in fraud class.</p>
               </div>
-              <Separator className="bg-border/70" />
-              <div className="space-y-1">
+              <div className="space-y-1 rounded-xl border border-violet-300/30 bg-violet-300/8 p-3">
                 <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                   Feature Focus
                 </p>
@@ -151,8 +177,7 @@ function App() {
                   Velocity, amount-vs-baseline ratio, device change, and location drift.
                 </p>
               </div>
-              <Separator className="bg-border/70" />
-              <div className="space-y-1">
+              <div className="space-y-1 rounded-xl border border-emerald-300/30 bg-emerald-300/8 p-3">
                 <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                   Runtime
                 </p>
