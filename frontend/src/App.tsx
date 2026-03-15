@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/card";
 
 const quickStats = [
-  { label: "Transactions Monitored", value: "12,841", tone: "blue" },
-  { label: "Open Alerts", value: "37", tone: "red" },
-  { label: "Model Recall", value: "86.97%", tone: "green" },
+  { label: "Transactions Monitored", value: "12,841" },
+  { label: "Open Alerts", value: "37" },
+  { label: "Model Recall", value: "86.97%" },
 ];
 
 const watchList = [
@@ -41,11 +41,6 @@ function App() {
 
   return (
     <div ref={rootRef} className="app-shell relative min-h-screen overflow-hidden">
-      <div className="accent-orb accent-orb-green" />
-      <div className="accent-orb accent-orb-blue" />
-      <div className="accent-orb accent-orb-purple" />
-      <div className="accent-orb accent-orb-red" />
-
       <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 py-8 md:px-10 md:py-12">
         <header className="js-hero space-y-6 rounded-3xl border border-border/70 bg-card/65 p-6 shadow-[0_20px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm md:p-10">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -69,7 +64,7 @@ function App() {
 
           <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
             A Vercel-grade control plane for mobile-money risk detection. Clean hierarchy, aggressive
-            contrast, and controlled color accents for fast scanning.
+            contrast, and one accent color for fast scanning.
           </p>
 
           <div className="flex flex-wrap gap-2">
@@ -88,26 +83,10 @@ function App() {
         <section className="grid gap-3 md:grid-cols-3">
           {quickStats.map((item) => (
             <Card key={item.label} className="js-stat relative overflow-hidden rounded-2xl border-border/70 bg-card/60">
-              <div
-                className={
-                  item.tone === "green"
-                    ? "absolute inset-x-0 top-0 h-px bg-emerald-300/80"
-                    : item.tone === "red"
-                      ? "absolute inset-x-0 top-0 h-px bg-rose-300/80"
-                      : "absolute inset-x-0 top-0 h-px bg-sky-300/80"
-                }
-              />
+              <div className="absolute inset-x-0 top-0 h-px bg-primary/70" />
               <CardHeader>
                 <CardDescription className="mono flex items-center gap-2 text-[11px] tracking-[0.16em] uppercase">
-                  <span
-                    className={
-                      item.tone === "green"
-                        ? "inline-block size-1.5 rounded-full bg-emerald-300"
-                        : item.tone === "red"
-                          ? "inline-block size-1.5 rounded-full bg-rose-300"
-                          : "inline-block size-1.5 rounded-full bg-sky-300"
-                    }
-                  />
+                  <span className="inline-block size-1.5 rounded-full bg-primary" />
                   {item.label}
                 </CardDescription>
                 <CardTitle className="text-3xl leading-none font-semibold tracking-[-0.03em]">
@@ -140,10 +119,10 @@ function App() {
                       variant="outline"
                       className={
                         item.state === "critical"
-                          ? "rounded-full border-rose-300/70 bg-rose-300/10 text-rose-200"
+                          ? "rounded-full border-primary/70 bg-primary/10 text-primary"
                           : item.state === "high"
-                            ? "rounded-full border-violet-300/70 bg-violet-300/10 text-violet-200"
-                            : "rounded-full border-sky-300/70 bg-sky-300/10 text-sky-200"
+                            ? "rounded-full border-primary/60 bg-primary/8 text-primary"
+                            : "rounded-full border-border text-muted-foreground"
                       }
                     >
                       risk {item.risk}
@@ -163,13 +142,13 @@ function App() {
               <CardTitle className="text-xl tracking-[-0.02em]">Signal over noise</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4 pb-2">
-              <div className="space-y-1 rounded-xl border border-blue-300/30 bg-blue-300/8 p-3">
+              <div className="space-y-1 rounded-xl border border-border bg-background/45 p-3">
                 <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                   Detection
                 </p>
                 <p className="text-sm text-foreground">Random forest model, calibrated for high recall in fraud class.</p>
               </div>
-              <div className="space-y-1 rounded-xl border border-violet-300/30 bg-violet-300/8 p-3">
+              <div className="space-y-1 rounded-xl border border-border bg-background/45 p-3">
                 <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                   Feature Focus
                 </p>
@@ -177,7 +156,7 @@ function App() {
                   Velocity, amount-vs-baseline ratio, device change, and location drift.
                 </p>
               </div>
-              <div className="space-y-1 rounded-xl border border-emerald-300/30 bg-emerald-300/8 p-3">
+              <div className="space-y-1 rounded-xl border border-primary/40 bg-primary/8 p-3">
                 <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
                   Runtime
                 </p>
