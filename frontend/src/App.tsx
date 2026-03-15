@@ -1,16 +1,26 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const quickStats = [
   { label: "Transactions Monitored", value: "12,841" },
-  { label: "Fraud Alerts Today", value: "37" },
-  { label: "Model Uptime", value: "99.98%" },
+  { label: "Open Alerts", value: "37" },
+  { label: "Model Recall", value: "86.97%" },
 ];
 
 const watchList = [
-  { wallet: "ZW-EC-3382", event: "Amount spike", risk: "0.92" },
-  { wallet: "ZW-EC-1046", event: "New device fingerprint", risk: "0.81" },
-  { wallet: "ZW-EC-7809", event: "Velocity burst", risk: "0.76" },
+  { wallet: "ZW-EC-3382", event: "Amount spike", risk: "0.92", state: "critical" },
+  { wallet: "ZW-EC-1046", event: "Device shift", risk: "0.81", state: "high" },
+  { wallet: "ZW-EC-7809", event: "Velocity burst", risk: "0.76", state: "high" },
 ];
 
 function App() {
@@ -20,9 +30,9 @@ function App() {
     const ctx = gsap.context(() => {
       gsap
         .timeline({ defaults: { ease: "power3.out" } })
-        .from(".js-hero", { opacity: 0, y: 28, duration: 0.7 })
-        .from(".js-stat", { opacity: 0, y: 20, duration: 0.55, stagger: 0.08 }, "-=0.35")
-        .from(".js-panel", { opacity: 0, y: 24, duration: 0.65, stagger: 0.1 }, "-=0.3");
+        .from(".js-hero", { opacity: 0, y: 24, duration: 0.65 })
+        .from(".js-stat", { opacity: 0, y: 18, duration: 0.45, stagger: 0.08 }, "-=0.25")
+        .from(".js-panel", { opacity: 0, y: 18, duration: 0.55, stagger: 0.1 }, "-=0.25");
     }, rootRef);
 
     return () => {
@@ -31,116 +41,125 @@ function App() {
   }, []);
 
   return (
-    <div ref={rootRef} className="premium-shell relative min-h-screen overflow-hidden text-zinc-100">
-      <div className="noise-layer pointer-events-none absolute inset-0" />
-
-      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-8 md:px-10 md:py-12">
-        <header className="premium-panel js-hero glow-line rounded-3xl p-7 md:p-10">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <p className="mono text-xs uppercase tracking-[0.22em] text-zinc-300">
-              PayGuard
-            </p>
-            <p className="mono inline-flex items-center rounded-full border border-emerald-300/45 bg-emerald-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.16em] text-emerald-200">
-              Green Accent Edition
-            </p>
+    <div ref={rootRef} className="app-shell relative min-h-screen overflow-hidden">
+      <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-5 px-5 py-8 md:px-10 md:py-12">
+        <header className="js-hero space-y-6 border border-border/60 bg-card/60 p-6 backdrop-blur-sm md:p-10">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Badge variant="outline" className="mono border-border bg-background/70 tracking-[0.2em]">
+              PAYGUARD / FRAUD OPS
+            </Badge>
+            <Badge className="mono bg-primary text-primary-foreground tracking-[0.12em]">
+              API READY
+            </Badge>
           </div>
 
-          <h1 className="display-title mt-6 text-4xl leading-tight md:text-6xl">
+          <h1 className="vercel-title max-w-4xl text-balance text-4xl leading-[0.98] font-semibold tracking-[-0.04em] text-foreground md:text-6xl">
             Hello, PayGuard
-            <span className="mt-2 block text-zinc-300">
-              Premium fraud monitoring for mobile money
+            <span className="mt-1 block text-muted-foreground">
+              Minimal surface. Maximum fraud signal.
             </span>
           </h1>
 
-          <p className="mt-5 max-w-3xl text-sm text-zinc-300 md:text-base">
-            A cleaner command center for real-time fraud scoring. Black and white foundation,
-            confidence-first hierarchy, and sharp green highlights for action states.
+          <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
+            A Vercel-grade control plane for mobile-money risk detection. Clean hierarchy, aggressive
+            contrast, and one accent color for action.
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            <button className="rounded-xl border border-zinc-200 bg-zinc-100 px-4 py-2 text-sm font-semibold text-zinc-900 transition hover:-translate-y-0.5 hover:bg-white">
+          <div className="flex flex-wrap gap-2">
+            <Button className="mono bg-primary px-4 text-[11px] tracking-[0.14em] text-primary-foreground uppercase hover:bg-primary/90">
               Open Console
-            </button>
-            <button className="rounded-xl border border-zinc-500/60 bg-black px-4 py-2 text-sm font-semibold text-zinc-100 transition hover:-translate-y-0.5 hover:border-emerald-300/70 hover:text-emerald-100">
+            </Button>
+            <Button
+              variant="outline"
+              className="mono border-border bg-background/70 px-4 text-[11px] tracking-[0.14em] uppercase hover:border-primary/60 hover:text-primary"
+            >
               Run Sample Score
-            </button>
+            </Button>
           </div>
         </header>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="grid gap-3 md:grid-cols-3">
           {quickStats.map((item) => (
-            <article key={item.label} className="premium-panel js-stat rounded-2xl p-5">
-              <p className="mono text-[11px] uppercase tracking-[0.18em] text-zinc-400">
-                {item.label}
-              </p>
-              <p className="display-title mt-3 text-3xl text-zinc-50">{item.value}</p>
-            </article>
+            <Card key={item.label} className="js-stat border-border/60 bg-card/50">
+              <CardHeader>
+                <CardDescription className="mono text-[11px] tracking-[0.16em] uppercase">
+                  {item.label}
+                </CardDescription>
+                <CardTitle className="text-3xl leading-none font-semibold tracking-[-0.03em]">
+                  {item.value}
+                </CardTitle>
+              </CardHeader>
+            </Card>
           ))}
         </section>
 
-        <section className="grid gap-5 lg:grid-cols-[1.1fr,0.9fr]">
-          <article className="premium-panel js-panel rounded-3xl p-6">
-            <h2 className="display-title text-2xl text-zinc-100">Watchlist</h2>
-            <p className="mt-2 text-sm text-zinc-400">
-              Transactions currently above risk threshold.
-            </p>
-
-            <div className="mt-6 space-y-3">
-              {watchList.map((item) => (
-                <div
-                  key={item.wallet}
-                  className="rounded-xl border border-zinc-800 bg-zinc-950/70 px-4 py-3"
-                >
-                  <div className="flex items-start justify-between gap-3">
+        <section className="grid gap-3 lg:grid-cols-[1.2fr,0.8fr]">
+          <Card className="js-panel border-border/60 bg-card/50">
+            <CardHeader>
+              <CardDescription className="mono text-[11px] tracking-[0.16em] uppercase">
+                Live Watchlist
+              </CardDescription>
+              <CardTitle className="text-xl tracking-[-0.02em]">High-risk transaction queue</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 pb-2">
+              {watchList.map((item, index) => (
+                <div key={item.wallet}>
+                  <div className="flex items-center justify-between gap-3 py-2">
                     <div>
-                      <p className="mono text-xs uppercase tracking-[0.14em] text-zinc-400">
+                      <p className="mono text-[11px] text-muted-foreground uppercase tracking-[0.14em]">
                         {item.wallet}
                       </p>
-                      <p className="mt-1 text-sm font-medium text-zinc-100">{item.event}</p>
+                      <p className="text-sm font-medium text-foreground">{item.event}</p>
                     </div>
-                    <span className="mono rounded-full border border-emerald-300/40 bg-emerald-300/10 px-2.5 py-1 text-[11px] uppercase tracking-[0.12em] text-emerald-200">
+                    <Badge
+                      variant="outline"
+                      className={
+                        item.state === "critical"
+                          ? "border-primary/70 text-primary"
+                          : "border-border text-muted-foreground"
+                      }
+                    >
                       risk {item.risk}
-                    </span>
+                    </Badge>
                   </div>
+                  {index < watchList.length - 1 ? <Separator className="bg-border/70" /> : null}
                 </div>
               ))}
-            </div>
-          </article>
+            </CardContent>
+          </Card>
 
-          <aside className="premium-panel js-panel rounded-3xl p-6">
-            <h2 className="display-title text-2xl text-zinc-100">System Posture</h2>
-            <p className="mt-2 text-sm text-zinc-400">
-              Current reliability and response readiness.
-            </p>
-
-            <div className="mt-6 space-y-4">
-              <div className="rounded-xl border border-zinc-700 bg-zinc-950/70 p-4">
-                <p className="mono text-[11px] uppercase tracking-[0.16em] text-zinc-400">
-                  Model Confidence
+          <Card className="js-panel border-border/60 bg-card/50">
+            <CardHeader>
+              <CardDescription className="mono text-[11px] tracking-[0.16em] uppercase">
+                Engineering Notes
+              </CardDescription>
+              <CardTitle className="text-xl tracking-[-0.02em]">Signal over noise</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4 pb-2">
+              <div className="space-y-1">
+                <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                  Detection
                 </p>
-                <p className="display-title mt-2 text-3xl text-zinc-50">94.2%</p>
+                <p className="text-sm text-foreground">Random forest model, calibrated for high recall in fraud class.</p>
               </div>
-
-              <div className="rounded-xl border border-zinc-700 bg-zinc-950/70 p-4">
-                <p className="mono text-[11px] uppercase tracking-[0.16em] text-zinc-400">
-                  Last Alert
+              <Separator className="bg-border/70" />
+              <div className="space-y-1">
+                <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                  Feature Focus
                 </p>
-                <p className="mt-2 text-sm font-medium text-zinc-100">
-                  16s ago - Lusaka gateway
-                </p>
-              </div>
-
-              <div className="rounded-xl border border-zinc-700 bg-zinc-950/70 p-4">
-                <p className="mono text-[11px] uppercase tracking-[0.16em] text-zinc-400">
-                  API Status
-                </p>
-                <p className="mt-2 flex items-center gap-2 text-sm font-medium text-emerald-200">
-                  <span className="inline-block h-2 w-2 rounded-full bg-emerald-300" />
-                  Healthy
+                <p className="text-sm text-foreground">
+                  Velocity, amount-vs-baseline ratio, device change, and location drift.
                 </p>
               </div>
-            </div>
-          </aside>
+              <Separator className="bg-border/70" />
+              <div className="space-y-1">
+                <p className="mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                  Runtime
+                </p>
+                <p className="text-sm text-primary">Model loaded and scoring endpoint healthy.</p>
+              </div>
+            </CardContent>
+          </Card>
         </section>
       </main>
     </div>
