@@ -10,16 +10,16 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 0: Project Setup
 
-- [ ] Initialize repository structure:
+- [x] Initialize repository structure:
   - `frontend/` (Vite + React)
   - `backend/` (Flask API + ML code)
   - `data/` (generated datasets)
   - `models/` (trained model artifacts)
   - `docs/` (architecture notes, API notes)
-- [ ] Create root `README.md` with setup instructions.
-- [ ] Create `.gitignore` for Node, Python, SQLite, and model artifacts.
-- [ ] Add `requirements.txt` in `backend/`.
-- [ ] Add `package.json` in `frontend/` via Vite scaffolding.
+- [x] Create root `README.md` with setup instructions.
+- [x] Create `.gitignore` for Node, Python, SQLite, and model artifacts.
+- [x] Add `requirements.txt` in `backend/`.
+- [x] Add `package.json` in `frontend/` via Vite scaffolding.
 
 ## Phase 1: Backend Foundation (Flask + SQLite)
 
@@ -110,9 +110,17 @@ This file is our execution checklist. We will tick each box only after the step 
 
 Use this section to log what was done each day.
 
-### YYYY-MM-DD
+### 2026-03-15
 
 - Completed:
+  - Phase 0 repo structure initialized (`backend/`, `data/`, `models/`, `docs/`)
+  - Root `README.md` created
+  - Root `.gitignore` created
+  - `backend/requirements.txt` added
+  - Frontend scaffold verified as present and working
 - In progress:
+  - None
 - Blockers:
+  - None
 - Next step:
+  - Start Phase 1: Flask app entrypoint and `GET /api/health`

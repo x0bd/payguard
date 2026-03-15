@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -21,7 +21,7 @@ body,
 
 body {
   margin: 0;
-  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-family: "Inter", "Segoe UI", sans-serif;
   background:
     radial-gradient(1200px 560px at 20% -10%, rgba(255, 255, 255, 0.08), transparent 55%),
     radial-gradient(900px 440px at 88% 120%, rgba(16, 185, 129, 0.14), transparent 55%),
@@ -30,12 +30,13 @@ body {
 }
 
 .display-title {
-  font-family: "Syne", "Manrope", sans-serif;
-  letter-spacing: -0.03em;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  letter-spacing: -0.035em;
+  font-weight: 800;
 }
 
 .mono {
-  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-family: "JetBrains Mono", "Consolas", monospace;
 }
 
 .premium-shell::before {
