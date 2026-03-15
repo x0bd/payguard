@@ -53,15 +53,15 @@ This file is our execution checklist. We will tick each box only after the step 
 
 ## Phase 4: Fraud Scoring API
 
-- [ ] Load trained model at API startup.
-- [ ] Add scoring endpoint (`POST /api/score`).
-- [ ] Return:
+- [x] Load trained model at API startup.
+- [x] Add scoring endpoint (`POST /api/score`).
+- [x] Return:
   - fraud risk score
   - predicted label
   - key features used for scoring
-- [ ] Persist scoring results into `alerts` table.
-- [ ] Add endpoint to fetch latest alerts (`GET /api/alerts`).
-- [ ] Add endpoint for dashboard summary metrics (`GET /api/metrics`).
+- [x] Persist scoring results into `alerts` table.
+- [x] Add endpoint to fetch latest alerts (`GET /api/alerts`).
+- [x] Add endpoint for dashboard summary metrics (`GET /api/metrics`).
 
 ## Phase 5: Frontend Dashboard (Vite + React)
 
@@ -131,9 +131,15 @@ Use this section to log what was done each day.
   - Model evaluation completed with precision/recall/F1/ROC-AUC metrics
   - Best model selected and saved to `models/fraud_model.joblib`
   - Versioned model and training report generated in `models/`
+  - Phase 4 model loading at API startup implemented
+  - Fraud scoring endpoint added (`POST /api/score`)
+  - Alert persistence implemented in `alerts` table from score results
+  - Alerts endpoint added (`GET /api/alerts`)
+  - Dashboard metrics endpoint added (`GET /api/metrics`)
+  - Phase 4 endpoints verified with Flask test client
 - In progress:
   - None
 - Blockers:
   - None (dependency compatibility issue resolved by installing newer Python 3.14-compatible versions)
 - Next step:
-  - Start Phase 4: load trained model in API and add fraud scoring endpoints
+  - Start Phase 5: frontend dashboard integration with API endpoints

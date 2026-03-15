@@ -62,6 +62,21 @@ cd backend
 python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42
 ```
 
+### Run API (Phase 4)
+
+```powershell
+cd backend
+python app.py
+```
+
+### Phase 4 Endpoints
+
+- `GET /api/health` - service, database, and model readiness
+- `POST /api/score` - score a transaction and persist alert result
+- `GET /api/alerts` - latest alerts (`limit`, `status`, `min_risk` supported)
+- `GET /api/metrics` - dashboard summary metrics
+- `GET /api/transactions` - transaction listing
+
 ## Notes
 
 - `frontend/` is already scaffolded and running.

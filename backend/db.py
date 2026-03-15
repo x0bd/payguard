@@ -153,3 +153,155 @@ def fetch_transactions(limit: int = 20, account_id: str | None = None) -> list[d
     for item in items:
         item["is_fraud"] = bool(item["is_fraud"])
     return items
+
+
+def fetch_account_history(
+    account_id: str,
+    before_created_at: str | None = None,
+    limit: int = 5000,
+) -> list[dict[str, Any]]:
+    conn = get_connection()
+    rows = conn.execute(
+        """
+        SELECT
+            account_id,
+            transaction_type,
+            amount,
+            currency,
+            device_id,
+            location,
+            created_at,
+            is_fraud
+        FROM transactions
+        WHERE account_id = ?
+        ORDER BY created_at DESC, id DESC
+        LIMIT ?
+        """,
+        (account_id, limit),
+    ).fetchall()
+
+    items = [dict(row) for row in rows]
+    items.reverse()
+    for item in items:
+        item["is_fraud"] = int(item["is_fraud"])
+    return items
+
+
+def insert_alert(
+    transaction_id: int,
+    risk_score: float,
+    alert_type: str,
+    reason: str | None,
+    status: str = "open",
+) -> int:
+    conn = get_connection()
+    cursor = conn.execute(
+        """
+        INSERT INTO alerts (
+            transaction_id,
+            risk_score,
+            alert_type,
+            reason,
+            status
+        ) VALUES (?, ?, ?, ?, ?)
+        """,
+        (transaction_id, risk_score, alert_type, reason, status),
+    )
+    conn.commit()
+    return int(cursor.lastrowid)
+
+
+def fetch_alerts(
+    limit: int = 20,
+    status: str | None = None,
+    min_risk: float | None = None,
+) -> list[dict[str, Any]]:
+    conn = get_connection()
+    conditions: list[str] = []
+    params: list[Any] = []
+
+    if status:
+        conditions.append("a.status = ?")
+        params.append(status)
+    if min_risk is not None:
+        conditions.append("a.risk_score >= ?")
+        params.append(min_risk)
+
+    where_clause = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+
+    rows = conn.execute(
+        f"""
+        SELECT
+            a.id,
+            a.transaction_id,
+            a.risk_score,
+            a.alert_type,
+            a.reason,
+            a.status,
+            a.created_at,
+            a.resolved_at,
+            t.account_id,
+            t.transaction_type,
+            t.amount,
+            t.currency,
+            t.device_id,
+            t.location
+        FROM alerts a
+        JOIN transactions t ON t.id = a.transaction_id
+        {where_clause}
+        ORDER BY a.created_at DESC, a.id DESC
+        LIMIT ?
+        """,
+        (*params, limit),
+    ).fetchall()
+
+    return [dict(row) for row in rows]
+
+
+def fetch_metrics() -> dict[str, Any]:
+    conn = get_connection()
+
+    total_transactions = int(conn.execute("SELECT COUNT(*) FROM transactions;").fetchone()[0])
+    flagged_transactions = int(
+        conn.execute("SELECT COUNT(*) FROM transactions WHERE is_fraud = 1;").fetchone()[0]
+    )
+    average_risk_score = conn.execute(
+        "SELECT AVG(fraud_score) FROM transactions WHERE fraud_score IS NOT NULL;"
+    ).fetchone()[0]
+
+    total_alerts = int(conn.execute("SELECT COUNT(*) FROM alerts;").fetchone()[0])
+    open_alerts = int(conn.execute("SELECT COUNT(*) FROM alerts WHERE status = 'open';").fetchone()[0])
+    high_risk_alerts = int(
+        conn.execute("SELECT COUNT(*) FROM alerts WHERE risk_score >= 0.8;").fetchone()[0]
+    )
+
+    tx_last_24h = int(
+        conn.execute(
+            "SELECT COUNT(*) FROM transactions WHERE datetime(created_at) >= datetime('now', '-24 hours');"
+        ).fetchone()[0]
+    )
+    alerts_last_24h = int(
+        conn.execute(
+            "SELECT COUNT(*) FROM alerts WHERE datetime(created_at) >= datetime('now', '-24 hours');"
+        ).fetchone()[0]
+    )
+
+    alert_type_rows = conn.execute(
+        "SELECT alert_type, COUNT(*) AS count FROM alerts GROUP BY alert_type ORDER BY count DESC;"
+    ).fetchall()
+    alert_type_breakdown = {str(row["alert_type"]): int(row["count"]) for row in alert_type_rows}
+
+    fraud_rate_percent = (flagged_transactions / total_transactions * 100.0) if total_transactions else 0.0
+
+    return {
+        "total_transactions": total_transactions,
+        "flagged_transactions": flagged_transactions,
+        "fraud_rate_percent": round(fraud_rate_percent, 4),
+        "average_risk_score": round(float(average_risk_score or 0.0), 4),
+        "total_alerts": total_alerts,
+        "open_alerts": open_alerts,
+        "high_risk_alerts": high_risk_alerts,
+        "transactions_last_24h": tx_last_24h,
+        "alerts_last_24h": alerts_last_24h,
+        "alert_type_breakdown": alert_type_breakdown,
+    }
