@@ -1,9 +1,4 @@
-import {
-  startTransition,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { startTransition, useEffect, useRef, useState } from "react";
 import {
   FiActivity,
   FiAlertTriangle,
@@ -19,27 +14,46 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   ChartContainer,
-  type ChartConfig,
   ChartTooltip,
   ChartTooltipContent,
+  type ChartConfig,
 } from "@/components/ui/chart";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { NativeSelect, NativeSelectOption } from "@/components/ui/native-select";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
-  fetchMetrics,
   fetchAlerts,
-  scoreTransaction,
+  fetchMetrics,
   formatNumber,
   formatPercent,
   formatTimestamp,
-  type MetricsResponse,
+  scoreTransaction,
   type AlertItem,
+  type MetricsResponse,
   type ScoreResponse,
 } from "@/lib/api";
 
-// ── KPI card ────────────────────────────────────────────────────────────────
+// ── Chart config ─────────────────────────────────────────────────────────────
+
+const riskChartConfig = {
+  risk:      { label: "Risk Score", color: "oklch(0.48 0.16 155)" },
+  threshold: { label: "Threshold",  color: "oklch(0.7 0 0)" },
+} satisfies ChartConfig;
+
+// ── Alert type → colour mapping ───────────────────────────────────────────────
+
+const ALERT_COLORS: Record<string, { bar: string; text: string; bg: string }> = {
+  critical_risk: { bar: "#dc2626", text: "text-red-600",    bg: "bg-red-100"    },
+  high_risk:     { bar: "#ea580c", text: "text-orange-600", bg: "bg-orange-100" },
+  medium_risk:   { bar: "#ca8a04", text: "text-amber-600",  bg: "bg-amber-100"  },
+  low_risk:      { bar: "#16a34a", text: "text-green-600",  bg: "bg-green-100"  },
+};
+function alertColor(type: string) {
+  return ALERT_COLORS[type] ?? { bar: "#6b7280", text: "text-zinc-500", bg: "bg-zinc-100" };
+}
+
+// ── KPI card ─────────────────────────────────────────────────────────────────
 
 function KpiCard({
   label,
@@ -47,6 +61,7 @@ function KpiCard({
   delta,
   deltaLabel,
   direction,
+  accentColor,
   icon: Icon,
   loading,
 }: {
@@ -54,28 +69,34 @@ function KpiCard({
   value: string;
   delta?: string;
   deltaLabel?: string;
-  direction?: "up" | "down" | "neutral";
+  direction?: "up-good" | "up-bad" | "neutral";
+  accentColor: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   loading?: boolean;
 }) {
-  const deltaColor =
-    direction === "up"
-      ? "text-primary"
-      : direction === "down"
-        ? "text-destructive"
-        : "text-muted-foreground";
+  const deltaClass =
+    direction === "up-good" ? "text-green-600" :
+    direction === "up-bad"  ? "text-red-600"   :
+    "text-zinc-400";
+
+  const Arrow =
+    direction === "up-good" ? FiArrowUp :
+    direction === "up-bad"  ? FiArrowDown : null;
 
   return (
-    <div className="rounded-xl border border-border bg-card p-6 flex flex-col gap-5">
-      <div className="flex items-center justify-between">
+    <div
+      className="relative overflow-hidden rounded-xl border border-border bg-card p-6 shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+      style={{ borderLeftWidth: 3, borderLeftColor: accentColor }}
+    >
+      <div className="flex items-center justify-between mb-5">
         <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
           {label}
         </p>
-        <Icon size={14} className="text-muted-foreground/60" />
+        <Icon size={13} className="text-muted-foreground/50" />
       </div>
 
       {loading ? (
-        <Skeleton className="h-9 w-32 rounded-lg bg-muted" />
+        <Skeleton className="h-9 w-28 rounded-lg bg-zinc-100" />
       ) : (
         <p className="text-4xl font-semibold tracking-tight leading-none text-foreground">
           {value}
@@ -83,10 +104,9 @@ function KpiCard({
       )}
 
       {delta && (
-        <div className="flex items-center gap-1.5">
-          {direction === "up" && <FiArrowUp size={11} className={deltaColor} />}
-          {direction === "down" && <FiArrowDown size={11} className={deltaColor} />}
-          <span className={`text-xs font-medium ${deltaColor}`}>{delta}</span>
+        <div className="mt-4 flex items-center gap-1.5">
+          {Arrow && <Arrow size={11} className={deltaClass} />}
+          <span className={`text-xs font-medium ${deltaClass}`}>{delta}</span>
           {deltaLabel && (
             <span className="text-xs text-muted-foreground">{deltaLabel}</span>
           )}
@@ -96,7 +116,7 @@ function KpiCard({
   );
 }
 
-// ── Score form ───────────────────────────────────────────────────────────────
+// ── Score form types ──────────────────────────────────────────────────────────
 
 type ScoreForm = {
   account_id: string;
@@ -116,38 +136,26 @@ const initialForm: ScoreForm = {
   location: "Lusaka",
 };
 
-const riskChartConfig = {
-  risk: { label: "Risk Score", color: "oklch(0.83 0.18 154)" },
-  threshold: { label: "Threshold", color: "oklch(0.55 0 0)" },
-} satisfies ChartConfig;
-
-// ── Main view ────────────────────────────────────────────────────────────────
+// ── Main view ─────────────────────────────────────────────────────────────────
 
 export default function DashboardView() {
   const fetchRef = useRef<(bg: boolean) => Promise<void>>(async () => {});
-  const [metrics, setMetrics] = useState<MetricsResponse | null>(null);
-  const [alerts, setAlerts] = useState<AlertItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [metrics, setMetrics]     = useState<MetricsResponse | null>(null);
+  const [alerts, setAlerts]       = useState<AlertItem[]>([]);
+  const [loading, setLoading]     = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [scoreForm, setScoreForm] = useState<ScoreForm>(initialForm);
   const [scoreResult, setScoreResult] = useState<ScoreResponse | null>(null);
-  const [scoreError, setScoreError] = useState<string | null>(null);
-  const [scoring, setScoring] = useState(false);
+  const [scoreError, setScoreError]   = useState<string | null>(null);
+  const [scoring, setScoring]         = useState(false);
 
   fetchRef.current = async (bg: boolean) => {
     bg ? setRefreshing(true) : setLoading(true);
     try {
       const [m, a] = await Promise.all([fetchMetrics(), fetchAlerts({ limit: 60 })]);
-      startTransition(() => {
-        setMetrics(m);
-        setAlerts(a.data || []);
-      });
-    } catch {
-      // keep stale
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
+      startTransition(() => { setMetrics(m); setAlerts(a.data || []); });
+    } catch { /* keep stale */ }
+    finally { setLoading(false); setRefreshing(false); }
   };
 
   useEffect(() => {
@@ -159,8 +167,8 @@ export default function DashboardView() {
   async function submitScore() {
     setScoring(true);
     setScoreError(null);
-    const parsedAmount = Number(scoreForm.amount);
-    if (!Number.isFinite(parsedAmount) || parsedAmount < 0) {
+    const amount = Number(scoreForm.amount);
+    if (!Number.isFinite(amount) || amount < 0) {
       setScoreError("Enter a valid non-negative amount.");
       setScoring(false);
       return;
@@ -169,7 +177,7 @@ export default function DashboardView() {
       const res = await scoreTransaction({
         account_id: scoreForm.account_id.trim(),
         transaction_type: scoreForm.transaction_type,
-        amount: parsedAmount,
+        amount,
         currency: scoreForm.currency,
         device_id: scoreForm.device_id.trim() || undefined,
         location: scoreForm.location.trim() || undefined,
@@ -178,9 +186,7 @@ export default function DashboardView() {
       await fetchRef.current(true);
     } catch (e) {
       setScoreError(e instanceof Error ? e.message : "Scoring failed.");
-    } finally {
-      setScoring(false);
-    }
+    } finally { setScoring(false); }
   }
 
   const riskTrendData = [...alerts]
@@ -194,27 +200,26 @@ export default function DashboardView() {
     }));
 
   const typeBreakdown = metrics
-    ? Object.entries(metrics.alert_type_breakdown)
-        .sort((a, b) => b[1] - a[1])
+    ? Object.entries(metrics.alert_type_breakdown).sort((a, b) => b[1] - a[1])
     : [];
   const totalByType = typeBreakdown.reduce((s, [, c]) => s + c, 0);
 
-  const riskLevelColor = (level: string) => {
-    if (level === "critical") return "text-destructive";
-    if (level === "high")     return "text-orange-400";
-    if (level === "medium")   return "text-yellow-400";
-    return "text-primary";
-  };
+  const scoreLevelStyle = (level: string) => ({
+    critical: { text: "text-red-600",    badge: "border-red-200 bg-red-50 text-red-700"    },
+    high:     { text: "text-orange-600", badge: "border-orange-200 bg-orange-50 text-orange-700" },
+    medium:   { text: "text-amber-600",  badge: "border-amber-200 bg-amber-50 text-amber-700"  },
+    low:      { text: "text-green-600",  badge: "border-green-200 bg-green-50 text-green-700"  },
+  }[level] ?? { text: "text-zinc-700", badge: "border-zinc-200 bg-zinc-50 text-zinc-700" });
 
   return (
-    <div className="flex flex-col gap-6 p-6 md:p-8 max-w-350">
+    <div className="flex flex-col gap-6 p-6 md:p-8">
 
-      {/* ── Page header ─────────────────────────────────────────────── */}
+      {/* ── Page header ─────────────────────────────────────────── */}
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-sm font-semibold text-foreground">Fraud Operations</h1>
+          <h1 className="text-[13px] font-semibold text-foreground">Fraud Operations</h1>
           {metrics && !loading && (
-            <span className="mono rounded-md border border-border bg-muted/40 px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <span className="mono rounded-md border border-border bg-muted px-2 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground">
               {formatNumber(metrics.total_transactions)} transactions
             </span>
           )}
@@ -222,20 +227,20 @@ export default function DashboardView() {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
-            <span
-              className={[
-                "h-1.5 w-1.5 rounded-full",
-                metrics?.model_status === "loaded" ? "bg-primary" : "bg-destructive",
-              ].join(" ")}
-            />
-            <span className="text-xs text-muted-foreground">
-              {metrics?.model_status === "loaded" ? "Model online" : "Model offline"}
+            <span className={[
+              "h-1.5 w-1.5 rounded-full",
+              metrics?.model_status === "loaded" ? "bg-green-500 status-dot-live" : "bg-red-500",
+            ].join(" ")} />
+            <span className="text-[11px] text-muted-foreground">
+              {metrics?.model_status === "loaded"
+                ? `${metrics.model_name ?? "model"} online`
+                : "Model offline"}
             </span>
           </div>
           <Button
             variant="outline"
             size="sm"
-            className="h-8 gap-1.5 rounded-lg px-3 text-xs"
+            className="h-8 gap-1.5 rounded-lg px-3 text-xs font-medium shadow-none"
             onClick={() => void fetchRef.current(false)}
             disabled={refreshing || loading}
           >
@@ -245,7 +250,7 @@ export default function DashboardView() {
         </div>
       </header>
 
-      {/* ── KPI row ─────────────────────────────────────────────────── */}
+      {/* ── KPI row ─────────────────────────────────────────────── */}
       <div className="grid grid-cols-2 gap-4 xl:grid-cols-4">
         <KpiCard
           label="Total Transactions"
@@ -253,7 +258,8 @@ export default function DashboardView() {
           value={formatNumber(metrics?.total_transactions)}
           delta={`+${formatNumber(metrics?.transactions_last_24h)}`}
           deltaLabel="last 24 h"
-          direction="up"
+          direction="up-good"
+          accentColor="#16a34a"
           loading={loading}
         />
         <KpiCard
@@ -262,7 +268,8 @@ export default function DashboardView() {
           value={formatPercent(metrics?.fraud_rate_percent)}
           delta={formatNumber(metrics?.flagged_transactions)}
           deltaLabel="flagged"
-          direction="down"
+          direction="up-bad"
+          accentColor="#dc2626"
           loading={loading}
         />
         <KpiCard
@@ -271,7 +278,8 @@ export default function DashboardView() {
           value={formatNumber(metrics?.open_alerts)}
           delta={formatNumber(metrics?.high_risk_alerts)}
           deltaLabel="high risk"
-          direction={(metrics?.high_risk_alerts ?? 0) > 0 ? "down" : "neutral"}
+          direction={(metrics?.high_risk_alerts ?? 0) > 0 ? "up-bad" : "neutral"}
+          accentColor="#ea580c"
           loading={loading}
         />
         <KpiCard
@@ -280,62 +288,57 @@ export default function DashboardView() {
           value={metrics ? metrics.average_risk_score.toFixed(3) : "--"}
           delta={metrics?.model_name ?? undefined}
           direction="neutral"
+          accentColor="#ca8a04"
           loading={loading}
         />
       </div>
 
-      {/* ── Charts row ──────────────────────────────────────────────── */}
+      {/* ── Charts row ──────────────────────────────────────────── */}
       <div className="grid gap-4 xl:grid-cols-[3fr_2fr]">
 
         {/* Risk Trend */}
-        <div className="rounded-xl border border-border bg-card p-6">
+        <div className="rounded-xl border border-border bg-card p-6 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
           <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
             Risk Trend
           </p>
-          <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-4xl font-semibold tracking-tight">
+          <div className="mt-3 flex items-baseline gap-2.5">
+            <span className="text-4xl font-semibold tracking-tight text-foreground">
               {metrics ? metrics.average_risk_score.toFixed(3) : "--"}
             </span>
             <span className="text-sm text-muted-foreground">avg risk score</span>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">
-            {formatNumber(metrics?.total_alerts)} total alerts recorded
+            {formatNumber(metrics?.total_alerts)} alerts recorded ·{" "}
+            {formatNumber(metrics?.alerts_last_24h)} in last 24 h
           </p>
 
           <div className="mt-6">
             {riskTrendData.length === 0 ? (
-              <div className="flex h-40 items-center justify-center rounded-lg border border-dashed border-border text-sm text-muted-foreground">
+              <div className="flex h-44 items-center justify-center rounded-lg border border-dashed border-border text-sm text-muted-foreground">
                 Score transactions to populate this chart
               </div>
             ) : (
-              <ChartContainer config={riskChartConfig} className="h-40 w-full aspect-auto">
-                <AreaChart data={riskTrendData}>
+              <ChartContainer config={riskChartConfig} className="h-44 w-full aspect-auto">
+                <AreaChart data={riskTrendData} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
                   <defs>
                     <linearGradient id="riskGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="var(--color-risk)" stopOpacity={0.2} />
-                      <stop offset="100%" stopColor="var(--color-risk)" stopOpacity={0} />
+                      <stop offset="0%"   stopColor="var(--color-risk)" stopOpacity={0.15} />
+                      <stop offset="100%" stopColor="var(--color-risk)" stopOpacity={0.01} />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid vertical={false} stroke="oklch(0.25 0 0)" />
+                  <CartesianGrid vertical={false} stroke="#f0f0f0" />
                   <XAxis dataKey="time" hide />
                   <YAxis domain={[0, 1]} hide />
                   <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
                   <Area
-                    type="monotone"
-                    dataKey="risk"
-                    stroke="var(--color-risk)"
-                    strokeWidth={1.5}
-                    fill="url(#riskGrad)"
-                    dot={false}
+                    type="monotone" dataKey="risk"
+                    stroke="var(--color-risk)" strokeWidth={1.8}
+                    fill="url(#riskGrad)" dot={false} activeDot={{ r: 3 }}
                   />
                   <Area
-                    type="monotone"
-                    dataKey="threshold"
-                    stroke="var(--color-threshold)"
-                    strokeWidth={1}
-                    strokeDasharray="4 4"
-                    fill="transparent"
-                    dot={false}
+                    type="monotone" dataKey="threshold"
+                    stroke="var(--color-threshold)" strokeWidth={1}
+                    strokeDasharray="5 4" fill="transparent" dot={false}
                   />
                 </AreaChart>
               </ChartContainer>
@@ -344,18 +347,19 @@ export default function DashboardView() {
         </div>
 
         {/* Alert Breakdown */}
-        <div className="rounded-xl border border-border bg-card p-6">
+        <div className="rounded-xl border border-border bg-card p-6 shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
           <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
             Alert Distribution
           </p>
-          <div className="mt-3 flex items-baseline gap-2">
-            <span className="text-4xl font-semibold tracking-tight">
+          <div className="mt-3 flex items-baseline gap-2.5">
+            <span className="text-4xl font-semibold tracking-tight text-foreground">
               {formatNumber(metrics?.total_alerts)}
             </span>
             <span className="text-sm text-muted-foreground">total alerts</span>
           </div>
           <p className="mt-1 text-xs text-muted-foreground">
-            {formatNumber(metrics?.open_alerts)} currently open
+            {formatNumber(metrics?.open_alerts)} open ·{" "}
+            {formatNumber(metrics?.high_risk_alerts)} high risk
           </p>
 
           <div className="mt-6 space-y-4">
@@ -364,16 +368,19 @@ export default function DashboardView() {
             ) : (
               typeBreakdown.map(([type, count]) => {
                 const pct = totalByType > 0 ? (count / totalByType) * 100 : 0;
+                const col = alertColor(type);
                 return (
                   <div key={type} className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">{type}</span>
-                      <span className="mono text-xs font-medium text-foreground">{count}</span>
+                      <span className={`text-xs font-medium ${col.text}`}>
+                        {type.replace("_", " ")}
+                      </span>
+                      <span className="mono text-xs font-semibold text-foreground">{count}</span>
                     </div>
-                    <div className="h-1 overflow-hidden rounded-full bg-muted">
+                    <div className={`h-1.5 overflow-hidden rounded-full ${col.bg}`}>
                       <div
-                        className="h-full rounded-full bg-primary transition-all duration-500"
-                        style={{ width: `${pct}%` }}
+                        className="h-full rounded-full transition-all duration-700"
+                        style={{ width: `${pct}%`, backgroundColor: col.bar }}
                       />
                     </div>
                   </div>
@@ -384,28 +391,31 @@ export default function DashboardView() {
         </div>
       </div>
 
-      {/* ── Score transaction ────────────────────────────────────────── */}
-      <div className="rounded-xl border border-border bg-card p-6">
-        <div className="mb-6">
+      {/* ── Score transaction ────────────────────────────────────── */}
+      <div className="rounded-xl border border-border bg-card shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
+        {/* Card header */}
+        <div className="border-b border-border px-6 py-4">
           <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
             Score Transaction
           </p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Submit a transaction to get a live fraud risk score.
+          <p className="mt-0.5 text-sm text-muted-foreground">
+            Submit a transaction to get a live fraud risk prediction.
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-2">
+        <div className="grid gap-0 lg:grid-cols-2 lg:divide-x lg:divide-border">
           {/* Form */}
           <form
-            className="space-y-4"
-            onSubmit={async (e) => { e.preventDefault(); await submitScore(); }}
+            className="space-y-4 p-6"
+            onSubmit={async e => { e.preventDefault(); await submitScore(); }}
           >
             <div className="space-y-1.5">
-              <Label htmlFor="s_account" className="text-xs text-muted-foreground">Account ID</Label>
+              <Label htmlFor="s_account" className="text-xs font-medium text-muted-foreground">
+                Account ID
+              </Label>
               <Input
                 id="s_account"
-                className="h-9 rounded-lg bg-background text-sm"
+                className="h-9 rounded-lg bg-muted/50 text-sm border-border"
                 value={scoreForm.account_id}
                 onChange={e => setScoreForm(s => ({ ...s, account_id: e.target.value }))}
               />
@@ -413,10 +423,12 @@ export default function DashboardView() {
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="s_type" className="text-xs text-muted-foreground">Type</Label>
+                <Label htmlFor="s_type" className="text-xs font-medium text-muted-foreground">
+                  Type
+                </Label>
                 <NativeSelect
                   id="s_type"
-                  className="h-9 w-full rounded-lg bg-background text-sm"
+                  className="h-9 w-full rounded-lg bg-muted/50 text-sm border-border"
                   value={scoreForm.transaction_type}
                   onChange={e => setScoreForm(s => ({ ...s, transaction_type: e.target.value }))}
                 >
@@ -428,10 +440,12 @@ export default function DashboardView() {
                 </NativeSelect>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="s_currency" className="text-xs text-muted-foreground">Currency</Label>
+                <Label htmlFor="s_currency" className="text-xs font-medium text-muted-foreground">
+                  Currency
+                </Label>
                 <NativeSelect
                   id="s_currency"
-                  className="h-9 w-full rounded-lg bg-background text-sm"
+                  className="h-9 w-full rounded-lg bg-muted/50 text-sm border-border"
                   value={scoreForm.currency}
                   onChange={e => setScoreForm(s => ({ ...s, currency: e.target.value }))}
                 >
@@ -442,12 +456,14 @@ export default function DashboardView() {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="s_amount" className="text-xs text-muted-foreground">Amount</Label>
+              <Label htmlFor="s_amount" className="text-xs font-medium text-muted-foreground">
+                Amount
+              </Label>
               <Input
                 id="s_amount"
                 type="number"
                 step="0.01"
-                className="h-9 rounded-lg bg-background text-sm"
+                className="h-9 rounded-lg bg-muted/50 text-sm border-border"
                 value={scoreForm.amount}
                 onChange={e => setScoreForm(s => ({ ...s, amount: e.target.value }))}
               />
@@ -455,19 +471,23 @@ export default function DashboardView() {
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
-                <Label htmlFor="s_device" className="text-xs text-muted-foreground">Device ID</Label>
+                <Label htmlFor="s_device" className="text-xs font-medium text-muted-foreground">
+                  Device ID
+                </Label>
                 <Input
                   id="s_device"
-                  className="h-9 rounded-lg bg-background text-sm"
+                  className="h-9 rounded-lg bg-muted/50 text-sm border-border"
                   value={scoreForm.device_id}
                   onChange={e => setScoreForm(s => ({ ...s, device_id: e.target.value }))}
                 />
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="s_location" className="text-xs text-muted-foreground">Location</Label>
+                <Label htmlFor="s_location" className="text-xs font-medium text-muted-foreground">
+                  Location
+                </Label>
                 <Input
                   id="s_location"
-                  className="h-9 rounded-lg bg-background text-sm"
+                  className="h-9 rounded-lg bg-muted/50 text-sm border-border"
                   value={scoreForm.location}
                   onChange={e => setScoreForm(s => ({ ...s, location: e.target.value }))}
                 />
@@ -476,68 +496,71 @@ export default function DashboardView() {
 
             <Button
               type="submit"
-              className="w-full h-9 gap-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium"
+              className="w-full h-9 gap-2 rounded-lg text-sm font-medium"
               disabled={scoring}
             >
-              <FiSend size={13} />
+              <FiSend size={12} />
               {scoring ? "Scoring…" : "Score Transaction"}
             </Button>
 
             {scoreError && (
-              <p className="rounded-lg border border-destructive/40 bg-destructive/8 px-3 py-2 text-xs text-destructive">
+              <p className="rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs text-red-700">
                 {scoreError}
               </p>
             )}
           </form>
 
           {/* Result panel */}
-          {scoreResult ? (
-            <div className="space-y-5">
-              <div>
-                <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground mb-3">
-                  Result
-                </p>
-                <div className="flex items-baseline gap-3">
-                  <span className={`text-5xl font-semibold tracking-tight ${riskLevelColor(scoreResult.risk_level)}`}>
-                    {scoreResult.risk_score.toFixed(4)}
-                  </span>
-                  <Badge
-                    variant="outline"
-                    className={[
-                      "rounded-md text-xs",
-                      scoreResult.risk_level === "critical" && "border-destructive/50 bg-destructive/10 text-destructive",
-                      scoreResult.risk_level === "high"     && "border-orange-500/50 bg-orange-500/10 text-orange-400",
-                      scoreResult.risk_level === "medium"   && "border-yellow-500/50 bg-yellow-500/10 text-yellow-400",
-                      scoreResult.risk_level === "low"      && "border-primary/50 bg-primary/10 text-primary",
-                    ].filter(Boolean).join(" ")}
-                  >
-                    {scoreResult.risk_level}
-                  </Badge>
-                </div>
-                <p className="mt-2 text-xs text-muted-foreground">{scoreResult.reason}</p>
-              </div>
-
-              <div className="border-t border-border pt-4">
-                <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground mb-3">
-                  Key Signals
-                </p>
-                <div className="space-y-2">
-                  {Object.entries(scoreResult.key_features).map(([k, v]) => (
-                    <div key={k} className="flex items-center justify-between">
-                      <span className="text-xs text-muted-foreground">{k.replace(/_/g, " ")}</span>
-                      <span className="mono text-xs font-medium text-foreground">
-                        {typeof v === "number" ? v.toFixed(3) : String(v)}
+          <div className="p-6">
+            {scoreResult ? (() => {
+              const s = scoreLevelStyle(scoreResult.risk_level);
+              return (
+                <div className="flex h-full flex-col gap-5">
+                  <div>
+                    <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground mb-3">
+                      Result
+                    </p>
+                    <div className="flex items-baseline gap-3">
+                      <span className={`text-5xl font-bold tracking-tight ${s.text}`}>
+                        {scoreResult.risk_score.toFixed(4)}
                       </span>
+                      <Badge variant="outline" className={`rounded-md text-xs font-medium ${s.badge}`}>
+                        {scoreResult.risk_level}
+                      </Badge>
                     </div>
-                  ))}
+                    <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                      {scoreResult.reason}
+                    </p>
+                  </div>
+
+                  <div className="border-t border-border pt-4 flex-1">
+                    <p className="text-[11px] font-medium uppercase tracking-widest text-muted-foreground mb-3">
+                      Key Signals
+                    </p>
+                    <div className="space-y-2.5">
+                      {Object.entries(scoreResult.key_features).map(([k, v]) => (
+                        <div key={k} className="flex items-center justify-between gap-4">
+                          <span className="text-xs text-muted-foreground truncate">
+                            {k.replace(/_/g, " ")}
+                          </span>
+                          <span className="mono text-xs font-medium text-foreground shrink-0">
+                            {typeof v === "number" ? v.toFixed(3) : String(v)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
+              );
+            })() : (
+              <div className="flex h-full min-h-52 flex-col items-center justify-center gap-2 rounded-lg border border-dashed border-border text-center">
+                <FiShield size={20} className="text-muted-foreground/30" />
+                <p className="text-sm text-muted-foreground">
+                  Submit a transaction to see the risk score
+                </p>
               </div>
-            </div>
-          ) : (
-            <div className="flex h-full min-h-40 items-center justify-center rounded-lg border border-dashed border-border text-sm text-muted-foreground">
-              Submit a transaction to see results
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
