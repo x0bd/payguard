@@ -408,14 +408,10 @@ export default function AlertsView() {
                         onClick={(e) => e.stopPropagation()}
                       >
                         <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="mono h-7 gap-1 rounded-xl px-2 text-[11px] uppercase"
-                            >
-                              Actions <FiChevronDown className="text-xs" />
-                            </Button>
+                          <DropdownMenuTrigger
+                            className="mono inline-flex h-7 cursor-pointer items-center gap-1 rounded-xl bg-transparent px-2 text-[11px] uppercase text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
+                          >
+                            Actions <FiChevronDown className="text-xs" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent align="end" className="rounded-xl border-border/70 bg-sidebar">
                             <DropdownMenuItem
