@@ -11,74 +11,69 @@ import {
 
 export type View = "dashboard" | "alerts" | "transactions" | "accounts";
 
-const NAV_ITEMS: { id: View; label: string; icon: React.ComponentType<{ className?: string }> }[] =
-  [
-    { id: "dashboard", label: "Dashboard", icon: FiActivity },
-    { id: "alerts", label: "Alerts", icon: FiAlertTriangle },
-    { id: "transactions", label: "Transactions", icon: FiList },
-    { id: "accounts", label: "Accounts", icon: FiUser },
-  ];
+const NAV: { id: View; label: string; Icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
+  { id: "dashboard",    label: "Dashboard",     Icon: FiActivity },
+  { id: "alerts",       label: "Alerts",        Icon: FiAlertTriangle },
+  { id: "transactions", label: "Transactions",   Icon: FiList },
+  { id: "accounts",     label: "Accounts",       Icon: FiUser },
+];
 
-type Props = {
-  activeView: View;
-  onNavigate: (view: View) => void;
-  openAlerts?: number;
-};
+type Props = { activeView: View; onNavigate: (v: View) => void; openAlerts?: number };
 
-export default function Sidebar({ activeView, onNavigate, openAlerts }: Props) {
+export default function Sidebar({ activeView, onNavigate, openAlerts = 0 }: Props) {
   const [collapsed, setCollapsed] = useState(false);
+  const W = collapsed ? 52 : 208;
 
   return (
     <aside
-      className="relative flex flex-shrink-0 flex-col border-r border-border/70 bg-[var(--sidebar)] transition-all duration-200"
-      style={{ width: collapsed ? 56 : 220 }}
+      className="relative flex shrink-0 flex-col border-r border-border bg-card"
+      style={{ width: W, transition: "width 180ms ease" }}
     >
       {/* Brand */}
-      <div className="flex h-14 items-center gap-2.5 border-b border-border/70 px-3.5">
-        <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-primary">
-          <FiShield className="text-[13px] text-primary-foreground" />
+      <div className="flex h-12 items-center gap-2.5 border-b border-border px-3.5">
+        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-primary">
+          <FiShield size={12} className="text-primary-foreground" />
         </div>
         {!collapsed && (
-          <span className="mono truncate text-[11px] font-semibold tracking-[0.18em] text-foreground/90 uppercase">
+          <span className="mono truncate text-[11px] font-semibold tracking-[0.2em] text-foreground/80 uppercase">
             PayGuard
           </span>
         )}
       </div>
 
-      {/* Nav */}
-      <nav className="flex flex-1 flex-col gap-0.5 p-2 pt-3">
-        {NAV_ITEMS.map(({ id, label, icon: Icon }) => {
+      {/* Nav items */}
+      <nav className="flex flex-1 flex-col gap-0.5 p-2 pt-2.5">
+        {NAV.map(({ id, label, Icon }) => {
           const active = activeView === id;
-          const showBadge = id === "alerts" && (openAlerts ?? 0) > 0;
+          const badge = id === "alerts" && openAlerts > 0;
           return (
             <button
               key={id}
               type="button"
               onClick={() => onNavigate(id)}
+              title={collapsed ? label : undefined}
               className={[
-                "group relative flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left transition-colors",
+                "group relative flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left transition-colors duration-100",
                 active
-                  ? "bg-primary/12 text-primary"
-                  : "text-muted-foreground hover:bg-muted/60 hover:text-foreground",
+                  ? "bg-primary/10 text-primary"
+                  : "text-muted-foreground hover:bg-muted/50 hover:text-foreground",
               ].join(" ")}
             >
               <Icon
-                className={[
-                  "flex-shrink-0 text-base transition-colors",
-                  active ? "text-primary" : "text-muted-foreground group-hover:text-foreground",
-                ].join(" ")}
+                size={15}
+                className={active ? "text-primary shrink-0" : "shrink-0 transition-colors group-hover:text-foreground"}
               />
               {!collapsed && (
-                <span className="mono truncate text-[11px] tracking-[0.12em] uppercase">
+                <span className="mono truncate text-[11px] tracking-widest uppercase leading-none">
                   {label}
                 </span>
               )}
-              {showBadge && !collapsed && (
-                <span className="mono ml-auto flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[9px] font-semibold text-primary-foreground">
+              {badge && !collapsed && (
+                <span className="mono ml-auto flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[9px] font-semibold text-primary-foreground leading-none">
                   {openAlerts}
                 </span>
               )}
-              {showBadge && collapsed && (
+              {badge && collapsed && (
                 <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-primary" />
               )}
             </button>
@@ -87,18 +82,16 @@ export default function Sidebar({ activeView, onNavigate, openAlerts }: Props) {
       </nav>
 
       {/* Collapse toggle */}
-      <div className="border-t border-border/70 p-2">
+      <div className="border-t border-border p-2">
         <button
           type="button"
-          onClick={() => setCollapsed((c) => !c)}
-          className="flex w-full items-center justify-center rounded-xl p-2 text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground"
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          onClick={() => setCollapsed(c => !c)}
+          className="flex w-full items-center justify-center rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
         >
-          {collapsed ? (
-            <FiChevronRight className="text-base" />
-          ) : (
-            <FiChevronLeft className="text-base" />
-          )}
+          {collapsed
+            ? <FiChevronRight size={14} />
+            : <FiChevronLeft size={14} />
+          }
         </button>
       </div>
     </aside>
