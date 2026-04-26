@@ -258,6 +258,119 @@ def fetch_alerts(
     return [dict(row) for row in rows]
 
 
+def fetch_alert_by_id(alert_id: int) -> dict[str, Any] | None:
+    conn = get_connection()
+    row = conn.execute(
+        """
+        SELECT
+            a.id,
+            a.transaction_id,
+            a.risk_score,
+            a.alert_type,
+            a.reason,
+            a.status,
+            a.created_at,
+            a.resolved_at,
+            t.account_id,
+            t.transaction_type,
+            t.amount,
+            t.currency,
+            t.device_id,
+            t.location,
+            t.fraud_score,
+            t.is_fraud,
+            t.metadata_json,
+            t.created_at AS transaction_created_at
+        FROM alerts a
+        JOIN transactions t ON t.id = a.transaction_id
+        WHERE a.id = ?
+        """,
+        (alert_id,),
+    ).fetchone()
+    if row is None:
+        return None
+    item = dict(row)
+    item["is_fraud"] = bool(item["is_fraud"])
+    return item
+
+
+def update_alert_status(alert_id: int, status: str, resolved_at: str | None = None) -> bool:
+    conn = get_connection()
+    cursor = conn.execute(
+        "UPDATE alerts SET status = ?, resolved_at = ? WHERE id = ?",
+        (status, resolved_at, alert_id),
+    )
+    conn.commit()
+    return cursor.rowcount > 0
+
+
+def fetch_account_profile(account_id: str) -> dict[str, Any] | None:
+    conn = get_connection()
+    tx_row = conn.execute(
+        """
+        SELECT
+            COUNT(*) AS total_transactions,
+            SUM(is_fraud) AS fraud_count,
+            ROUND(AVG(amount), 4) AS avg_amount,
+            ROUND(MAX(amount), 4) AS max_amount,
+            MIN(created_at) AS first_transaction,
+            MAX(created_at) AS last_transaction,
+            ROUND(AVG(CASE WHEN fraud_score IS NOT NULL THEN fraud_score END), 4) AS avg_risk_score
+        FROM transactions
+        WHERE account_id = ?
+        """,
+        (account_id,),
+    ).fetchone()
+
+    if tx_row is None or tx_row["total_transactions"] == 0:
+        return None
+
+    alert_row = conn.execute(
+        """
+        SELECT
+            COUNT(*) AS total_alerts,
+            SUM(CASE WHEN a.status = 'open' THEN 1 ELSE 0 END) AS open_alerts
+        FROM alerts a
+        JOIN transactions t ON t.id = a.transaction_id
+        WHERE t.account_id = ?
+        """,
+        (account_id,),
+    ).fetchone()
+
+    profile = dict(tx_row)
+    profile["account_id"] = account_id
+    profile["fraud_count"] = int(profile.get("fraud_count") or 0)
+    total = profile["total_transactions"]
+    profile["fraud_rate_percent"] = round(profile["fraud_count"] / total * 100, 4) if total else 0.0
+    profile["total_alerts"] = int(alert_row["total_alerts"] or 0) if alert_row else 0
+    profile["open_alerts"] = int(alert_row["open_alerts"] or 0) if alert_row else 0
+    return profile
+
+
+def fetch_account_transactions(
+    account_id: str,
+    limit: int = 50,
+    offset: int = 0,
+) -> list[dict[str, Any]]:
+    conn = get_connection()
+    rows = conn.execute(
+        """
+        SELECT
+            id, account_id, transaction_type, amount, currency, device_id,
+            location, created_at, is_fraud, fraud_score, inserted_at
+        FROM transactions
+        WHERE account_id = ?
+        ORDER BY created_at DESC, id DESC
+        LIMIT ? OFFSET ?
+        """,
+        (account_id, limit, offset),
+    ).fetchall()
+    items = [dict(row) for row in rows]
+    for item in items:
+        item["is_fraud"] = bool(item["is_fraud"])
+    return items
+
+
 def fetch_metrics() -> dict[str, Any]:
     conn = get_connection()
 

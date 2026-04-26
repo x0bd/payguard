@@ -12,6 +12,9 @@ from werkzeug.exceptions import BadRequest, HTTPException
 from db import (
     close_connection,
     fetch_account_history,
+    fetch_account_profile,
+    fetch_account_transactions,
+    fetch_alert_by_id,
     fetch_alerts,
     fetch_metrics,
     fetch_transactions,
@@ -19,6 +22,7 @@ from db import (
     insert_alert,
     insert_transaction,
     ping_db,
+    update_alert_status,
 )
 from ml.features import build_feature_frame
 
@@ -471,6 +475,55 @@ def create_app() -> Flask:
 
         items = fetch_alerts(limit=limit, status=status, min_risk=min_risk)
         return jsonify({"count": len(items), "data": items})
+
+    @app.get("/api/alerts/<int:alert_id>")
+    def get_alert(alert_id: int):
+        alert = fetch_alert_by_id(alert_id)
+        if alert is None:
+            raise APIError(f"Alert {alert_id} not found.", 404)
+        return jsonify({"data": alert})
+
+    @app.patch("/api/alerts/<int:alert_id>")
+    def update_alert(alert_id: int):
+        payload = request.get_json()
+        if not isinstance(payload, dict):
+            raise APIError("Request body must be a JSON object.", 400)
+
+        status = payload.get("status")
+        if status not in ("open", "closed", "resolved"):
+            raise APIError("status must be one of: open, closed, resolved.", 400)
+
+        resolved_at = utc_now_iso() if status == "resolved" else None
+        updated = update_alert_status(alert_id, status, resolved_at)
+        if not updated:
+            raise APIError(f"Alert {alert_id} not found.", 404)
+
+        return jsonify({"status": "updated", "alert_id": alert_id, "new_status": status})
+
+    @app.get("/api/accounts/<account_id>")
+    def get_account(account_id: str):
+        profile = fetch_account_profile(account_id.strip())
+        if profile is None:
+            raise APIError(f"Account '{account_id}' not found.", 404)
+        return jsonify({"data": profile})
+
+    @app.get("/api/accounts/<account_id>/transactions")
+    def get_account_transactions(account_id: str):
+        limit_raw = request.args.get("limit", "50")
+        offset_raw = request.args.get("offset", "0")
+        try:
+            limit = int(limit_raw)
+            offset = int(offset_raw)
+        except ValueError as exc:
+            raise APIError("limit and offset must be integers.", 400) from exc
+
+        if not 1 <= limit <= 200:
+            raise APIError("limit must be between 1 and 200.", 400)
+        if offset < 0:
+            raise APIError("offset must be >= 0.", 400)
+
+        items = fetch_account_transactions(account_id.strip(), limit=limit, offset=offset)
+        return jsonify({"count": len(items), "data": items, "account_id": account_id})
 
     @app.get("/api/metrics")
     def get_metrics():
