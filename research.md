@@ -1,6 +1,6 @@
 # PayGuard: Mobile money fraud detection for institutional digital finance
 
-**Dissertation draft — Chapters 1 & 2**  
+**Dissertation draft — Chapters 1–3**  
 *Harvard (author–date) referencing*
 
 ---
@@ -99,7 +99,7 @@ The significance is **threefold**:
 |---------|---------------------|
 | 1 | Introduction, problem, aims, scope *(this document)* |
 | 2 | Literature review, theoretical framing, feasibility *(this document)* |
-| 3 | Requirements, architecture, methodology, UML design |
+| 3 | Requirements, systems design, UML methodology *(this document)* |
 | 4 | PayGuard implementation (backend, ML, frontend) |
 | 5 | Results, evaluation, discussion |
 | 6 | Conclusion, limitations, future work (incl. XGBoost deployment, SHAP, streaming) |
@@ -221,7 +221,124 @@ Successful adoption requires **workflow fit**: investigators must **confirm or d
 
 ### 2.12 Chapter summary
 
-Chapter 2 established that **mobile-money fraud** in university fee contexts is a **material risk**, that **simulation and aggregation** are academically legitimate responses to **privacy constraints**, and that **supervised learning** with **imbalance-aware metrics** provides a **credible detection core**. **XGBoost** (Chen and Guestrin, 2016) remains the **canonical boosted-tree reference** for future enhancement. Chapter 3 (forthcoming) will formalise **requirements**, **system architecture**, and **design artefacts** for PayGuard.
+Chapter 2 established that **mobile-money fraud** in university fee contexts is a **material risk**, that **simulation and aggregation** are academically legitimate responses to **privacy constraints**, and that **supervised learning** with **imbalance-aware metrics** provides a **credible detection core**. **XGBoost** (Chen and Guestrin, 2016) remains the **canonical boosted-tree reference** for future enhancement. Chapter 3 formalises **requirements**, **architecture**, **data and ML design**, and **UML-oriented specifications** for PayGuard; accompanying **figure briefs** are listed in `figures.md`.
+
+---
+
+## Chapter 3 — Requirements, systems design, and methodology
+
+### 3.1 Introduction
+
+Chapter 3 translates the research problem (§1.2) and feasibility constraints (§2.11) into an **engineering blueprint**. The exposition follows a conventional **systems-analysis** path—requirements, architecture, data model, behavioural and structural models, machine-learning procedure, and interface design—consistent with survey guidance on end-to-end fraud-detection systems (Abdallah *et al.*, 2016) and with operational emphasis on **human-in-the-loop** disposition (Dal Pozzolo *et al.*, 2015). Diagram references (**Figure 3.1**–**Figure 3.14**) are specified at caption level here; production drawings are tracked in `figures.md`.
+
+### 3.2 Development approach and life cycle
+
+PayGuard was engineered under an **iterative, prototype-first** life cycle: short cycles of **implement → integrate → evaluate** rather than a rigid waterfall hand-off. This matches the uncertainty inherent in **model selection**, **threshold tuning**, and **UI validation**, and aligns with incremental perspectives on keeping detection models current (Lebichot *et al.*, 2021). **Figure 3.2** sketches the phase sequence and the feedback loop from **evaluation** back to **design** (e.g. feature or threshold revisions).
+
+### 3.3 Functional requirements
+
+Functional requirements tie objectives O3–O7 (§1.5) to observable system behaviour. Each requirement is **testable** via API interaction or UI inspection.
+
+| ID | Requirement | Rationale |
+|----|-------------|-----------|
+| FR1 | The system shall **ingest** a transaction record (account, type, amount, currency, optional device and location, timestamp) and persist it. | Baseline data capture for history-based scoring |
+| FR2 | The system shall **score** an incoming transaction using a **trained supervised model** and **account-level history**, producing a **probability or risk score**, a **discrete label**, and **explanatory feature summaries**. | Core fraud-detection obligation (Phua *et al.*, 2010; Whitrow *et al.*, 2009) |
+| FR3 | On scoring, the system shall **persist** the transaction (with score metadata) and create an **alert** record when risk exceeds policy thresholds. | Operational traceability (Dal Pozzolo *et al.*, 2015) |
+| FR4 | The system shall **list and filter alerts** (e.g. by status and minimum risk) and support **status updates** (open, closed, resolved) with resolution timestamps. | Investigator workflow |
+| FR5 | The system shall expose **aggregate metrics** (counts, fraud rate, alert breakdowns, rolling windows) for dashboard consumption. | Situational awareness |
+| FR6 | The system shall support **transaction listing** globally and **per account**, including **account risk profiles** (totals, averages, alert counts). | Deep-dive analysis |
+| FR7 | The system shall report **service health** (database reachability, model load status). | Operability |
+
+**Figure 3.3** (use case diagram) maps these requirements to **analyst-facing** goals; an optional **administrator** actor may be included for future authentication and configuration.
+
+### 3.4 Non-functional requirements
+
+| ID | Category | Requirement |
+|----|----------|----------------|
+| NFR1 | Performance | Interactive API responses on **prototype-scale** SQLite under **single-user** demonstration load; latency not certified for campus peak traffic. |
+| NFR2 | Reliability | Graceful degradation when the **model artefact** is missing (service reports unavailable model rather than silent failure). |
+| NFR3 | Maintainability | **Shared feature-engineering** logic for **offline training** and **online scoring** to prevent train–serve skew (Whitrow *et al.*, 2009). |
+| NFR4 | Portability | **Container-free** deployment on standard Windows/macOS/Linux developer machines; environment variables for **database path** and **model path**. |
+| NFR5 | Security (prototype) | **Input validation** on JSON payloads; **no production authentication** in the baseline artefact—explicit delimitation (§1.6). |
+| NFR6 | Legal alignment | **Data minimisation** mindset in schema design; production deployment would require controls per **Cyber and Data Protection Act [Chapter 12:07]** (Zimbabwe, 2021). |
+
+### 3.5 System architecture
+
+Architecturally, PayGuard is a **three-tier pattern**: **presentation** (React SPA), **application** (Flask REST), **data** (SQLite file) plus an **offline analytical path** (CSV generation, feature building, training script, persisted **joblib** pipeline). The browser communicates over **HTTP**; the API loads the **serialized model** at startup and uses **request-scoped** database connections.
+
+**Figure 3.1** depicts: (i) **offline** flow—synthetic dataset → training → model file; (ii) **online** flow—dashboard → REST → feature builder → scikit-learn **Pipeline** → persistence. This separation mirrors industrial batch vs streaming distinctions discussed under SCARFF (Carcillo *et al.*, 2018), albeit at prototype scale.
+
+### 3.6 Data design
+
+#### 3.6.1 Conceptual schema
+
+Three persistent entities anchor the prototype:
+
+- **Transaction** — atomic payment event with **monetary attributes**, **channel context** (device, location), **temporal stamp**, **ground-truth or predicted fraud flag**, optional **fraud_score**, and **metadata** for audit extensions.  
+- **Alert** — **investigator-facing** record linked **many-to-one** to a transaction, carrying **risk_score**, **alert_type**, **natural-language reason**, **status**, and **timestamps**.  
+- **Model run** (schema reserved) — optional registry for **training experiments** (name, version, **metrics_json**); not required for minimum viable scoring.
+
+**Figure 3.9** presents the **ERD** with **1:N** cardinality from **Transaction** to **Alert** and **ON DELETE CASCADE** semantics on the relational implementation.
+
+#### 3.6.2 Logical view
+
+SQLite realises the conceptual model with **INTEGER** primary keys, **TEXT** ISO timestamps, and **CHECK** constraints on **non-negative amount** and binary **is_fraud**. JSON metadata is stored as **TEXT** for flexibility during prototype evolution.
+
+### 3.7 Machine-learning design
+
+#### 3.7.1 Feature engineering
+
+Features are derived from **per-account chronological streams**, reflecting aggregation and behavioural-shift intuition (Whitrow *et al.*, 2009). **Numeric** inputs include **amount**, **log1p(amount)**, **calendar** signals (hour, day-of-week, weekend/night flags), **prior transaction count**, **prior average amount**, **ratio and delta** to that average, **account age** in hours, **seconds since previous transaction** (capped), **rolling transaction counts** over 1 h and 24 h, and **binary device/location change** flags. **Categorical** inputs include **transaction_type**, **currency**, and **location**. The same construction applies to **CSV training rows** and **API scoring rows** once history is assembled.
+
+#### 3.7.2 Training and model selection
+
+Training uses **stratified hold-out** data partitioning and **class-weighted** logistic regression and random forest **pipelines** combining **ColumnTransformer** (**StandardScaler** on numeric columns, **OneHotEncoder** on categoricals) with the classifier. The **winning model** is selected by **ROC-AUC** with **F1** and **recall** as secondary ordering—transparent reporting aligned with imbalance-aware practice (Bahnsen *et al.*, 2013, 2017; Phua *et al.*, 2010). **Figure 3.11** shows the **conceptual ML pipeline** for both **fit** and **predict** paths.
+
+#### 3.7.3 Inference and alert policy
+
+At scoring time, the service builds a **feature row** for the **target** transaction, applies **predict** and **predict_proba**, maps the score to **risk bands** (e.g. low / medium / high / critical), composes a **reason string** from thresholded key features, and sets **alert status** from **label-or-threshold** policy—consistent with treating scores as **triage signals** rather than final adjudication (OECD, 2017; Dal Pozzolo *et al.*, 2015).
+
+### 3.8 Behavioural models
+
+#### 3.8.1 Activity model — fraud scoring
+
+**Figure 3.4** models end-to-end **score transaction**: validate input → ensure model availability → retrieve **account history** → assemble frame → **build_feature_frame** → **predict** → persist **transaction** and **alert** → return JSON. Decision branches cover **validation errors**, **missing model**, and **empty history** edge cases.
+
+#### 3.8.2 Sequence and communication views
+
+**Figure 3.5** (sequence diagram) orders messages among **Client**, **Flask controller**, **database accessor**, **feature module**, and **sklearn Pipeline**. **Figure 3.6** (communication diagram) presents the same collaboration with **numbered interactions** for oral defence walkthroughs.
+
+### 3.9 Structural models
+
+#### 3.9.1 Class diagram
+
+**Figure 3.7** groups logical classes into **API / validation**, **persistence**, **machine learning**, and **domain** packages. Operations such as **insert_transaction**, **fetch_account_history**, **build_feature_frame**, and **load_model_context** appear as class-level responsibilities even when implemented as **functions** in Python—UML serves **communication**, not literal code mapping.
+
+#### 3.9.2 Object diagram
+
+**Figure 3.8** captures a **post-scoring snapshot**: one **Transaction** instance, one **Alert** linked by foreign key, and an **in-memory Pipeline** object representing the loaded artefact.
+
+### 3.10 State model — alert lifecycle
+
+**Figure 3.10** specifies **states** **open**, **closed**, and **resolved**, with transitions triggered by **analyst PATCH requests** or system closure when risk is below threshold. **Resolved** sets a **resolution timestamp** to support SLA-style reporting in future work.
+
+### 3.11 Application process design
+
+**Figure 3.12** flowcharts the **Flask service lifecycle**: **initialise** application (create tables, load model) → **per-request** routing and validation → **business operations** with **commit** → **teardown** closing the **request-scoped** connection. This pattern supports **thread-safe** SQLite access under Flask’s execution model.
+
+### 3.12 User interface design
+
+The SPA is organised into **Dashboard** (KPI cards, risk trend visualisation, **live scoring** form), **Alerts** (filterable table, disposition actions), **Transactions** (stream view), and **Accounts** (profile and history). Navigation is **sidebar-based**; visual hierarchy emphasises **risk chroma** (green→red) and **badge** semantics for alert status.
+
+**Figure 3.13** provides a **sitemap / low-fidelity wireframe collage**; a **high-fidelity dashboard screenshot** may be supplied as **Figure 3.14** in the final typeset dissertation.
+
+### 3.13 Security and deployment considerations (design level)
+
+Prototype security relies on **network locality** (developer machine) and **validated JSON**. Production hardening would add **TLS**, **authentication**, **rate limiting**, and **secrets management**—items flagged under NFR5–NFR6 and §2.11.3.
+
+### 3.14 Chapter summary
+
+Chapter 3 specified **functional and non-functional requirements**, a **three-tier architecture** with an **offline training spine**, a **relational data model** for transactions and alerts, a **documented feature set** grounded in aggregation literature (Whitrow *et al.*, 2009), **UML behavioural and structural views**, **alert state semantics**, and **UI information architecture**. Chapter 4 will narrate **implementation** fidelity and tooling; Chapter 5 will report **empirical metrics**.
 
 ---
 
