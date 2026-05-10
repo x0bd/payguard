@@ -73,7 +73,7 @@ The following objectives map research questions to deliverables:
 |--------|-------------|
 | Data | **Synthetic** mobile-money-style transactions generated within PayGuard; optional external simulators (e.g. PaySim philosophy) discussed literarily |
 | Models | **Binary classification**; scikit-learn pipelines; **probability scores** for thresholding |
-| Software | **Python 3**, **Flask**, **SQLite**, **pandas**, **scikit-learn**, **joblib**; **React (Vite, TypeScript)** frontend |
+| Software | **Python 3**, **Flask**, **SQLite**, **pandas**, **scikit-learn**, **joblib**; **React** with **TypeScript** |
 | Evaluation | **Offline** train/validation split; **precision, recall, F1, ROC-AUC**; alert workflow **simulated** |
 
 **Out of scope (delimitations)**
@@ -116,7 +116,7 @@ The chapter moves from **institutional payment context** and **fraud typologies*
 
 ### 2.2 Mobile money, institutional payments, and fraud modalities
 
-Mobile money systems decouple **cash handling** from **physical bank branches**, enabling low-friction peer-to-peer transfers and merchant payments. That strength—speed—is also a liability: victims may authorise transfers under duress or deception before controls trigger. Regional scholarship and industry reports highlight **USSD phishing**, **fake SMS receipts**, **agent complicity**, and **SIM-related account access** as recurring failure modes in Sub-Saharan Africa (Makori, 2019; GSMA, 2021).
+Mobile money systems decouple **cash handling** from **physical bank branches**, enabling low-friction peer-to-peer transfers and merchant payments. That strength—speed—is also a liability: victims may authorise transfers under duress or deception before controls trigger. Regional scholarship and industry reports highlight **USSD phishing**, **fake SMS receipts**, **agent complicity**, and **SIM-related account access** as recurring failure modes in Sub-Saharan Africa (Makori, 2019; OECD, 2017).
 
 University fee portals compound **high-value** and **seasonal** payment peaks. Fraud here does not only harm individuals; it undermines **institutional revenue integrity** and **auditability**. Hence, detection systems must support **investigator workflows** (triage, disposition, feedback) rather than isolated model accuracy (Dal Pozzolo *et al.*, 2015).
 
