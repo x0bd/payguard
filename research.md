@@ -1,6 +1,6 @@
 # PayGuard: Mobile money fraud detection for institutional digital finance
 
-**Dissertation draft — Chapters 1–3**  
+**Dissertation draft — Chapters 1–4**  
 *Harvard (author–date) referencing*
 
 ---
@@ -61,8 +61,8 @@ The following objectives map research questions to deliverables:
 | O3 | Implement a **reproducible data generator** and CSV→SQLite ingestion | Versioned scripts, documented parameters, reproducible fraud rate |
 | O4 | Implement **feature engineering** aligned between **offline training** and **online scoring** | Shared module; documented feature dictionary |
 | O5 | Train and evaluate **multiple classifiers**; persist **best model artefact** and **metrics report** | Tabular evaluation record; reported precision, recall, F1, and ROC-AUC |
-| O6 | Implement **Flask REST API** exposing scoring, alerts, metrics, transactions, and account resources | Formal API description in a later chapter; sample request–response evidence |
-| O7 | Implement **React dashboard** for KPIs, alerts, transactions, live scoring | Screenshots / usability notes in later chapter |
+| O6 | Implement **Flask REST API** exposing scoring, alerts, metrics, transactions, and account resources | Narrated in **§4.8**; sample request–response evidence may appear in appendices |
+| O7 | Implement **React dashboard** for KPIs, alerts, transactions, live scoring | Narrated in **§4.10**; optional high-fidelity capture (**Figure 3.14**) |
 | O8 | Assess **feasibility** (technical, economic, legal, operational) for UZ deployment | Feasibility matrices in §2.12 |
 
 ### 1.6 Scope and delimitations
@@ -100,7 +100,7 @@ The significance is **threefold**:
 | 1 | Introduction, problem, aims, scope *(this document)* |
 | 2 | Literature review, theoretical framing, feasibility *(this document)* |
 | 3 | Requirements, systems design, UML methodology *(this document)* |
-| 4 | PayGuard implementation (backend, ML, frontend) |
+| 4 | PayGuard implementation (backend, ML, frontend) *(this document)* |
 | 5 | Results, evaluation, discussion |
 | 6 | Conclusion, limitations, future work (incl. XGBoost deployment, SHAP, streaming) |
 
@@ -338,7 +338,142 @@ Prototype security relies on **network locality** (developer machine) and **vali
 
 ### 3.14 Chapter summary
 
-Chapter 3 specified **functional and non-functional requirements**, a **three-tier architecture** with an **offline training spine**, a **relational data model** for transactions and alerts, a **documented feature set** grounded in aggregation literature (Whitrow *et al.*, 2009), **UML behavioural and structural views**, **alert state semantics**, and **UI information architecture**. Chapter 4 will narrate **implementation** fidelity and tooling; Chapter 5 will report **empirical metrics**.
+Chapter 3 specified **functional and non-functional requirements**, a **three-tier architecture** with an **offline training spine**, a **relational data model** for transactions and alerts, a **documented feature set** grounded in aggregation literature (Whitrow *et al.*, 2009), **UML behavioural and structural views**, **alert state semantics**, and **UI information architecture**. Chapter 4 documents how those designs were **realised in software**; Chapter 5 interprets **quantitative outcomes**.
+
+---
+
+## Chapter 4 — Implementation
+
+### 4.1 Introduction
+
+This chapter describes the **concrete realisation** of PayGuard: directory layout, **synthetic data** tooling, **shared feature code**, **training and model persistence**, the **Flask service**, **SQLite** access patterns, and the **React** dashboard. The narrative follows the **offline-then-online** split already established in Chapter 3 and mirrors modular descriptions typical of fraud-detection system surveys (Abdallah *et al.*, 2016). Implementation choices prioritise **reproducibility** (fixed random seeds, versioned model dumps, documented CLI parameters) and **train–serve symmetry** for tabular features (Whitrow *et al.*, 2009).
+
+**Figure 4.1** summarises the **technology stack** as deployed in the prototype (see figure tracker for export specifications).
+
+### 4.2 Work breakdown and repository layout
+
+Development was partitioned into **data**, **models**, **service**, and **presentation** work packages. Table 4.1 maps the **top-level layout** to responsibilities.
+
+**Table 4.1** — Repository areas and responsibilities
+
+| Area | Responsibility |
+|------|----------------|
+| **Backend (Python)** | Synthetic generation, CSV seeding, feature and training scripts, Flask application, SQLite access |
+| **Data** | Generated CSV corpora and the SQLite database file used at run time |
+| **Models** | Serialized **joblib** payloads (best classifier plus versioned copies) and JSON training summary |
+| **Frontend (TypeScript/React)** | Single-page dashboard, typed HTTP client, charting and form components |
+
+This separation keeps **batch ML** independent of the **HTTP process**, so retraining does not require front-end redeployment (Lebichot *et al.*, 2021).
+
+### 4.3 Technology stack
+
+The **presentation tier** uses **React 19** with **TypeScript**, bundled by **Vite**, styled with **Tailwind CSS**, and composed from a **component library** suited to dashboards (cards, tables, dialogs, charts). The **application tier** uses **Flask 3** on **Python 3** with **pandas**, **NumPy**, **scikit-learn**, and **joblib**. The **data tier** is **SQLite 3** accessed through the standard library driver with **request-scoped** connections and **foreign-key** enforcement. Offline analytics share the same Python environment as the API to avoid dependency skew.
+
+### 4.4 Synthetic transaction generation
+
+The generator constructs **account profiles** (home location, primary device, expected daily activity intensity, typical spend level) and simulates **mobile-money-style** event types (cash-in, cash-out, peer-to-peer transfer, bill pay, merchant pay) with **Zimbabwe-relevant** city labels and **USD / ZWL** currency mix. Fraud is introduced through **controlled injectors** after the benign stream is built:
+
+| Pattern | Intended signal |
+|---------|-----------------|
+| **Amount spike** | Sudden large debit/credit inconsistent with prior median |
+| **Device / location change** | Channel context diverging from established profile |
+| **Rapid burst** | Many events in a short interval for a sampled account |
+
+The design follows the **simulation-for-privacy** rationale discussed for mobile-money research (Lopez-Rojas *et al.*, 2016). Row-level **`fraud_pattern`** metadata supports stratified error analysis even though the classifier consumes the **feature matrix**, not the pattern label, at training time.
+
+### 4.5 Data import and schema initialisation
+
+A dedicated **ingestion** routine reads the CSV, normalises types, and **bulk-inserts** into the **transactions** table. The persistence module executes **idempotent** `CREATE TABLE IF NOT EXISTS` statements for **transactions**, **alerts**, and a reserved **model_runs** registry. **Referential integrity** from **alerts** to **transactions** is enforced with `ON DELETE CASCADE` so alert rows cannot orphan parent transactions during development resets.
+
+### 4.6 Shared feature engineering
+
+All **supervised** features are produced by a single **feature-engineering** module consumed by both the **training script** and the **scoring endpoint**. The implementation:
+
+- enforces a **required column schema** on load;  
+- sorts by **account** and **timestamp** before rolling statistics;  
+- computes **numeric** behavioural descriptors (e.g. log-amount, prior counts, rolling 1 h / 24 h velocities, device/location change flags) and passes **categorical** channels (transaction type, currency, location) into the learning pipeline’s **one-hot** branch.
+
+This arrangement directly implements the **aggregation-centric** design rationale from Chapter 3 (Whitrow *et al.*, 2009) and mitigates **train–serve skew**, which surveys flag as a recurring failure mode in operational fraud analytics (Abdallah *et al.*, 2016).
+
+### 4.7 Model training and artefact persistence
+
+The training entry point loads the CSV, builds the **feature bundle**, performs a **stratified shuffle split**, fits two candidate **pipelines**—**logistic regression** (class-weighted, L-BFGS) and **random forest** (class-weighted subsampling, depth-capped ensemble)—and ranks models using **ROC-AUC** with **F1** and **recall** as tie-breakers. The winning **estimator**, **feature name lists**, and **metadata** are serialized to a primary **joblib** file plus a **timestamped** copy; a **JSON** sidecar records metrics and paths for audit.
+
+**Table 4.2** — Illustrative hold-out metrics (one frozen training run bundled with the project)
+
+| Model | Precision | Recall | F1 | ROC-AUC | Hold-out test rows |
+|-------|-----------|--------|-----|---------|---------------------|
+| Random forest *(selected)* | 0.454 | 0.870 | 0.597 | **0.991** | 19 894 |
+| Logistic regression | 0.375 | 0.981 | 0.543 | 0.990 | 19 894 |
+
+Corpus statistics from the same run: **99 468** total rows, approximately **2.39%** fraud prevalence, stratified **80 / 20** train–test split. These numbers are **illustrative** of prototype quality; fresh runs will differ slightly unless seeds and data files are identical.
+
+### 4.8 REST API implementation
+
+The HTTP layer is implemented as a **single Flask application factory** that:
+
+1. initialises the database file and **attempts to load** the serialized model at startup, recording **success or error** in application configuration;  
+2. registers **JSON-first** routes with explicit **validation** helpers (typed fields, ISO timestamps, currency length checks);  
+3. centralises **API errors** in a small exception type mapped to HTTP status codes;  
+4. closes the SQLite connection on **request teardown**.
+
+**Table 4.3** — Published REST resources (prototype)
+
+| Method | Resource | Purpose |
+|--------|----------|---------|
+| GET | Service health | Database ping + model load status |
+| POST | Transaction collection | Append validated transaction |
+| GET | Transaction collection | Recent transactions (optional account filter) |
+| POST | Fraud scoring | Score payload, persist transaction + alert |
+| GET | Alert collection | Filterable alert feed |
+| GET | Single alert | Detail view including joined transaction fields |
+| PATCH | Single alert | Update **open / closed / resolved** disposition |
+| GET | Account profile | Aggregated statistics for one account |
+| GET | Account transactions | Paginated history |
+| GET | Dashboard metrics | KPI JSON for the SPA |
+
+The surface area maps directly to **FR1–FR7** in §3.3.
+
+### 4.9 Scoring path and alert heuristics
+
+When a **score** request arrives, the service:
+
+1. validates the **payload**;  
+2. pulls **chronological history** for the account (bounded row count);  
+3. appends the **candidate** transaction and invokes the **same** `build_feature_frame` logic used in training, retaining only the **target** row for **prediction**;  
+4. reads **binary label** and **fraud probability** from the pipeline;  
+5. maps probability to a **discrete risk band**;  
+6. composes a **short natural-language reason** from thresholded key drivers (e.g. velocity, ratio to prior average, device change);  
+7. persists the transaction (including **predicted label** and **score**) and inserts an **alert** whose **status** is **open** if either the **hard label** is positive **or** the probability exceeds a **configurable operating threshold** (otherwise **closed**).
+
+This hybrid rule-plus-model policy keeps analyst workload bounded while preserving transparency (Dal Pozzolo *et al.*, 2015; OECD, 2017).
+
+### 4.10 Frontend implementation
+
+The dashboard is a **client-rendered** application with a **static shell**: a **sidebar** switches among **Dashboard**, **Alerts**, **Transactions**, and **Accounts** views. A lightweight **metrics poll** refreshes open-alert counts for the navigation badge. Data access is isolated in a **typed fetch module** so components remain **presentational**. Charts use a **declarative** chart library appropriate for time-series and **categorical breakdowns**; forms expose mandatory fields for **live scoring** demos.
+
+During **local development**, the bundler **proxies** same-origin API paths to the Flask port, avoiding cross-origin complexity; a **base URL** environment variable supports **deployed** backends.
+
+### 4.11 Configuration, security posture, and operations
+
+**Environment variables** select the **database file path** and **model file path**, enabling multiple **experimental** databases on one machine. At prototype stage **authentication is not implemented**; access control relies on **network isolation**. JSON payloads are **validated** before SQL execution to reduce injection and logic errors. **Future production** hardening—TLS, API keys, rate limits—was scoped in §3.13 and §2.11.3.
+
+### 4.12 Verification and testing strategy
+
+Automated unit coverage was **not** a deliverable target for the capstone timeline; instead, **manual verification** matrices were used:
+
+| Area | Check |
+|------|--------|
+| Data | Regenerate CSV with fixed seed → expect stable fraud-rate band |
+| Training | Re-run training → metrics within expected variance; artefact written |
+| API | Health endpoint **200** when DB and model present; **503** on scoring if model missing |
+| UI | Each view loads without console errors; scoring form returns visible risk output |
+
+These checks provide **traceable evidence** for the examination while acknowledging limits on **regression automation** (Abdallah *et al.*, 2016).
+
+### 4.13 Chapter summary
+
+Chapter 4 explained **how** PayGuard was built: **Python** data and ML tooling with **SQLite** persistence, **Flask** HTTP services aligned to Chapter 3 requirements, and a **React** dashboard for monitoring. **Train–serve feature parity** was preserved through a **shared module**, and **model selection** was automated with transparent reporting. **Chapter 5** presents **evaluation results**, error analysis, and discussion.
 
 ---
 

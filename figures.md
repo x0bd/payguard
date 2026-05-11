@@ -35,15 +35,20 @@
 
 ---
 
-## Later chapters (placeholders)
-
-Add rows when Chapters 4–6 are drafted. Typical additions:
+## Chapter 4 — Implementation
 
 | Done | ID | Suggested caption | Specification |
 |------|-----|-------------------|---------------|
-| - [ ] | **Figure 4.1** | Technology stack or deployment view | Layer diagram: UI / API / DB / ML artefact / host environment. |
-| - [ ] | **Figure 5.1** | Model comparison (e.g. bar chart) | Precision, recall, F1, ROC-AUC for candidate classifiers on hold-out data. |
-| - [ ] | **Figure 5.2** | ROC curve or confusion matrix | Single best model; label threshold operating point. |
+| - [ ] | **Figure 4.1** | PayGuard implementation technology stack | **Layered diagram** (bottom→top or left→right): **SQLite** file; **joblib** classifier artefact; **Flask** (Python) service layer; **HTTP/JSON**; **React + TypeScript** SPA (Vite build). **Side branch:** CSV + offline **pandas / scikit-learn** training path feeding the artefact. Optional: **Node** icon only if you show dev tooling. |
+
+---
+
+## Chapter 5 — Results (planned)
+
+| Done | ID | Suggested caption | Specification |
+|------|-----|-------------------|---------------|
+| - [ ] | **Figure 5.1** | Model comparison (bar chart) | Grouped bars: logistic regression vs random forest on **precision**, **recall**, **F1**, **ROC-AUC** from hold-out evaluation (values in dissertation text). |
+| - [ ] | **Figure 5.2** | ROC curve or confusion matrix | **Either** ROC with AUC annotation for best model **or** 2×2 confusion matrix on test set; mark operating threshold if relevant. |
 
 ---
 

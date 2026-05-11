@@ -269,8 +269,8 @@ Glyph uses “initialize framework / handle events / …”. For PayGuard, map t
 
 ### Figure — Implementation stack (optional)
 
-- [ ] **Figure 16 — Technology stack diagram**  
-  **What to show:** logos or labels in layers: UI → HTTP → Flask → SQLite / joblib; offline: CSV + Python ML.
+- [ ] **Figure 4.1 — Technology stack (implementation)**  
+  **What to show:** layered diagram: UI → HTTP → Flask → SQLite / joblib; offline: CSV + Python ML. *(Same content as `figures.md` Figure 4.1.)*
 
 ---
 
@@ -281,10 +281,10 @@ Glyph uses “initialize framework / handle events / …”. For PayGuard, map t
 - [ ] **Interpretation:** strengths, failure modes (false positives, cold-start accounts)
 - [ ] **Dashboard:** what an analyst sees in a demo scenario
 
-- [ ] **Figure 17 — Metrics comparison (bar chart)**  
+- [ ] **Figure 5.1 — Metrics comparison (bar chart)**  
   **What to show:** grouped bars for LR vs RF on F1 and ROC-AUC (from training report).
 
-- [ ] **Figure 18 — ROC curve or confusion matrix (optional)**  
+- [ ] **Figure 5.2 — ROC curve or confusion matrix (optional)**  
   **What to show:** one ROC curve for best model on test set, or confusion matrix heatmap — export from notebook or sklearn.
 
 ---
@@ -333,9 +333,9 @@ Glyph uses “initialize framework / handle events / …”. For PayGuard, map t
 | 13 | Flask service process design | 3 |
 | 14 | UI sitemap / wireframes | 3 |
 | 15 | Dashboard screenshot (optional) | 3–4 |
-| 16 | Technology stack (optional) | 4 |
-| 17 | Model metrics chart | 5 |
-| 18 | ROC / confusion matrix (optional) | 5 |
+| 4.1 | Technology stack (implementation) | 4 |
+| 5.1 | Model metrics chart | 5 |
+| 5.2 | ROC / confusion matrix (optional) | 5 |
 
 ---
 
