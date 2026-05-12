@@ -426,6 +426,8 @@ Schedule feasibility considers whether the project can be completed within the a
 
 **Figure 2.1: Gantt chart**
 
+![Figure 2.1: Gantt chart](assets/figures/figure-2-1-gantt-chart.svg)
+
 ### 2.13.6 Social Feasibility
 
 PayGuard is socially feasible because it supports financial integrity and reduces manual fraud checking. Finance officers may identify suspicious transactions faster, while students and guardians benefit from safer digital payment processes. Users must still understand that an alert is not final proof of fraud; it only means a transaction needs review.

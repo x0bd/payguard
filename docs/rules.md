@@ -4,10 +4,11 @@ These rules should be followed while writing the PayGuard dissertation documenta
 
 ## Figures and Screenshots
 
-- Do not insert actual figures, diagrams, or screenshots yet.
-- When a figure is required in the main report, use only a short placeholder such as `Figure 3.1: Use case diagram`.
+- Insert approved technical figures and diagrams one at a time.
+- Keep figure captions short in the main report, such as `Figure 3.1: Use case diagram`.
 - Store full diagram and screenshot descriptions in `docs/figure-descriptions.md`.
-- The actual figures, diagrams, and screenshots will be added later after the written structure is approved.
+- Store generated figure assets in `docs/assets/figures`.
+- Skip actual application, terminal, API, and browser screenshots until real screenshots are provided from the running project.
 
 ## Writing Style
 
