@@ -1565,6 +1565,1023 @@ The next chapter will focus on implementation, coding, testing, and the results 
 
 ---
 
+# Chapter 5: Implementation, Testing and Results
+
+## 5.1 Introduction
+
+This chapter explains how the PayGuard Mobile Money Fraud Detection System was implemented and tested. The previous chapter described the system design, while this chapter focuses on the actual development of the prototype, the tools used, the main modules created, the testing performed, and the results obtained.
+
+PayGuard was implemented as a full-stack prototype. The frontend was developed using React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and chart components. The backend was developed using Python and Flask. SQLite was used as the local database, while pandas, NumPy, scikit-learn, and joblib were used for data processing and machine learning.
+
+The system was implemented in stages. First, the backend foundation and database were created. After that, synthetic data generation was added. The machine learning feature engineering and training pipeline were then implemented. The scoring API was connected to the trained model, and finally the frontend dashboard was integrated with the backend API.
+
+This chapter follows the documentation rule of not inserting actual screenshots or figures yet. Where screenshots are required, the figure is described so that the correct image can be inserted later.
+
+## 5.2 Development Environment
+
+The PayGuard project was developed using open-source tools that are suitable for a final year software project. The development environment was chosen to be simple, affordable, and easy to reproduce.
+
+**Table 5.1: Development environment**
+
+| Item | Description |
+|---|---|
+| Operating system | Windows development environment. |
+| Backend language | Python. |
+| Backend framework | Flask. |
+| Database | SQLite. |
+| Frontend framework | React with TypeScript. |
+| Build tool | Vite. |
+| Styling | Tailwind CSS and shadcn/ui components. |
+| Machine learning libraries | pandas, NumPy, scikit-learn, joblib. |
+| Version control | Git. |
+| Dataset storage | CSV files in the data folder. |
+| Model storage | joblib model files in the models folder. |
+
+The backend dependencies used in the current prototype include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. The frontend dependencies include React, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
+
+## 5.3 Implementation Approach
+
+The implementation followed an iterative prototype approach. This means that the system was built in small stages, with each stage tested before continuing to the next. This approach was suitable because PayGuard includes several connected parts: data generation, database storage, machine learning, backend APIs, and frontend dashboard screens.
+
+The main implementation phases were:
+
+1. Project structure setup.
+2. Flask backend and SQLite database setup.
+3. Synthetic transaction data generation.
+4. Database seeding from generated CSV data.
+5. Feature engineering and model training.
+6. Fraud scoring API development.
+7. Frontend dashboard development.
+8. End-to-end integration and testing.
+
+This approach made it easier to confirm that each part worked before connecting everything together.
+
+## 5.4 Project Structure Implementation
+
+The project was organised into separate folders so that each part of the system could be maintained clearly.
+
+**Table 5.2: Project folder structure**
+
+| Folder or file | Purpose |
+|---|---|
+| frontend | Contains the React dashboard application. |
+| backend | Contains the Flask API, database code, data generator, training script, and machine learning modules. |
+| backend/ml | Contains the feature engineering module used by training and scoring. |
+| data | Stores generated transaction CSV files and the SQLite database. |
+| models | Stores the trained fraud detection model and training report. |
+| docs | Stores the dissertation documentation and project notes. |
+| README.md | Provides setup and run instructions. |
+| plan.md | Tracks implementation phases and progress. |
+
+This structure separates frontend code, backend code, generated data, trained model files, and documentation. This makes the project easier to understand and demonstrate.
+
+**Figure 5.1 description:** The project structure screenshot will show the root PayGuard folder with the main folders: frontend, backend, data, models, and docs. It will also show important files such as README.md, plan.md, project.md, and docs/final.md.
+
+## 5.5 Backend Implementation
+
+The backend was implemented using Flask. The Flask backend acts as the main application server for PayGuard. It receives requests from the frontend, validates transaction data, reads and writes records in SQLite, loads the trained fraud detection model, and returns JSON responses.
+
+The main backend file is `backend/app.py`. It defines the Flask application, API routes, request validation functions, error handling, model loading, scoring logic, and alert creation process.
+
+### 5.5.1 Backend Startup
+
+When the backend starts, it performs two important actions. First, it initialises the SQLite database by creating the required tables if they do not already exist. Second, it attempts to load the saved fraud detection model from the models folder.
+
+If the model is available, the backend reports that the model is loaded. If the model is missing, the API still starts, but scoring requests return a clear message telling the user to train a model first.
+
+### 5.5.2 Request Validation
+
+The backend validates transaction input before saving or scoring it. This helps prevent invalid data from entering the system.
+
+The validation checks include:
+
+- request body must be valid JSON;
+- account ID must not be empty;
+- transaction type must not be empty;
+- amount must be a valid number;
+- amount must not be negative;
+- currency must be a three-letter code;
+- timestamp must be valid if it is supplied;
+- fraud label must be true/false or 0/1 when supplied.
+
+Validation is important because machine learning predictions depend on clean and consistent input.
+
+### 5.5.3 API Endpoints Implemented
+
+The backend exposes several API endpoints for the frontend dashboard.
+
+**Table 5.3: Implemented backend endpoints**
+
+| Endpoint | Method | Implementation result |
+|---|---|---|
+| `/api/health` | GET | Returns service status, database status, model status, model name, model path, and timestamp. |
+| `/api/transactions` | POST | Validates and saves a transaction. |
+| `/api/transactions` | GET | Returns recent transactions, with optional account filtering. |
+| `/api/score` | POST | Scores a transaction, saves it, creates an alert, and returns the result. |
+| `/api/alerts` | GET | Returns alerts with optional status and risk filters. |
+| `/api/alerts/<alert_id>` | GET | Returns details for one alert. |
+| `/api/alerts/<alert_id>` | PATCH | Updates alert status to open, closed, or resolved. |
+| `/api/accounts/<account_id>` | GET | Returns account profile metrics. |
+| `/api/accounts/<account_id>/transactions` | GET | Returns transaction history for an account. |
+| `/api/metrics` | GET | Returns dashboard summary metrics. |
+
+### 5.5.4 Fraud Scoring Implementation
+
+The fraud scoring endpoint is the most important backend feature. It allows the frontend to submit a transaction and receive a fraud risk result.
+
+The scoring process works as follows:
+
+1. The frontend sends transaction details to `/api/score`.
+2. The backend validates the request body.
+3. The backend retrieves previous transaction history for the same account.
+4. The feature engineering module combines the account history with the new transaction.
+5. The trained model predicts whether the transaction is suspicious.
+6. The model also produces a risk score.
+7. The backend converts the score into a risk level.
+8. The backend creates a readable reason for the alert.
+9. The transaction is saved in the database.
+10. An alert is saved in the alerts table.
+11. The result is returned to the frontend.
+
+The scoring response includes the transaction ID, alert ID, predicted label, risk score, risk level, alert status, alert type, key features, alert reason, and model name.
+
+**Figure 5.2 description:** The backend scoring screenshot will show an example API response from `/api/score`. The response should include fields such as transaction_id, alert_id, predicted_label, risk_score, risk_level, alert_status, key_features, reason, and model_name.
+
+## 5.6 Database Implementation
+
+SQLite was used to implement the database. SQLite was selected because it is lightweight, easy to use, and suitable for a local prototype. The database is created in the data folder and stores records needed by the backend and dashboard.
+
+The database schema is defined in `backend/db.py`. The database is initialised automatically when the backend starts or when the seeding script runs.
+
+### 5.6.1 Database Tables
+
+The implemented database contains three tables:
+
+- transactions;
+- alerts;
+- model_runs.
+
+The `transactions` table stores payment transaction records. The `alerts` table stores fraud alerts linked to transactions. The `model_runs` table is included for storing model training metadata in future versions.
+
+**Table 5.4: Implemented database tables**
+
+| Table | Implementation purpose |
+|---|---|
+| transactions | Stores transaction records from CSV seeding, manual creation, and model scoring. |
+| alerts | Stores alert records created from scoring results. |
+| model_runs | Supports storage of model metadata and future model history. |
+
+### 5.6.2 Database Seeding
+
+A seeding script was implemented in `backend/seed_db_from_csv.py`. This script loads transaction records from a CSV file, validates required columns, cleans data types, and inserts records into SQLite.
+
+The script supports a truncate option. When truncation is used, existing transactions and alerts are cleared before new data is inserted. This is useful for resetting the prototype during testing and demonstrations.
+
+**Figure 5.3 description:** The database seeding screenshot will show terminal output from running the seeding command. The output should show the source CSV file, inserted rows, total rows in the database, fraud rows in the database, fraud rate, and database path.
+
+## 5.7 Synthetic Data Implementation
+
+The synthetic data generator was implemented in `backend/generate_data.py`. It creates mobile-money-style transactions for a selected number of accounts and days. The generator uses random account profiles to create realistic variation in amount, location, device, transaction type, and transaction frequency.
+
+The generator first creates normal transactions, then injects fraud patterns. The injected fraud patterns are amount spike, device/location change, and rapid burst.
+
+**Table 5.5: Implemented fraud pattern injectors**
+
+| Fraud injector | Implementation description |
+|---|---|
+| Amount spike | Selects normal transactions and increases their amount far above the account baseline. |
+| Device/location change | Changes the device and location of selected transactions to simulate suspicious account access. |
+| Rapid burst | Creates several transactions close together for selected accounts. |
+
+The generated dataset is saved as `data/transactions.csv`. A smaller sample dataset is also available as `data/sample_transactions.csv` for quick demonstrations.
+
+The full generated dataset used during development contained 99,468 transactions, including 2,380 fraud transactions. This gave a fraud rate of approximately 2.39 percent, which is suitable for demonstrating class imbalance in fraud detection.
+
+**Table 5.6: Generated dataset summary**
+
+| Item | Result |
+|---|---|
+| Full dataset rows | 99,468 |
+| Fraud rows | 2,380 |
+| Fraud rate | 2.39 percent |
+| Fraud patterns | amount_spike, device_location_change, rapid_burst |
+| Quick demo dataset | 600 rows |
+| Quick demo fraud rows | 12 rows |
+
+**Figure 5.4 description:** The synthetic data generation screenshot will show terminal output from the generator, including dataset path, number of rows, fraud rows, fraud rate, account count, amount range, and fraud pattern breakdown.
+
+## 5.8 Machine Learning Implementation
+
+The machine learning implementation is divided into feature engineering and model training.
+
+### 5.8.1 Feature Engineering Implementation
+
+Feature engineering was implemented in `backend/ml/features.py`. The feature engineering module loads transaction data, validates the required columns, cleans the data, and creates features that can help the model detect suspicious behaviour.
+
+The feature engineering module creates time features, amount features, account history features, velocity features, device change features, and location change features.
+
+**Table 5.7: Implemented feature groups**
+
+| Feature group | Example implementation |
+|---|---|
+| Time features | hour, day_of_week, is_weekend, is_night. |
+| Amount features | amount, amount_log, amount_to_prior_avg_ratio, amount_delta_from_prior_avg. |
+| Account history features | account_prior_tx_count, account_prior_avg_amount, account_age_hours. |
+| Velocity features | seconds_since_prev_tx, tx_count_last_1h, tx_count_last_24h. |
+| Device and location features | device_change, location_change. |
+| Categorical features | transaction_type, currency, location. |
+
+These features help the model compare a transaction against previous account behaviour.
+
+### 5.8.2 Model Training Implementation
+
+Model training was implemented in `backend/train.py`. The training script loads the generated dataset, builds features, splits the data into training and testing sets, trains candidate models, evaluates them, selects the best model, and saves the selected model.
+
+Two models were trained:
+
+- logistic regression;
+- random forest.
+
+The training pipeline uses preprocessing before model training. Numeric features are scaled, and categorical features are encoded so that they can be used by machine learning algorithms.
+
+The selected model is saved as `models/fraud_model.joblib`. A versioned copy is also saved, and the training report is written to `models/training_report.json`.
+
+**Table 5.8: Model training results**
+
+| Model | Precision | Recall | F1-score | ROC-AUC |
+|---|---:|---:|---:|---:|
+| Random forest | 0.4539 | 0.8697 | 0.5965 | 0.9912 |
+| Logistic regression | 0.3751 | 0.9811 | 0.5427 | 0.9898 |
+
+The random forest model was selected because it achieved the best overall ranking using ROC-AUC, F1-score, and recall. It produced a strong ROC-AUC score on the synthetic dataset, showing that it could separate many suspicious and normal transactions in the prototype environment.
+
+**Figure 5.5 description:** The model training screenshot will show the training summary printed by the training script. It should include dataset rows, fraud rate, selected model, precision, recall, F1-score, ROC-AUC, best model path, versioned model path, and report path.
+
+## 5.9 Frontend Implementation
+
+The frontend was implemented using React and TypeScript. It provides the user interface for monitoring fraud activity, scoring transactions, reviewing alerts, viewing recent transactions, and searching account profiles.
+
+The frontend application is organised into views and reusable components. The main application file controls which view is active. A sidebar allows navigation between the main pages.
+
+### 5.9.1 Sidebar Navigation
+
+The sidebar provides navigation to the main parts of the dashboard. It includes the PayGuard brand and four navigation items: Dashboard, Alerts, Transactions, and Accounts. It also displays an open alert count so that users can quickly notice active alerts.
+
+### 5.9.2 Dashboard View
+
+The dashboard view shows the main fraud operations summary. It includes:
+
+- total transactions;
+- fraud rate;
+- open alerts;
+- average risk score;
+- risk trend chart;
+- alert distribution panel;
+- live transaction scoring form;
+- scoring result panel.
+
+The scoring form allows a user to submit a transaction and immediately view the model result. This is useful for demonstration because it shows the complete flow from frontend input to backend scoring and alert creation.
+
+### 5.9.3 Alerts View
+
+The alerts view displays alert records in a table. Users can search and filter alerts. Users can also open an alert detail drawer to view more information about a suspicious transaction.
+
+The alert detail drawer allows users to:
+
+- view alert details;
+- view transaction details;
+- view metadata;
+- mark an alert as resolved;
+- dismiss an alert;
+- reopen an alert.
+
+### 5.9.4 Transactions View
+
+The transactions view displays recent transaction records. Users can search by account, location, or device, and filter by transaction type or fraud status. This helps users inspect stored transaction data and compare risk scores.
+
+### 5.9.5 Accounts View
+
+The accounts view allows the user to enter an account ID and retrieve the account profile. The profile includes total transactions, fraud count, fraud rate, average amount, maximum amount, average risk score, total alerts, open alerts, and account transaction history.
+
+**Table 5.9: Implemented frontend views**
+
+| View | Main implementation result |
+|---|---|
+| Dashboard | Displays metrics, charts, and live transaction scoring. |
+| Alerts | Displays alert table, filtering, detail drawer, and status actions. |
+| Transactions | Displays recent transactions with filtering and risk labels. |
+| Accounts | Displays account lookup, account risk profile, and transaction history. |
+
+**Figure 5.6 description:** The dashboard screenshot will show the implemented PayGuard frontend with sidebar navigation, metric cards, charts, and scoring form.
+
+**Figure 5.7 description:** The alerts screenshot will show the implemented alert table, filters, action menu, and alert detail drawer.
+
+**Figure 5.8 description:** The transactions screenshot will show transaction records with account IDs, transaction types, amounts, locations, risk scores, fraud labels, and dates.
+
+**Figure 5.9 description:** The accounts screenshot will show the account search field, account profile cards, risk badges, and transaction history table.
+
+## 5.10 Frontend and Backend Integration
+
+The frontend communicates with the backend through API helper functions in the frontend API client. These helper functions call endpoints such as `/api/metrics`, `/api/alerts`, `/api/transactions`, `/api/score`, and account profile endpoints.
+
+During local development, the frontend uses the Vite development server and sends relative `/api` requests. Vite then proxies those requests to the Flask backend running on `http://127.0.0.1:5000`. This allows the frontend and backend to work together during development without changing API URLs.
+
+The integration flow is shown below:
+
+1. User opens the React dashboard.
+2. Dashboard requests metrics from `/api/metrics`.
+3. Backend reads transaction and alert data from SQLite.
+4. Dashboard displays metrics and charts.
+5. User submits a transaction through the scoring form.
+6. Frontend sends the transaction to `/api/score`.
+7. Backend scores the transaction and creates an alert.
+8. Frontend refreshes metrics and alerts.
+
+**Figure 5.10 description:** The frontend-backend integration screenshot will show the dashboard running in the browser and API requests being handled through the Flask backend. The screenshot may include the dashboard and a terminal showing backend activity.
+
+## 5.11 Testing Strategy
+
+Testing was performed to check that the main parts of PayGuard worked correctly. Since PayGuard is a prototype, testing focused on functional correctness, API behaviour, model evaluation, frontend build verification, and end-to-end integration.
+
+The following testing categories were used:
+
+- Dataset validation testing.
+- Database seeding testing.
+- Machine learning evaluation.
+- API endpoint testing.
+- Frontend build testing.
+- End-to-end integration testing.
+- User interface behaviour testing.
+
+**Table 5.10: Testing strategy**
+
+| Test area | Purpose |
+|---|---|
+| Dataset validation | Confirm that generated data contains required columns, fraud labels, and class balance. |
+| Database seeding | Confirm that CSV transactions can be loaded into SQLite. |
+| Model training | Confirm that candidate models can train and produce evaluation metrics. |
+| API testing | Confirm that backend endpoints return expected responses. |
+| Frontend testing | Confirm that the dashboard builds and displays expected screens. |
+| Integration testing | Confirm that frontend, backend, database, and model work together. |
+
+## 5.12 Test Cases
+
+The main test cases used to verify the system are shown in Table 5.11.
+
+**Table 5.11: PayGuard test cases**
+
+| Test ID | Test description | Expected result | Actual result | Status |
+|---|---|---|---|---|
+| TC01 | Generate synthetic transaction dataset. | CSV file is created with valid transaction records. | Dataset was generated successfully. | Passed |
+| TC02 | Validate fraud class balance. | Dataset contains both normal and fraud records. | Full dataset contained 99,468 rows and 2,380 fraud rows. | Passed |
+| TC03 | Seed SQLite database from CSV. | Transactions are inserted into SQLite. | Database was seeded successfully from generated CSV. | Passed |
+| TC04 | Train fraud detection models. | Logistic regression and random forest models train successfully. | Both models trained and were evaluated. | Passed |
+| TC05 | Save best model artifact. | Best model is saved in the models folder. | `fraud_model.joblib` was created. | Passed |
+| TC06 | Check API health endpoint. | API returns status ok, database connection, and model status. | `/api/health` returned successful health information. | Passed |
+| TC07 | Create transaction endpoint. | Valid transaction is stored in database. | `POST /api/transactions` inserted a record. | Passed |
+| TC08 | Reject invalid payload. | API returns validation error. | Invalid requests returned error responses. | Passed |
+| TC09 | Score transaction endpoint. | API returns risk score, prediction, features, and alert. | `/api/score` returned risk result and created alert. | Passed |
+| TC10 | Fetch alerts endpoint. | API returns latest alerts. | `/api/alerts` returned alert records. | Passed |
+| TC11 | Fetch metrics endpoint. | API returns dashboard metrics. | `/api/metrics` returned transaction and alert summaries. | Passed |
+| TC12 | Update alert status. | Alert can be marked open, closed, or resolved. | Alert status update endpoint worked. | Passed |
+| TC13 | Account profile lookup. | API returns account summary and history. | Account lookup returned profile data for stored accounts. | Passed |
+| TC14 | Frontend production build. | React dashboard builds successfully. | Frontend build completed successfully. | Passed |
+| TC15 | End-to-end scoring from dashboard. | User submits transaction and sees result on dashboard. | Dashboard connected to backend and returned live score. | Passed |
+
+The test results show that the implemented prototype satisfies the main functional requirements.
+
+## 5.13 API Testing Results
+
+API testing confirmed that the backend routes work correctly and return JSON responses. The most important API tests were health check, transaction creation, transaction listing, scoring, alert listing, metrics, and alert status update.
+
+**Table 5.12: API testing summary**
+
+| Endpoint | Test purpose | Result |
+|---|---|---|
+| `GET /api/health` | Check service readiness. | Passed. |
+| `POST /api/transactions` | Store a transaction. | Passed. |
+| `GET /api/transactions` | Retrieve transaction records. | Passed. |
+| `POST /api/score` | Score a transaction and create alert. | Passed. |
+| `GET /api/alerts` | Retrieve alerts. | Passed. |
+| `GET /api/metrics` | Retrieve dashboard metrics. | Passed. |
+| `PATCH /api/alerts/<alert_id>` | Update alert status. | Passed. |
+| `GET /api/accounts/<account_id>` | Retrieve account profile. | Passed. |
+
+The API responses support the frontend dashboard and confirm that the backend can control the main fraud monitoring workflow.
+
+## 5.14 Model Testing Results
+
+The model was tested using a train-test split. The dataset was divided into training and testing parts so that the model could be evaluated on data it had not directly trained on.
+
+The random forest model was selected as the final model. It achieved the following performance on the synthetic test dataset:
+
+**Table 5.13: Selected model evaluation**
+
+| Metric | Value |
+|---|---:|
+| Precision | 0.4539 |
+| Recall | 0.8697 |
+| F1-score | 0.5965 |
+| ROC-AUC | 0.9912 |
+
+The recall value shows that the model detected many of the fraud cases in the synthetic test data. The precision value shows that some alerts may still be false positives. This is acceptable for a prototype because PayGuard is designed to support human review. A real deployment would require more tuning using real anonymised data and feedback from fraud analysts.
+
+The ROC-AUC value shows that the model can rank risky and non-risky transactions strongly in the synthetic dataset. However, these results should not be treated as proof of production performance because the dataset is simulated.
+
+## 5.15 Frontend Testing Results
+
+Frontend testing focused on checking whether the dashboard views could build successfully and whether the interface connected correctly to the backend endpoints.
+
+The frontend build was verified using the production build command. The dashboard views were also checked through the local development server during integration testing.
+
+**Table 5.14: Frontend testing summary**
+
+| Test area | Expected result | Actual result | Status |
+|---|---|---|---|
+| Dashboard view | Metrics, charts, and scoring form display correctly. | Dashboard displayed the expected monitoring interface. | Passed |
+| Alerts view | Alerts table, filters, drawer, and status actions work. | Alerts were displayed and could be reviewed. | Passed |
+| Transactions view | Recent transactions and filters are shown. | Transaction table displayed stored records. | Passed |
+| Accounts view | Account lookup returns profile and transaction history. | Account search returned account metrics and records. | Passed |
+| Frontend build | Application builds successfully. | Build completed successfully. | Passed |
+
+The frontend interface was designed to be simple and operational. It avoids requiring users to understand the internal machine learning model before using the system.
+
+## 5.16 End-to-End Integration Results
+
+End-to-end testing was performed to confirm that all major components worked together. The full flow included generating data, training the model, seeding the database, starting the backend, starting the frontend, loading the dashboard, and scoring a transaction.
+
+The end-to-end flow followed these steps:
+
+1. Generate synthetic transactions.
+2. Train the fraud detection model.
+3. Seed SQLite from the generated CSV file.
+4. Start the Flask API.
+5. Start the React frontend.
+6. Open the dashboard in the browser.
+7. Fetch dashboard metrics through the API.
+8. Score a transaction from the frontend.
+9. Save the transaction and alert.
+10. Display updated alerts and metrics.
+
+**Table 5.15: End-to-end verification**
+
+| Integration point | Expected result | Result |
+|---|---|---|
+| Frontend to backend health check | Frontend proxy can reach Flask API. | Passed. |
+| Metrics loading | Dashboard receives metrics from `/api/metrics`. | Passed. |
+| Alert loading | Dashboard receives alerts from `/api/alerts`. | Passed. |
+| Live scoring | Scoring form sends transaction to `/api/score`. | Passed. |
+| Database persistence | Scored transaction and alert are stored. | Passed. |
+| Dashboard refresh | Metrics and alerts update after scoring. | Passed. |
+
+The integration test confirmed that PayGuard works as a complete prototype rather than separate disconnected modules.
+
+**Figure 5.11 description:** The end-to-end demonstration screenshot will show the dashboard after a transaction has been scored. It should show the scoring result, updated alert count, and alert entry created from the submitted transaction.
+
+## 5.17 Validation Against Objectives
+
+The project objectives from Chapter 1 were compared against the implemented system to confirm whether the project achieved its purpose.
+
+**Table 5.16: Validation against project objectives**
+
+| Objective | Implementation evidence | Status |
+|---|---|---|
+| Design a mobile money fraud detection system. | System architecture, backend, database, model, and dashboard were implemented. | Achieved |
+| Generate synthetic mobile money transaction data. | Data generator created full and sample transaction datasets. | Achieved |
+| Identify transaction features for fraud detection. | Feature engineering module created amount, time, velocity, account history, device, and location features. | Achieved |
+| Train and evaluate supervised machine learning models. | Logistic regression and random forest models were trained and evaluated. | Achieved |
+| Develop backend scoring and alert storage. | Flask API implemented `/api/score` and alert persistence. | Achieved |
+| Design a dashboard for transactions, alerts, and risk levels. | React dashboard implemented Dashboard, Alerts, Transactions, and Accounts views. | Achieved |
+| Reduce manual work needed to identify suspicious transactions. | Dashboard highlights risk scores and alerts for review. | Achieved at prototype level |
+
+The validation shows that the main project objectives were achieved within the scope of a prototype system.
+
+## 5.18 Challenges Encountered
+
+Several challenges were encountered during implementation.
+
+**Table 5.17: Implementation challenges and solutions**
+
+| Challenge | Effect | Solution |
+|---|---|---|
+| Lack of real financial data | Real mobile money records could not be used for privacy reasons. | Synthetic transaction data was generated. |
+| Fraud class imbalance | Fraud records are fewer than normal records. | Metrics such as recall, F1-score, and ROC-AUC were used instead of accuracy alone. |
+| Connecting model scoring to API | The model needed account history to build features. | Backend retrieves account history before scoring new transactions. |
+| Explaining risk results to users | Users need understandable reasons, not only numbers. | Backend returns key features and human-readable alert reasons. |
+| Frontend and backend integration | The dashboard needed to call the Flask API smoothly. | Vite proxy and API helper functions were implemented. |
+| Prototype security limits | Full authentication and role controls were outside current scope. | Security limitations were documented for future improvement. |
+
+These challenges helped improve the final system design and made the project more realistic.
+
+## 5.19 Chapter Summary
+
+This chapter described the implementation, testing, and results of the PayGuard Mobile Money Fraud Detection System. It explained the development environment, project structure, backend implementation, database implementation, synthetic data generation, machine learning implementation, frontend implementation, frontend-backend integration, testing strategy, test cases, API results, model results, frontend results, and end-to-end integration results.
+
+The completed prototype successfully generated synthetic transaction data, trained fraud detection models, selected a random forest model, stored transactions in SQLite, exposed Flask API endpoints, created fraud alerts, and displayed monitoring information through a React dashboard. The system achieved the main objectives of the project at prototype level.
+
+The next chapter will discuss system deployment, implementation planning, maintenance, user training, and post-implementation considerations.
+
+---
+
+# Chapter 6: System Implementation and Maintenance
+
+## 6.1 Introduction
+
+This chapter explains how the completed PayGuard prototype can be installed, configured, run, maintained, and reviewed after implementation. While Chapter 5 focused on how the system was developed and tested, this chapter focuses on how the system is introduced into use and how it can continue to operate after development.
+
+PayGuard is currently implemented as a local prototype. It can be run on a development computer using a Flask backend, SQLite database, saved machine learning model, and React frontend. The system is suitable for demonstration, academic assessment, and further improvement. It is not yet a production system connected to a real mobile money provider or institutional payment platform.
+
+The implementation process includes installing dependencies, generating synthetic data, training the fraud detection model, seeding the database, starting the backend API, and starting the frontend dashboard. Maintenance includes backing up data, retraining the model when needed, monitoring alerts, improving fraud patterns, and preparing the system for future deployment.
+
+## 6.2 Implementation Overview
+
+The PayGuard implementation is divided into backend implementation, database implementation, machine learning implementation, frontend implementation, and integration implementation. These parts must work together for the system to function properly.
+
+**Table 6.1: PayGuard implementation overview**
+
+| System part | Implementation status | Purpose |
+|---|---|---|
+| Backend API | Implemented | Handles transactions, scoring, alerts, metrics, and account profiles. |
+| SQLite database | Implemented | Stores transactions, alerts, and model run information. |
+| Synthetic data generator | Implemented | Creates mobile-money-style transaction datasets. |
+| Machine learning model | Implemented | Scores transactions and produces fraud risk predictions. |
+| React dashboard | Implemented | Displays metrics, alerts, transactions, account profiles, and scoring form. |
+| End-to-end integration | Implemented | Connects frontend, backend, database, and model. |
+| Cloud deployment | Future improvement | Can be added later after production requirements are confirmed. |
+
+**Figure 6.1 description:** The implementation overview diagram will show the completed PayGuard prototype as connected blocks: synthetic data generator, training script, saved model, SQLite database, Flask API, and React dashboard.
+
+## 6.3 System Installation Requirements
+
+Before PayGuard can run, the required software must be installed. The project uses separate setup steps for the backend and frontend.
+
+**Table 6.2: Installation requirements**
+
+| Requirement | Purpose |
+|---|---|
+| Python | Runs the Flask API, data generator, database seeding script, and machine learning training script. |
+| Node.js | Runs the React frontend development environment. |
+| npm or pnpm | Installs frontend dependencies. |
+| Git | Supports project version control. |
+| Web browser | Opens and uses the PayGuard dashboard. |
+| Internet access | Required when installing packages and dependencies. |
+
+The backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. The frontend dependencies include React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
+
+## 6.4 Backend Installation Procedure
+
+The backend setup prepares the Python environment and installs the required backend packages. The backend folder contains the Flask application, machine learning scripts, database layer, data generation script, and training script.
+
+The backend setup process is:
+
+1. Open the project folder.
+2. Move into the backend folder.
+3. Create a Python virtual environment.
+4. Activate the virtual environment.
+5. Install backend dependencies from `requirements.txt`.
+
+**Table 6.3: Backend setup commands**
+
+| Step | Command |
+|---|---|
+| Open backend folder | `cd backend` |
+| Create virtual environment | `python -m venv .venv` |
+| Activate virtual environment | `.venv\Scripts\Activate.ps1` |
+| Install dependencies | `pip install -r requirements.txt` |
+
+After the backend dependencies are installed, the system can generate data, train models, seed the database, and run the API.
+
+**Figure 6.2 description:** The backend setup screenshot will show the terminal after activating the Python virtual environment and installing the packages from `requirements.txt`.
+
+## 6.5 Frontend Installation Procedure
+
+The frontend setup prepares the React dashboard. The frontend folder contains the user interface, dashboard views, UI components, API client, and styling files.
+
+The frontend setup process is:
+
+1. Move into the frontend folder.
+2. Install frontend dependencies.
+3. Start the development server.
+
+**Table 6.4: Frontend setup commands**
+
+| Step | Command |
+|---|---|
+| Open frontend folder | `cd frontend` |
+| Install dependencies | `npm install` |
+| Start development server | `npm run dev` |
+| Build production version | `npm run build` |
+
+The frontend uses relative `/api` requests during development. Vite proxies these requests to the Flask backend running on `http://127.0.0.1:5000`.
+
+**Figure 6.3 description:** The frontend setup screenshot will show the terminal running the Vite development server and displaying the local dashboard URL.
+
+## 6.6 Data Preparation Procedure
+
+PayGuard uses synthetic transaction data for training and testing. This protects privacy because no real student, customer, or mobile money account records are used.
+
+The data preparation process is:
+
+1. Generate synthetic mobile money transactions.
+2. Save the generated data to the `data` folder.
+3. Validate the number of rows, fraud rows, and fraud rate.
+4. Seed the SQLite database from the generated CSV file.
+
+**Table 6.5: Data preparation commands**
+
+| Step | Command |
+|---|---|
+| Generate full dataset | `python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv` |
+| Seed full dataset | `python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate` |
+| Seed quick demo dataset | `python seed_db_from_csv.py --csv ..\data\sample_transactions.csv --truncate` |
+
+The full dataset is useful for training and full demonstration. The sample dataset is useful when a quick demo is required.
+
+**Figure 6.4 description:** The data preparation screenshot will show successful synthetic data generation and database seeding output, including total rows and fraud rows.
+
+## 6.7 Model Training Procedure
+
+The fraud detection model must be trained before the scoring API can produce model-based risk scores. The training script loads the generated dataset, builds features, trains candidate models, evaluates them, selects the best model, and saves the selected model.
+
+The model training command is:
+
+`python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42`
+
+After training, the selected model is saved in the models folder as `fraud_model.joblib`. A training report is also saved as `training_report.json`.
+
+**Table 6.6: Model training outputs**
+
+| Output | Description |
+|---|---|
+| `fraud_model.joblib` | Main trained model loaded by the backend API. |
+| Versioned model file | Timestamped model copy for tracking model versions. |
+| `training_report.json` | Stores model metrics, dataset summary, selected model, and feature lists. |
+
+The current selected model is random forest. It was selected because it performed better overall than logistic regression on the synthetic test dataset.
+
+**Figure 6.5 description:** The model training screenshot will show the terminal output after training, including selected model, precision, recall, F1-score, ROC-AUC, and saved model paths.
+
+## 6.8 Database Initialisation and Seeding
+
+The SQLite database is initialised automatically by the backend database layer. If the database file does not exist, the system creates it and adds the required tables.
+
+The database seeding script inserts transaction records from a CSV file into the `transactions` table. It can also clear existing transaction and alert records when the `--truncate` option is used.
+
+**Table 6.7: Database implementation files**
+
+| File | Purpose |
+|---|---|
+| `backend/db.py` | Defines database schema and database helper functions. |
+| `backend/seed_db_from_csv.py` | Loads CSV transactions into SQLite. |
+| `data/payguard.db` | SQLite database file created during local use. |
+
+The database should be seeded after generating the dataset and before using the dashboard for transaction browsing or account lookup.
+
+## 6.9 Running the Backend API
+
+After the database and trained model are ready, the Flask backend can be started.
+
+The backend run command is:
+
+`python app.py`
+
+By default, the backend runs at:
+
+`http://127.0.0.1:5000`
+
+Once the backend is running, the health endpoint can be used to confirm that the service, database, and model are ready.
+
+**Table 6.8: Backend readiness checks**
+
+| Check | Expected result |
+|---|---|
+| API service | Health endpoint returns status ok. |
+| Database | Health endpoint reports database connected. |
+| Model | Health endpoint reports model loaded. |
+| Timestamp | Health endpoint returns current API response time. |
+
+**Figure 6.6 description:** The backend health check screenshot will show the `/api/health` response with service status, database status, model status, model name, model path, and timestamp.
+
+## 6.10 Running the Frontend Dashboard
+
+The frontend dashboard is started from the frontend folder using:
+
+`npm run dev`
+
+The browser then opens the local dashboard URL shown by Vite. Through the dashboard, the user can view metrics, score transactions, inspect alerts, view transactions, and search account profiles.
+
+The dashboard should be used after the backend is already running. This is because the dashboard depends on backend API endpoints for live data.
+
+**Table 6.9: Dashboard screens available after startup**
+
+| Screen | Purpose |
+|---|---|
+| Dashboard | Shows metrics, charts, and live scoring form. |
+| Alerts | Shows suspicious transaction alerts and review actions. |
+| Transactions | Shows recent transaction records and filters. |
+| Accounts | Allows lookup of account profiles and transaction history. |
+
+**Figure 6.7 description:** The dashboard startup screenshot will show the PayGuard dashboard open in the browser with the sidebar and main dashboard metrics visible.
+
+## 6.11 End-to-End Run Order
+
+The full PayGuard prototype should be run in the correct order so that all components are ready.
+
+**Table 6.10: Full run order**
+
+| Step | Action | Reason |
+|---|---|---|
+| 1 | Install backend dependencies. | Prepares Python environment. |
+| 2 | Install frontend dependencies. | Prepares React dashboard. |
+| 3 | Generate synthetic dataset. | Creates transaction data for training and seeding. |
+| 4 | Train fraud detection model. | Creates saved model used by API scoring. |
+| 5 | Seed SQLite database. | Loads transaction records for dashboard use. |
+| 6 | Start Flask backend. | Makes API endpoints available. |
+| 7 | Start React frontend. | Opens the dashboard interface. |
+| 8 | Score a transaction. | Confirms end-to-end model and alert workflow. |
+
+The recommended backend run sequence is:
+
+1. `python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv`
+2. `python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42`
+3. `python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate`
+4. `python app.py`
+
+In another terminal, the frontend run sequence is:
+
+1. `cd frontend`
+2. `npm run dev`
+
+**Figure 6.8 description:** The end-to-end run screenshot will show two terminals: one running the Flask backend and another running the Vite frontend, with the PayGuard dashboard open in the browser.
+
+## 6.12 User Training Plan
+
+User training is important because finance staff and administrators may not be technical users. The training should focus on how to use the dashboard and interpret alerts, not on the internal machine learning code.
+
+The training should cover:
+
+- how to open the dashboard;
+- how to read the summary metrics;
+- how to submit a transaction for scoring;
+- how to interpret risk scores and risk levels;
+- how to view alerts;
+- how to open alert details;
+- how to mark alerts as resolved, closed, or reopened;
+- how to search transactions;
+- how to look up an account profile.
+
+**Table 6.11: User training plan**
+
+| Training area | User should learn |
+|---|---|
+| Dashboard overview | Understand total transactions, fraud rate, open alerts, and average risk score. |
+| Transaction scoring | Enter transaction details and read the result. |
+| Alert review | Open alerts, read reasons, and update status. |
+| Transaction search | Filter recent transactions by account, type, device, location, or fraud status. |
+| Account lookup | Search for an account and review account-level risk information. |
+| Responsible use | Understand that an alert is a warning for review, not final proof of fraud. |
+
+**Figure 6.9 description:** The user training screenshot will show the dashboard scoring form and result panel, with labels indicating the fields a user should understand during training.
+
+## 6.13 System Deployment Plan
+
+The current version of PayGuard is deployed locally for development and demonstration. Local deployment is suitable for the final year project because it allows the examiner to see the full system working without connecting to real financial infrastructure.
+
+Future cloud deployment can be considered after the academic prototype is complete. The frontend can be deployed as a static Vite application. The Flask backend may be adapted for serverless or cloud hosting. However, SQLite has limitations in serverless environments because serverless file systems may not provide permanent writable storage. For a production or cloud version, a managed database such as PostgreSQL would be more appropriate.
+
+**Table 6.12: Deployment options**
+
+| Deployment option | Suitability | Notes |
+|---|---|---|
+| Local development machine | Suitable for current prototype. | Easy to run during demonstration. |
+| Local network deployment | Possible for small internal demos. | Requires backend host machine to be reachable on the network. |
+| Static frontend hosting | Suitable for frontend only. | Requires backend API URL configuration. |
+| Cloud/serverless backend | Future option. | Requires careful handling of database and model files. |
+| Production deployment | Future improvement. | Requires authentication, audit logs, secure database, and real data governance. |
+
+**Figure 6.10 description:** The deployment options diagram will show current local deployment as the active implementation and future cloud deployment as a possible extension using a hosted frontend, hosted API, and managed database.
+
+## 6.14 Maintenance Plan
+
+Maintenance is required to keep the system useful and reliable. Since PayGuard includes a machine learning model, maintenance involves both software maintenance and model maintenance.
+
+**Table 6.13: Maintenance activities**
+
+| Activity | Frequency | Purpose |
+|---|---|---|
+| Backup database | Weekly during active use | Protect stored transactions and alerts. |
+| Review alerts | Daily during demonstration or active monitoring | Confirm suspicious transactions are investigated. |
+| Retrain model | When new data or improved fraud patterns are available | Keep fraud detection relevant. |
+| Review model metrics | After every training run | Check precision, recall, F1-score, and ROC-AUC. |
+| Update dependencies | Periodically | Keep software secure and compatible. |
+| Review API errors | During testing and demos | Detect backend issues early. |
+| Improve frontend usability | As users give feedback | Make the dashboard easier to use. |
+| Document changes | After each major update | Keep the project report and README accurate. |
+
+## 6.15 Model Maintenance
+
+The fraud detection model should not be treated as permanently complete. Fraud behaviour changes over time, and a model trained on old patterns may become less useful. This is known as concept drift.
+
+For PayGuard, model maintenance should include:
+
+- collecting new approved data or improving synthetic data patterns;
+- retraining the candidate models;
+- comparing new metrics with previous metrics;
+- saving versioned model files;
+- updating the main `fraud_model.joblib` only when the new model performs acceptably;
+- checking whether the model creates too many false alerts;
+- using human review feedback to improve future training.
+
+In a real deployment, the model should be retrained with real anonymised transaction records only after proper permission and privacy controls are in place.
+
+## 6.16 Data Backup and Recovery
+
+Because PayGuard stores transaction and alert information in SQLite, the database file should be backed up during active use. The main database file is stored in the data folder as `payguard.db`.
+
+**Table 6.14: Backup and recovery plan**
+
+| Item | Backup method | Recovery method |
+|---|---|---|
+| SQLite database | Copy `data/payguard.db` to backup storage. | Restore the copied database file into the data folder. |
+| Generated CSV data | Keep copies of `transactions.csv` and `sample_transactions.csv`. | Reseed the database from CSV if needed. |
+| Model artifacts | Backup `models/fraud_model.joblib` and versioned model files. | Restore model file into the models folder. |
+| Training report | Backup `models/training_report.json`. | Restore report for documentation and comparison. |
+| Source code | Commit changes using Git. | Restore from repository history. |
+
+If the database is lost during prototype work, it can be recreated by running the seeding script again using the generated CSV dataset.
+
+## 6.17 Post-Implementation Review
+
+After implementation, the system was reviewed against the original project goals. The prototype was able to generate transaction data, train a fraud detection model, start the backend API, store transactions and alerts, and display monitoring information in the frontend dashboard.
+
+The post-implementation review showed the following:
+
+- The system can run locally as a complete prototype.
+- The backend API can connect to SQLite.
+- The fraud model can be loaded by the backend.
+- The scoring endpoint can return risk scores and alert reasons.
+- The dashboard can display metrics, alerts, transactions, and account profiles.
+- The frontend and backend can communicate through API requests.
+- The system supports a clear demonstration of fraud detection workflow.
+
+The review also showed areas that should be improved before production use. These include authentication, role-based access, real data integration, stronger deployment design, cloud database support, and continuous model monitoring.
+
+**Table 6.15: Post-implementation review**
+
+| Review area | Result |
+|---|---|
+| Data generation | Worked successfully using synthetic data. |
+| Model training | Worked successfully and selected random forest model. |
+| Backend API | Worked successfully for health, transactions, scoring, alerts, metrics, and accounts. |
+| Database | Worked successfully using SQLite. |
+| Frontend dashboard | Worked successfully with dashboard, alerts, transactions, and account views. |
+| Integration | Worked successfully from frontend scoring to backend alert creation. |
+| Production readiness | Not yet production ready because it is a prototype. |
+
+## 6.18 Implementation Limitations
+
+The system implementation has some limitations that should be acknowledged.
+
+**Table 6.16: Implementation limitations**
+
+| Limitation | Explanation |
+|---|---|
+| Synthetic data only | The system does not use real institutional mobile money data. |
+| Local SQLite database | SQLite is suitable for the prototype but not ideal for large production deployment. |
+| Limited authentication | The current prototype does not include full user login and role management. |
+| No real mobile money integration | The system does not connect to EcoCash, bank APIs, or live payment systems. |
+| Prototype model performance | Model results are based on simulated data, not real fraud investigation outcomes. |
+| Manual screenshot insertion | Figures and screenshots are described but not yet inserted into the report. |
+
+These limitations are acceptable for the current academic prototype, but they guide future improvements.
+
+## 6.19 Chapter Summary
+
+This chapter discussed the implementation and maintenance of the PayGuard Mobile Money Fraud Detection System. It explained the installation requirements, backend setup, frontend setup, data preparation, model training, database seeding, backend startup, frontend startup, end-to-end run order, user training, deployment plan, maintenance plan, model maintenance, backup and recovery, post-implementation review, and implementation limitations.
+
+The chapter showed that PayGuard can be installed and demonstrated locally as a complete prototype. It also showed that future deployment would require stronger security, a production database, real data governance, and more advanced maintenance procedures.
+
+The next chapter will present the project summary, conclusion, recommendations, and future enhancements.
+
+---
+
+# Chapter 7: Summary, Conclusion and Recommendations
+
+## 7.1 Introduction
+
+This chapter presents the final summary, conclusion, recommendations, and future enhancements for the PayGuard Mobile Money Fraud Detection System. The chapter reflects on the work completed in the project and explains how the system addressed the problem identified in Chapter 1.
+
+The main purpose of PayGuard was to design and develop a prototype system that can assist institutions in detecting suspicious mobile money transactions. The system was created to support finance officers and fraud analysts by providing transaction monitoring, fraud risk scoring, alert generation, dashboard metrics, and account-level review.
+
+This final chapter also discusses the extent to which the project objectives were achieved, the main challenges faced, recommendations for use, and possible improvements for future work.
+
+## 7.2 Project Summary
+
+PayGuard was developed as a mobile money fraud detection and monitoring prototype. The system uses synthetic mobile-money-style transaction data because real financial data is sensitive and difficult to access for academic research. The synthetic dataset contains normal transactions as well as fraud patterns such as amount spikes, device and location changes, and rapid transaction bursts.
+
+The project includes a complete software workflow. A Python data generator creates transaction data. A feature engineering module prepares the data for machine learning. A training script trains and evaluates candidate fraud detection models. The best model is saved and loaded by the Flask backend. The backend provides API endpoints for health checks, transactions, scoring, alerts, metrics, and account profiles. The React dashboard allows users to view fraud monitoring information and score transactions through a user-friendly interface.
+
+The system was tested end-to-end. The testing confirmed that the prototype can generate data, train a model, seed the SQLite database, run the backend API, load the frontend dashboard, score a transaction, create an alert, and display updated metrics.
+
+## 7.3 Objectives Achieved
+
+The objectives stated in Chapter 1 were reviewed to determine whether the project achieved its purpose.
+
+**Table 7.1: Objectives achieved**
+
+| Objective | Achievement |
+|---|---|
+| To design a mobile money fraud detection system for institutional digital finance. | Achieved. The system architecture, backend, database, model, and dashboard were designed and implemented. |
+| To generate synthetic mobile money transaction data for system development and testing. | Achieved. Synthetic transaction data was generated with normal and fraudulent patterns. |
+| To identify transaction features that can help separate normal transactions from suspicious transactions. | Achieved. Features such as amount ratio, velocity, account history, device change, and location change were implemented. |
+| To train and evaluate supervised machine learning models for fraud detection. | Achieved. Logistic regression and random forest models were trained and evaluated. |
+| To develop a backend system that can score transactions and store alerts. | Achieved. Flask endpoints were implemented for transaction scoring and alert storage. |
+| To design a dashboard that allows users to view transactions, alerts, and fraud risk levels. | Achieved. The React dashboard includes Dashboard, Alerts, Transactions, and Accounts views. |
+| To support finance staff by reducing the amount of manual work needed when identifying suspicious transactions. | Achieved at prototype level. The system highlights risky transactions and provides alerts for review. |
+
+The project therefore achieved its main objectives within the limits of a prototype system.
+
+## 7.4 Main Findings
+
+The project produced several findings during development and testing.
+
+First, synthetic data can support the development of a fraud detection prototype when real financial data is unavailable. Although synthetic data cannot fully replace real transaction data, it allows safe experimentation without exposing personal or financial records.
+
+Second, feature engineering is important in fraud detection. The model needs more than the raw transaction amount. Features such as transaction velocity, account prior average amount, time since previous transaction, device change, and location change help the system understand whether a transaction is unusual.
+
+Third, machine learning can support fraud monitoring by producing risk scores. In the PayGuard prototype, the random forest model performed strongly on the synthetic dataset and was selected as the final model. However, the model should still be reviewed by humans because a suspicious transaction is not always fraudulent.
+
+Fourth, a dashboard improves the usefulness of the fraud detection model. Instead of only producing technical model results, PayGuard displays risk scores, alerts, trends, account profiles, and transaction records in a way that users can inspect.
+
+## 7.5 Conclusion
+
+The PayGuard Mobile Money Fraud Detection System successfully demonstrates how a software prototype can be used to support fraud monitoring in mobile-money-style institutional payments. The system was able to generate synthetic transaction data, train a fraud detection model, score transactions, create alerts, store records in SQLite, and display useful monitoring information through a React dashboard.
+
+The project addressed the problem of manual and slow fraud checking by introducing automated transaction scoring and alert creation. Instead of requiring finance staff to inspect every transaction equally, PayGuard helps prioritise suspicious transactions based on risk level and key fraud signals.
+
+The system also supports ethical and privacy-aware development by using synthetic data instead of real customer or student payment data. This makes the project suitable for academic demonstration while reducing privacy risk.
+
+Although PayGuard is not a production banking system, it successfully proves the concept of using machine learning and dashboard monitoring to support mobile money fraud detection. The project can therefore be considered successful within its academic scope.
+
+## 7.6 Recommendations
+
+The following recommendations are made based on the completed project:
+
+- Institutions that process many digital payments should consider automated fraud monitoring tools to support manual checking.
+- Fraud alerts should be used as decision-support information, not as automatic proof that a user committed fraud.
+- Human review should remain part of the fraud investigation process.
+- Synthetic data is useful for academic development, but real anonymised data should be used for serious production evaluation where permission is granted.
+- Future systems should include strong authentication, user roles, audit logs, and secure database storage.
+- The fraud detection model should be retrained periodically so that it can adapt to changing fraud patterns.
+- Dashboard design should remain simple so that non-technical finance users can understand risk scores and alerts easily.
+
+## 7.7 Future Enhancements
+
+PayGuard can be improved in several ways in future versions.
+
+**Table 7.2: Future enhancements**
+
+| Enhancement | Description |
+|---|---|
+| Real anonymised data | Use approved real transaction data after removing personal information. |
+| User authentication | Add login functionality for finance officers, fraud analysts, and administrators. |
+| Role-based access control | Give different users different permissions based on their responsibilities. |
+| Cloud database | Replace SQLite with PostgreSQL or another managed database for larger deployment. |
+| Real-time notifications | Add email, SMS, or dashboard notifications for high-risk alerts. |
+| Advanced machine learning models | Test models such as XGBoost, anomaly detection, or neural networks. |
+| Explainability tools | Add clearer explanations showing why a model marked a transaction as risky. |
+| Audit trail | Record user actions such as alert review, resolution, and dismissal. |
+| Live payment integration | Connect to real payment systems only after security and legal requirements are met. |
+| Model monitoring | Track model performance over time and detect concept drift. |
+
+These enhancements would make the system stronger, safer, and closer to a real-world fraud monitoring platform.
+
+## 7.8 Contribution of the Project
+
+The project contributes a practical demonstration of how fraud detection can be applied to mobile-money-style transactions. It combines software engineering, data generation, database design, machine learning, API development, and dashboard design into one working prototype.
+
+The project also contributes academically by showing how a student can use synthetic data to study a sensitive problem without exposing real personal records. This is important because financial fraud research often faces data access and privacy challenges.
+
+For non-technical users, the project shows that machine learning can be presented through simple dashboard tools instead of only technical reports. This makes the system easier to explain and defend during presentation.
+
+## 7.9 Limitations Revisited
+
+The project had several limitations. The most important limitation is that the system used synthetic data rather than real mobile money records. This means that the model results may not fully represent real-world fraud behaviour. Real fraud patterns may be more complex and may change faster than the patterns simulated in the dataset.
+
+Another limitation is that the system is currently a local prototype. It does not include full production security, live integration with mobile money providers, or enterprise-level deployment. SQLite was suitable for the project, but a production version would require a stronger database and secure hosting environment.
+
+The system also does not make final fraud decisions. It only highlights suspicious transactions for review. This limitation is important because legitimate transactions can sometimes appear unusual.
+
+## 7.10 Final Conclusion
+
+PayGuard achieved its goal of demonstrating a mobile money fraud detection and monitoring system. The project produced a working prototype that can generate transaction data, train a model, score transactions, create alerts, store results, and display fraud monitoring information through a dashboard.
+
+The project shows that automated fraud detection can support finance departments by improving speed, organisation, and prioritisation during transaction review. It also shows that machine learning can be useful when combined with clear user interfaces and human review.
+
+In conclusion, PayGuard is a successful final year project prototype that addresses a real digital finance problem. It provides a strong foundation for future research and development in mobile money fraud detection.
+
+---
+
 # References
 
 Abdallah, A., Maarof, M.A. and Zainal, A. (2016) 'Fraud detection system: a survey', *Journal of Network and Computer Applications*, 68, pp. 90-113.
