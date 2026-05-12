@@ -169,3 +169,45 @@ The frontend-backend integration screenshot will show the dashboard running in t
 ### Figure 5.11: End-to-End Demonstration Screenshot
 
 The end-to-end demonstration screenshot will show the dashboard after a transaction has been scored. It should show the scoring result, updated alert count, and alert entry created from the submitted transaction.
+
+## Chapter 6
+
+### Figure 6.1: Implementation Overview Diagram
+
+The implementation overview diagram will show the completed PayGuard prototype as connected blocks: synthetic data generator, training script, saved model, SQLite database, Flask API, and React dashboard.
+
+### Figure 6.2: Backend Setup Screenshot
+
+The backend setup screenshot will show the terminal after activating the Python virtual environment and installing the packages from `requirements.txt`.
+
+### Figure 6.3: Frontend Setup Screenshot
+
+The frontend setup screenshot will show the terminal running the Vite development server and displaying the local dashboard URL.
+
+### Figure 6.4: Data Preparation Screenshot
+
+The data preparation screenshot will show successful synthetic data generation and database seeding output, including total rows and fraud rows.
+
+### Figure 6.5: Model Training Screenshot
+
+The model training screenshot will show the terminal output after training, including selected model, precision, recall, F1-score, ROC-AUC, and saved model paths.
+
+### Figure 6.6: Backend Health Check Screenshot
+
+The backend health check screenshot will show the `/api/health` response with service status, database status, model status, model name, model path, and timestamp.
+
+### Figure 6.7: Dashboard Startup Screenshot
+
+The dashboard startup screenshot will show the PayGuard dashboard open in the browser with the sidebar and main dashboard metrics visible.
+
+### Figure 6.8: End-to-End Run Screenshot
+
+The end-to-end run screenshot will show two terminals: one running the Flask backend and another running the Vite frontend, with the PayGuard dashboard open in the browser.
+
+### Figure 6.9: User Training Screenshot
+
+The user training screenshot will show the dashboard scoring form and result panel, with labels indicating the fields a user should understand during training.
+
+### Figure 6.10: Deployment Options Diagram
+
+The deployment options diagram will show current local deployment as the active implementation and future cloud deployment as a possible extension using a hosted frontend, hosted API, and managed database.

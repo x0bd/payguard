@@ -1795,50 +1795,50 @@ The next chapter will discuss system deployment, implementation planning, mainte
 
 ## 6.1 Introduction
 
-This chapter explains how the completed PayGuard prototype can be installed, configured, run, maintained, and reviewed after implementation. While Chapter 5 focused on how the system was developed and tested, this chapter focuses on how the system is introduced into use and how it can continue to operate after development.
+This chapter explains how the completed PayGuard prototype can be installed, run, maintained, and reviewed after implementation. Chapter 5 focused on development and testing, while this chapter focuses on introducing the system into use and keeping it operational.
 
-PayGuard is currently implemented as a local prototype. It can be run on a development computer using a Flask backend, SQLite database, saved machine learning model, and React frontend. The system is suitable for demonstration, academic assessment, and further improvement. It is not yet a production system connected to a real mobile money provider or institutional payment platform.
+PayGuard is currently a local prototype that runs on a development computer using Flask, SQLite, a saved machine learning model, and a React frontend. It is suitable for demonstration, academic assessment, and future improvement, but it is not yet connected to a real mobile money provider or institutional payment platform.
 
-The implementation process includes installing dependencies, generating synthetic data, training the fraud detection model, seeding the database, starting the backend API, and starting the frontend dashboard. Maintenance includes backing up data, retraining the model when needed, monitoring alerts, improving fraud patterns, and preparing the system for future deployment.
+Implementation includes installing dependencies, generating synthetic data, training the model, seeding the database, and starting the backend and frontend. Maintenance includes backups, retraining, alert monitoring, fraud pattern improvement, and future deployment planning.
 
 ## 6.2 Implementation Overview
 
-The PayGuard implementation is divided into backend implementation, database implementation, machine learning implementation, frontend implementation, and integration implementation. These parts must work together for the system to function properly.
+The PayGuard implementation is divided into backend, database, machine learning, frontend, and integration parts. These must work together for the system to function properly.
 
 **Table 6.1: PayGuard implementation overview**
 
 | System part | Implementation status | Purpose |
 |---|---|---|
-| Backend API | Implemented | Handles transactions, scoring, alerts, metrics, and account profiles. |
+| Backend API | Implemented | Handles transactions, scoring, alerts, metrics, and accounts. |
 | SQLite database | Implemented | Stores transactions, alerts, and model run information. |
-| Synthetic data generator | Implemented | Creates mobile-money-style transaction datasets. |
-| Machine learning model | Implemented | Scores transactions and produces fraud risk predictions. |
-| React dashboard | Implemented | Displays metrics, alerts, transactions, account profiles, and scoring form. |
+| Synthetic data generator | Implemented | Creates mobile-money-style datasets. |
+| Machine learning model | Implemented | Produces fraud risk predictions. |
+| React dashboard | Implemented | Displays metrics, alerts, transactions, accounts, and scoring form. |
 | End-to-end integration | Implemented | Connects frontend, backend, database, and model. |
 | Cloud deployment | Future improvement | Can be added later after production requirements are confirmed. |
 
-**Figure 6.1 description:** The implementation overview diagram will show the completed PayGuard prototype as connected blocks: synthetic data generator, training script, saved model, SQLite database, Flask API, and React dashboard.
+**Figure 6.1: Implementation overview diagram**
 
 ## 6.3 System Installation Requirements
 
-Before PayGuard can run, the required software must be installed. The project uses separate setup steps for the backend and frontend.
+Before PayGuard can run, the required software must be installed. The project uses separate backend and frontend setup steps.
 
 **Table 6.2: Installation requirements**
 
 | Requirement | Purpose |
 |---|---|
-| Python | Runs the Flask API, data generator, database seeding script, and machine learning training script. |
-| Node.js | Runs the React frontend development environment. |
+| Python | Runs the API, generator, seeding script, and training script. |
+| Node.js | Runs the React frontend environment. |
 | npm or pnpm | Installs frontend dependencies. |
 | Git | Supports project version control. |
 | Web browser | Opens and uses the PayGuard dashboard. |
 | Internet access | Required when installing packages and dependencies. |
 
-The backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. The frontend dependencies include React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
+Backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. Frontend dependencies include React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
 
 ## 6.4 Backend Installation Procedure
 
-The backend setup prepares the Python environment and installs the required backend packages. The backend folder contains the Flask application, machine learning scripts, database layer, data generation script, and training script.
+The backend setup prepares the Python environment and installs required packages. The backend folder contains the Flask application, machine learning scripts, database layer, data generator, and training script.
 
 The backend setup process is:
 
@@ -1857,13 +1857,13 @@ The backend setup process is:
 | Activate virtual environment | `.venv\Scripts\Activate.ps1` |
 | Install dependencies | `pip install -r requirements.txt` |
 
-After the backend dependencies are installed, the system can generate data, train models, seed the database, and run the API.
+After installation, the system can generate data, train models, seed the database, and run the API.
 
-**Figure 6.2 description:** The backend setup screenshot will show the terminal after activating the Python virtual environment and installing the packages from `requirements.txt`.
+**Figure 6.2: Backend setup screenshot**
 
 ## 6.5 Frontend Installation Procedure
 
-The frontend setup prepares the React dashboard. The frontend folder contains the user interface, dashboard views, UI components, API client, and styling files.
+The frontend setup prepares the React dashboard, including views, UI components, API client, and styling files.
 
 The frontend setup process is:
 
@@ -1880,13 +1880,13 @@ The frontend setup process is:
 | Start development server | `npm run dev` |
 | Build production version | `npm run build` |
 
-The frontend uses relative `/api` requests during development. Vite proxies these requests to the Flask backend running on `http://127.0.0.1:5000`.
+During development, Vite proxies relative `/api` requests to Flask at `http://127.0.0.1:5000`.
 
-**Figure 6.3 description:** The frontend setup screenshot will show the terminal running the Vite development server and displaying the local dashboard URL.
+**Figure 6.3: Frontend setup screenshot**
 
 ## 6.6 Data Preparation Procedure
 
-PayGuard uses synthetic transaction data for training and testing. This protects privacy because no real student, customer, or mobile money account records are used.
+PayGuard uses synthetic transaction data for training and testing, protecting privacy because no real student, customer, or mobile money account records are used.
 
 The data preparation process is:
 
@@ -1903,19 +1903,19 @@ The data preparation process is:
 | Seed full dataset | `python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate` |
 | Seed quick demo dataset | `python seed_db_from_csv.py --csv ..\data\sample_transactions.csv --truncate` |
 
-The full dataset is useful for training and full demonstration. The sample dataset is useful when a quick demo is required.
+The full dataset is used for training and full demonstration, while the sample dataset supports quick demos.
 
-**Figure 6.4 description:** The data preparation screenshot will show successful synthetic data generation and database seeding output, including total rows and fraud rows.
+**Figure 6.4: Data preparation screenshot**
 
 ## 6.7 Model Training Procedure
 
-The fraud detection model must be trained before the scoring API can produce model-based risk scores. The training script loads the generated dataset, builds features, trains candidate models, evaluates them, selects the best model, and saves the selected model.
+The fraud detection model must be trained before the scoring API can produce model-based risk scores. The training script loads the dataset, builds features, trains candidate models, evaluates them, selects the best model, and saves it.
 
 The model training command is:
 
 `python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42`
 
-After training, the selected model is saved in the models folder as `fraud_model.joblib`. A training report is also saved as `training_report.json`.
+After training, the selected model is saved as `fraud_model.joblib`, with a report saved as `training_report.json`.
 
 **Table 6.6: Model training outputs**
 
@@ -1925,15 +1925,13 @@ After training, the selected model is saved in the models folder as `fraud_model
 | Versioned model file | Timestamped model copy for tracking model versions. |
 | `training_report.json` | Stores model metrics, dataset summary, selected model, and feature lists. |
 
-The current selected model is random forest. It was selected because it performed better overall than logistic regression on the synthetic test dataset.
+The current selected model is random forest because it performed better overall than logistic regression on the synthetic test dataset.
 
-**Figure 6.5 description:** The model training screenshot will show the terminal output after training, including selected model, precision, recall, F1-score, ROC-AUC, and saved model paths.
+**Figure 6.5: Model training screenshot**
 
 ## 6.8 Database Initialisation and Seeding
 
-The SQLite database is initialised automatically by the backend database layer. If the database file does not exist, the system creates it and adds the required tables.
-
-The database seeding script inserts transaction records from a CSV file into the `transactions` table. It can also clear existing transaction and alert records when the `--truncate` option is used.
+The SQLite database is initialised automatically by the backend database layer. If the file does not exist, the system creates it and adds the required tables. The seeding script inserts CSV records into `transactions` and can clear existing records with `--truncate`.
 
 **Table 6.7: Database implementation files**
 
@@ -1943,7 +1941,7 @@ The database seeding script inserts transaction records from a CSV file into the
 | `backend/seed_db_from_csv.py` | Loads CSV transactions into SQLite. |
 | `data/payguard.db` | SQLite database file created during local use. |
 
-The database should be seeded after generating the dataset and before using the dashboard for transaction browsing or account lookup.
+The database should be seeded before using the dashboard for transaction browsing or account lookup.
 
 ## 6.9 Running the Backend API
 
@@ -1957,18 +1955,18 @@ By default, the backend runs at:
 
 `http://127.0.0.1:5000`
 
-Once the backend is running, the health endpoint can be used to confirm that the service, database, and model are ready.
+Once running, the health endpoint confirms that the service, database, and model are ready.
 
 **Table 6.8: Backend readiness checks**
 
 | Check | Expected result |
 |---|---|
-| API service | Health endpoint returns status ok. |
-| Database | Health endpoint reports database connected. |
-| Model | Health endpoint reports model loaded. |
-| Timestamp | Health endpoint returns current API response time. |
+| API service | Returns status ok. |
+| Database | Reports database connected. |
+| Model | Reports model loaded. |
+| Timestamp | Returns API response time. |
 
-**Figure 6.6 description:** The backend health check screenshot will show the `/api/health` response with service status, database status, model status, model name, model path, and timestamp.
+**Figure 6.6: Backend health check screenshot**
 
 ## 6.10 Running the Frontend Dashboard
 
@@ -1976,24 +1974,22 @@ The frontend dashboard is started from the frontend folder using:
 
 `npm run dev`
 
-The browser then opens the local dashboard URL shown by Vite. Through the dashboard, the user can view metrics, score transactions, inspect alerts, view transactions, and search account profiles.
-
-The dashboard should be used after the backend is already running. This is because the dashboard depends on backend API endpoints for live data.
+The browser opens the local dashboard URL shown by Vite. The dashboard should be used after the backend is running because it depends on API endpoints for live data.
 
 **Table 6.9: Dashboard screens available after startup**
 
 | Screen | Purpose |
 |---|---|
-| Dashboard | Shows metrics, charts, and live scoring form. |
-| Alerts | Shows suspicious transaction alerts and review actions. |
-| Transactions | Shows recent transaction records and filters. |
-| Accounts | Allows lookup of account profiles and transaction history. |
+| Dashboard | Metrics, charts, and live scoring. |
+| Alerts | Suspicious alerts and review actions. |
+| Transactions | Recent records and filters. |
+| Accounts | Account profiles and history. |
 
-**Figure 6.7 description:** The dashboard startup screenshot will show the PayGuard dashboard open in the browser with the sidebar and main dashboard metrics visible.
+**Figure 6.7: Dashboard startup screenshot**
 
 ## 6.11 End-to-End Run Order
 
-The full PayGuard prototype should be run in the correct order so that all components are ready.
+The full PayGuard prototype should be run in the correct order so all components are ready.
 
 **Table 6.10: Full run order**
 
@@ -2001,12 +1997,12 @@ The full PayGuard prototype should be run in the correct order so that all compo
 |---|---|---|
 | 1 | Install backend dependencies. | Prepares Python environment. |
 | 2 | Install frontend dependencies. | Prepares React dashboard. |
-| 3 | Generate synthetic dataset. | Creates transaction data for training and seeding. |
-| 4 | Train fraud detection model. | Creates saved model used by API scoring. |
-| 5 | Seed SQLite database. | Loads transaction records for dashboard use. |
+| 3 | Generate synthetic dataset. | Creates training and seed data. |
+| 4 | Train fraud model. | Creates saved scoring model. |
+| 5 | Seed SQLite database. | Loads dashboard records. |
 | 6 | Start Flask backend. | Makes API endpoints available. |
-| 7 | Start React frontend. | Opens the dashboard interface. |
-| 8 | Score a transaction. | Confirms end-to-end model and alert workflow. |
+| 7 | Start React frontend. | Opens dashboard interface. |
+| 8 | Score a transaction. | Confirms end-to-end workflow. |
 
 The recommended backend run sequence is:
 
@@ -2020,11 +2016,11 @@ In another terminal, the frontend run sequence is:
 1. `cd frontend`
 2. `npm run dev`
 
-**Figure 6.8 description:** The end-to-end run screenshot will show two terminals: one running the Flask backend and another running the Vite frontend, with the PayGuard dashboard open in the browser.
+**Figure 6.8: End-to-end run screenshot**
 
 ## 6.12 User Training Plan
 
-User training is important because finance staff and administrators may not be technical users. The training should focus on how to use the dashboard and interpret alerts, not on the internal machine learning code.
+User training is important because finance staff and administrators may not be technical users. Training should focus on dashboard use and alert interpretation, not internal machine learning code.
 
 The training should cover:
 
@@ -2042,53 +2038,53 @@ The training should cover:
 
 | Training area | User should learn |
 |---|---|
-| Dashboard overview | Understand total transactions, fraud rate, open alerts, and average risk score. |
-| Transaction scoring | Enter transaction details and read the result. |
+| Dashboard overview | Understand metrics and risk summaries. |
+| Transaction scoring | Enter details and read results. |
 | Alert review | Open alerts, read reasons, and update status. |
-| Transaction search | Filter recent transactions by account, type, device, location, or fraud status. |
-| Account lookup | Search for an account and review account-level risk information. |
-| Responsible use | Understand that an alert is a warning for review, not final proof of fraud. |
+| Transaction search | Filter records by account, type, device, location, or fraud status. |
+| Account lookup | Review account-level risk information. |
+| Responsible use | Treat alerts as review warnings, not proof of fraud. |
 
-**Figure 6.9 description:** The user training screenshot will show the dashboard scoring form and result panel, with labels indicating the fields a user should understand during training.
+**Figure 6.9: User training screenshot**
 
 ## 6.13 System Deployment Plan
 
-The current version of PayGuard is deployed locally for development and demonstration. Local deployment is suitable for the final year project because it allows the examiner to see the full system working without connecting to real financial infrastructure.
+The current version of PayGuard is deployed locally for development and demonstration. This is suitable for the final year project because the examiner can see the full system without connecting to real financial infrastructure.
 
-Future cloud deployment can be considered after the academic prototype is complete. The frontend can be deployed as a static Vite application. The Flask backend may be adapted for serverless or cloud hosting. However, SQLite has limitations in serverless environments because serverless file systems may not provide permanent writable storage. For a production or cloud version, a managed database such as PostgreSQL would be more appropriate.
+Future cloud deployment can be considered after the prototype is complete. The frontend can be deployed as a static Vite application, and Flask can be adapted for cloud hosting. However, SQLite is limited in serverless environments, so production deployment would require a managed database such as PostgreSQL.
 
 **Table 6.12: Deployment options**
 
 | Deployment option | Suitability | Notes |
 |---|---|---|
-| Local development machine | Suitable for current prototype. | Easy to run during demonstration. |
-| Local network deployment | Possible for small internal demos. | Requires backend host machine to be reachable on the network. |
-| Static frontend hosting | Suitable for frontend only. | Requires backend API URL configuration. |
-| Cloud/serverless backend | Future option. | Requires careful handling of database and model files. |
-| Production deployment | Future improvement. | Requires authentication, audit logs, secure database, and real data governance. |
+| Local development machine | Current prototype. | Easy for demonstration. |
+| Local network deployment | Small internal demos. | Requires reachable backend host. |
+| Static frontend hosting | Frontend only. | Requires backend API URL. |
+| Cloud/serverless backend | Future option. | Requires database and model planning. |
+| Production deployment | Future improvement. | Requires security and governance. |
 
-**Figure 6.10 description:** The deployment options diagram will show current local deployment as the active implementation and future cloud deployment as a possible extension using a hosted frontend, hosted API, and managed database.
+**Figure 6.10: Deployment options diagram**
 
 ## 6.14 Maintenance Plan
 
-Maintenance is required to keep the system useful and reliable. Since PayGuard includes a machine learning model, maintenance involves both software maintenance and model maintenance.
+Maintenance is required to keep PayGuard useful and reliable. Since it includes a machine learning model, maintenance covers both software and model work.
 
 **Table 6.13: Maintenance activities**
 
 | Activity | Frequency | Purpose |
 |---|---|---|
-| Backup database | Weekly during active use | Protect stored transactions and alerts. |
-| Review alerts | Daily during demonstration or active monitoring | Confirm suspicious transactions are investigated. |
-| Retrain model | When new data or improved fraud patterns are available | Keep fraud detection relevant. |
-| Review model metrics | After every training run | Check precision, recall, F1-score, and ROC-AUC. |
-| Update dependencies | Periodically | Keep software secure and compatible. |
-| Review API errors | During testing and demos | Detect backend issues early. |
-| Improve frontend usability | As users give feedback | Make the dashboard easier to use. |
-| Document changes | After each major update | Keep the project report and README accurate. |
+| Backup database | Weekly during active use | Protect records. |
+| Review alerts | Daily during active monitoring | Confirm investigation. |
+| Retrain model | When new data or patterns exist | Keep detection relevant. |
+| Review model metrics | After each training run | Check performance. |
+| Update dependencies | Periodically | Keep software compatible. |
+| Review API errors | During testing and demos | Detect issues early. |
+| Improve usability | As users give feedback | Improve dashboard use. |
+| Document changes | After major updates | Keep docs accurate. |
 
 ## 6.15 Model Maintenance
 
-The fraud detection model should not be treated as permanently complete. Fraud behaviour changes over time, and a model trained on old patterns may become less useful. This is known as concept drift.
+The fraud detection model should not be treated as permanently complete. Fraud behaviour changes over time, and older models may become less useful because of concept drift.
 
 For PayGuard, model maintenance should include:
 
@@ -2100,27 +2096,27 @@ For PayGuard, model maintenance should include:
 - checking whether the model creates too many false alerts;
 - using human review feedback to improve future training.
 
-In a real deployment, the model should be retrained with real anonymised transaction records only after proper permission and privacy controls are in place.
+In real deployment, retraining with anonymised records should only happen after proper permission and privacy controls are in place.
 
 ## 6.16 Data Backup and Recovery
 
-Because PayGuard stores transaction and alert information in SQLite, the database file should be backed up during active use. The main database file is stored in the data folder as `payguard.db`.
+Because PayGuard stores transaction and alert information in SQLite, `data/payguard.db` should be backed up during active use.
 
 **Table 6.14: Backup and recovery plan**
 
 | Item | Backup method | Recovery method |
 |---|---|---|
-| SQLite database | Copy `data/payguard.db` to backup storage. | Restore the copied database file into the data folder. |
-| Generated CSV data | Keep copies of `transactions.csv` and `sample_transactions.csv`. | Reseed the database from CSV if needed. |
-| Model artifacts | Backup `models/fraud_model.joblib` and versioned model files. | Restore model file into the models folder. |
-| Training report | Backup `models/training_report.json`. | Restore report for documentation and comparison. |
+| SQLite database | Copy `data/payguard.db`. | Restore it into the data folder. |
+| Generated CSV data | Keep CSV copies. | Reseed database if needed. |
+| Model artifacts | Backup model files. | Restore into models folder. |
+| Training report | Backup report JSON. | Restore for comparison. |
 | Source code | Commit changes using Git. | Restore from repository history. |
 
-If the database is lost during prototype work, it can be recreated by running the seeding script again using the generated CSV dataset.
+If the database is lost, it can be recreated by rerunning the seeding script with the generated CSV dataset.
 
 ## 6.17 Post-Implementation Review
 
-After implementation, the system was reviewed against the original project goals. The prototype was able to generate transaction data, train a fraud detection model, start the backend API, store transactions and alerts, and display monitoring information in the frontend dashboard.
+After implementation, the system was reviewed against the project goals. The prototype generated transaction data, trained a model, started the backend API, stored transactions and alerts, and displayed monitoring information in the dashboard.
 
 The post-implementation review showed the following:
 
@@ -2132,42 +2128,42 @@ The post-implementation review showed the following:
 - The frontend and backend can communicate through API requests.
 - The system supports a clear demonstration of fraud detection workflow.
 
-The review also showed areas that should be improved before production use. These include authentication, role-based access, real data integration, stronger deployment design, cloud database support, and continuous model monitoring.
+The review also showed areas for production improvement, including authentication, role-based access, real data integration, stronger deployment, cloud database support, and continuous model monitoring.
 
 **Table 6.15: Post-implementation review**
 
 | Review area | Result |
 |---|---|
-| Data generation | Worked successfully using synthetic data. |
-| Model training | Worked successfully and selected random forest model. |
-| Backend API | Worked successfully for health, transactions, scoring, alerts, metrics, and accounts. |
-| Database | Worked successfully using SQLite. |
-| Frontend dashboard | Worked successfully with dashboard, alerts, transactions, and account views. |
-| Integration | Worked successfully from frontend scoring to backend alert creation. |
-| Production readiness | Not yet production ready because it is a prototype. |
+| Data generation | Worked using synthetic data. |
+| Model training | Worked and selected random forest. |
+| Backend API | Worked for health, transactions, scoring, alerts, metrics, and accounts. |
+| Database | Worked using SQLite. |
+| Frontend dashboard | Worked with all main views. |
+| Integration | Worked from scoring to alert creation. |
+| Production readiness | Not production ready because it is a prototype. |
 
 ## 6.18 Implementation Limitations
 
-The system implementation has some limitations that should be acknowledged.
+The system implementation has limitations that should be acknowledged.
 
 **Table 6.16: Implementation limitations**
 
 | Limitation | Explanation |
 |---|---|
-| Synthetic data only | The system does not use real institutional mobile money data. |
-| Local SQLite database | SQLite is suitable for the prototype but not ideal for large production deployment. |
-| Limited authentication | The current prototype does not include full user login and role management. |
-| No real mobile money integration | The system does not connect to EcoCash, bank APIs, or live payment systems. |
-| Prototype model performance | Model results are based on simulated data, not real fraud investigation outcomes. |
-| Manual screenshot insertion | Figures and screenshots are described but not yet inserted into the report. |
+| Synthetic data only | No real institutional mobile money data. |
+| Local SQLite database | Suitable for prototype, not large production. |
+| Limited authentication | No full login or role management. |
+| No real mobile money integration | No EcoCash, bank API, or live payment connection. |
+| Prototype model performance | Results are based on simulated data. |
+| Manual screenshot insertion | Figures are planned but not inserted yet. |
 
-These limitations are acceptable for the current academic prototype, but they guide future improvements.
+These limitations are acceptable for the academic prototype and guide future improvements.
 
 ## 6.19 Chapter Summary
 
-This chapter discussed the implementation and maintenance of the PayGuard Mobile Money Fraud Detection System. It explained the installation requirements, backend setup, frontend setup, data preparation, model training, database seeding, backend startup, frontend startup, end-to-end run order, user training, deployment plan, maintenance plan, model maintenance, backup and recovery, post-implementation review, and implementation limitations.
+This chapter discussed PayGuard implementation and maintenance, including installation, setup, data preparation, model training, database seeding, startup, run order, user training, deployment, maintenance, backup, review, and limitations.
 
-The chapter showed that PayGuard can be installed and demonstrated locally as a complete prototype. It also showed that future deployment would require stronger security, a production database, real data governance, and more advanced maintenance procedures.
+The chapter showed that PayGuard can be demonstrated locally as a complete prototype. Future deployment would require stronger security, a production database, real data governance, and advanced maintenance procedures.
 
 The next chapter will present the project summary, conclusion, recommendations, and future enhancements.
 
