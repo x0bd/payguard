@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1050" viewBox="0 0 1800 1050" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.7: Entity relationship diagram</title>
+  <desc id="desc">Entity relationship diagram for PayGuard showing transactions, alerts, model runs, and derived account profiles.</desc>
+  <defs>
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
+    </pattern>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
+    </filter>
+    <marker id="crow" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto">
+      <path d="M2,2 L14,8 L2,14 M4,8 L14,8" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1050" fill="#f2f3f1" />
+  <rect width="1800" height="1050" fill="url(#dot-grid)" opacity="0.95" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="92" font-size="36" font-weight="850" fill="#101010">PayGuard Entity Relationship Diagram</text>
+    <text x="96" y="128" font-size="18" font-weight="500" fill="#666666">Database entities and relationships used by the fraud monitoring prototype</text>
+
+    <g filter="url(#card-shadow)">
+      <rect x="158" y="270" width="430" height="430" rx="28" fill="#ffffff" stroke="#dedede" />
+      <rect x="158" y="270" width="430" height="68" rx="28" fill="#111111" />
+      <path d="M158 310 H588 V338 H158 Z" fill="#111111" />
+      <text x="188" y="314" font-size="24" font-weight="850" fill="#ffffff">transactions</text>
+      <circle cx="552" cy="304" r="7" fill="#16a34a" />
+      <g font-size="16" fill="#202020">
+        <text x="188" y="382" font-weight="850">PK</text><text x="238" y="382" font-weight="700">id</text>
+        <text x="188" y="418" font-weight="850">FK</text><text x="238" y="418">account_id</text>
+        <text x="238" y="454">transaction_type</text>
+        <text x="238" y="490">amount</text>
+        <text x="238" y="526">currency</text>
+        <text x="238" y="562">device_id</text>
+        <text x="238" y="598">location</text>
+        <text x="238" y="634">created_at</text>
+        <text x="238" y="670">is_fraud, fraud_score</text>
+      </g>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1212" y="270" width="430" height="392" rx="28" fill="#ffffff" stroke="#dedede" />
+      <rect x="1212" y="270" width="430" height="68" rx="28" fill="#111111" />
+      <path d="M1212 310 H1642 V338 H1212 Z" fill="#111111" />
+      <text x="1242" y="314" font-size="24" font-weight="850" fill="#ffffff">alerts</text>
+      <circle cx="1606" cy="304" r="7" fill="#16a34a" />
+      <g font-size="16" fill="#202020">
+        <text x="1242" y="382" font-weight="850">PK</text><text x="1292" y="382" font-weight="700">id</text>
+        <text x="1242" y="418" font-weight="850">FK</text><text x="1292" y="418">transaction_id</text>
+        <text x="1292" y="454">risk_score</text>
+        <text x="1292" y="490">alert_type</text>
+        <text x="1292" y="526">reason</text>
+        <text x="1292" y="562">status</text>
+        <text x="1292" y="598">created_at</text>
+        <text x="1292" y="634">resolved_at</text>
+      </g>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="686" y="708" width="430" height="238" rx="28" fill="#ffffff" stroke="#dedede" />
+      <rect x="686" y="708" width="430" height="68" rx="28" fill="#111111" />
+      <path d="M686 748 H1116 V776 H686 Z" fill="#111111" />
+      <text x="716" y="752" font-size="24" font-weight="850" fill="#ffffff">model_runs</text>
+      <circle cx="1080" cy="742" r="7" fill="#16a34a" />
+      <g font-size="16" fill="#202020">
+        <text x="716" y="820" font-weight="850">PK</text><text x="766" y="820" font-weight="700">id</text>
+        <text x="766" y="856">model_name</text>
+        <text x="766" y="892">model_version</text>
+        <text x="766" y="928">metrics_json, created_at</text>
+      </g>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="686" y="178" width="430" height="220" rx="28" fill="#ffffff" stroke="#dedede" stroke-dasharray="8 8" />
+      <rect x="686" y="178" width="430" height="68" rx="28" fill="#f6f6f6" stroke="#e5e5e5" stroke-dasharray="8 8" />
+      <path d="M686 218 H1116 V246 H686 Z" fill="#f6f6f6" />
+      <text x="716" y="222" font-size="24" font-weight="850" fill="#111111">account_profile</text>
+      <text x="1068" y="222" font-size="13" font-weight="850" fill="#16a34a">DERIVED</text>
+      <g font-size="16" fill="#202020">
+        <text x="716" y="290">account_id</text>
+        <text x="716" y="326">total_transactions</text>
+        <text x="716" y="362">fraud_rate, open_alerts</text>
+      </g>
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round">
+      <path d="M588 474 C786 474, 1014 474, 1212 474" marker-end="url(#crow)" />
+      <path d="M373 270 C464 156, 598 148, 686 250" stroke-dasharray="10 10" />
+      <path d="M901 398 C901 514, 901 594, 901 708" stroke-dasharray="10 10" />
+    </g>
+
+    <g font-size="15" font-weight="850" fill="#111111">
+      <rect x="800" y="440" width="244" height="40" rx="20" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="922" y="466" text-anchor="middle">one transaction may create alerts</text>
+
+      <rect x="458" y="180" width="210" height="40" rx="20" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="563" y="206" text-anchor="middle">grouped by account_id</text>
+
+      <rect x="918" y="552" width="206" height="40" rx="20" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1021" y="578" text-anchor="middle">training metadata</text>
+    </g>
+
+    <g>
+      <rect x="142" y="770" width="440" height="96" rx="24" fill="#ffffff" stroke="#e5e5e5" filter="url(#card-shadow)" />
+      <text x="174" y="812" font-size="18" font-weight="850" fill="#111111">Notation note</text>
+      <text x="174" y="842" font-size="15" font-weight="600" fill="#666666">Dashed account_profile is calculated from transactions and alerts,</text>
+      <text x="174" y="866" font-size="15" font-weight="600" fill="#666666">not stored as a separate physical table in the prototype.</text>
+    </g>
+  </g>
+</svg>

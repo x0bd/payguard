@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1050" viewBox="0 0 1800 1050" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.6: Level 1 data flow diagram</title>
+  <desc id="desc">Level 1 data flow diagram showing internal PayGuard processes for receiving, validating, feature engineering, scoring, alerting, storage, and dashboard reporting.</desc>
+  <defs>
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
+    </pattern>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1050" fill="#f2f3f1" />
+  <rect width="1800" height="1050" fill="url(#dot-grid)" opacity="0.95" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="92" font-size="36" font-weight="850" fill="#101010">PayGuard Level 1 Data Flow Diagram</text>
+    <text x="96" y="128" font-size="18" font-weight="500" fill="#666666">Detailed data movement inside the PayGuard fraud detection process</text>
+
+    <g filter="url(#card-shadow)">
+      <rect x="84" y="206" width="280" height="116" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="114" y="252" font-size="21" font-weight="850" fill="#111111">External Entity</text>
+      <text x="114" y="282" font-size="15" font-weight="650" fill="#666666">Transaction Source</text>
+      <circle cx="342" cy="264" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="84" y="730" width="280" height="116" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="114" y="776" font-size="21" font-weight="850" fill="#111111">External Entity</text>
+      <text x="114" y="806" font-size="15" font-weight="650" fill="#666666">Dashboard User</text>
+      <circle cx="342" cy="788" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="474" y="202" width="286" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="506" cy="236" r="7" fill="#16a34a" />
+      <text x="617" y="254" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.1 Receive</text>
+      <text x="617" y="284" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Transaction input</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="474" y="416" width="286" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="506" cy="450" r="7" fill="#16a34a" />
+      <text x="617" y="468" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.2 Validate</text>
+      <text x="617" y="498" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Check required fields</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="840" y="416" width="300" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="872" cy="450" r="7" fill="#16a34a" />
+      <text x="990" y="468" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.3 Build Features</text>
+      <text x="990" y="498" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Amount, time, history, velocity</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1218" y="416" width="286" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="1250" cy="450" r="7" fill="#16a34a" />
+      <text x="1361" y="468" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.4 Score Risk</text>
+      <text x="1361" y="498" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Model prediction</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1218" y="644" width="286" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="1250" cy="678" r="7" fill="#16a34a" />
+      <text x="1361" y="696" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.5 Create Alert</text>
+      <text x="1361" y="726" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Risk level and reason</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="840" y="644" width="300" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="872" cy="678" r="7" fill="#16a34a" />
+      <text x="990" y="696" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.6 Store Records</text>
+      <text x="990" y="726" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Transactions and alerts</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="474" y="644" width="286" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <circle cx="506" cy="678" r="7" fill="#16a34a" />
+      <text x="617" y="696" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">1.7 Serve Dashboard</text>
+      <text x="617" y="726" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Metrics, alerts, accounts</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="846" y="834" width="294" height="100" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <rect x="880" y="864" width="226" height="36" rx="18" fill="#f6f6f6" stroke="#e3e3e3" />
+      <text x="993" y="887" text-anchor="middle" font-size="20" font-weight="850" fill="#111111">D1 SQLite Database</text>
+      <text x="993" y="918" text-anchor="middle" font-size="14" font-weight="650" fill="#666666">Stored transaction history</text>
+      <circle cx="993" cy="834" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1528" y="416" width="220" height="118" rx="26" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="1638" y="468" text-anchor="middle" font-size="21" font-weight="850" fill="#111111">Saved Model</text>
+      <text x="1638" y="498" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">fraud_model.joblib</text>
+      <circle cx="1528" cy="475" r="7" fill="#111111" />
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M364 264 C408 264, 430 260, 474 260" />
+      <path d="M617 320 C617 356, 617 380, 617 416" />
+      <path d="M760 475 C790 475, 810 475, 840 475" />
+      <path d="M1140 475 C1170 475, 1188 475, 1218 475" />
+      <path d="M1361 534 C1361 574, 1361 604, 1361 644" />
+      <path d="M1218 703 C1188 703, 1170 703, 1140 703" />
+      <path d="M840 703 C810 703, 790 703, 760 703" />
+      <path d="M474 703 C426 734, 392 768, 364 788" />
+      <path d="M990 762 C990 790, 992 806, 993 834" />
+      <path d="M1528 475 C1518 475, 1514 475, 1504 475" />
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.92">
+      <path d="M993 834 C993 794, 993 790, 993 762" />
+      <path d="M1504 504 C1514 504, 1518 504, 1528 504" />
+    </g>
+
+    <g font-size="13" font-weight="800" fill="#111111">
+      <rect x="380" y="230" width="104" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="432" y="251" text-anchor="middle">Raw data</text>
+
+      <rect x="636" y="360" width="126" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="699" y="381" text-anchor="middle">Valid input</text>
+
+      <rect x="770" y="440" width="72" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="806" y="461" text-anchor="middle">Fields</text>
+
+      <rect x="1152" y="440" width="82" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1193" y="461" text-anchor="middle">Features</text>
+
+      <rect x="1392" y="574" width="100" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1442" y="595" text-anchor="middle">Risk score</text>
+
+      <rect x="1146" y="668" width="74" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1183" y="689" text-anchor="middle">Alert</text>
+
+      <rect x="764" y="668" width="78" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="803" y="689" text-anchor="middle">Records</text>
+
+      <rect x="356" y="742" width="126" height="32" rx="16" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="419" y="763" text-anchor="middle">Dashboard data</text>
+    </g>
+  </g>
+</svg>

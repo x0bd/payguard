@@ -687,9 +687,13 @@ A data flow diagram shows how data moves through the proposed system.
 
 **Figure 3.5: Level 0 data flow diagram**
 
+![Figure 3.5: Level 0 data flow diagram](assets/figures/figure-3-5-level-0-dfd.svg)
+
 ### 3.11.2 Level 1 Data Flow Diagram
 
 **Figure 3.6: Level 1 data flow diagram**
+
+![Figure 3.6: Level 1 data flow diagram](assets/figures/figure-3-6-level-1-dfd.svg)
 
 ## 3.12 Entity Relationship Diagram
 
@@ -697,11 +701,13 @@ The entity relationship diagram shows the database structure and relationships b
 
 **Figure 3.7: Entity relationship diagram**
 
+![Figure 3.7: Entity relationship diagram](assets/figures/figure-3-7-erd.svg)
+
 **Table 3.14: Main database entities**
 
 | Entity | Description | Key fields |
 |---|---|---|
-| Accounts | Represents an account involved in transactions. | account_id, home_location, created_at |
+| Account profiles | Derived account summaries calculated from transaction and alert records. | account_id, total_transactions, fraud_rate, open_alerts |
 | Transactions | Stores payment transaction details. | transaction_id, account_id, amount, type, timestamp, risk_score |
 | Alerts | Stores suspicious transaction alerts. | alert_id, transaction_id, risk_score, status, reason |
 | ModelRuns | Stores model training information. | model_id, model_name, metrics, trained_at |

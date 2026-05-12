@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.5: Level 0 data flow diagram</title>
+  <desc id="desc">Level 0 data flow diagram for PayGuard showing external entities, the main fraud detection process, a data store, and key data flows.</desc>
+  <defs>
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
+    </pattern>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f2f3f1" />
+  <rect width="1600" height="900" fill="url(#dot-grid)" opacity="0.95" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="92" font-size="34" font-weight="800" fill="#101010">PayGuard Level 0 Data Flow Diagram</text>
+    <text x="96" y="126" font-size="18" font-weight="500" fill="#666666">High-level data movement between users, PayGuard, model scoring, and storage</text>
+
+    <g filter="url(#card-shadow)">
+      <rect x="560" y="286" width="480" height="220" rx="34" fill="#ffffff" stroke="#dedede" />
+      <circle cx="604" cy="332" r="8" fill="#16a34a" />
+      <text x="800" y="354" text-anchor="middle" font-size="28" font-weight="850" fill="#111111">0 PayGuard Fraud</text>
+      <text x="800" y="390" text-anchor="middle" font-size="28" font-weight="850" fill="#111111">Detection System</text>
+      <text x="800" y="434" text-anchor="middle" font-size="15" font-weight="700" fill="#626262">Validate transaction, score risk, create alerts, return dashboard data</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="96" y="260" width="332" height="124" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="126" y="308" font-size="22" font-weight="800" fill="#111111">Transaction Source</text>
+      <text x="126" y="340" font-size="15" font-weight="600" fill="#666666">Mobile money transaction records</text>
+      <circle cx="406" cy="322" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="96" y="536" width="332" height="124" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="126" y="584" font-size="22" font-weight="800" fill="#111111">Finance Officer / Analyst</text>
+      <text x="126" y="616" font-size="15" font-weight="600" fill="#666666">Submits reviews and decisions</text>
+      <circle cx="406" cy="598" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1172" y="260" width="332" height="124" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="1202" y="308" font-size="22" font-weight="800" fill="#111111">Dashboard User</text>
+      <text x="1202" y="340" font-size="15" font-weight="600" fill="#666666">Requests metrics and views alerts</text>
+      <circle cx="1194" cy="322" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1172" y="536" width="332" height="124" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="1202" y="584" font-size="22" font-weight="800" fill="#111111">Saved ML Model</text>
+      <text x="1202" y="616" font-size="15" font-weight="600" fill="#666666">Prediction service artefact</text>
+      <circle cx="1194" cy="598" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="594" y="634" width="412" height="108" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <rect x="626" y="668" width="348" height="42" rx="21" fill="#f6f6f6" stroke="#e3e3e3" />
+      <text x="800" y="694" text-anchor="middle" font-size="21" font-weight="850" fill="#111111">D1 SQLite Database</text>
+      <text x="800" y="724" text-anchor="middle" font-size="15" font-weight="600" fill="#666666">Transactions, alerts, account profiles, model runs</text>
+      <circle cx="800" cy="634" r="7" fill="#111111" />
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M428 322 C488 322, 504 358, 560 374" />
+      <path d="M428 598 C488 598, 514 498, 560 470" />
+      <path d="M1040 374 C1096 358, 1112 322, 1172 322" />
+      <path d="M1040 470 C1090 502, 1116 598, 1172 598" />
+      <path d="M800 506 C800 558, 800 588, 800 634" />
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.92">
+      <path d="M1172 350 C1118 390, 1098 414, 1040 420" />
+      <path d="M1172 626 C1110 584, 1092 544, 1040 504" />
+      <path d="M800 634 C800 590, 800 556, 800 506" />
+    </g>
+
+    <g font-size="14" font-weight="800" fill="#111111">
+      <rect x="444" y="296" width="146" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="517" y="318" text-anchor="middle">Transaction data</text>
+
+      <rect x="432" y="552" width="174" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="519" y="574" text-anchor="middle">Review actions</text>
+
+      <rect x="1010" y="296" width="148" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1084" y="318" text-anchor="middle">Metrics / alerts</text>
+
+      <rect x="1014" y="552" width="150" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1089" y="574" text-anchor="middle">Risk prediction</text>
+
+      <rect x="684" y="566" width="232" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="800" y="588" text-anchor="middle">Stored records and history</text>
+    </g>
+  </g>
+</svg>
