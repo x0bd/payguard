@@ -757,9 +757,11 @@ The data dictionary explains the important fields that will be stored in the sys
 
 ## 3.14 UML and Interaction Diagrams
 
-Several UML-style diagrams will be used to explain how PayGuard is structured and how its components interact. These diagrams will not be inserted yet; they are described here as placeholders for later completion.
+Several UML-style diagrams are used to explain how PayGuard is structured and how its components interact.
 
 **Figure 3.8: Class diagram**
+
+![Figure 3.8: Class diagram](assets/figures/figure-3-8-class-diagram.svg)
 
 **Table 3.18: Proposed classes/modules**
 
@@ -776,6 +778,8 @@ Several UML-style diagrams will be used to explain how PayGuard is structured an
 | DashboardService | Provides metrics for display. |
 
 **Figure 3.9: Object diagram**
+
+![Figure 3.9: Object diagram](assets/figures/figure-3-9-object-diagram.svg)
 
 **Figure 3.10: Sequence diagram**
 
