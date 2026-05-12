@@ -436,7 +436,7 @@ Schedule feasibility determines whether the project can be completed within the 
 | Testing |  |  |  |  |  |  |  |  |  | X | X |  |  |
 | Final documentation |  |  |  |  |  |  |  |  |  |  | X | X | X |
 
-**Figure 2.1 description:** The Gantt chart will visually show the project activities and their timelines across the project weeks. It will show research and literature review first, followed by requirements and design, synthetic data generation, model training, backend API development, frontend dashboard development, testing, and final documentation.
+**Figure 2.1: Gantt chart**
 
 ### 2.13.6 Social Feasibility
 
@@ -538,7 +538,7 @@ These weaknesses show that a more automated and intelligent monitoring system is
 
 ## 3.4 Context Diagram of the Existing System
 
-**Figure 3.1 description:** The context diagram will show the existing payment monitoring process, including Student/Guardian, Mobile Money Platform, Finance Officer, Institutional Records System and Administrator.
+**Figure 3.1: Existing system context diagram**
 
 The figure will show how transaction information currently moves between users and the institution before PayGuard is introduced.
 
@@ -578,7 +578,7 @@ The proposed workflow is as follows:
 7. The finance officer or analyst reviews the alert.
 8. The alert status is updated after investigation.
 
-**Figure 3.2 description:** The proposed system context diagram will show PayGuard receiving transaction data, scoring risk, saving records, and returning alerts and dashboard information to users.
+**Figure 3.2: Proposed PayGuard context diagram**
 
 ### 3.6.2 Advantages of the Proposed System
 
@@ -666,7 +666,7 @@ The user should be able to access the dashboard, inspect suspicious transactions
 
 A use case diagram shows the interaction between users and the system. It helps identify the main functions that users expect from PayGuard.
 
-**Figure 3.3 description:** The use case diagram will show Finance Officer, Fraud Analyst, Administrator and Developer/Researcher interacting with dashboard, transaction, alert, account, data generation and model training functions.
+**Figure 3.3: Use case diagram**
 
 **Table 3.13: Use case descriptions**
 
@@ -685,7 +685,7 @@ A use case diagram shows the interaction between users and the system. It helps 
 
 An activity diagram shows the step-by-step flow of activities in the system.
 
-**Figure 3.4 description:** The activity diagram will show transaction scoring from input validation to feature building, model prediction, alert creation and dashboard response.
+**Figure 3.4: Activity diagram**
 
 The activity flow helps explain how PayGuard processes a transaction from input to output.
 
@@ -695,17 +695,17 @@ A data flow diagram shows how data moves through the proposed system.
 
 ### 3.11.1 Level 0 Data Flow Diagram
 
-**Figure 3.5 description:** The Level 0 data flow diagram will show PayGuard as one process connected to users, transaction source, database, alerts and model file.
+**Figure 3.5: Level 0 data flow diagram**
 
 ### 3.11.2 Level 1 Data Flow Diagram
 
-**Figure 3.6 description:** The Level 1 data flow diagram will break PayGuard into receiving, validation, feature engineering, scoring, alerting, storage and dashboard metric processes.
+**Figure 3.6: Level 1 data flow diagram**
 
 ## 3.12 Entity Relationship Diagram
 
 The entity relationship diagram shows the database structure and relationships between important records.
 
-**Figure 3.7 description:** The ERD will show Transactions, Alerts, Accounts and ModelRuns, including primary keys, foreign keys and relationships.
+**Figure 3.7: Entity relationship diagram**
 
 **Table 3.14: Main database entities**
 
@@ -763,7 +763,7 @@ The data dictionary explains the important fields that will be stored in the sys
 
 Several UML-style diagrams will be used to explain how PayGuard is structured and how its components interact. These diagrams will not be inserted yet; they are described here as placeholders for later completion.
 
-**Figure 3.8 description:** The class diagram will show core modules such as Transaction, Alert, AccountProfile, FraudScorer, FeatureBuilder, ModelLoader, DatabaseService, DashboardService and APIController.
+**Figure 3.8: Class diagram**
 
 **Table 3.18: Proposed classes/modules**
 
@@ -779,13 +779,13 @@ Several UML-style diagrams will be used to explain how PayGuard is structured an
 | APIController | Handles requests from the dashboard. |
 | DashboardService | Provides metrics for display. |
 
-**Figure 3.9 description:** The object diagram will show an example scored transaction linked to an alert, fraud scorer and model object.
+**Figure 3.9: Object diagram**
 
-**Figure 3.10 description:** The sequence diagram will show the dashboard submitting a transaction, the API validating it, the model scoring it, the alert service saving an alert, and the dashboard displaying the result.
+**Figure 3.10: Sequence diagram**
 
-**Figure 3.11 description:** The communication diagram will show numbered messages between the dashboard, API, database, feature builder, model and alert service.
+**Figure 3.11: Communication diagram**
 
-**Figure 3.12 description:** The state chart will show the alert lifecycle from created/open to review, resolved, closed or archived.
+**Figure 3.12: State chart diagram**
 
 **Table 3.19: Alert states**
 
@@ -806,7 +806,7 @@ Process design explains how major system processes will operate. The main PayGua
 
 The transaction scoring process requires a valid transaction, an available database, and a trained model. The user submits transaction details, the backend validates the input, account history is retrieved, features are prepared, and the model predicts a fraud risk score. The transaction is then stored, an alert is created when needed, and the result is returned to the dashboard.
 
-**Figure 3.13 description:** The flowchart will show transaction scoring from input validation to model prediction, alert creation and dashboard response.
+**Figure 3.13: Transaction scoring flowchart**
 
 ### 3.15.2 Alert Review Process
 
@@ -825,9 +825,9 @@ The main dashboard areas will include:
 - live scoring form;
 - metrics and charts.
 
-**Figure 3.14 description:** The dashboard wireframe will show sidebar navigation, summary cards, risk chart, recent alerts and transaction scoring form.
+**Figure 3.14: Dashboard wireframe**
 
-**Figure 3.15 description:** The alerts page wireframe will show alert records with risk score, reason, status, action buttons and filters.
+**Figure 3.15: Alerts page wireframe**
 
 **Table 3.20: User interface features**
 
