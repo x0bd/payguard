@@ -137,103 +137,95 @@ The proposed system aims to support finance departments by detecting suspicious 
 
 ## 2.1 Introduction
 
-This chapter reviews literature related to mobile money fraud detection and also studies the feasibility of developing the proposed PayGuard system. The chapter first explains the main terms used in the research, then discusses mobile money, institutional digital finance, common fraud methods, machine learning approaches, synthetic data, evaluation methods and related studies. The chapter also includes the feasibility study, covering technical, economic, operational, legal, schedule and social feasibility.
+This chapter reviews literature related to mobile money fraud detection and studies the feasibility of developing PayGuard. It defines key terms, discusses mobile money, fraud methods, machine learning approaches, synthetic data, evaluation metrics and related studies, then assesses technical, economic, operational, legal, schedule and social feasibility.
 
-The purpose of this chapter is to show that the proposed system is based on existing research and that it can be developed using available tools and resources. Fraud detection is an important area because many organisations now depend on digital payments, mobile wallets and online transaction systems. As transactions increase, criminals also develop new ways of committing fraud. This makes it necessary to develop intelligent systems that can detect suspicious transactions quickly and assist finance officers in making decisions (Phua et al., 2010; Abdallah, Maarof and Zainal, 2016).
-
-PayGuard is proposed as a prototype system for detecting suspicious mobile-money-style transactions in an institutional finance environment. The system will not replace human officers, but will assist them by giving risk scores, alerts and transaction summaries. This approach agrees with fraud detection literature, which shows that automated systems are most useful when they support human investigation rather than making final decisions alone (Dal Pozzolo et al., 2015).
+The purpose is to show that PayGuard is based on existing research and can be developed using available resources. Fraud detection is important because organisations increasingly depend on digital payments, while criminals continue to develop new fraud methods. Intelligent systems can help finance officers detect suspicious transactions quickly and make better decisions (Phua et al., 2010; Abdallah, Maarof and Zainal, 2016). PayGuard follows this approach by supporting human review through risk scores, alerts and summaries rather than replacing investigators (Dal Pozzolo et al., 2015).
 
 ## 2.2 Definition of Terms
 
 | Term | Meaning in this study |
 |---|---|
-| Mobile money | A financial service that allows users to send, receive, store and pay money using a mobile device. |
-| Digital finance | The use of digital systems such as mobile wallets, payment portals, online banking and databases to support financial services. |
-| Fraud | Any dishonest activity done to gain money, services or access through false information, manipulation or unauthorised use. |
-| Fraud detection | The process of identifying transactions or behaviour that may indicate fraudulent activity. |
-| Transaction | A record of money movement, for example payment of fees, transfer of funds, cash-in or cash-out. |
-| Risk score | A numerical value produced by a model to show how suspicious a transaction is. |
-| Alert | A notification created by the system when a transaction is considered risky. |
-| Machine learning | A branch of artificial intelligence where computer systems learn patterns from data and use them to make predictions. |
-| Supervised learning | A machine learning method where a model is trained using examples that already have known labels such as fraud or legitimate. |
-| Synthetic data | Artificially generated data that imitates real data but does not contain real personal information. |
-| Class imbalance | A situation where one class is much larger than another, for example legitimate transactions being far more common than fraud cases. |
-| Concept drift | A change in data patterns over time, where fraud methods change and older models become less accurate. |
+| Mobile money | Sending, receiving, storing or paying money using a mobile device. |
+| Digital finance | Use of mobile wallets, portals, online banking and databases for financial services. |
+| Fraud | Dishonest activity used to gain money, services or access. |
+| Fraud detection | Identifying transactions or behaviour that may indicate fraud. |
+| Transaction | A record of money movement, such as a fee payment or transfer. |
+| Risk score | A model value showing how suspicious a transaction is. |
+| Alert | A system notification created when a transaction is risky. |
+| Machine learning | Computer systems learning patterns from data to make predictions. |
+| Supervised learning | Training a model using examples with known labels. |
+| Synthetic data | Artificial data that imitates real data without real personal records. |
+| Class imbalance | When one class is much larger than another, such as normal transactions versus fraud. |
+| Concept drift | When fraud patterns change and older models become less accurate. |
 
 ## 2.3 Mobile Money and Institutional Digital Finance
 
-Mobile money has become an important financial technology in many African economies because it allows people to perform transactions without visiting a physical bank. It is especially useful where formal banking access is limited or where people need fast and convenient payment channels. Mobile money supports person-to-person transfers, merchant payments, bill payments, savings and institutional payments (OECD, 2017; Makori, 2019).
+Mobile money is important in many African economies because it enables fast transactions without visiting a physical bank. It supports transfers, merchant payments, bill payments, savings and institutional payments, especially where formal banking access is limited (OECD, 2017; Makori, 2019).
 
-In universities and colleges, digital finance is now used for tuition payments, registration fees, accommodation fees and other student payments. This reduces queues and allows payments to be processed faster. However, it also creates new risks because payment systems must handle large numbers of transactions, many users, different channels and possible fraudulent behaviour.
-
-At institutional level, the finance department needs to confirm payments, reconcile records and detect suspicious activities. If this process is done manually, fraud may be discovered late. A fraud detection system can help by continuously checking transactions and showing which ones need further investigation.
+Universities and colleges also use digital finance for tuition, registration, accommodation and other payments. This improves speed and reduces queues, but it also creates risks because finance departments must monitor many transactions, users and payment channels. A fraud detection system can support this work by continuously checking transactions and highlighting cases that need further investigation.
 
 ## 2.4 Mobile Money Fraud Methods
 
-Mobile money fraud can happen in many ways. Fraudsters may target the customer, the agent, the institution, or the payment infrastructure. The common fraud methods relevant to this research are shown in Table 2.1.
+Mobile money fraud can target customers, agents, institutions or payment infrastructure. Common methods relevant to this research are shown in Table 2.1.
 
 **Table 2.1: Common mobile money fraud methods**
 
 | Fraud method | Description | Possible indicator in the system |
 |---|---|---|
-| Social engineering | A user is tricked into sending money or revealing account details. | Sudden unusual transfer or payment from a normally quiet account. |
-| SIM swap fraud | A fraudster takes control of the victim's mobile number. | New device, new location or sudden change in transaction pattern. |
-| Account takeover | Unauthorised person gains access to an account. | Transactions from unfamiliar devices or locations. |
-| Smurfing | Large value is split into many smaller transactions to avoid detection. | Many transactions within a short period. |
-| Fake payment confirmation | Fraudster presents a false message or receipt as proof of payment. | Payment not matching official transaction records. |
-| Agent or insider abuse | A trusted person misuses system access or transaction authority. | Repeated suspicious activity linked to similar accounts or patterns. |
+| Social engineering | User is tricked into sending money or revealing details. | Unusual transfer from a quiet account. |
+| SIM swap fraud | Fraudster controls the victim's mobile number. | New device, location or transaction pattern. |
+| Account takeover | Unauthorised person accesses an account. | Unfamiliar device or location. |
+| Smurfing | Large value is split into smaller transactions. | Many transactions in a short period. |
+| Fake payment confirmation | False message or receipt is used as proof. | Payment missing from official records. |
+| Agent or insider abuse | Trusted person misuses access. | Repeated suspicious linked patterns. |
 
-The above methods show that fraud is not always detected using one simple rule. Some fraud cases are only suspicious when several signs are combined, such as transaction amount, time, device, location and account history. This is one reason why machine learning is useful in fraud detection.
+These methods show why one simple rule is not enough. Fraud may only become visible when amount, time, device, location and account history are considered together.
 
 ## 2.5 Existing Fraud Detection Approaches
 
-Fraud detection systems have developed from simple manual checking to automated and intelligent systems. The main approaches include rule-based detection, supervised machine learning, unsupervised detection and hybrid systems.
+Fraud detection has developed from manual checking to automated systems. The main approaches are rule-based detection, supervised learning, unsupervised detection and hybrid systems.
 
 ### 2.5.1 Manual and Rule-Based Detection
 
-Traditional fraud detection uses manual checking and fixed rules. Examples include blocking transactions above a certain amount, limiting the number of transactions per day, or flagging transactions from blocked accounts. These methods are easy to understand and can enforce policy requirements.
+Traditional fraud detection uses manual checking and fixed rules, such as blocking large transactions, limiting daily transaction counts or flagging blocked accounts. These rules are easy to understand and enforce policy requirements.
 
-However, rule-based systems have weaknesses. They are not flexible when fraud patterns change. Fraudsters can also study the rules and avoid them. For example, if the system checks only large payments, a fraudster may divide the amount into smaller payments. Rule-based systems may also create many false alerts if the rules are too strict (Phua et al., 2010).
+However, rules are weak when fraud patterns change. Fraudsters may avoid known limits by splitting payments, and strict rules may create many false alerts (Phua et al., 2010).
 
 ### 2.5.2 Supervised Machine Learning
 
-Supervised learning uses historical labelled data to train a model. In fraud detection, each transaction may be labelled as fraudulent or legitimate. The model then learns patterns that separate the two classes. Common supervised algorithms include logistic regression, decision trees, random forests, support vector machines, neural networks and gradient boosting methods (Abdallah, Maarof and Zainal, 2016).
+Supervised learning uses labelled data to train a model. In fraud detection, transactions are labelled as fraudulent or legitimate, and the model learns patterns that separate the classes. Common algorithms include logistic regression, decision trees, random forests, support vector machines, neural networks and gradient boosting (Abdallah, Maarof and Zainal, 2016).
 
-Supervised learning is suitable for PayGuard because the proposed system uses labelled synthetic data. The labels allow the model to learn how fraudulent transactions differ from normal ones. The trained model can then be used to score new transactions.
+This approach suits PayGuard because the prototype uses labelled synthetic data. The trained model can then score new transactions.
 
 ### 2.5.3 Unsupervised and Anomaly Detection
 
-Unsupervised methods do not require labelled fraud examples. They try to find unusual behaviour or outliers. This is useful where fraud labels are not available or where new fraud methods appear. Examples include clustering and anomaly detection. However, unsupervised methods can be difficult to evaluate because they do not always explain whether an unusual transaction is truly fraudulent (Phua et al., 2010).
+Unsupervised methods do not require fraud labels. They look for unusual behaviour using approaches such as clustering or anomaly detection. They are useful when labels are unavailable, but they can be difficult to evaluate because unusual does not always mean fraudulent (Phua et al., 2010).
 
 ### 2.5.4 Hybrid Fraud Detection
 
-Hybrid systems combine different methods. For example, a system may use rules for known policy violations and machine learning for more complex patterns. A hybrid approach is often practical because financial institutions still need clear rules, but also need adaptive methods that can learn from data (Carcillo et al., 2019).
-
-PayGuard follows a hybrid idea at prototype level. It uses supervised machine learning to produce risk scores, while also using alert thresholds to decide when a transaction should be reviewed.
+Hybrid systems combine methods, for example rules for known policy violations and machine learning for complex patterns. PayGuard follows this idea at prototype level by using supervised learning for risk scores and thresholds for alert review (Carcillo et al., 2019).
 
 ## 2.6 Synthetic Transaction Data
 
-Access to real financial data is usually restricted because of privacy, security and legal concerns. Real transaction data may contain names, account numbers, phone numbers, locations, payment references and other sensitive information. For an academic project, using real data may create ethical and legal risks.
+Real financial data is usually restricted because it may contain names, account numbers, phone numbers, locations and payment references. For an academic project, this creates privacy, security and legal risks.
 
-Synthetic data is therefore useful because it allows the researcher to create realistic transaction records without exposing real users. Lopez-Rojas, Elmir and Axelsson (2016) introduced PaySim, a mobile money simulator for fraud detection research. Their work shows that simulated financial data can be useful when real financial datasets are not available.
-
-PayGuard adopts this idea by generating synthetic mobile-money-style transactions. The generated data includes accounts, amounts, transaction types, timestamps, locations, devices and fraud labels. Fraud patterns are injected into the data so that the model can learn from them.
+Synthetic data is useful because it allows realistic transaction records to be created without exposing real users. Lopez-Rojas, Elmir and Axelsson (2016) introduced PaySim, showing that simulated mobile money data can support fraud detection research. PayGuard adopts this idea by generating accounts, amounts, transaction types, timestamps, locations, devices and fraud labels.
 
 **Table 2.2: Comparison between real data and synthetic data**
 
 | Area | Real transaction data | Synthetic transaction data |
 |---|---|---|
-| Privacy | Contains sensitive user information. | Does not contain real personal records. |
-| Access | Difficult to obtain due to institutional restrictions. | Can be generated by the researcher. |
-| Legal risk | Requires strong approvals and compliance controls. | Lower risk during prototype development. |
-| Realism | More accurate representation of actual behaviour. | Depends on quality of simulation rules. |
-| Reproducibility | May not be shareable with other researchers. | Can be regenerated using scripts and parameters. |
+| Privacy | Contains sensitive user information. | No real personal records. |
+| Access | Difficult to obtain. | Generated by the researcher. |
+| Legal risk | Requires approvals and controls. | Lower prototype risk. |
+| Realism | More accurate real behaviour. | Depends on simulation quality. |
+| Reproducibility | May not be shareable. | Can be regenerated. |
 
-Although synthetic data is useful, it is not a perfect replacement for real data. A system trained on synthetic data must be tested carefully before being used in production. The final system should therefore be treated as a research prototype.
+Synthetic data is not a perfect replacement for real data, so PayGuard should be treated as a research prototype until tested with approved real-world data.
 
 ## 2.7 Feature Engineering for Fraud Detection
 
-Feature engineering is the process of converting raw transaction data into useful model inputs. In fraud detection, useful features often describe how a transaction compares with normal behaviour for that account. Whitrow et al. (2009) showed that aggregating transactions over time can improve fraud detection because it captures behavioural changes.
+Feature engineering converts raw transaction data into model inputs. In fraud detection, strong features often compare a transaction with normal account behaviour. Whitrow et al. (2009) showed that time-based transaction aggregation can improve detection because it captures behavioural change.
 
 For PayGuard, the following feature groups are important:
 
@@ -241,79 +233,75 @@ For PayGuard, the following feature groups are important:
 
 | Feature group | Examples | Reason for use |
 |---|---|---|
-| Amount features | Transaction amount, log amount, amount difference from average. | Fraud may involve unusual transaction values. |
-| Time features | Hour of day, day of week, night transaction flag. | Fraud may happen at unusual times. |
-| Velocity features | Number of transactions in last hour or last day. | Many quick transactions may suggest smurfing or account takeover. |
-| Account history features | Prior average amount, account age, previous transaction count. | Helps compare current transaction with normal behaviour. |
-| Device features | Device change flag, known or unknown device. | New device may suggest account compromise. |
-| Location features | Location change flag, transaction city. | New location may suggest suspicious access. |
-| Transaction type | Cash-in, cash-out, transfer, merchant payment, bill payment. | Some transaction types may carry different fraud risk. |
+| Amount features | Amount, log amount, difference from average. | Detects unusual values. |
+| Time features | Hour, day, night flag. | Detects unusual timing. |
+| Velocity features | Transactions in last hour or day. | Detects rapid activity. |
+| Account history features | Prior average, account age, previous count. | Compares with normal behaviour. |
+| Device features | Device change, known or unknown device. | Detects possible compromise. |
+| Location features | Location change and city. | Detects suspicious access. |
+| Transaction type | Cash-in, cash-out, transfer and payments. | Captures different risk levels. |
 
-Good features help the model detect fraud more accurately. Poor features may lead to weak predictions even when the algorithm is strong. Therefore, feature engineering is a central part of the PayGuard system.
+Good features are central to PayGuard because weak features can produce poor predictions even when the algorithm is strong.
 
 ## 2.8 Class Imbalance and Evaluation Metrics
 
-Fraud detection usually faces a class imbalance problem. Legitimate transactions are much more common than fraudulent transactions. If a dataset has 98 percent legitimate transactions and 2 percent fraud, a model can appear accurate by predicting every transaction as legitimate. However, such a model would be useless because it would miss all fraud cases.
-
-For this reason, accuracy alone is not enough. Fraud detection systems should use metrics that focus on the minority fraud class. Important metrics are shown in Table 2.4.
+Fraud detection usually faces class imbalance because legitimate transactions are far more common than fraudulent ones. A model may appear accurate by predicting all transactions as legitimate, but such a model would miss fraud. Therefore, accuracy alone is not enough; metrics must focus on the minority fraud class.
 
 **Table 2.4: Evaluation metrics for fraud detection**
 
 | Metric | Meaning | Importance |
 |---|---|---|
-| Accuracy | Percentage of all correct predictions. | Can be misleading when fraud cases are rare. |
-| Precision | Out of transactions flagged as fraud, how many were actually fraud. | Shows alert quality and helps reduce unnecessary investigations. |
-| Recall | Out of all fraud cases, how many were detected. | Shows how much fraud the system captures. |
-| F1-score | Balance between precision and recall. | Useful when both missed fraud and false alerts matter. |
-| ROC-AUC | Measures ranking ability across thresholds. | Useful for comparing models before choosing an alert threshold. |
+| Accuracy | Percentage of correct predictions. | Misleading when fraud is rare. |
+| Precision | How many flagged transactions were fraud. | Shows alert quality. |
+| Recall | How many fraud cases were detected. | Shows fraud capture. |
+| F1-score | Balance of precision and recall. | Useful when both errors matter. |
+| ROC-AUC | Ranking ability across thresholds. | Helps compare models. |
 
-Cost-sensitive learning is also important because false negatives and false positives do not have the same cost. Missing fraud may lead to direct financial loss, while false alerts may increase investigator workload. Bahnsen et al. (2013) and Bahnsen, Aouada and Stojanovic (2017) argue that fraud detection should consider the cost of different mistakes.
+Cost-sensitive learning is also important because missed fraud may cause financial loss, while false alerts increase investigation workload (Bahnsen et al., 2013; Bahnsen, Aouada and Stojanovic, 2017).
 
 ## 2.9 Concept Drift in Fraud Detection
 
-Concept drift happens when the patterns in data change over time. In fraud detection, this is common because fraudsters adapt their methods once existing controls become known. A model trained on old patterns may become less effective if new fraud methods appear.
-
-Dal Pozzolo et al. (2015) studied credit card fraud detection under concept drift and delayed labels. Their work shows that fraud models must be monitored and updated because financial crime behaviour changes. For PayGuard, this means that the model should not be viewed as permanently complete. A future version should allow periodic retraining, analyst feedback and threshold adjustment.
+Concept drift happens when data patterns change over time. In fraud detection, this is common because fraudsters adapt once existing controls become known. Dal Pozzolo et al. (2015) showed that fraud models must be monitored and updated because financial crime behaviour changes. For PayGuard, future versions should support retraining, analyst feedback and threshold adjustment.
 
 ## 2.10 Machine Learning Algorithms Reviewed
 
-Several algorithms can be used for fraud detection. The algorithms below are considered relevant to PayGuard.
+Several algorithms can be used for fraud detection. Table 2.5 summarises those most relevant to PayGuard.
 
 **Table 2.5: Reviewed machine learning algorithms**
 
 | Algorithm | Strengths | Weaknesses | Relevance to PayGuard |
 |---|---|---|---|
-| Logistic Regression | Simple, fast and easier to interpret. | May fail to capture complex non-linear patterns. | Useful as a baseline model. |
-| Decision Tree | Easy to understand and can model non-linear patterns. | Can overfit if not controlled. | Useful for explaining decision logic. |
-| Random Forest | Handles non-linear patterns and reduces overfitting by using many trees. | Less interpretable than a single tree. | Main candidate for prototype fraud scoring. |
-| Support Vector Machine | Can perform well on complex boundaries. | Can be slower and harder to tune on large datasets. | Useful for comparison but not primary. |
-| Neural Network | Can learn complex patterns. | Requires more data and may be less explainable. | Future extension if more data becomes available. |
-| XGBoost | Strong performance on tabular datasets and supports regularised boosted trees. | Requires careful tuning and explanation methods. | Future improvement and benchmark method. |
+| Logistic Regression | Simple, fast and interpretable. | Weak on complex patterns. | Baseline model. |
+| Decision Tree | Understandable and non-linear. | Can overfit. | Explains decision logic. |
+| Random Forest | Handles non-linear patterns and reduces overfitting. | Less interpretable. | Main prototype candidate. |
+| Support Vector Machine | Works on complex boundaries. | Slower and harder to tune. | Comparison method. |
+| Neural Network | Learns complex patterns. | Needs more data and explanation. | Future extension. |
+| XGBoost | Strong on tabular data. | Needs tuning and explanation. | Future benchmark. |
 
-Chen and Guestrin (2016) introduced XGBoost as a scalable tree boosting system. XGBoost is widely used in tabular machine learning problems because it is strong, efficient and flexible. However, for the first PayGuard prototype, simpler scikit-learn models such as logistic regression and random forest are preferred because they are easier to implement, explain and evaluate in a capstone context.
+Chen and Guestrin (2016) introduced XGBoost as a scalable tree boosting system. It is strong for tabular data, but the first PayGuard prototype uses simpler scikit-learn models because they are easier to implement, explain and evaluate in a capstone context.
 
 ## 2.11 Related Studies
 
-The following studies were reviewed because they relate to fraud detection, mobile money simulation, transaction aggregation, class imbalance and machine learning.
+The following studies relate to fraud detection, mobile money simulation, transaction aggregation, class imbalance and machine learning.
 
 **Table 2.6: Summary of related studies**
 
 | Author(s) | Study focus | Key finding | Relevance to PayGuard |
 |---|---|---|---|
-| Phua et al. (2010) | Survey of data mining fraud detection. | Fraud detection can use classification, clustering and anomaly detection. | Supports the use of supervised learning and hybrid approaches. |
-| Whitrow et al. (2009) | Transaction aggregation for credit card fraud detection. | Aggregated behavioural features improve detection performance. | Supports account history, velocity and amount-ratio features. |
-| Bahnsen et al. (2013) | Cost-sensitive credit card fraud detection. | Different mistakes have different financial costs. | Supports use of precision, recall and cost-aware thinking. |
-| Dal Pozzolo et al. (2015) | Concept drift and delayed labels in fraud detection. | Fraud models require updating because fraud patterns change. | Supports future retraining and analyst feedback. |
-| Lopez-Rojas, Elmir and Axelsson (2016) | PaySim mobile money simulator. | Synthetic mobile money datasets can support research where real data is unavailable. | Supports the use of synthetic data in PayGuard. |
-| Abdallah, Maarof and Zainal (2016) | Survey of fraud detection systems. | Fraud detection requires both algorithmic and system-level design. | Supports end-to-end design from data to dashboard. |
-| Carcillo et al. (2018) | Streaming credit card fraud detection framework. | Real-time fraud detection requires scalable architecture. | Supports future streaming version of PayGuard. |
-| Carcillo et al. (2019) | Combining supervised and unsupervised fraud detection. | Hybrid approaches can improve detection. | Supports possible future anomaly detection extension. |
-| Chen and Guestrin (2016) | XGBoost scalable tree boosting. | Boosted trees perform strongly on structured data. | Supports future use of XGBoost for improved performance. |
-| Lebichot et al. (2021) | Incremental learning for fraud detection. | Incremental learning can help models adapt over time. | Supports future continuous learning and model refresh. |
+| Phua et al. (2010) | Data mining fraud detection. | Uses classification, clustering and anomaly detection. | Supports supervised and hybrid approaches. |
+| Whitrow et al. (2009) | Transaction aggregation. | Behavioural features improve detection. | Supports history and velocity features. |
+| Bahnsen et al. (2013) | Cost-sensitive fraud detection. | Mistakes have different costs. | Supports cost-aware metrics. |
+| Dal Pozzolo et al. (2015) | Concept drift and delayed labels. | Models need updating. | Supports retraining and feedback. |
+| Lopez-Rojas, Elmir and Axelsson (2016) | PaySim simulator. | Synthetic mobile money data supports research. | Supports PayGuard synthetic data. |
+| Abdallah, Maarof and Zainal (2016) | Fraud detection survey. | Needs algorithmic and system design. | Supports end-to-end design. |
+| Carcillo et al. (2018) | Streaming fraud framework. | Real-time detection needs scalable design. | Supports future streaming. |
+| Carcillo et al. (2019) | Hybrid fraud detection. | Combined methods can improve detection. | Supports anomaly detection extension. |
+| Chen and Guestrin (2016) | XGBoost. | Boosted trees work well on structured data. | Supports future benchmarking. |
+| Lebichot et al. (2021) | Incremental learning. | Models can adapt over time. | Supports future model refresh. |
 
 ## 2.12 Research Gap
 
-From the reviewed literature, several gaps can be identified. Many fraud detection studies focus on credit card fraud, while fewer focus on mobile-money-style transactions in African institutional payment environments. Also, many studies discuss algorithms without showing a full working prototype that includes data generation, model training, API scoring, alert storage and a monitoring dashboard.
+The literature shows that many studies focus on credit card fraud, while fewer focus on mobile-money-style transactions in African institutional payment environments. Many studies also discuss algorithms without showing a complete prototype that includes data generation, model training, API scoring, alert storage and a dashboard.
 
 **Table 2.7: Research gap and PayGuard contribution**
 
@@ -325,60 +313,60 @@ From the reviewed literature, several gaps can be identified. Many fraud detecti
 | Fraud detection systems may not support human review clearly. | Provides alerts and transaction summaries for investigation. |
 | Few capstone-level systems show end-to-end fraud monitoring. | Builds a complete prototype from data generation to UI monitoring. |
 
-Therefore, PayGuard addresses the gap by developing a practical prototype for institutional digital finance fraud detection using synthetic data and machine learning.
+PayGuard addresses this gap by building a practical institutional digital finance fraud detection prototype using synthetic data and machine learning.
 
 ## 2.13 Feasibility Study
 
-A feasibility study is conducted to determine whether the proposed system can be developed and used successfully. This section discusses technical, economic, operational, legal, schedule and social feasibility.
+A feasibility study determines whether the proposed system can be developed and used successfully. This section covers technical, economic, operational, legal, schedule and social feasibility.
 
 ### 2.13.1 Technical Feasibility
 
-Technical feasibility determines whether the system can be developed using available hardware, software and skills. PayGuard is technically feasible because it uses commonly available open-source technologies such as Python, Flask, SQLite, pandas, scikit-learn, joblib, React and TypeScript.
+PayGuard is technically feasible because it uses available open-source technologies such as Python, Flask, SQLite, pandas, scikit-learn, joblib, React and TypeScript.
 
 **Table 2.8: Software requirements**
 
 | Software | Purpose | Availability |
 |---|---|---|
-| Python 3 | Data generation, feature engineering, model training and backend API. | Open-source and freely available. |
-| Flask | REST API development. | Open-source and lightweight. |
-| SQLite | Local database storage for transactions and alerts. | Built into many Python environments. |
-| pandas and NumPy | Data cleaning and feature engineering. | Open-source and widely used. |
-| scikit-learn | Machine learning model training and evaluation. | Open-source and widely used. |
-| joblib | Saving and loading trained model artefacts. | Open-source. |
-| React and TypeScript | Frontend dashboard development. | Open-source. |
-| Git and GitHub | Version control and project storage. | Freely available for student use. |
+| Python 3 | Data, model training and backend API. | Open-source. |
+| Flask | REST API development. | Open-source. |
+| SQLite | Local transaction and alert storage. | Built into many Python environments. |
+| pandas and NumPy | Data cleaning and feature engineering. | Open-source. |
+| scikit-learn | Model training and evaluation. | Open-source. |
+| joblib | Saving and loading model artefacts. | Open-source. |
+| React and TypeScript | Frontend dashboard. | Open-source. |
+| Git and GitHub | Version control and storage. | Freely available. |
 
 **Table 2.9: Hardware requirements**
 
 | Hardware | Minimum requirement | Purpose |
 |---|---|---|
 | Laptop or desktop computer | 8GB RAM, dual-core processor, 256GB storage. | Development and testing. |
-| Recommended development machine | 16GB RAM, quad-core processor, SSD storage. | Faster model training and frontend development. |
-| Internet access | Stable connection when installing packages and researching. | Downloading tools, references and dependencies. |
-| Backup storage | Flash drive, external drive or cloud repository. | Protecting project files and source code. |
+| Recommended machine | 16GB RAM, quad-core processor, SSD. | Faster training and development. |
+| Internet access | Stable connection. | Downloads and research. |
+| Backup storage | External drive or cloud repository. | Protecting project files. |
 
-The system can be built and tested on a normal development machine. Since PayGuard is a prototype, it does not require expensive servers or high-performance clusters. If the system is later moved to production, PostgreSQL, cloud hosting and stronger security controls may be required.
+PayGuard can be built on a normal development machine and does not require expensive servers. Production use would require stronger hosting, database and security controls.
 
 ### 2.13.2 Economic Feasibility
 
-Economic feasibility determines whether the benefits of the proposed system justify the cost of developing it. PayGuard is economically feasible because most of the tools used are open-source. The main cost is development time, internet access and hardware already available to the student or institution.
+PayGuard is economically feasible because most tools are open-source. The main costs are development time, internet access and already available hardware.
 
 **Table 2.10: Estimated development cost**
 
 | Item | Estimated cost | Comment |
 |---|---:|---|
-| Development tools | USD 0 | Python, Flask, SQLite, React and scikit-learn are open-source. |
-| Hosting during development | USD 0 | Local development machine can be used. |
-| Internet and research access | USD 30 | Needed for downloads, references and testing. |
-| Backup storage | USD 10 | Flash drive or cloud storage. |
-| Testing and documentation | USD 20 | Printing, review and optional deployment tests. |
+| Development tools | USD 0 | Open-source tools. |
+| Hosting during development | USD 0 | Local machine. |
+| Internet and research access | USD 30 | Downloads and references. |
+| Backup storage | USD 10 | External or cloud backup. |
+| Testing and documentation | USD 20 | Review and optional tests. |
 | Total estimated cost | USD 60 | Prototype cost only. |
 
-The project is therefore affordable because it does not require paid software licences. The institution may benefit from the system because it can reduce the time needed to identify suspicious transactions and improve monitoring of digital payments.
+The project is affordable because it does not require paid software licences and may reduce the time needed to identify suspicious transactions.
 
 ### 2.13.3 Operational Feasibility
 
-Operational feasibility determines whether the system can work in the intended environment and whether users can operate it. PayGuard is operationally feasible because it is designed to provide a simple dashboard for finance officers and administrators.
+PayGuard is operationally feasible because it provides a simple dashboard for finance officers and administrators.
 
 The system will allow users to:
 
@@ -389,39 +377,39 @@ The system will allow users to:
 - update alert status after investigation;
 - observe dashboard metrics.
 
-The system does not require users to understand machine learning details. The technical model runs in the background while the user interacts with normal dashboard pages. This makes the system more acceptable to non-technical users.
+Users do not need to understand machine learning details because the model runs in the background while they interact with normal dashboard pages.
 
 ### 2.13.4 Legal and Ethical Feasibility
 
-PayGuard handles financial-style data, therefore legal and ethical issues must be considered. Zimbabwe's Cyber and Data Protection Act [Chapter 12:07] provides a legal framework for data protection and establishes responsibilities for the processing of personal information (Zimbabwe, 2021). A production system connected to real institutional payment data would need to follow data minimisation, access control, secure storage and proper authorisation.
+PayGuard handles financial-style data, so legal and ethical issues must be considered. Zimbabwe's Cyber and Data Protection Act [Chapter 12:07] provides a framework for protecting personal information (Zimbabwe, 2021). A production system would require data minimisation, access control, secure storage and authorisation.
 
-For this research, PayGuard uses synthetic data. This reduces privacy risk because real student names, account numbers and phone numbers are not used. However, ethical design is still important because fraud detection systems can affect people if used incorrectly. The system should therefore be treated as a decision-support tool, not as an automatic punishment system.
+For this research, PayGuard uses synthetic data, reducing privacy risk because real student names, account numbers and phone numbers are not used. The system is also treated as decision support, not automatic punishment.
 
 **Table 2.11: Legal and ethical considerations**
 
 | Issue | Risk | Control measure |
 |---|---|---|
-| Personal data exposure | Real users may be identified if production data is mishandled. | Use synthetic data for research and apply data minimisation in production. |
-| False accusation | A legitimate transaction may be flagged as suspicious. | Use alerts for human review, not automatic punishment. |
-| Unauthorised access | Dashboard may expose sensitive financial records. | Add authentication and role-based access in production. |
-| Model bias | Model may incorrectly treat some transaction patterns as suspicious. | Monitor false positives and allow investigator feedback. |
-| Data retention | Old records may be stored for too long. | Define retention policy before production deployment. |
+| Personal data exposure | Real users may be identified. | Use synthetic data and data minimisation. |
+| False accusation | Legitimate transaction may be flagged. | Use human review. |
+| Unauthorised access | Dashboard may expose records. | Add login and roles. |
+| Model bias | Some patterns may be unfairly flagged. | Monitor false positives. |
+| Data retention | Old records may be stored too long. | Define retention policy. |
 
 ### 2.13.5 Schedule Feasibility
 
-Schedule feasibility determines whether the project can be completed within the available time. The project is feasible if development is divided into clear stages.
+Schedule feasibility considers whether the project can be completed within the available time. PayGuard is feasible when development is divided into clear stages.
 
 **Table 2.12: Proposed work plan**
 
 | Phase | Activity | Duration | Expected output |
 |---|---|---:|---|
-| Phase 1 | Research and literature review | 2 weeks | Chapter 2 and reference base. |
-| Phase 2 | Requirements and system design | 2 weeks | Functional requirements, architecture and diagrams. |
-| Phase 3 | Synthetic data generator | 1 week | Generated transaction dataset. |
-| Phase 4 | Feature engineering and model training | 2 weeks | Trained model and evaluation metrics. |
-| Phase 5 | Backend API development | 2 weeks | Flask API for transactions, scoring, alerts and metrics. |
-| Phase 6 | Frontend dashboard development | 2 weeks | React dashboard for monitoring. |
-| Phase 7 | Testing and documentation | 2 weeks | Tested prototype and final write-up. |
+| Phase 1 | Research and literature review | 2 weeks | Chapter 2 and references. |
+| Phase 2 | Requirements and design | 2 weeks | Requirements and diagrams. |
+| Phase 3 | Synthetic data generator | 1 week | Transaction dataset. |
+| Phase 4 | Feature engineering and model training | 2 weeks | Trained model and metrics. |
+| Phase 5 | Backend API development | 2 weeks | Flask API. |
+| Phase 6 | Frontend dashboard development | 2 weeks | React dashboard. |
+| Phase 7 | Testing and documentation | 2 weeks | Tested prototype and write-up. |
 
 **Table 2.13: Gantt chart table placeholder**
 
@@ -440,31 +428,29 @@ Schedule feasibility determines whether the project can be completed within the 
 
 ### 2.13.6 Social Feasibility
 
-Social feasibility determines whether the users and institution are likely to accept the system. PayGuard is socially feasible because it supports financial integrity and helps reduce the burden of manual fraud checking. Finance officers may benefit from faster identification of suspicious transactions, while students and guardians may benefit from safer digital payment processes.
-
-However, users must understand that a fraud alert is not final proof of fraud. The alert only means that a transaction needs review. This helps reduce fear and improves fairness.
+PayGuard is socially feasible because it supports financial integrity and reduces manual fraud checking. Finance officers may identify suspicious transactions faster, while students and guardians benefit from safer digital payment processes. Users must still understand that an alert is not final proof of fraud; it only means a transaction needs review.
 
 ## 2.14 Development Methodology
 
-The development of PayGuard follows an iterative prototype approach. This means that the system is developed in small stages, tested, improved and documented. This method is suitable because the project includes both software development and machine learning experimentation. Model training may require adjustments to features, thresholds and evaluation methods.
+PayGuard follows an iterative prototype approach, where the system is built in small stages, tested, improved and documented. This suits the project because software development and machine learning experimentation both require adjustment.
 
 **Table 2.14: Development stages**
 
 | Stage | Description |
 |---|---|
-| Planning | Identify the problem, objectives, scope and tools. |
-| Data preparation | Generate synthetic data and prepare transaction records. |
-| Model development | Train and evaluate machine learning models. |
-| Backend development | Build APIs for scoring, alerts, transactions and metrics. |
-| Frontend development | Build dashboard pages for users. |
-| Testing | Test model outputs, API endpoints and user interface behaviour. |
-| Documentation | Write dissertation chapters and user/developer notes. |
+| Planning | Identify problem, objectives, scope and tools. |
+| Data preparation | Generate synthetic transaction records. |
+| Model development | Train and evaluate models. |
+| Backend development | Build APIs for scoring, alerts and metrics. |
+| Frontend development | Build dashboard pages. |
+| Testing | Test model, API and interface behaviour. |
+| Documentation | Write dissertation and project notes. |
 
 ## 2.15 Chapter Conclusion
 
-This chapter reviewed literature and feasibility issues related to PayGuard. The literature shows that mobile money fraud is a serious challenge and that machine learning can assist in detecting suspicious transactions. It also shows that synthetic data is useful where real financial data cannot be used due to privacy and legal restrictions. Studies on transaction aggregation, class imbalance, cost-sensitive learning and concept drift provide a foundation for PayGuard's design.
+This chapter reviewed literature and feasibility issues related to PayGuard. The literature shows that mobile money fraud is a serious challenge, machine learning can assist detection, and synthetic data is useful where real financial data cannot be used. Transaction aggregation, class imbalance, cost-sensitive learning and concept drift also guide the system design.
 
-The feasibility study shows that PayGuard is technically, economically, operationally, legally, socially and schedule feasible as a prototype. The next chapter focuses on the requirements analysis and design of the proposed PayGuard system.
+The feasibility study shows that PayGuard is technically, economically, operationally, legally, socially and schedule feasible as a prototype. The next chapter focuses on requirements analysis and design.
 
 ---
 
@@ -885,23 +871,19 @@ The next chapter will focus on the coding and implementation of the PayGuard sys
 
 ## 4.1 Introduction
 
-System design is the stage where the proposed solution is planned in detail before and during implementation. It explains how the different parts of the system are arranged, how they communicate, how data is stored, and how users interact with the final application. This chapter presents the design of the PayGuard Mobile Money Fraud Detection System.
+System design explains how the proposed solution is organised, how its parts communicate, how data is stored, and how users interact with it. This chapter presents the design of PayGuard as a prototype mobile money fraud monitoring system.
 
-PayGuard was designed as a prototype fraud monitoring platform for mobile-money-style transactions. The system combines synthetic data generation, machine learning, a Flask backend, SQLite database storage, and a React dashboard. The design supports the main project aim, which is to help finance users identify suspicious transactions through risk scores, alerts, and transaction summaries.
+PayGuard combines synthetic data generation, machine learning, a Flask backend, SQLite storage, and a React dashboard. The design supports the project aim of helping finance users identify suspicious transactions through risk scores, alerts, and summary views.
 
-The design follows a simple layered approach. The frontend layer provides the dashboard that users interact with. The backend layer receives requests, validates data, loads the fraud detection model, scores transactions, creates alerts, and returns results. The database layer stores transactions, alerts, and model run information. The machine learning layer prepares transaction features and predicts fraud risk.
-
-This chapter does not insert actual diagrams or screenshots. In line with the documentation rules, each required figure is described clearly so that the actual diagram or screenshot can be added later.
+The system follows a layered approach. The frontend presents the dashboard, the backend handles validation and scoring, the database stores transactions and alerts, and the machine learning layer prepares features and predicts risk. Figure placeholders are kept brief in the main report, while full descriptions are stored separately in the figure description reference.
 
 ## 4.2 Design Objectives
 
 The design of PayGuard was guided by the following objectives:
 
-- To create a clear separation between the frontend dashboard, backend API, database, and machine learning model.
-- To allow transactions to be submitted, stored, scored, and reviewed.
-- To provide a fraud risk score that helps users prioritise suspicious transactions.
-- To create alerts when transactions are considered risky.
-- To provide dashboard metrics for monitoring transaction and alert activity.
+- To separate the frontend dashboard, backend API, database, and machine learning model.
+- To support transaction submission, storage, scoring, and review.
+- To provide fraud risk scores, alerts, and dashboard metrics for monitoring suspicious activity.
 - To keep the system simple enough for academic demonstration and future improvement.
 - To use synthetic data so that real customer financial information is not exposed.
 
@@ -909,7 +891,7 @@ The system is therefore designed as a decision-support prototype. It helps users
 
 ## 4.3 Overall System Architecture
 
-PayGuard uses a client-server architecture. The client side is the web dashboard built using React, TypeScript, Vite, Tailwind CSS, shadcn/ui components, React Icons, and chart components. The server side is a Flask backend written in Python. The backend uses SQLite for storage and scikit-learn for the fraud detection model.
+PayGuard uses a client-server architecture. The client side is a React, TypeScript, Vite, Tailwind CSS, shadcn/ui dashboard. The server side is a Python Flask backend that uses SQLite for storage and scikit-learn for fraud detection.
 
 The main architectural layers are shown in Table 4.1.
 
@@ -923,11 +905,11 @@ The main architectural layers are shown in Table 4.1.
 | Machine learning layer | pandas, NumPy, scikit-learn, joblib | Builds features, trains models, saves the selected model, and scores new transactions. |
 | Data generation layer | Python, pandas, NumPy | Generates synthetic mobile money transactions and fraud patterns for development and testing. |
 
-**Figure 4.1 description:** The system architecture diagram will show the React dashboard on the left, the Flask API in the middle, and SQLite plus the saved machine learning model on the right. The diagram will show that the dashboard sends requests to Flask endpoints, Flask reads and writes data in SQLite, and Flask loads the saved fraud model from the models folder to score transactions.
+**Figure 4.1: System architecture diagram**
 
 ## 4.4 System Component Design
 
-The PayGuard system is divided into several major components. Each component has a specific responsibility so that the system remains understandable and maintainable.
+PayGuard is divided into major components with clear responsibilities, making the prototype easier to understand, test, and improve.
 
 **Table 4.2: Main PayGuard components**
 
@@ -940,13 +922,11 @@ The PayGuard system is divided into several major components. Each component has
 | SQLite database | Local relational database. | Stores transactions, alerts, and model run metadata. |
 | React dashboard | Web frontend. | Allows users to monitor metrics, score transactions, view alerts, view transactions, and search account profiles. |
 
-The components communicate through structured data. The frontend communicates with the backend using HTTP requests and JSON responses. The backend communicates with the database using SQL queries. The machine learning model receives a prepared feature frame and returns a fraud prediction and risk score.
+The components communicate through structured data. The frontend sends HTTP requests to the backend, the backend queries SQLite, and the model receives prepared features before returning a prediction and risk score.
 
 ## 4.5 Data Generation Design
 
-PayGuard uses synthetic data because real financial data is sensitive and difficult to access for an academic project. The data generation component creates mobile-money-style transaction records that imitate normal and suspicious behaviour.
-
-The generator creates multiple account profiles. Each account has an account ID, a home location, a primary device, an average daily transaction rate, and an average amount. Normal transactions are generated using these account profiles. Fraud patterns are then injected into the dataset.
+PayGuard uses synthetic data because real financial data is sensitive and difficult to access for an academic project. The generator creates account profiles with IDs, locations, devices, daily transaction rates, and average amounts. It then produces normal transactions and injects selected fraud patterns.
 
 The synthetic dataset includes the fields shown in Table 4.3.
 
@@ -954,17 +934,17 @@ The synthetic dataset includes the fields shown in Table 4.3.
 
 | Field | Description |
 |---|---|
-| account_id | Unique account identifier used in the prototype. |
-| transaction_type | Type of transaction, such as cash_in, cash_out, bill_payment, p2p_transfer, or merchant_payment. |
+| account_id | Unique prototype account identifier. |
+| transaction_type | Type such as cash_in, cash_out, bill_payment, p2p_transfer, or merchant_payment. |
 | amount | Transaction amount. |
 | currency | Transaction currency, mainly USD or ZWL. |
-| device_id | Identifier of the device used to perform the transaction. |
-| location | Location linked to the transaction. |
-| created_at | Date and time when the transaction occurred. |
-| is_fraud | Label showing whether the transaction is normal or fraudulent in the synthetic dataset. |
-| fraud_score | Synthetic risk score included during generation and later replaced or supported by model scoring. |
-| metadata_json | Extra information stored as JSON, such as data source and fraud pattern. |
-| fraud_pattern | Fraud pattern name used during generation. |
+| device_id | Device used for the transaction. |
+| location | Transaction location. |
+| created_at | Transaction date and time. |
+| is_fraud | Synthetic normal or fraud label. |
+| fraud_score | Synthetic risk score later supported by model scoring. |
+| metadata_json | Extra JSON details such as source and pattern. |
+| fraud_pattern | Fraud pattern name. |
 
 The generator includes three main fraud patterns, shown in Table 4.4.
 
@@ -972,15 +952,15 @@ The generator includes three main fraud patterns, shown in Table 4.4.
 
 | Fraud pattern | Description | Design reason |
 |---|---|---|
-| amount_spike | A transaction amount is made much larger than the account's normal amount. | Detects unusual transaction values. |
-| device_location_change | A transaction uses a new device and a different location. | Simulates account compromise or suspicious access. |
-| rapid_burst | Many transactions occur close together within a short time. | Simulates fast movement of funds or smurfing behaviour. |
+| amount_spike | Amount is much larger than normal. | Detects unusual values. |
+| device_location_change | New device and different location. | Simulates suspicious access. |
+| rapid_burst | Many transactions happen close together. | Simulates fast fund movement. |
 
-**Figure 4.2 description:** The data generation flow diagram will show account profile creation, normal transaction generation, amount spike injection, device/location change injection, rapid burst injection, metadata creation, and final CSV export to the data folder.
+**Figure 4.2: Data generation flow diagram**
 
 ## 4.6 Machine Learning Design
 
-The machine learning part of PayGuard is designed to learn fraud patterns from the synthetic dataset and provide a risk score for new transactions. The project uses supervised learning because the generated dataset includes labels showing whether each transaction is fraudulent or not.
+The machine learning part of PayGuard learns fraud patterns from the synthetic dataset and provides a risk score for new transactions. Supervised learning is used because each generated transaction has a fraud label.
 
 The machine learning design has four main stages:
 
@@ -989,30 +969,28 @@ The machine learning design has four main stages:
 3. Train and compare candidate models.
 4. Save the selected model for backend scoring.
 
-The feature engineering module first validates that the required columns exist. It then cleans account IDs, transaction types, currencies, devices, locations, amounts, timestamps, and fraud labels. Invalid timestamps and invalid amounts are removed so that the model receives clean data.
-
-The project uses both numeric and categorical features. Numeric features are values that can be measured directly, while categorical features represent groups such as transaction type or location.
+The feature engineering module validates required columns, cleans transaction fields, removes invalid records, and prepares numeric and categorical features for model training.
 
 **Table 4.5: Numeric machine learning features**
 
 | Feature | Description |
 |---|---|
 | amount | Original transaction amount. |
-| amount_log | Log-transformed amount used to reduce the effect of very large values. |
-| hour | Hour of the day when the transaction occurred. |
-| day_of_week | Day of the week when the transaction occurred. |
-| is_weekend | Shows whether the transaction happened during a weekend. |
-| is_night | Shows whether the transaction happened late at night or early morning. |
-| account_prior_tx_count | Number of previous transactions for the account. |
-| account_prior_avg_amount | Average amount of previous transactions for the account. |
-| amount_to_prior_avg_ratio | Compares the current amount with the account's previous average. |
-| amount_delta_from_prior_avg | Difference between current amount and previous average amount. |
-| account_age_hours | Time between the account's first transaction and the current transaction. |
-| seconds_since_prev_tx | Time since the account's previous transaction. |
-| tx_count_last_1h | Number of previous transactions in the last hour. |
-| tx_count_last_24h | Number of previous transactions in the last 24 hours. |
-| device_change | Shows whether the device changed from the previous transaction. |
-| location_change | Shows whether the location changed from the previous transaction. |
+| amount_log | Log-transformed amount. |
+| hour | Transaction hour. |
+| day_of_week | Transaction day of week. |
+| is_weekend | Weekend indicator. |
+| is_night | Late-night indicator. |
+| account_prior_tx_count | Previous account transaction count. |
+| account_prior_avg_amount | Previous account average amount. |
+| amount_to_prior_avg_ratio | Current amount compared with prior average. |
+| amount_delta_from_prior_avg | Difference from prior average. |
+| account_age_hours | Time since the account's first transaction. |
+| seconds_since_prev_tx | Time since previous account transaction. |
+| tx_count_last_1h | Transactions in the last hour. |
+| tx_count_last_24h | Transactions in the last 24 hours. |
+| device_change | Device change indicator. |
+| location_change | Location change indicator. |
 
 **Table 4.6: Categorical machine learning features**
 
@@ -1022,7 +1000,7 @@ The project uses both numeric and categorical features. Numeric features are val
 | currency | Currency used in the transaction. |
 | location | Transaction location. |
 
-Two candidate models are trained in the current prototype: logistic regression and random forest. Logistic regression is used as a simple baseline model, while random forest is used because it can learn more complex relationships between transaction behaviour and fraud risk.
+Two candidate models are trained: logistic regression as a baseline and random forest as the stronger model for learning more complex fraud patterns.
 
 **Table 4.7: Candidate machine learning models**
 
@@ -1031,9 +1009,7 @@ Two candidate models are trained in the current prototype: logistic regression a
 | Logistic regression | Provides a simple baseline model for comparison. |
 | Random forest | Provides the main selected model for scoring because it handles non-linear fraud patterns better. |
 
-The training pipeline uses a train-test split and evaluates models using precision, recall, F1-score, and ROC-AUC. The selected model is saved as `fraud_model.joblib` so that the Flask backend can load it when the API starts.
-
-According to the current training report, the selected model is random forest. The dataset contains 99,468 rows, with 2,380 fraud rows, giving a fraud rate of approximately 2.39 percent. The selected random forest model achieved strong ROC-AUC on the synthetic test dataset.
+The training pipeline uses a train-test split and evaluates models using precision, recall, F1-score, and ROC-AUC. The selected model is saved as `fraud_model.joblib` so that Flask can load it during API startup. The current report selected random forest on a synthetic dataset of 99,468 rows.
 
 **Table 4.8: Current model training summary**
 
@@ -1048,15 +1024,13 @@ According to the current training report, the selected model is random forest. T
 | F1-score | 0.5965 |
 | ROC-AUC | 0.9912 |
 
-The model result shows that the prototype is able to learn the synthetic fraud patterns. However, because the dataset is synthetic, these results should be treated as prototype results rather than production banking results.
+The result shows that the prototype can learn the generated fraud patterns. However, because the data is synthetic, the results are treated as academic prototype results, not production banking evidence.
 
-**Figure 4.3 description:** The machine learning pipeline diagram will show dataset loading, data cleaning, feature engineering, train-test split, model training, model evaluation, best model selection, model saving, and backend model loading.
+**Figure 4.3: Machine learning pipeline diagram**
 
 ## 4.7 Backend API Design
 
-The backend is designed as a Flask API. It acts as the central controller of the system. It validates requests, communicates with SQLite, loads the saved machine learning model, builds scoring features, creates alerts, and returns JSON responses to the frontend.
-
-The backend starts by initialising the database and attempting to load the saved fraud model. If the model is available, the system reports the model as loaded. If the model is missing, the health endpoint reports that the model is unavailable and scoring requests return a clear error message.
+The backend is designed as a Flask API and acts as the central controller of the system. It validates requests, communicates with SQLite, loads the saved model, builds scoring features, creates alerts, and returns JSON responses to the frontend. During startup, it initialises the database and reports whether the model is available.
 
 **Table 4.9: PayGuard API endpoint design**
 
@@ -1073,7 +1047,7 @@ The backend starts by initialising the database and attempting to load the saved
 | `/api/accounts/<account_id>/transactions` | GET | Returns transaction history for a selected account. |
 | `/api/metrics` | GET | Returns dashboard metrics such as total transactions, fraud rate, open alerts, and alert breakdown. |
 
-The scoring endpoint is the most important backend process. When a transaction is submitted for scoring, the backend validates the required fields, retrieves previous transactions for the same account, builds a feature frame, sends the feature frame to the loaded model, receives a predicted label and probability score, creates an alert record, and returns the result to the dashboard.
+The scoring endpoint is the most important backend process. It validates a submitted transaction, retrieves account history, builds features, runs the model, stores the transaction, creates an alert, and returns the result to the dashboard.
 
 **Table 4.10: Required transaction input fields for scoring**
 
@@ -1087,7 +1061,7 @@ The scoring endpoint is the most important backend process. When a transaction i
 | location | Helps detect location changes. |
 | created_at | Optional timestamp; if absent, the backend uses the current time. |
 
-The backend also calculates a risk level from the fraud score. A high score produces a more serious risk level. The current alert threshold is 0.65. If the predicted label is fraud or the risk score reaches the threshold, the alert is opened for review.
+The backend also converts the fraud score into a risk level. The current alert threshold is 0.65. If the predicted label is fraud or the risk score reaches the threshold, the alert is opened for review.
 
 **Table 4.11: Risk level design**
 
@@ -1098,15 +1072,13 @@ The backend also calculates a risk level from the fraud score. A high score prod
 | 0.55 to 0.74 | medium |
 | Below 0.55 | low |
 
-The backend also generates a reason for the alert using the most important feature signals. These reasons include amount exceeding the account baseline, high transaction velocity, device change, location change, and rapid repeat transaction interval.
+The backend also generates an alert reason from important feature signals such as unusual amount, transaction velocity, device change, location change, or rapid repeat activity.
 
-**Figure 4.4 description:** The backend scoring sequence diagram will show the dashboard submitting a transaction to `/api/score`, the Flask API validating the input, the database returning account history, the feature builder preparing features, the model returning a risk score, the database saving the transaction and alert, and the dashboard displaying the result.
+**Figure 4.4: Backend scoring sequence diagram**
 
 ## 4.8 Database Design
 
-PayGuard uses SQLite as the database because it is simple, lightweight, and suitable for a local academic prototype. SQLite also makes it easy to run the project without setting up a separate database server.
-
-The database design includes three physical tables: `transactions`, `alerts`, and `model_runs`. Account profiles are not stored in a separate accounts table in the current implementation. Instead, account summaries are calculated from transaction and alert records when the account lookup endpoint is called.
+PayGuard uses SQLite because it is lightweight and suitable for a local academic prototype. The database has three physical tables: `transactions`, `alerts`, and `model_runs`. Account profiles are calculated from stored transactions and alerts when the account lookup endpoint is called.
 
 **Table 4.12: Database tables**
 
@@ -1118,7 +1090,7 @@ The database design includes three physical tables: `transactions`, `alerts`, an
 
 ### 4.8.1 Transactions Table
 
-The `transactions` table is the main data table. It stores transaction records that come from seeding the synthetic dataset, manual creation, or live scoring through the API.
+The `transactions` table stores records from the synthetic dataset, manual transaction creation, and live scoring through the API.
 
 **Table 4.13: Transactions table design**
 
@@ -1139,7 +1111,7 @@ The `transactions` table is the main data table. It stores transaction records t
 
 ### 4.8.2 Alerts Table
 
-The `alerts` table stores suspicious transaction alerts. Each alert is linked to one transaction using `transaction_id`.
+The `alerts` table stores suspicious transaction alerts, with each alert linked to one transaction through `transaction_id`.
 
 **Table 4.14: Alerts table design**
 
@@ -1156,7 +1128,7 @@ The `alerts` table stores suspicious transaction alerts. Each alert is linked to
 
 ### 4.8.3 Model Runs Table
 
-The `model_runs` table is included to support model history tracking. Although the current training report is mainly stored as a JSON file in the models folder, the table design allows future versions of the system to store model metadata in the database.
+The `model_runs` table supports future model history tracking. The current prototype stores the main training report as JSON, but the table allows later versions to save metadata in the database.
 
 **Table 4.15: Model runs table design**
 
@@ -1169,19 +1141,13 @@ The `model_runs` table is included to support model history tracking. Although t
 | notes | TEXT | Extra notes about the model run. |
 | created_at | TEXT | Date and time when the model run was recorded. |
 
-**Figure 4.5 description:** The database relationship diagram will show that one transaction can have one or more alerts linked through `alerts.transaction_id`. It will also show that account profiles are derived from transaction records by grouping transactions using `account_id`. The `model_runs` table will appear as a supporting table for model metadata.
+**Figure 4.5: Database relationship diagram**
 
 ## 4.9 Alert Lifecycle Design
 
-Alerts are designed to help users focus on transactions that need review. An alert is created whenever a transaction is scored. The alert may be open or closed depending on the predicted risk. Open alerts require human review.
+Alerts help users focus on transactions that need review. An alert is created when a transaction is scored, and its status depends on the predicted risk and later user action.
 
-The alert status values in the implemented backend are:
-
-- open;
-- closed;
-- resolved.
-
-An open alert means the transaction needs review. A closed alert means the alert has been dismissed or does not require action. A resolved alert means it has been investigated and completed.
+The implemented backend uses three alert status values.
 
 **Table 4.16: Alert lifecycle states**
 
@@ -1191,11 +1157,11 @@ An open alert means the transaction needs review. A closed alert means the alert
 | closed | The alert has been dismissed or closed without further action. |
 | resolved | The alert has been reviewed and marked as resolved. |
 
-**Figure 4.6 description:** The alert lifecycle diagram will show an alert being created after scoring. The alert can remain open, be marked as resolved after investigation, be closed when dismissed, or be reopened if further review is needed.
+**Figure 4.6: Alert lifecycle diagram**
 
 ## 4.10 Frontend User Interface Design
 
-The frontend is designed as a fraud operations dashboard. It is built using React and TypeScript, with shadcn/ui components for buttons, badges, inputs, tables, sheets, dropdowns, skeleton loading states, and chart containers. The interface uses a clean black, white, and green-accent visual style so that users can focus on the monitoring task.
+The frontend is designed as a fraud operations dashboard. It uses React, TypeScript, shadcn/ui components, charts, and a clean black, white, and green-accent visual style so users can focus on monitoring work.
 
 The application has a sidebar navigation menu with four main views:
 
@@ -1215,39 +1181,33 @@ The application has a sidebar navigation menu with four main views:
 
 ### 4.10.1 Dashboard View
 
-The dashboard view is the main monitoring screen. It displays key performance indicators such as total transactions, fraud rate, open alerts, and average risk score. It also displays a risk trend chart and alert distribution summary.
+The dashboard view is the main monitoring screen. It displays key indicators such as total transactions, fraud rate, open alerts, and average risk score, together with charts and alert summaries.
 
-The dashboard includes a live scoring form where a user can enter account ID, transaction type, amount, currency, device ID, and location. When the user submits the form, the frontend calls the `/api/score` endpoint. The response shows the risk score, risk level, alert status, reason, and key feature signals.
+The dashboard also includes a live scoring form. When a user submits transaction details, the frontend calls `/api/score` and displays the risk score, risk level, alert status, reason, and key feature signals.
 
-**Figure 4.7 description:** The dashboard screenshot will show the PayGuard sidebar, key metric cards, risk trend chart, alert distribution panel, and transaction scoring form with a result panel.
+**Figure 4.7: Dashboard screenshot**
 
 ### 4.10.2 Alerts View
 
-The alerts view allows users to review suspicious transactions. It includes search and filter controls for account ID, alert type, reason, status, and risk level. The alerts are displayed in a table with account, type, amount, risk score, status, time, and actions.
+The alerts view allows users to review suspicious transactions using search and filters for account ID, alert type, reason, status, and risk level. Alerts are shown in a table, and selecting one opens a detail drawer with transaction information and status actions.
 
-When a user selects an alert, a detail drawer opens. The drawer shows alert details, transaction details, metadata, risk score, alert type, and status. Users can resolve, dismiss, or reopen alerts.
-
-**Figure 4.8 description:** The alerts page screenshot will show the alert table, search box, filter controls, risk labels, status labels, action menu, and the alert detail drawer.
+**Figure 4.8: Alerts page screenshot**
 
 ### 4.10.3 Transactions View
 
-The transactions view shows recent transaction records from the database. It allows users to search by account, location, or device, and filter by transaction type or fraud status. The table shows transaction ID, account, type, amount, location, risk score, fraud label, and date.
+The transactions view shows recent database records. Users can search by account, location, or device, and filter by transaction type or fraud status. This helps users inspect whether flagged records appear in the stored transaction history.
 
-This screen helps users inspect transaction history and identify whether flagged records appear in the stored data.
-
-**Figure 4.9 description:** The transactions page screenshot will show a transaction table with filters for transaction type and fraud status, including risk scores and fraud labels.
+**Figure 4.9: Transactions page screenshot**
 
 ### 4.10.4 Accounts View
 
-The accounts view allows users to search for a specific account ID. When an account is found, the page displays account-level statistics such as total transactions, fraud rate, average amount, average risk score, total alerts, and open alerts. It also shows the account's transaction history.
+The accounts view allows users to search for an account ID and view account-level statistics, alerts, risk values, and transaction history. The backend calculates the profile from SQLite records, avoiding duplicated account data while still supporting behaviour analysis.
 
-The account profile is calculated by the backend from the transactions and alerts stored in SQLite. This design avoids duplicating account data in a separate table while still allowing users to analyse account behaviour.
-
-**Figure 4.10 description:** The account lookup screenshot will show the account search box, account summary cards, open alert badge, fraud rate, average amount, average risk score, and the account transaction history table.
+**Figure 4.10: Account lookup screenshot**
 
 ## 4.11 Input and Output Design
 
-Input design describes the information entered into the system. Output design describes what the system returns to users.
+Input design covers information entered into the system, while output design covers the results returned to users.
 
 **Table 4.18: Main system inputs**
 
@@ -1272,7 +1232,7 @@ Input design describes the information entered into the system. Output design de
 
 ## 4.12 Processing Design
 
-The main process in PayGuard is transaction scoring. This process combines input validation, history retrieval, feature engineering, model prediction, alert creation, and dashboard response.
+The main PayGuard process is transaction scoring, which combines validation, history retrieval, feature engineering, prediction, alert creation, and dashboard response.
 
 The processing steps are:
 
@@ -1289,11 +1249,11 @@ The processing steps are:
 11. An alert is saved in the alerts table.
 12. The result is returned to the dashboard.
 
-**Figure 4.11 description:** The transaction scoring flowchart will show the process from transaction entry to validation, account history retrieval, feature engineering, model scoring, risk level calculation, alert creation, database storage, and result display.
+**Figure 4.11: Transaction scoring flowchart**
 
 ## 4.13 Security and Control Design
 
-Although PayGuard is a prototype, the design includes basic controls that support safer use and future improvement.
+Although PayGuard is a prototype, the design includes basic controls for safer use and future improvement.
 
 **Table 4.20: Security and control design**
 
@@ -1309,13 +1269,13 @@ Although PayGuard is a prototype, the design includes basic controls that suppor
 | Synthetic data | Real personal financial records are not used during prototype development. |
 | Human review | Fraud alerts support human investigation and do not automatically punish users. |
 
-For future production deployment, stronger controls would be required. These include user login, role-based access, encrypted storage, audit logs, secure hosting, and integration controls for real mobile money providers.
+For production use, stronger controls would be required, including login, role-based access, encrypted storage, audit logs, secure hosting, and integration controls for real mobile money providers.
 
 ## 4.14 Deployment Design
 
-The current project is designed to run locally during development. The backend runs as a Flask service on port 5000, while the frontend runs through Vite. During development, the frontend can proxy `/api` requests to the Flask backend.
+The current project is designed to run locally during development. The Flask backend runs on port 5000, while the frontend runs through Vite and can proxy `/api` requests to Flask.
 
-The simplified stack was selected so that the project can be hosted more easily in future. The frontend is suitable for static deployment, while the Flask backend can be adapted for serverless or lightweight cloud hosting. SQLite is suitable for local prototype storage, but a future production system may need PostgreSQL or another managed database.
+The simplified stack was selected to make future hosting easier. The frontend is suitable for static deployment, while Flask can be adapted for lightweight cloud hosting. SQLite is suitable for the prototype, although a production system may require PostgreSQL or another managed database.
 
 **Table 4.21: Development deployment design**
 
@@ -1327,13 +1287,13 @@ The simplified stack was selected so that the project can be hosted more easily 
 | Model | Saved joblib model stored in the models folder. |
 | Dataset | Synthetic CSV data stored in the data folder. |
 
-**Figure 4.12 description:** The deployment diagram will show the user opening the React dashboard in a browser, the Vite frontend sending API requests to Flask, Flask reading the SQLite database, and Flask loading the saved joblib fraud model.
+**Figure 4.12: Deployment diagram**
 
 ## 4.15 Chapter Summary
 
-This chapter presented the system design of PayGuard. It described the overall architecture, major components, synthetic data design, machine learning design, backend API design, database design, alert lifecycle, frontend interface design, input and output design, processing flow, security controls, and deployment design.
+This chapter presented the system design of PayGuard, covering the architecture, components, data generation, machine learning, backend API, database, alerts, interface, inputs and outputs, processing flow, security controls, and deployment design.
 
-The design shows that PayGuard is organised as a layered prototype system. The frontend provides the user interface, the Flask backend controls application logic, SQLite stores transactions and alerts, and the machine learning model produces fraud risk scores. The chapter also followed the documentation rule by describing figures and screenshots instead of inserting them directly.
+The design shows PayGuard as a layered prototype system. The frontend provides the user interface, Flask controls application logic, SQLite stores records, and the machine learning model produces fraud risk scores. The main report keeps only figure placeholders, with full descriptions stored separately for later diagram creation.
 
 The next chapter will focus on implementation, coding, testing, and the results produced by the completed PayGuard prototype.
 
@@ -1343,17 +1303,15 @@ The next chapter will focus on implementation, coding, testing, and the results 
 
 ## 5.1 Introduction
 
-This chapter explains how the PayGuard Mobile Money Fraud Detection System was implemented and tested. The previous chapter described the system design, while this chapter focuses on the actual development of the prototype, the tools used, the main modules created, the testing performed, and the results obtained.
+This chapter explains how PayGuard was implemented and tested. It focuses on the development tools, main modules, testing performed, and results obtained from the completed prototype.
 
-PayGuard was implemented as a full-stack prototype. The frontend was developed using React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and chart components. The backend was developed using Python and Flask. SQLite was used as the local database, while pandas, NumPy, scikit-learn, and joblib were used for data processing and machine learning.
+PayGuard was implemented as a full-stack prototype. The frontend uses React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and chart components. The backend uses Python and Flask, with SQLite for storage and pandas, NumPy, scikit-learn, and joblib for data processing and machine learning.
 
-The system was implemented in stages. First, the backend foundation and database were created. After that, synthetic data generation was added. The machine learning feature engineering and training pipeline were then implemented. The scoring API was connected to the trained model, and finally the frontend dashboard was integrated with the backend API.
-
-This chapter follows the documentation rule of not inserting actual screenshots or figures yet. Where screenshots are required, the figure is described so that the correct image can be inserted later.
+Implementation was completed in stages: backend and database setup, synthetic data generation, model training, scoring API development, and frontend integration. As required, the main report keeps short figure captions while full screenshot descriptions are stored separately.
 
 ## 5.2 Development Environment
 
-The PayGuard project was developed using open-source tools that are suitable for a final year software project. The development environment was chosen to be simple, affordable, and easy to reproduce.
+PayGuard was developed using open-source tools suitable for a final year software project. The environment was kept simple, affordable, and easy to reproduce.
 
 **Table 5.1: Development environment**
 
@@ -1371,11 +1329,11 @@ The PayGuard project was developed using open-source tools that are suitable for
 | Dataset storage | CSV files in the data folder. |
 | Model storage | joblib model files in the models folder. |
 
-The backend dependencies used in the current prototype include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. The frontend dependencies include React, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
+The backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. The frontend dependencies include React, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
 
 ## 5.3 Implementation Approach
 
-The implementation followed an iterative prototype approach. This means that the system was built in small stages, with each stage tested before continuing to the next. This approach was suitable because PayGuard includes several connected parts: data generation, database storage, machine learning, backend APIs, and frontend dashboard screens.
+The implementation followed an iterative prototype approach. Each stage was built and tested before moving to the next, which suited a system with connected data generation, database, machine learning, API, and dashboard parts.
 
 The main implementation phases were:
 
@@ -1388,44 +1346,42 @@ The main implementation phases were:
 7. Frontend dashboard development.
 8. End-to-end integration and testing.
 
-This approach made it easier to confirm that each part worked before connecting everything together.
+This approach made it easier to confirm each part before full integration.
 
 ## 5.4 Project Structure Implementation
 
-The project was organised into separate folders so that each part of the system could be maintained clearly.
+The project was organised into separate folders so each part could be maintained clearly.
 
 **Table 5.2: Project folder structure**
 
 | Folder or file | Purpose |
 |---|---|
-| frontend | Contains the React dashboard application. |
-| backend | Contains the Flask API, database code, data generator, training script, and machine learning modules. |
-| backend/ml | Contains the feature engineering module used by training and scoring. |
-| data | Stores generated transaction CSV files and the SQLite database. |
-| models | Stores the trained fraud detection model and training report. |
-| docs | Stores the dissertation documentation and project notes. |
-| README.md | Provides setup and run instructions. |
-| plan.md | Tracks implementation phases and progress. |
+| frontend | React dashboard application. |
+| backend | Flask API, database code, generator, training script, and ML modules. |
+| backend/ml | Feature engineering module. |
+| data | Generated CSV files and SQLite database. |
+| models | Trained model and training report. |
+| docs | Dissertation and project notes. |
+| README.md | Setup and run instructions. |
+| plan.md | Implementation progress tracker. |
 
-This structure separates frontend code, backend code, generated data, trained model files, and documentation. This makes the project easier to understand and demonstrate.
+This structure separates frontend code, backend code, generated data, models, and documentation, making the project easier to understand and demonstrate.
 
-**Figure 5.1 description:** The project structure screenshot will show the root PayGuard folder with the main folders: frontend, backend, data, models, and docs. It will also show important files such as README.md, plan.md, project.md, and docs/final.md.
+**Figure 5.1: Project structure screenshot**
 
 ## 5.5 Backend Implementation
 
-The backend was implemented using Flask. The Flask backend acts as the main application server for PayGuard. It receives requests from the frontend, validates transaction data, reads and writes records in SQLite, loads the trained fraud detection model, and returns JSON responses.
+The backend was implemented using Flask as the main application server. It receives frontend requests, validates transaction data, reads and writes SQLite records, loads the trained model, and returns JSON responses.
 
-The main backend file is `backend/app.py`. It defines the Flask application, API routes, request validation functions, error handling, model loading, scoring logic, and alert creation process.
+The main backend file is `backend/app.py`, which defines routes, validation, error handling, model loading, scoring logic, and alert creation.
 
 ### 5.5.1 Backend Startup
 
-When the backend starts, it performs two important actions. First, it initialises the SQLite database by creating the required tables if they do not already exist. Second, it attempts to load the saved fraud detection model from the models folder.
-
-If the model is available, the backend reports that the model is loaded. If the model is missing, the API still starts, but scoring requests return a clear message telling the user to train a model first.
+When the backend starts, it initialises SQLite tables and attempts to load the saved fraud model. If the model is missing, the API still starts, but scoring requests return a clear message telling the user to train a model first.
 
 ### 5.5.2 Request Validation
 
-The backend validates transaction input before saving or scoring it. This helps prevent invalid data from entering the system.
+The backend validates transaction input before saving or scoring it to prevent invalid data from entering the system.
 
 The validation checks include:
 
@@ -1438,32 +1394,32 @@ The validation checks include:
 - timestamp must be valid if it is supplied;
 - fraud label must be true/false or 0/1 when supplied.
 
-Validation is important because machine learning predictions depend on clean and consistent input.
+Validation is important because model predictions depend on clean and consistent input.
 
 ### 5.5.3 API Endpoints Implemented
 
-The backend exposes several API endpoints for the frontend dashboard.
+The backend exposes API endpoints for the frontend dashboard.
 
 **Table 5.3: Implemented backend endpoints**
 
 | Endpoint | Method | Implementation result |
 |---|---|---|
-| `/api/health` | GET | Returns service status, database status, model status, model name, model path, and timestamp. |
+| `/api/health` | GET | Returns service, database, and model status. |
 | `/api/transactions` | POST | Validates and saves a transaction. |
-| `/api/transactions` | GET | Returns recent transactions, with optional account filtering. |
-| `/api/score` | POST | Scores a transaction, saves it, creates an alert, and returns the result. |
-| `/api/alerts` | GET | Returns alerts with optional status and risk filters. |
-| `/api/alerts/<alert_id>` | GET | Returns details for one alert. |
-| `/api/alerts/<alert_id>` | PATCH | Updates alert status to open, closed, or resolved. |
-| `/api/accounts/<account_id>` | GET | Returns account profile metrics. |
-| `/api/accounts/<account_id>/transactions` | GET | Returns transaction history for an account. |
-| `/api/metrics` | GET | Returns dashboard summary metrics. |
+| `/api/transactions` | GET | Returns recent transactions. |
+| `/api/score` | POST | Scores a transaction and creates an alert. |
+| `/api/alerts` | GET | Returns alerts with filters. |
+| `/api/alerts/<alert_id>` | GET | Returns one alert. |
+| `/api/alerts/<alert_id>` | PATCH | Updates alert status. |
+| `/api/accounts/<account_id>` | GET | Returns account metrics. |
+| `/api/accounts/<account_id>/transactions` | GET | Returns account history. |
+| `/api/metrics` | GET | Returns dashboard metrics. |
 
 ### 5.5.4 Fraud Scoring Implementation
 
-The fraud scoring endpoint is the most important backend feature. It allows the frontend to submit a transaction and receive a fraud risk result.
+The fraud scoring endpoint allows the frontend to submit a transaction and receive a fraud risk result.
 
-The scoring process works as follows:
+The scoring process is:
 
 1. The frontend sends transaction details to `/api/score`.
 2. The backend validates the request body.
@@ -1477,59 +1433,47 @@ The scoring process works as follows:
 10. An alert is saved in the alerts table.
 11. The result is returned to the frontend.
 
-The scoring response includes the transaction ID, alert ID, predicted label, risk score, risk level, alert status, alert type, key features, alert reason, and model name.
+The response includes the transaction ID, alert ID, predicted label, risk score, risk level, alert status, key features, reason, and model name.
 
-**Figure 5.2 description:** The backend scoring screenshot will show an example API response from `/api/score`. The response should include fields such as transaction_id, alert_id, predicted_label, risk_score, risk_level, alert_status, key_features, reason, and model_name.
+**Figure 5.2: Backend scoring screenshot**
 
 ## 5.6 Database Implementation
 
-SQLite was used to implement the database. SQLite was selected because it is lightweight, easy to use, and suitable for a local prototype. The database is created in the data folder and stores records needed by the backend and dashboard.
+SQLite was used because it is lightweight and suitable for a local prototype. The database is created in the data folder and stores records needed by the backend and dashboard.
 
-The database schema is defined in `backend/db.py`. The database is initialised automatically when the backend starts or when the seeding script runs.
+The schema is defined in `backend/db.py` and initialised automatically when the backend or seeding script runs.
 
 ### 5.6.1 Database Tables
 
-The implemented database contains three tables:
-
-- transactions;
-- alerts;
-- model_runs.
-
-The `transactions` table stores payment transaction records. The `alerts` table stores fraud alerts linked to transactions. The `model_runs` table is included for storing model training metadata in future versions.
+The implemented database contains three tables: `transactions`, `alerts`, and `model_runs`. Transactions store payment records, alerts store fraud review items, and model runs support future model metadata.
 
 **Table 5.4: Implemented database tables**
 
 | Table | Implementation purpose |
 |---|---|
-| transactions | Stores transaction records from CSV seeding, manual creation, and model scoring. |
-| alerts | Stores alert records created from scoring results. |
-| model_runs | Supports storage of model metadata and future model history. |
+| transactions | Stores seeded, manual, and scored transactions. |
+| alerts | Stores alert records from scoring. |
+| model_runs | Supports future model metadata. |
 
 ### 5.6.2 Database Seeding
 
-A seeding script was implemented in `backend/seed_db_from_csv.py`. This script loads transaction records from a CSV file, validates required columns, cleans data types, and inserts records into SQLite.
+A seeding script was implemented in `backend/seed_db_from_csv.py`. It loads transaction records from CSV, validates required columns, cleans data types, and inserts records into SQLite. It also supports truncation so the prototype can be reset during testing and demonstrations.
 
-The script supports a truncate option. When truncation is used, existing transactions and alerts are cleared before new data is inserted. This is useful for resetting the prototype during testing and demonstrations.
-
-**Figure 5.3 description:** The database seeding screenshot will show terminal output from running the seeding command. The output should show the source CSV file, inserted rows, total rows in the database, fraud rows in the database, fraud rate, and database path.
+**Figure 5.3: Database seeding screenshot**
 
 ## 5.7 Synthetic Data Implementation
 
-The synthetic data generator was implemented in `backend/generate_data.py`. It creates mobile-money-style transactions for a selected number of accounts and days. The generator uses random account profiles to create realistic variation in amount, location, device, transaction type, and transaction frequency.
-
-The generator first creates normal transactions, then injects fraud patterns. The injected fraud patterns are amount spike, device/location change, and rapid burst.
+The synthetic data generator was implemented in `backend/generate_data.py`. It creates mobile-money-style transactions across accounts and days, using account profiles to vary amounts, locations, devices, transaction types, and frequency. It first creates normal transactions, then injects amount spike, device/location change, and rapid burst fraud patterns.
 
 **Table 5.5: Implemented fraud pattern injectors**
 
 | Fraud injector | Implementation description |
 |---|---|
-| Amount spike | Selects normal transactions and increases their amount far above the account baseline. |
-| Device/location change | Changes the device and location of selected transactions to simulate suspicious account access. |
-| Rapid burst | Creates several transactions close together for selected accounts. |
+| Amount spike | Increases selected transaction amounts above account baseline. |
+| Device/location change | Changes device and location to simulate suspicious access. |
+| Rapid burst | Creates several transactions close together. |
 
-The generated dataset is saved as `data/transactions.csv`. A smaller sample dataset is also available as `data/sample_transactions.csv` for quick demonstrations.
-
-The full generated dataset used during development contained 99,468 transactions, including 2,380 fraud transactions. This gave a fraud rate of approximately 2.39 percent, which is suitable for demonstrating class imbalance in fraud detection.
+The generated dataset is saved as `data/transactions.csv`, with a smaller `data/sample_transactions.csv` for demonstrations. The full dataset contained 99,468 transactions, including 2,380 fraud transactions, giving a 2.39 percent fraud rate suitable for demonstrating class imbalance.
 
 **Table 5.6: Generated dataset summary**
 
@@ -1542,43 +1486,39 @@ The full generated dataset used during development contained 99,468 transactions
 | Quick demo dataset | 600 rows |
 | Quick demo fraud rows | 12 rows |
 
-**Figure 5.4 description:** The synthetic data generation screenshot will show terminal output from the generator, including dataset path, number of rows, fraud rows, fraud rate, account count, amount range, and fraud pattern breakdown.
+**Figure 5.4: Synthetic data generation screenshot**
 
 ## 5.8 Machine Learning Implementation
 
-The machine learning implementation is divided into feature engineering and model training.
+The machine learning implementation has two parts: feature engineering and model training.
 
 ### 5.8.1 Feature Engineering Implementation
 
-Feature engineering was implemented in `backend/ml/features.py`. The feature engineering module loads transaction data, validates the required columns, cleans the data, and creates features that can help the model detect suspicious behaviour.
-
-The feature engineering module creates time features, amount features, account history features, velocity features, device change features, and location change features.
+Feature engineering was implemented in `backend/ml/features.py`. It loads transaction data, validates columns, cleans records, and creates time, amount, account history, velocity, device change, and location change features.
 
 **Table 5.7: Implemented feature groups**
 
 | Feature group | Example implementation |
 |---|---|
 | Time features | hour, day_of_week, is_weekend, is_night. |
-| Amount features | amount, amount_log, amount_to_prior_avg_ratio, amount_delta_from_prior_avg. |
-| Account history features | account_prior_tx_count, account_prior_avg_amount, account_age_hours. |
-| Velocity features | seconds_since_prev_tx, tx_count_last_1h, tx_count_last_24h. |
+| Amount features | amount, amount_log, amount ratio and delta. |
+| Account history features | prior count, prior average, account age. |
+| Velocity features | previous interval, last 1h count, last 24h count. |
 | Device and location features | device_change, location_change. |
 | Categorical features | transaction_type, currency, location. |
 
-These features help the model compare a transaction against previous account behaviour.
+These features help the model compare a transaction with previous account behaviour.
 
 ### 5.8.2 Model Training Implementation
 
-Model training was implemented in `backend/train.py`. The training script loads the generated dataset, builds features, splits the data into training and testing sets, trains candidate models, evaluates them, selects the best model, and saves the selected model.
+Model training was implemented in `backend/train.py`. The script loads the dataset, builds features, splits the data, trains candidate models, evaluates them, selects the best model, and saves it.
 
 Two models were trained:
 
 - logistic regression;
 - random forest.
 
-The training pipeline uses preprocessing before model training. Numeric features are scaled, and categorical features are encoded so that they can be used by machine learning algorithms.
-
-The selected model is saved as `models/fraud_model.joblib`. A versioned copy is also saved, and the training report is written to `models/training_report.json`.
+The pipeline scales numeric features and encodes categorical features before training. The selected model is saved as `models/fraud_model.joblib`, with a versioned copy and `models/training_report.json`.
 
 **Table 5.8: Model training results**
 
@@ -1587,23 +1527,21 @@ The selected model is saved as `models/fraud_model.joblib`. A versioned copy is 
 | Random forest | 0.4539 | 0.8697 | 0.5965 | 0.9912 |
 | Logistic regression | 0.3751 | 0.9811 | 0.5427 | 0.9898 |
 
-The random forest model was selected because it achieved the best overall ranking using ROC-AUC, F1-score, and recall. It produced a strong ROC-AUC score on the synthetic dataset, showing that it could separate many suspicious and normal transactions in the prototype environment.
+Random forest was selected because it gave the best overall balance of ROC-AUC, F1-score, and recall on the synthetic dataset.
 
-**Figure 5.5 description:** The model training screenshot will show the training summary printed by the training script. It should include dataset rows, fraud rate, selected model, precision, recall, F1-score, ROC-AUC, best model path, versioned model path, and report path.
+**Figure 5.5: Model training screenshot**
 
 ## 5.9 Frontend Implementation
 
-The frontend was implemented using React and TypeScript. It provides the user interface for monitoring fraud activity, scoring transactions, reviewing alerts, viewing recent transactions, and searching account profiles.
-
-The frontend application is organised into views and reusable components. The main application file controls which view is active. A sidebar allows navigation between the main pages.
+The frontend was implemented using React and TypeScript. It provides views for monitoring fraud activity, scoring transactions, reviewing alerts, viewing transactions, and searching account profiles. The application uses reusable components and sidebar navigation.
 
 ### 5.9.1 Sidebar Navigation
 
-The sidebar provides navigation to the main parts of the dashboard. It includes the PayGuard brand and four navigation items: Dashboard, Alerts, Transactions, and Accounts. It also displays an open alert count so that users can quickly notice active alerts.
+The sidebar provides navigation to Dashboard, Alerts, Transactions, and Accounts, and displays the open alert count.
 
 ### 5.9.2 Dashboard View
 
-The dashboard view shows the main fraud operations summary. It includes:
+The dashboard view shows the main fraud operations summary, including:
 
 - total transactions;
 - fraud rate;
@@ -1614,11 +1552,11 @@ The dashboard view shows the main fraud operations summary. It includes:
 - live transaction scoring form;
 - scoring result panel.
 
-The scoring form allows a user to submit a transaction and immediately view the model result. This is useful for demonstration because it shows the complete flow from frontend input to backend scoring and alert creation.
+The scoring form demonstrates the full flow from frontend input to backend scoring and alert creation.
 
 ### 5.9.3 Alerts View
 
-The alerts view displays alert records in a table. Users can search and filter alerts. Users can also open an alert detail drawer to view more information about a suspicious transaction.
+The alerts view displays searchable and filterable alert records. Users can open a detail drawer for more information about a suspicious transaction.
 
 The alert detail drawer allows users to:
 
@@ -1631,36 +1569,36 @@ The alert detail drawer allows users to:
 
 ### 5.9.4 Transactions View
 
-The transactions view displays recent transaction records. Users can search by account, location, or device, and filter by transaction type or fraud status. This helps users inspect stored transaction data and compare risk scores.
+The transactions view displays recent records and supports search by account, location, or device, plus filters for type and fraud status.
 
 ### 5.9.5 Accounts View
 
-The accounts view allows the user to enter an account ID and retrieve the account profile. The profile includes total transactions, fraud count, fraud rate, average amount, maximum amount, average risk score, total alerts, open alerts, and account transaction history.
+The accounts view retrieves an account profile with transaction totals, fraud count, fraud rate, average and maximum amount, average risk score, alerts, and history.
 
 **Table 5.9: Implemented frontend views**
 
 | View | Main implementation result |
 |---|---|
-| Dashboard | Displays metrics, charts, and live transaction scoring. |
-| Alerts | Displays alert table, filtering, detail drawer, and status actions. |
-| Transactions | Displays recent transactions with filtering and risk labels. |
-| Accounts | Displays account lookup, account risk profile, and transaction history. |
+| Dashboard | Metrics, charts, and live scoring. |
+| Alerts | Alert table, filters, drawer, and actions. |
+| Transactions | Recent transactions, filters, and risk labels. |
+| Accounts | Account lookup, risk profile, and history. |
 
-**Figure 5.6 description:** The dashboard screenshot will show the implemented PayGuard frontend with sidebar navigation, metric cards, charts, and scoring form.
+**Figure 5.6: Dashboard screenshot**
 
-**Figure 5.7 description:** The alerts screenshot will show the implemented alert table, filters, action menu, and alert detail drawer.
+**Figure 5.7: Alerts screenshot**
 
-**Figure 5.8 description:** The transactions screenshot will show transaction records with account IDs, transaction types, amounts, locations, risk scores, fraud labels, and dates.
+**Figure 5.8: Transactions screenshot**
 
-**Figure 5.9 description:** The accounts screenshot will show the account search field, account profile cards, risk badges, and transaction history table.
+**Figure 5.9: Accounts screenshot**
 
 ## 5.10 Frontend and Backend Integration
 
-The frontend communicates with the backend through API helper functions in the frontend API client. These helper functions call endpoints such as `/api/metrics`, `/api/alerts`, `/api/transactions`, `/api/score`, and account profile endpoints.
+The frontend communicates with the backend through API helper functions that call `/api/metrics`, `/api/alerts`, `/api/transactions`, `/api/score`, and account profile endpoints.
 
-During local development, the frontend uses the Vite development server and sends relative `/api` requests. Vite then proxies those requests to the Flask backend running on `http://127.0.0.1:5000`. This allows the frontend and backend to work together during development without changing API URLs.
+During local development, Vite sends relative `/api` requests to the Flask backend at `http://127.0.0.1:5000` through a proxy. This lets both parts work together without changing API URLs.
 
-The integration flow is shown below:
+The integration flow is:
 
 1. User opens the React dashboard.
 2. Dashboard requests metrics from `/api/metrics`.
@@ -1671,11 +1609,11 @@ The integration flow is shown below:
 7. Backend scores the transaction and creates an alert.
 8. Frontend refreshes metrics and alerts.
 
-**Figure 5.10 description:** The frontend-backend integration screenshot will show the dashboard running in the browser and API requests being handled through the Flask backend. The screenshot may include the dashboard and a terminal showing backend activity.
+**Figure 5.10: Frontend-backend integration screenshot**
 
 ## 5.11 Testing Strategy
 
-Testing was performed to check that the main parts of PayGuard worked correctly. Since PayGuard is a prototype, testing focused on functional correctness, API behaviour, model evaluation, frontend build verification, and end-to-end integration.
+Testing checked that the main parts of PayGuard worked correctly. Because this is a prototype, testing focused on functional correctness, API behaviour, model evaluation, frontend build verification, and end-to-end integration.
 
 The following testing categories were used:
 
@@ -1691,42 +1629,42 @@ The following testing categories were used:
 
 | Test area | Purpose |
 |---|---|
-| Dataset validation | Confirm that generated data contains required columns, fraud labels, and class balance. |
-| Database seeding | Confirm that CSV transactions can be loaded into SQLite. |
-| Model training | Confirm that candidate models can train and produce evaluation metrics. |
-| API testing | Confirm that backend endpoints return expected responses. |
-| Frontend testing | Confirm that the dashboard builds and displays expected screens. |
-| Integration testing | Confirm that frontend, backend, database, and model work together. |
+| Dataset validation | Confirm required columns, labels, and class balance. |
+| Database seeding | Confirm CSV records load into SQLite. |
+| Model training | Confirm models train and produce metrics. |
+| API testing | Confirm endpoints return expected responses. |
+| Frontend testing | Confirm dashboard builds and displays screens. |
+| Integration testing | Confirm frontend, backend, database, and model work together. |
 
 ## 5.12 Test Cases
 
-The main test cases used to verify the system are shown in Table 5.11.
+The main system test cases are shown in Table 5.11.
 
 **Table 5.11: PayGuard test cases**
 
 | Test ID | Test description | Expected result | Actual result | Status |
 |---|---|---|---|---|
-| TC01 | Generate synthetic transaction dataset. | CSV file is created with valid transaction records. | Dataset was generated successfully. | Passed |
-| TC02 | Validate fraud class balance. | Dataset contains both normal and fraud records. | Full dataset contained 99,468 rows and 2,380 fraud rows. | Passed |
-| TC03 | Seed SQLite database from CSV. | Transactions are inserted into SQLite. | Database was seeded successfully from generated CSV. | Passed |
-| TC04 | Train fraud detection models. | Logistic regression and random forest models train successfully. | Both models trained and were evaluated. | Passed |
-| TC05 | Save best model artifact. | Best model is saved in the models folder. | `fraud_model.joblib` was created. | Passed |
-| TC06 | Check API health endpoint. | API returns status ok, database connection, and model status. | `/api/health` returned successful health information. | Passed |
-| TC07 | Create transaction endpoint. | Valid transaction is stored in database. | `POST /api/transactions` inserted a record. | Passed |
-| TC08 | Reject invalid payload. | API returns validation error. | Invalid requests returned error responses. | Passed |
-| TC09 | Score transaction endpoint. | API returns risk score, prediction, features, and alert. | `/api/score` returned risk result and created alert. | Passed |
-| TC10 | Fetch alerts endpoint. | API returns latest alerts. | `/api/alerts` returned alert records. | Passed |
-| TC11 | Fetch metrics endpoint. | API returns dashboard metrics. | `/api/metrics` returned transaction and alert summaries. | Passed |
-| TC12 | Update alert status. | Alert can be marked open, closed, or resolved. | Alert status update endpoint worked. | Passed |
-| TC13 | Account profile lookup. | API returns account summary and history. | Account lookup returned profile data for stored accounts. | Passed |
-| TC14 | Frontend production build. | React dashboard builds successfully. | Frontend build completed successfully. | Passed |
-| TC15 | End-to-end scoring from dashboard. | User submits transaction and sees result on dashboard. | Dashboard connected to backend and returned live score. | Passed |
+| TC01 | Generate synthetic dataset. | Valid CSV is created. | Dataset generated. | Passed |
+| TC02 | Validate fraud balance. | Normal and fraud records exist. | 99,468 rows and 2,380 fraud rows. | Passed |
+| TC03 | Seed SQLite from CSV. | Transactions are inserted. | Database seeded. | Passed |
+| TC04 | Train models. | Models train successfully. | Both models evaluated. | Passed |
+| TC05 | Save best model. | Model artifact is saved. | `fraud_model.joblib` created. | Passed |
+| TC06 | Check health endpoint. | API returns service status. | `/api/health` passed. | Passed |
+| TC07 | Create transaction. | Valid transaction is stored. | Record inserted. | Passed |
+| TC08 | Reject invalid payload. | API returns validation error. | Error returned. | Passed |
+| TC09 | Score transaction. | API returns risk result and alert. | Score and alert returned. | Passed |
+| TC10 | Fetch alerts. | API returns latest alerts. | Alerts returned. | Passed |
+| TC11 | Fetch metrics. | API returns dashboard metrics. | Summaries returned. | Passed |
+| TC12 | Update alert status. | Status can be changed. | Endpoint worked. | Passed |
+| TC13 | Account profile lookup. | API returns profile and history. | Profile returned. | Passed |
+| TC14 | Frontend build. | React dashboard builds. | Build completed. | Passed |
+| TC15 | Dashboard scoring. | User submits and sees result. | Live score returned. | Passed |
 
-The test results show that the implemented prototype satisfies the main functional requirements.
+The test results show that the prototype satisfies the main functional requirements.
 
 ## 5.13 API Testing Results
 
-API testing confirmed that the backend routes work correctly and return JSON responses. The most important API tests were health check, transaction creation, transaction listing, scoring, alert listing, metrics, and alert status update.
+API testing confirmed that backend routes return JSON responses for health checks, transactions, scoring, alerts, metrics, and account profiles.
 
 **Table 5.12: API testing summary**
 
@@ -1741,13 +1679,13 @@ API testing confirmed that the backend routes work correctly and return JSON res
 | `PATCH /api/alerts/<alert_id>` | Update alert status. | Passed. |
 | `GET /api/accounts/<account_id>` | Retrieve account profile. | Passed. |
 
-The API responses support the frontend dashboard and confirm that the backend can control the main fraud monitoring workflow.
+The API responses support the dashboard and confirm that the backend controls the main fraud monitoring workflow.
 
 ## 5.14 Model Testing Results
 
-The model was tested using a train-test split. The dataset was divided into training and testing parts so that the model could be evaluated on data it had not directly trained on.
+The model was tested using a train-test split so it could be evaluated on data it had not directly trained on.
 
-The random forest model was selected as the final model. It achieved the following performance on the synthetic test dataset:
+Random forest was selected as the final model and achieved the following synthetic test results:
 
 **Table 5.13: Selected model evaluation**
 
@@ -1758,31 +1696,27 @@ The random forest model was selected as the final model. It achieved the followi
 | F1-score | 0.5965 |
 | ROC-AUC | 0.9912 |
 
-The recall value shows that the model detected many of the fraud cases in the synthetic test data. The precision value shows that some alerts may still be false positives. This is acceptable for a prototype because PayGuard is designed to support human review. A real deployment would require more tuning using real anonymised data and feedback from fraud analysts.
-
-The ROC-AUC value shows that the model can rank risky and non-risky transactions strongly in the synthetic dataset. However, these results should not be treated as proof of production performance because the dataset is simulated.
+The recall value shows that the model detected many synthetic fraud cases, while the precision value shows that some alerts may be false positives. This is acceptable for a decision-support prototype. The ROC-AUC value shows strong ranking ability on synthetic data, but not proof of production performance.
 
 ## 5.15 Frontend Testing Results
 
-Frontend testing focused on checking whether the dashboard views could build successfully and whether the interface connected correctly to the backend endpoints.
-
-The frontend build was verified using the production build command. The dashboard views were also checked through the local development server during integration testing.
+Frontend testing checked whether the dashboard built successfully and connected correctly to backend endpoints. The production build command and local development server were both used.
 
 **Table 5.14: Frontend testing summary**
 
 | Test area | Expected result | Actual result | Status |
 |---|---|---|---|
-| Dashboard view | Metrics, charts, and scoring form display correctly. | Dashboard displayed the expected monitoring interface. | Passed |
-| Alerts view | Alerts table, filters, drawer, and status actions work. | Alerts were displayed and could be reviewed. | Passed |
-| Transactions view | Recent transactions and filters are shown. | Transaction table displayed stored records. | Passed |
-| Accounts view | Account lookup returns profile and transaction history. | Account search returned account metrics and records. | Passed |
-| Frontend build | Application builds successfully. | Build completed successfully. | Passed |
+| Dashboard view | Metrics, charts, and scoring form display. | Dashboard displayed correctly. | Passed |
+| Alerts view | Table, filters, drawer, and actions work. | Alerts could be reviewed. | Passed |
+| Transactions view | Records and filters are shown. | Table displayed records. | Passed |
+| Accounts view | Lookup returns profile and history. | Metrics and records returned. | Passed |
+| Frontend build | Application builds. | Build completed. | Passed |
 
-The frontend interface was designed to be simple and operational. It avoids requiring users to understand the internal machine learning model before using the system.
+The frontend was designed to be simple and operational, without requiring users to understand the internal model.
 
 ## 5.16 End-to-End Integration Results
 
-End-to-end testing was performed to confirm that all major components worked together. The full flow included generating data, training the model, seeding the database, starting the backend, starting the frontend, loading the dashboard, and scoring a transaction.
+End-to-end testing confirmed that all major components worked together, from data generation and model training to database seeding, backend startup, frontend loading, and transaction scoring.
 
 The end-to-end flow followed these steps:
 
@@ -1801,20 +1735,20 @@ The end-to-end flow followed these steps:
 
 | Integration point | Expected result | Result |
 |---|---|---|
-| Frontend to backend health check | Frontend proxy can reach Flask API. | Passed. |
-| Metrics loading | Dashboard receives metrics from `/api/metrics`. | Passed. |
-| Alert loading | Dashboard receives alerts from `/api/alerts`. | Passed. |
-| Live scoring | Scoring form sends transaction to `/api/score`. | Passed. |
-| Database persistence | Scored transaction and alert are stored. | Passed. |
-| Dashboard refresh | Metrics and alerts update after scoring. | Passed. |
+| Frontend to backend health check | Proxy reaches Flask API. | Passed. |
+| Metrics loading | Dashboard receives `/api/metrics`. | Passed. |
+| Alert loading | Dashboard receives `/api/alerts`. | Passed. |
+| Live scoring | Form sends to `/api/score`. | Passed. |
+| Database persistence | Transaction and alert are stored. | Passed. |
+| Dashboard refresh | Metrics and alerts update. | Passed. |
 
-The integration test confirmed that PayGuard works as a complete prototype rather than separate disconnected modules.
+The integration test confirmed that PayGuard works as a complete prototype rather than disconnected modules.
 
-**Figure 5.11 description:** The end-to-end demonstration screenshot will show the dashboard after a transaction has been scored. It should show the scoring result, updated alert count, and alert entry created from the submitted transaction.
+**Figure 5.11: End-to-end demonstration screenshot**
 
 ## 5.17 Validation Against Objectives
 
-The project objectives from Chapter 1 were compared against the implemented system to confirm whether the project achieved its purpose.
+The Chapter 1 objectives were compared with the implemented system to confirm whether the project achieved its purpose.
 
 **Table 5.16: Validation against project objectives**
 
@@ -1828,11 +1762,11 @@ The project objectives from Chapter 1 were compared against the implemented syst
 | Design a dashboard for transactions, alerts, and risk levels. | React dashboard implemented Dashboard, Alerts, Transactions, and Accounts views. | Achieved |
 | Reduce manual work needed to identify suspicious transactions. | Dashboard highlights risk scores and alerts for review. | Achieved at prototype level |
 
-The validation shows that the main project objectives were achieved within the scope of a prototype system.
+The validation shows that the main objectives were achieved within prototype scope.
 
 ## 5.18 Challenges Encountered
 
-Several challenges were encountered during implementation.
+Several implementation challenges were encountered.
 
 **Table 5.17: Implementation challenges and solutions**
 
@@ -1845,13 +1779,13 @@ Several challenges were encountered during implementation.
 | Frontend and backend integration | The dashboard needed to call the Flask API smoothly. | Vite proxy and API helper functions were implemented. |
 | Prototype security limits | Full authentication and role controls were outside current scope. | Security limitations were documented for future improvement. |
 
-These challenges helped improve the final system design and made the project more realistic.
+These challenges helped improve the final system design.
 
 ## 5.19 Chapter Summary
 
-This chapter described the implementation, testing, and results of the PayGuard Mobile Money Fraud Detection System. It explained the development environment, project structure, backend implementation, database implementation, synthetic data generation, machine learning implementation, frontend implementation, frontend-backend integration, testing strategy, test cases, API results, model results, frontend results, and end-to-end integration results.
+This chapter described PayGuard's implementation, testing, and results. It covered the development environment, project structure, backend, database, data generation, machine learning, frontend, integration, test cases, API results, model results, and end-to-end verification.
 
-The completed prototype successfully generated synthetic transaction data, trained fraud detection models, selected a random forest model, stored transactions in SQLite, exposed Flask API endpoints, created fraud alerts, and displayed monitoring information through a React dashboard. The system achieved the main objectives of the project at prototype level.
+The completed prototype generated synthetic data, trained fraud detection models, selected random forest, stored transactions in SQLite, exposed Flask API endpoints, created alerts, and displayed monitoring information through a React dashboard. The system achieved the main objectives at prototype level.
 
 The next chapter will discuss system deployment, implementation planning, maintenance, user training, and post-implementation considerations.
 
