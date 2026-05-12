@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.2: Proposed PayGuard context diagram</title>
+  <desc id="desc">Context diagram showing PayGuard receiving transaction data, scoring risk, storing records, creating alerts, and returning dashboard information.</desc>
+  <defs>
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
+    </pattern>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f2f3f1" />
+  <rect width="1600" height="900" fill="url(#dot-grid)" opacity="0.95" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="92" font-size="34" font-weight="800" fill="#101010">Proposed PayGuard Context Diagram</text>
+    <text x="96" y="126" font-size="18" font-weight="500" fill="#666666">Automated fraud scoring, alert creation, and dashboard reporting</text>
+
+    <g filter="url(#card-shadow)">
+      <rect x="540" y="250" width="520" height="300" rx="34" fill="#ffffff" stroke="#dedede" />
+      <rect x="568" y="278" width="464" height="244" rx="26" fill="#f8f8f7" stroke="#e7e7e7" />
+      <circle cx="604" cy="314" r="7" fill="#16a34a" />
+      <text x="800" y="334" text-anchor="middle" font-size="27" font-weight="850" fill="#111111">0 PayGuard Fraud</text>
+      <text x="800" y="369" text-anchor="middle" font-size="27" font-weight="850" fill="#111111">Detection System</text>
+      <text x="800" y="410" text-anchor="middle" font-size="15" font-weight="700" fill="#626262">Validate transaction</text>
+      <text x="800" y="438" text-anchor="middle" font-size="15" font-weight="700" fill="#626262">Score fraud risk</text>
+      <text x="800" y="466" text-anchor="middle" font-size="15" font-weight="700" fill="#626262">Create alerts and dashboard summaries</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="96" y="238" width="328" height="132" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="126" y="287" font-size="22" font-weight="800" fill="#111111">Transaction Source</text>
+      <text x="126" y="320" font-size="15" font-weight="600" fill="#666666">Mobile money style records</text>
+      <circle cx="402" cy="304" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="96" y="540" width="328" height="132" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="126" y="589" font-size="22" font-weight="800" fill="#111111">Finance Officer / Analyst</text>
+      <text x="126" y="622" font-size="15" font-weight="600" fill="#666666">Reviews alerts and scoring results</text>
+      <circle cx="402" cy="606" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1176" y="238" width="328" height="132" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="1206" y="287" font-size="22" font-weight="800" fill="#111111">React Dashboard</text>
+      <text x="1206" y="320" font-size="15" font-weight="600" fill="#666666">Requests metrics, alerts, accounts</text>
+      <circle cx="1198" cy="304" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1176" y="540" width="328" height="132" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="1206" y="589" font-size="22" font-weight="800" fill="#111111">SQLite Database</text>
+      <text x="1206" y="622" font-size="15" font-weight="600" fill="#666666">Transactions, alerts, model runs</text>
+      <circle cx="1198" cy="606" r="7" fill="#111111" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="641" y="646" width="318" height="116" rx="24" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="800" y="692" text-anchor="middle" font-size="22" font-weight="800" fill="#111111">Saved ML Model</text>
+      <text x="800" y="724" text-anchor="middle" font-size="15" font-weight="600" fill="#666666">fraud_model.joblib</text>
+      <circle cx="800" cy="646" r="7" fill="#111111" />
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M424 304 C470 304, 488 330, 540 356" />
+      <path d="M424 606 C486 606, 500 508, 540 480" />
+      <path d="M1060 356 C1114 330, 1132 304, 1176 304" />
+      <path d="M1060 480 C1112 510, 1130 606, 1176 606" />
+      <path d="M800 550 C800 592, 800 614, 800 646" />
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)" opacity="0.92">
+      <path d="M1176 334 C1120 374, 1096 392, 1060 400" />
+      <path d="M1176 636 C1110 594, 1090 560, 1060 522" />
+      <path d="M800 646 C800 612, 800 588, 800 550" />
+    </g>
+
+    <g font-size="14" font-weight="800" fill="#111111">
+      <rect x="438" y="286" width="150" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="513" y="308" text-anchor="middle">Transaction data</text>
+
+      <rect x="420" y="558" width="184" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="512" y="580" text-anchor="middle">Review action</text>
+
+      <rect x="1012" y="286" width="150" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1087" y="308" text-anchor="middle">Dashboard data</text>
+
+      <rect x="1006" y="558" width="166" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1089" y="580" text-anchor="middle">Store records</text>
+
+      <rect x="704" y="588" width="192" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="800" y="610" text-anchor="middle">Prediction request</text>
+    </g>
+  </g>
+</svg>

@@ -528,7 +528,7 @@ These weaknesses show that a more automated and intelligent monitoring system is
 
 **Figure 3.1: Existing system context diagram**
 
-The figure will show how transaction information currently moves between users and the institution before PayGuard is introduced.
+![Figure 3.1: Existing system context diagram](assets/figures/figure-3-1-existing-context.svg)
 
 ## 3.5 Functions of Current System Actors
 
@@ -567,6 +567,8 @@ The proposed workflow is as follows:
 8. The alert status is updated after investigation.
 
 **Figure 3.2: Proposed PayGuard context diagram**
+
+![Figure 3.2: Proposed PayGuard context diagram](assets/figures/figure-3-2-proposed-context.svg)
 
 ### 3.6.2 Advantages of the Proposed System
 
