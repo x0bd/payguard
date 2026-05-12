@@ -1840,7 +1840,7 @@ Backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and pyt
 
 The backend setup prepares the Python environment and installs required packages. The backend folder contains the Flask application, machine learning scripts, database layer, data generator, and training script.
 
-The backend setup process is:
+Backend setup:
 
 1. Open the project folder.
 2. Move into the backend folder.
@@ -1852,10 +1852,10 @@ The backend setup process is:
 
 | Step | Command |
 |---|---|
-| Open backend folder | `cd backend` |
-| Create virtual environment | `python -m venv .venv` |
-| Activate virtual environment | `.venv\Scripts\Activate.ps1` |
-| Install dependencies | `pip install -r requirements.txt` |
+| Open folder | `cd backend` |
+| Create venv | `python -m venv .venv` |
+| Activate venv | `.venv\Scripts\Activate.ps1` |
+| Install packages | `pip install -r requirements.txt` |
 
 After installation, the system can generate data, train models, seed the database, and run the API.
 
@@ -1865,7 +1865,7 @@ After installation, the system can generate data, train models, seed the databas
 
 The frontend setup prepares the React dashboard, including views, UI components, API client, and styling files.
 
-The frontend setup process is:
+Frontend setup:
 
 1. Move into the frontend folder.
 2. Install frontend dependencies.
@@ -1875,10 +1875,10 @@ The frontend setup process is:
 
 | Step | Command |
 |---|---|
-| Open frontend folder | `cd frontend` |
-| Install dependencies | `npm install` |
-| Start development server | `npm run dev` |
-| Build production version | `npm run build` |
+| Open folder | `cd frontend` |
+| Install packages | `npm install` |
+| Start dev server | `npm run dev` |
+| Build app | `npm run build` |
 
 During development, Vite proxies relative `/api` requests to Flask at `http://127.0.0.1:5000`.
 
@@ -1888,7 +1888,7 @@ During development, Vite proxies relative `/api` requests to Flask at `http://12
 
 PayGuard uses synthetic transaction data for training and testing, protecting privacy because no real student, customer, or mobile money account records are used.
 
-The data preparation process is:
+Data preparation:
 
 1. Generate synthetic mobile money transactions.
 2. Save the generated data to the `data` folder.
@@ -1911,7 +1911,7 @@ The full dataset is used for training and full demonstration, while the sample d
 
 The fraud detection model must be trained before the scoring API can produce model-based risk scores. The training script loads the dataset, builds features, trains candidate models, evaluates them, selects the best model, and saves it.
 
-The model training command is:
+Model training command:
 
 `python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42`
 
@@ -1947,11 +1947,11 @@ The database should be seeded before using the dashboard for transaction browsin
 
 After the database and trained model are ready, the Flask backend can be started.
 
-The backend run command is:
+Backend run command:
 
 `python app.py`
 
-By default, the backend runs at:
+Default backend URL:
 
 `http://127.0.0.1:5000`
 
@@ -1970,7 +1970,7 @@ Once running, the health endpoint confirms that the service, database, and model
 
 ## 6.10 Running the Frontend Dashboard
 
-The frontend dashboard is started from the frontend folder using:
+The frontend dashboard is started from `frontend` using:
 
 `npm run dev`
 
@@ -2004,14 +2004,14 @@ The full PayGuard prototype should be run in the correct order so all components
 | 7 | Start React frontend. | Opens dashboard interface. |
 | 8 | Score a transaction. | Confirms end-to-end workflow. |
 
-The recommended backend run sequence is:
+Recommended backend sequence:
 
 1. `python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv`
 2. `python train.py --dataset ..\data\transactions.csv --models-dir ..\models --test-size 0.2 --random-seed 42`
 3. `python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate`
 4. `python app.py`
 
-In another terminal, the frontend run sequence is:
+Frontend sequence:
 
 1. `cd frontend`
 2. `npm run dev`
@@ -2022,7 +2022,7 @@ In another terminal, the frontend run sequence is:
 
 User training is important because finance staff and administrators may not be technical users. Training should focus on dashboard use and alert interpretation, not internal machine learning code.
 
-The training should cover:
+Training should cover:
 
 - how to open the dashboard;
 - how to read the summary metrics;
@@ -2086,7 +2086,7 @@ Maintenance is required to keep PayGuard useful and reliable. Since it includes 
 
 The fraud detection model should not be treated as permanently complete. Fraud behaviour changes over time, and older models may become less useful because of concept drift.
 
-For PayGuard, model maintenance should include:
+Model maintenance should include:
 
 - collecting new approved data or improving synthetic data patterns;
 - retraining the candidate models;
@@ -2118,15 +2118,14 @@ If the database is lost, it can be recreated by rerunning the seeding script wit
 
 After implementation, the system was reviewed against the project goals. The prototype generated transaction data, trained a model, started the backend API, stored transactions and alerts, and displayed monitoring information in the dashboard.
 
-The post-implementation review showed the following:
+The review showed:
 
-- The system can run locally as a complete prototype.
-- The backend API can connect to SQLite.
-- The fraud model can be loaded by the backend.
-- The scoring endpoint can return risk scores and alert reasons.
-- The dashboard can display metrics, alerts, transactions, and account profiles.
-- The frontend and backend can communicate through API requests.
-- The system supports a clear demonstration of fraud detection workflow.
+- The system runs locally as a complete prototype.
+- The backend connects to SQLite and loads the model.
+- The scoring endpoint returns risk scores and alert reasons.
+- The dashboard displays metrics, alerts, transactions, and accounts.
+- The frontend and backend communicate through API requests.
+- The system demonstrates the fraud detection workflow clearly.
 
 The review also showed areas for production improvement, including authentication, role-based access, real data integration, stronger deployment, cloud database support, and continuous model monitoring.
 
