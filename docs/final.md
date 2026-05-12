@@ -2172,19 +2172,15 @@ The next chapter will present the project summary, conclusion, recommendations, 
 
 ## 7.1 Introduction
 
-This chapter presents the final summary, conclusion, recommendations, and future enhancements for the PayGuard Mobile Money Fraud Detection System. The chapter reflects on the work completed in the project and explains how the system addressed the problem identified in Chapter 1.
+This chapter presents the final summary, conclusion, recommendations, and future enhancements for PayGuard. It reflects on the work completed and explains how the system addressed the problem identified in Chapter 1.
 
-The main purpose of PayGuard was to design and develop a prototype system that can assist institutions in detecting suspicious mobile money transactions. The system was created to support finance officers and fraud analysts by providing transaction monitoring, fraud risk scoring, alert generation, dashboard metrics, and account-level review.
-
-This final chapter also discusses the extent to which the project objectives were achieved, the main challenges faced, recommendations for use, and possible improvements for future work.
+The purpose of PayGuard was to develop a prototype that assists institutions in detecting suspicious mobile money transactions. It supports finance officers and fraud analysts through transaction monitoring, risk scoring, alert generation, dashboard metrics, and account-level review.
 
 ## 7.2 Project Summary
 
-PayGuard was developed as a mobile money fraud detection and monitoring prototype. The system uses synthetic mobile-money-style transaction data because real financial data is sensitive and difficult to access for academic research. The synthetic dataset contains normal transactions as well as fraud patterns such as amount spikes, device and location changes, and rapid transaction bursts.
+PayGuard was developed as a mobile money fraud detection and monitoring prototype using synthetic mobile-money-style data. Synthetic data was used because real financial data is sensitive and difficult to access for academic research. The dataset includes normal transactions and fraud patterns such as amount spikes, device/location changes, and rapid transaction bursts.
 
-The project includes a complete software workflow. A Python data generator creates transaction data. A feature engineering module prepares the data for machine learning. A training script trains and evaluates candidate fraud detection models. The best model is saved and loaded by the Flask backend. The backend provides API endpoints for health checks, transactions, scoring, alerts, metrics, and account profiles. The React dashboard allows users to view fraud monitoring information and score transactions through a user-friendly interface.
-
-The system was tested end-to-end. The testing confirmed that the prototype can generate data, train a model, seed the SQLite database, run the backend API, load the frontend dashboard, score a transaction, create an alert, and display updated metrics.
+The project provides a complete workflow: a Python generator creates data, feature engineering prepares model inputs, a training script evaluates candidate models, Flask loads the selected model, SQLite stores records, and the React dashboard presents monitoring information. End-to-end testing confirmed that the prototype can generate data, train a model, seed the database, run the API, score transactions, create alerts, and update dashboard metrics.
 
 ## 7.3 Objectives Achieved
 
@@ -2202,33 +2198,23 @@ The objectives stated in Chapter 1 were reviewed to determine whether the projec
 | To design a dashboard that allows users to view transactions, alerts, and fraud risk levels. | Achieved. The React dashboard includes Dashboard, Alerts, Transactions, and Accounts views. |
 | To support finance staff by reducing the amount of manual work needed when identifying suspicious transactions. | Achieved at prototype level. The system highlights risky transactions and provides alerts for review. |
 
-The project therefore achieved its main objectives within the limits of a prototype system.
+The project achieved its main objectives within prototype scope.
 
 ## 7.4 Main Findings
 
-The project produced several findings during development and testing.
+The project produced several findings. Synthetic data can support safe fraud detection research when real financial data is unavailable, although it cannot fully replace real transaction behaviour. Feature engineering is also important because fraud detection needs more than the raw transaction amount; velocity, account history, device change, and location change provide stronger context.
 
-First, synthetic data can support the development of a fraud detection prototype when real financial data is unavailable. Although synthetic data cannot fully replace real transaction data, it allows safe experimentation without exposing personal or financial records.
-
-Second, feature engineering is important in fraud detection. The model needs more than the raw transaction amount. Features such as transaction velocity, account prior average amount, time since previous transaction, device change, and location change help the system understand whether a transaction is unusual.
-
-Third, machine learning can support fraud monitoring by producing risk scores. In the PayGuard prototype, the random forest model performed strongly on the synthetic dataset and was selected as the final model. However, the model should still be reviewed by humans because a suspicious transaction is not always fraudulent.
-
-Fourth, a dashboard improves the usefulness of the fraud detection model. Instead of only producing technical model results, PayGuard displays risk scores, alerts, trends, account profiles, and transaction records in a way that users can inspect.
+The results also showed that machine learning can support fraud monitoring by producing risk scores. In PayGuard, random forest performed strongly on the synthetic dataset and was selected as the final model. However, human review remains necessary because suspicious transactions are not always fraudulent. The dashboard also improved usefulness by presenting risk scores, alerts, trends, account profiles, and transactions in an inspectable format.
 
 ## 7.5 Conclusion
 
-The PayGuard Mobile Money Fraud Detection System successfully demonstrates how a software prototype can be used to support fraud monitoring in mobile-money-style institutional payments. The system was able to generate synthetic transaction data, train a fraud detection model, score transactions, create alerts, store records in SQLite, and display useful monitoring information through a React dashboard.
+PayGuard successfully demonstrates how a software prototype can support fraud monitoring in mobile-money-style institutional payments. It generates synthetic data, trains a fraud detection model, scores transactions, creates alerts, stores records in SQLite, and displays monitoring information through a React dashboard.
 
-The project addressed the problem of manual and slow fraud checking by introducing automated transaction scoring and alert creation. Instead of requiring finance staff to inspect every transaction equally, PayGuard helps prioritise suspicious transactions based on risk level and key fraud signals.
-
-The system also supports ethical and privacy-aware development by using synthetic data instead of real customer or student payment data. This makes the project suitable for academic demonstration while reducing privacy risk.
-
-Although PayGuard is not a production banking system, it successfully proves the concept of using machine learning and dashboard monitoring to support mobile money fraud detection. The project can therefore be considered successful within its academic scope.
+The project addressed manual and slow fraud checking by introducing automated risk scoring and alert creation. Instead of requiring finance staff to inspect every transaction equally, PayGuard helps prioritise suspicious cases based on risk level and key fraud signals. Although it is not a production banking system, it successfully proves the concept within academic scope.
 
 ## 7.6 Recommendations
 
-The following recommendations are made based on the completed project:
+The following recommendations are made:
 
 - Institutions that process many digital payments should consider automated fraud monitoring tools to support manual checking.
 - Fraud alerts should be used as decision-support information, not as automatic proof that a user committed fraud.
@@ -2240,48 +2226,42 @@ The following recommendations are made based on the completed project:
 
 ## 7.7 Future Enhancements
 
-PayGuard can be improved in several ways in future versions.
+PayGuard can be improved in future versions.
 
 **Table 7.2: Future enhancements**
 
 | Enhancement | Description |
 |---|---|
-| Real anonymised data | Use approved real transaction data after removing personal information. |
-| User authentication | Add login functionality for finance officers, fraud analysts, and administrators. |
-| Role-based access control | Give different users different permissions based on their responsibilities. |
-| Cloud database | Replace SQLite with PostgreSQL or another managed database for larger deployment. |
-| Real-time notifications | Add email, SMS, or dashboard notifications for high-risk alerts. |
-| Advanced machine learning models | Test models such as XGBoost, anomaly detection, or neural networks. |
-| Explainability tools | Add clearer explanations showing why a model marked a transaction as risky. |
-| Audit trail | Record user actions such as alert review, resolution, and dismissal. |
-| Live payment integration | Connect to real payment systems only after security and legal requirements are met. |
-| Model monitoring | Track model performance over time and detect concept drift. |
+| Real anonymised data | Use approved real data after removing personal information. |
+| User authentication | Add login for finance officers, analysts, and administrators. |
+| Role-based access control | Give users permissions based on responsibility. |
+| Cloud database | Replace SQLite with PostgreSQL or another managed database. |
+| Real-time notifications | Add email, SMS, or dashboard alerts for high-risk cases. |
+| Advanced models | Test XGBoost, anomaly detection, or neural networks. |
+| Explainability tools | Show clearer reasons for risk predictions. |
+| Audit trail | Record alert review, resolution, and dismissal actions. |
+| Live payment integration | Connect to real systems only after legal and security approval. |
+| Model monitoring | Track performance and concept drift. |
 
-These enhancements would make the system stronger, safer, and closer to a real-world fraud monitoring platform.
+These enhancements would make PayGuard stronger, safer, and closer to real-world use.
 
 ## 7.8 Contribution of the Project
 
-The project contributes a practical demonstration of how fraud detection can be applied to mobile-money-style transactions. It combines software engineering, data generation, database design, machine learning, API development, and dashboard design into one working prototype.
+The project contributes a practical demonstration of fraud detection for mobile-money-style transactions. It combines software engineering, data generation, database design, machine learning, API development, and dashboard design into one working prototype.
 
-The project also contributes academically by showing how a student can use synthetic data to study a sensitive problem without exposing real personal records. This is important because financial fraud research often faces data access and privacy challenges.
-
-For non-technical users, the project shows that machine learning can be presented through simple dashboard tools instead of only technical reports. This makes the system easier to explain and defend during presentation.
+Academically, it shows how synthetic data can be used to study a sensitive problem without exposing real personal records. For non-technical users, it shows that machine learning can be presented through simple dashboard tools instead of only technical reports.
 
 ## 7.9 Limitations Revisited
 
-The project had several limitations. The most important limitation is that the system used synthetic data rather than real mobile money records. This means that the model results may not fully represent real-world fraud behaviour. Real fraud patterns may be more complex and may change faster than the patterns simulated in the dataset.
+The main limitation is that PayGuard uses synthetic data rather than real mobile money records, so model results may not fully represent real-world fraud behaviour. Real fraud patterns may be more complex and may change faster than the simulated patterns.
 
-Another limitation is that the system is currently a local prototype. It does not include full production security, live integration with mobile money providers, or enterprise-level deployment. SQLite was suitable for the project, but a production version would require a stronger database and secure hosting environment.
-
-The system also does not make final fraud decisions. It only highlights suspicious transactions for review. This limitation is important because legitimate transactions can sometimes appear unusual.
+The system is also a local prototype. It does not include full production security, live mobile money integration, or enterprise deployment. SQLite was suitable for the project, but production use would require a stronger database and secure hosting. PayGuard also does not make final fraud decisions; it only highlights suspicious transactions for review.
 
 ## 7.10 Final Conclusion
 
-PayGuard achieved its goal of demonstrating a mobile money fraud detection and monitoring system. The project produced a working prototype that can generate transaction data, train a model, score transactions, create alerts, store results, and display fraud monitoring information through a dashboard.
+PayGuard achieved its goal of demonstrating a mobile money fraud detection and monitoring system. The working prototype can generate transaction data, train a model, score transactions, create alerts, store results, and display fraud monitoring information through a dashboard.
 
-The project shows that automated fraud detection can support finance departments by improving speed, organisation, and prioritisation during transaction review. It also shows that machine learning can be useful when combined with clear user interfaces and human review.
-
-In conclusion, PayGuard is a successful final year project prototype that addresses a real digital finance problem. It provides a strong foundation for future research and development in mobile money fraud detection.
+The project shows that automated fraud detection can support finance departments by improving speed, organisation, and prioritisation during transaction review. In conclusion, PayGuard is a successful final year project prototype that addresses a real digital finance problem and provides a foundation for future research and development.
 
 ---
 
