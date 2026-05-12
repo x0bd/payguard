@@ -480,122 +480,21 @@ The purpose of these models is to show how PayGuard will operate before the actu
 
 ## 3.2 Information Gathering Methodologies
 
-The researcher used different data gathering methods to understand the fraud detection problem and to identify the expected functions of the proposed system. Since PayGuard is a research prototype and does not use live institutional payment data, the information gathering process focused on literature review, observation of digital payment workflows, document analysis, and informal user requirement analysis.
+The researcher used several methods to understand the fraud detection problem and identify the expected functions of PayGuard. Since the project is a prototype and does not use live institutional payment data, the information gathering process focused on literature review, observation of digital finance workflows, document review, and prototype analysis.
 
-The main methods used were:
+The methods used are summarised in Table 3.1.
 
-- interviews;
-- questionnaires;
-- observation;
-- document review;
-- literature review;
-- prototype analysis.
+**Table 3.1: Information gathering methods**
 
-These methods assisted the researcher in understanding how institutional digital payments are handled, the risks involved, and the features that a fraud detection system should provide.
-
-### 3.2.1 Interviews
-
-The researcher considered interviews as one of the methods for understanding the needs of possible system users. The expected users of PayGuard include finance officers, administrators, fraud analysts, IT support staff and system supervisors.
-
-The interviews were intended to gather information on the following areas:
-
-- how digital payment transactions are currently verified;
-- how suspicious payments are identified;
-- how long manual reconciliation normally takes;
-- what challenges are faced when many transactions are received;
-- what type of fraud indicators users would want to see;
-- what reports and alerts would be useful in the system.
-
-**Table 3.1: Interview guide summary**
-
-| Interview area | Example question | Expected information gathered |
-|---|---|---|
-| Current payment checking | How are mobile money payments currently verified? | Existing workflow and responsible users. |
-| Fraud identification | How are suspicious payments detected? | Current fraud detection controls. |
-| User challenges | What problems are faced during reconciliation? | Weaknesses of the current process. |
-| Alert needs | What information should a fraud alert show? | Dashboard and alert requirements. |
-| Reporting | What summaries are useful for management? | Metrics and report requirements. |
-
-The benefit of interviews is that they help the researcher to understand the actual challenges faced by users. They also help clarify requirements that may not be obvious from documents alone.
-
-### 3.2.2 Questionnaires
-
-Questionnaires were considered as a way of collecting structured feedback from potential users. The questionnaire method is useful because it allows many users to answer the same questions, making it easier to compare their responses.
-
-The questionnaire would focus on the following issues:
-
-- whether users have experienced payment verification delays;
-- whether users believe manual fraud checking is reliable;
-- whether users would accept an automated fraud detection system;
-- which dashboard features they consider most important;
-- whether users prefer alerts, reports or transaction search tools.
-
-**Table 3.2: Questionnaire areas**
-
-| Question area | Purpose |
+| Method | Purpose |
 |---|---|
-| User experience | To understand problems in the current process. |
-| Fraud awareness | To identify common fraud concerns. |
-| System acceptance | To measure willingness to use PayGuard. |
-| Feature preference | To determine important dashboard features. |
-| Reporting needs | To understand required summaries and outputs. |
+| Interviews | To understand how finance users verify payments, detect suspicious transactions, and respond to fraud concerns. |
+| Questionnaires | To collect structured feedback on payment verification delays, manual checking, fraud awareness, and preferred dashboard features. |
+| Observation | To study how digital payment records are received, checked, confirmed, and stored. |
+| Document review | To review fraud detection literature, mobile money risks, machine learning studies, and previous dissertation structures. |
+| Prototype analysis | To identify the practical components required, including data generation, model training, backend APIs, database storage, and dashboard views. |
 
-The questionnaire results would help the researcher improve the user interface and make sure that the proposed system is useful to the target users.
-
-### 3.2.3 Observation
-
-Observation was used to understand how digital finance workflows are normally carried out. The researcher observed the general process of receiving, checking and confirming institutional payments. The observation focused on how a transaction moves from payment submission to verification and record keeping.
-
-The following activities were observed:
-
-- payment records being received through digital channels;
-- users checking transaction details;
-- manual comparison of payment records;
-- identification of unusual or incomplete payments;
-- updating of payment records after verification.
-
-**Table 3.3: Observation guide**
-
-| Observation item | Description |
-|---|---|
-| Transaction receipt | How payment information reaches the institution. |
-| Verification process | How users confirm whether a payment is valid. |
-| Manual checks | The amount of human effort involved. |
-| Suspicious payments | How unusual payments are noticed. |
-| Record update | How verified transactions are stored or marked. |
-
-Observation showed that manual checking can become difficult when transaction volumes increase. It also showed that users need a system that can quickly highlight transactions that require attention.
-
-### 3.2.4 Document Review
-
-The researcher reviewed documents and literature related to fraud detection, mobile money, synthetic data, machine learning and institutional digital finance. This helped the researcher understand accepted methods and system design practices.
-
-The reviewed sources included:
-
-- fraud detection research papers;
-- mobile money fraud literature;
-- machine learning studies;
-- Zimbabwe data protection and digital finance considerations;
-- system analysis and design examples from previous dissertations;
-- PayGuard project draft documents.
-
-Document review helped the researcher develop functional requirements, non-functional requirements and design models for the proposed system.
-
-### 3.2.5 Prototype Analysis
-
-Since PayGuard is a software artefact, prototype analysis was also used. The researcher analysed the expected parts of the prototype, including synthetic data generation, model training, backend APIs, database storage and the dashboard.
-
-**Table 3.4: Prototype components analysed**
-
-| Component | Purpose |
-|---|---|
-| Synthetic data generator | Creates transaction data for training and testing. |
-| Machine learning model | Learns fraud patterns and produces risk scores. |
-| Backend API | Receives transactions, scores them and stores results. |
-| Database | Stores transactions, alerts and model information. |
-| Dashboard | Allows users to view metrics, alerts and transactions. |
-
-This helped ensure that the requirements were practical and could be implemented within the project scope.
+These methods showed that manual payment verification can become slow when transaction volumes increase. They also showed that users need a system that can highlight suspicious transactions, provide clear risk information, and support human review.
 
 ## 3.3 Analysis of the Existing System
 
@@ -639,9 +538,9 @@ These weaknesses show that a more automated and intelligent monitoring system is
 
 ## 3.4 Context Diagram of the Existing System
 
-**Figure 3.1 description:** The context diagram will show the current payment monitoring environment. The main process will be labelled **Institutional Payment Verification System**. External entities will include **Student/Guardian**, **Mobile Money Platform**, **Finance Officer**, **Institutional Records System** and **Administrator**. Data flows will include payment details, payment confirmation, verification request, transaction record and payment status.
+**Figure 3.1 description:** The context diagram will show the existing payment monitoring process, including Student/Guardian, Mobile Money Platform, Finance Officer, Institutional Records System and Administrator.
 
-The purpose of this figure is to show how transaction information currently moves between users and the institution before the introduction of PayGuard.
+The figure will show how transaction information currently moves between users and the institution before PayGuard is introduced.
 
 ## 3.5 Functions of Current System Actors
 
@@ -658,7 +557,7 @@ The main actors in the current system are shown in Table 3.7.
 | Institutional Records System | Stores payment status and student account details. |
 | IT Support | Assists when there are technical issues with digital systems. |
 
-The above functions show that the current process depends heavily on human checking. PayGuard is proposed to support these actors by providing automated fraud detection assistance.
+These actors show that the current process depends heavily on human checking. PayGuard is proposed to support them with automated fraud detection assistance.
 
 ## 3.6 Analysis of the Proposed System
 
@@ -679,7 +578,7 @@ The proposed workflow is as follows:
 7. The finance officer or analyst reviews the alert.
 8. The alert status is updated after investigation.
 
-**Figure 3.2 description:** The proposed PayGuard system context diagram will show PayGuard as the main system. External entities will include **Finance Officer**, **Fraud Analyst**, **Administrator**, **Mobile Money Transaction Source**, **Machine Learning Model** and **Database**. The figure will show transaction input, risk scoring, alert output, dashboard viewing and alert status updates.
+**Figure 3.2 description:** The proposed system context diagram will show PayGuard receiving transaction data, scoring risk, saving records, and returning alerts and dashboard information to users.
 
 ### 3.6.2 Advantages of the Proposed System
 
@@ -697,60 +596,11 @@ The proposed workflow is as follows:
 
 ## 3.7 Evaluation of Alternatives
 
-The researcher considered different alternatives before selecting the proposed PayGuard prototype.
+The researcher considered three alternatives before selecting the proposed PayGuard prototype. The first option was to maintain the current manual checking process. This option was cheaper in the short term, but it did not solve the problem of delayed fraud detection and poor prioritisation.
 
-### 3.7.1 Maintaining the Current Manual System
+The second option was to buy a commercial fraud detection system. This could provide advanced features, but it would be expensive, less suitable for academic ownership, and would likely require access to sensitive institutional data.
 
-This alternative means continuing with manual checking and spreadsheet-based reconciliation. It is cheaper in the short term but does not solve the major problem of delayed fraud detection.
-
-**Benefits**
-
-- No new system development cost.
-- Users already understand the process.
-- No training is required.
-
-**Drawbacks**
-
-- Slow when transaction volumes increase.
-- Fraud patterns may be missed.
-- Difficult to prioritise risky transactions.
-- High workload for finance staff.
-
-### 3.7.2 Buying a Commercial Fraud Detection System
-
-This alternative means purchasing an existing fraud detection solution from a vendor. It may provide advanced features, but it may be expensive and difficult to customise for a university prototype.
-
-**Benefits**
-
-- Mature features may already exist.
-- Vendor support may be available.
-- Deployment time may be reduced.
-
-**Drawbacks**
-
-- High cost.
-- Vendor lock-in.
-- May require access to sensitive data.
-- May not match the project scope.
-- Less academic ownership of the artefact.
-
-### 3.7.3 Developing PayGuard as an In-House Prototype
-
-This alternative means developing the system as part of the research project using open-source tools. This was selected because it gives the researcher control over the design, features and implementation.
-
-**Benefits**
-
-- Lower development cost.
-- Full control over system design.
-- Suitable for academic demonstration.
-- Can use synthetic data safely.
-- Supports future improvement.
-
-**Drawbacks**
-
-- Requires development time.
-- Requires machine learning and software engineering skills.
-- Prototype must be improved before production use.
+The third option was to develop PayGuard as an in-house prototype using open-source tools. This option was selected because it matched the project objectives, allowed the use of synthetic data, and gave the researcher full control over the system design.
 
 **Table 3.9: Alternative comparison table**
 
@@ -816,7 +666,7 @@ The user should be able to access the dashboard, inspect suspicious transactions
 
 A use case diagram shows the interaction between users and the system. It helps identify the main functions that users expect from PayGuard.
 
-**Figure 3.3 description:** The use case diagram for PayGuard will show the following actors: **Finance Officer**, **Fraud Analyst**, **Administrator** and **Developer/Researcher**. The main use cases will include **View Dashboard**, **View Transactions**, **Score Transaction**, **View Alerts**, **Update Alert Status**, **View Account Profile**, **Train Model**, and **Generate Synthetic Data**.
+**Figure 3.3 description:** The use case diagram will show Finance Officer, Fraud Analyst, Administrator and Developer/Researcher interacting with dashboard, transaction, alert, account, data generation and model training functions.
 
 **Table 3.13: Use case descriptions**
 
@@ -835,7 +685,7 @@ A use case diagram shows the interaction between users and the system. It helps 
 
 An activity diagram shows the step-by-step flow of activities in the system.
 
-**Figure 3.4 description:** The activity diagram for scoring a transaction will begin with **Start**, followed by **Receive Transaction**, **Validate Transaction Details**, **Retrieve Account History**, **Build Feature Set**, **Apply Machine Learning Model**, **Generate Risk Score**, **Check Risk Threshold**, **Create Alert if Suspicious**, **Save Transaction**, **Display Result on Dashboard**, and **End**. Decision points will include **Is transaction valid?** and **Is risk score high?**.
+**Figure 3.4 description:** The activity diagram will show transaction scoring from input validation to feature building, model prediction, alert creation and dashboard response.
 
 The activity flow helps explain how PayGuard processes a transaction from input to output.
 
@@ -845,17 +695,17 @@ A data flow diagram shows how data moves through the proposed system.
 
 ### 3.11.1 Level 0 Data Flow Diagram
 
-**Figure 3.5 description:** The Level 0 data flow diagram for PayGuard will show PayGuard as one main process. External entities will include **Transaction Source**, **Finance Officer**, **Fraud Analyst** and **Administrator**. Data stores will include **Transaction Database**, **Alert Database** and **Model File**. Data flows will include transaction details, risk score, alert data, dashboard metrics and alert updates.
+**Figure 3.5 description:** The Level 0 data flow diagram will show PayGuard as one process connected to users, transaction source, database, alerts and model file.
 
 ### 3.11.2 Level 1 Data Flow Diagram
 
-**Figure 3.6 description:** The Level 1 data flow diagram for PayGuard will break PayGuard into subprocesses: **Receive Transaction**, **Validate Data**, **Engineer Features**, **Score Transaction**, **Generate Alert**, **Store Records**, and **Display Dashboard Metrics**. The diagram will show how data moves between each process and the database.
+**Figure 3.6 description:** The Level 1 data flow diagram will break PayGuard into receiving, validation, feature engineering, scoring, alerting, storage and dashboard metric processes.
 
 ## 3.12 Entity Relationship Diagram
 
 The entity relationship diagram shows the database structure and relationships between important records.
 
-**Figure 3.7 description:** The ERD will show the main entities: **Transactions**, **Alerts**, **Accounts** and **ModelRuns**. A transaction belongs to one account. An alert is linked to one transaction. A model run stores information about a trained model and its evaluation metrics. The diagram will show primary keys, foreign keys and relationships.
+**Figure 3.7 description:** The ERD will show Transactions, Alerts, Accounts and ModelRuns, including primary keys, foreign keys and relationships.
 
 **Table 3.14: Main database entities**
 
@@ -909,11 +759,11 @@ The data dictionary explains the important fields that will be stored in the sys
 | model_path | Text | Location of saved model artefact. |
 | trained_at | DateTime | Date and time when model was trained. |
 
-## 3.14 Class Diagram
+## 3.14 UML and Interaction Diagrams
 
-A class diagram shows the major classes or modules that make up the system.
+Several UML-style diagrams will be used to explain how PayGuard is structured and how its components interact. These diagrams will not be inserted yet; they are described here as placeholders for later completion.
 
-**Figure 3.8 description:** The class diagram for PayGuard will show modules such as **Transaction**, **Alert**, **AccountProfile**, **FraudScorer**, **FeatureBuilder**, **ModelLoader**, **DatabaseService**, **DashboardService** and **APIController**. The diagram will show relationships such as Transaction creating Alert, FraudScorer using FeatureBuilder, and APIController communicating with DatabaseService.
+**Figure 3.8 description:** The class diagram will show core modules such as Transaction, Alert, AccountProfile, FraudScorer, FeatureBuilder, ModelLoader, DatabaseService, DashboardService and APIController.
 
 **Table 3.18: Proposed classes/modules**
 
@@ -929,29 +779,13 @@ A class diagram shows the major classes or modules that make up the system.
 | APIController | Handles requests from the dashboard. |
 | DashboardService | Provides metrics for display. |
 
-## 3.15 Object Diagram
+**Figure 3.9 description:** The object diagram will show an example scored transaction linked to an alert, fraud scorer and model object.
 
-An object diagram shows an example of system objects at one moment during execution.
+**Figure 3.10 description:** The sequence diagram will show the dashboard submitting a transaction, the API validating it, the model scoring it, the alert service saving an alert, and the dashboard displaying the result.
 
-**Figure 3.9 description:** The object diagram for a scored transaction will show one example **Transaction object** with values such as account ID, amount and location. It will also show the linked **Alert object** with risk score, status and reason. The diagram will include a **FraudScorer object** and **Model object** to show that the transaction was scored by the model.
+**Figure 3.11 description:** The communication diagram will show numbered messages between the dashboard, API, database, feature builder, model and alert service.
 
-## 3.16 Sequence Diagram
-
-A sequence diagram shows how system parts communicate over time.
-
-**Figure 3.10 description:** The sequence diagram for transaction scoring will show the interaction between **User**, **Dashboard**, **APIController**, **DatabaseService**, **FeatureBuilder**, **FraudScorer**, **Model**, and **AlertService**. The order will be: user submits transaction, dashboard sends request, API validates data, database retrieves history, feature builder prepares inputs, model scores transaction, alert service creates alert if needed, and dashboard displays results.
-
-## 3.17 Communication Diagram
-
-A communication diagram shows how system components are linked and how messages pass between them.
-
-**Figure 3.11 description:** The communication diagram for PayGuard will show numbered messages between the dashboard, API, database, model, feature builder and alert service. It will help explain the same transaction scoring process in a network-style layout.
-
-## 3.18 State Chart Diagram
-
-A state chart shows how an alert changes from one state to another.
-
-**Figure 3.12 description:** The state chart diagram for the PayGuard alert lifecycle will show the states **Created**, **Open**, **Under Review**, **Resolved**, **Closed** and **Archived**. The transitions will show how a fraud analyst can update the alert status after investigation.
+**Figure 3.12 description:** The state chart will show the alert lifecycle from created/open to review, resolved, closed or archived.
 
 **Table 3.19: Alert states**
 
@@ -964,62 +798,21 @@ A state chart shows how an alert changes from one state to another.
 | Closed | Alert is closed and no further action is needed. |
 | Archived | Old alert is kept for record purposes. |
 
-## 3.19 Process Design
+## 3.15 Process Design
 
 Process design explains how major system processes will operate. The main PayGuard process is transaction scoring.
 
-### 3.19.1 Transaction Scoring Process
+### 3.15.1 Transaction Scoring Process
 
-**Preconditions**
+The transaction scoring process requires a valid transaction, an available database, and a trained model. The user submits transaction details, the backend validates the input, account history is retrieved, features are prepared, and the model predicts a fraud risk score. The transaction is then stored, an alert is created when needed, and the result is returned to the dashboard.
 
-- The system database is available.
-- The machine learning model has been trained and loaded.
-- A transaction record is received or entered.
-- Required transaction fields are present.
+**Figure 3.13 description:** The flowchart will show transaction scoring from input validation to model prediction, alert creation and dashboard response.
 
-**Steps**
+### 3.15.2 Alert Review Process
 
-1. The user or transaction source submits transaction details.
-2. The backend validates the input fields.
-3. The system retrieves account history from the database.
-4. The feature builder prepares the model input values.
-5. The fraud detection model predicts a risk score.
-6. The system checks whether the score is above the alert threshold.
-7. The transaction is saved.
-8. If suspicious, an alert is created.
-9. The result is returned to the dashboard.
+The alert review process begins when a finance officer or fraud analyst opens the alerts page. The user selects an alert, reviews the transaction details and risk reason, then updates the alert status. The system stores the updated status so that the alert history can be reviewed later.
 
-**Postconditions**
-
-- The transaction is stored.
-- A risk score is attached to the transaction.
-- An alert is created if necessary.
-- The dashboard shows the scoring result.
-
-**Figure 3.13 description:** The flowchart for the transaction scoring process will show the process from input to output, including validation, feature engineering, model prediction, threshold decision, alert creation and dashboard response.
-
-### 3.19.2 Alert Review Process
-
-**Preconditions**
-
-- An alert exists in the system.
-- A finance officer or fraud analyst has access to the dashboard.
-
-**Steps**
-
-1. User opens the alerts page.
-2. System displays open alerts.
-3. User selects one alert.
-4. User reviews transaction details and risk reason.
-5. User updates the alert status.
-6. System saves the new status and timestamp.
-
-**Postconditions**
-
-- Alert status is updated.
-- Alert history is retained for future reporting.
-
-## 3.20 User Interface Design
+## 3.16 User Interface Design
 
 The PayGuard interface must be simple, clear and useful for finance users. The interface should guide users to important information without requiring advanced technical knowledge.
 
@@ -1032,9 +825,9 @@ The main dashboard areas will include:
 - live scoring form;
 - metrics and charts.
 
-**Figure 3.14 description:** The PayGuard dashboard wireframe will show the main layout of the system. It will include a sidebar menu, summary cards for total transactions and open alerts, a chart showing risk levels, a table of recent alerts and a form for testing transaction scoring.
+**Figure 3.14 description:** The dashboard wireframe will show sidebar navigation, summary cards, risk chart, recent alerts and transaction scoring form.
 
-**Figure 3.15 description:** The alerts page wireframe will show a table with columns such as alert ID, transaction ID, account, risk score, reason, status and action buttons. It will also show filters for status and risk level.
+**Figure 3.15 description:** The alerts page wireframe will show alert records with risk score, reason, status, action buttons and filters.
 
 **Table 3.20: User interface features**
 
@@ -1047,42 +840,23 @@ The main dashboard areas will include:
 | Maintainable | Interface can be extended with new pages in future. |
 | Responsive | Can be improved to work on different screen sizes. |
 
-## 3.21 System Controls and Security
+## 3.17 System Controls and Security
 
 System controls and security are important because PayGuard handles financial transaction records. Although the prototype uses synthetic data, the design should support future secure deployment.
-
-### 3.21.1 Input Controls
-
-The system should validate transaction details before accepting them. Required fields such as account ID, amount, transaction type, timestamp, device and location should be checked.
-
-### 3.21.2 Processing Controls
-
-The system should ensure that a transaction is scored using the correct model and feature set. If the model is missing, the system should show an error instead of silently accepting wrong results.
-
-### 3.21.3 Storage Controls
-
-Transactions, alerts and model information should be stored in a database. Regular backups should be considered in future deployment.
-
-### 3.21.4 Access Controls
-
-In the prototype, user authentication may be limited. In future, the system should include user accounts, passwords, roles and access permissions. Finance officers should not have the same permissions as administrators or developers.
-
-### 3.21.5 Data Protection Controls
-
-The prototype uses synthetic data. If real institutional data is used in future, the system should follow data minimisation, secure storage and privacy requirements in line with Zimbabwe's Cyber and Data Protection Act [Chapter 12:07] (Zimbabwe, 2021).
 
 **Table 3.21: System controls**
 
 | Control area | Control method |
 |---|---|
-| Input validation | Check required fields and correct data types. |
-| Database control | Store records in structured tables. |
-| Error handling | Return clear messages when something fails. |
-| Access control | Add user roles in future production version. |
-| Backup | Maintain database backup copies. |
-| Privacy | Use synthetic data during research and minimise personal data in future. |
+| Input validation | Check required fields, data types, timestamps, and transaction amounts. |
+| Processing control | Score transactions using the correct feature set and loaded model. |
+| Database control | Store transactions, alerts, and model information in structured tables. |
+| Error handling | Return clear messages when model loading, validation, or database operations fail. |
+| Access control | Add user accounts and role-based permissions in a future production version. |
+| Backup | Maintain database and model backup copies. |
+| Privacy | Use synthetic data during research and apply data minimisation if real data is used later. |
 
-## 3.22 Testing Requirements
+## 3.18 Testing Requirements
 
 Testing requirements define how the system will be checked during implementation. The testing details will be expanded in the coding and testing chapter, but the main testing needs are identified here.
 
@@ -1097,7 +871,7 @@ Testing requirements define how the system will be checked during implementation
 | API testing | Check endpoints for transactions, scoring, alerts and metrics. |
 | User acceptance testing | Check whether users can understand and operate the system. |
 
-## 3.23 Chapter Conclusion
+## 3.19 Chapter Conclusion
 
 This chapter analysed the requirements and design of the proposed PayGuard system. It explained the information gathering methods used by the researcher, described the weaknesses of the current manual or semi-manual payment monitoring process, and justified the need for an automated fraud detection system.
 
