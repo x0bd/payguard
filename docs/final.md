@@ -783,6 +783,8 @@ Several UML-style diagrams are used to explain how PayGuard is structured and ho
 
 **Figure 3.10: Sequence diagram**
 
+![Figure 3.10: Sequence diagram](assets/figures/figure-3-10-sequence-diagram.svg)
+
 **Figure 3.11: Communication diagram**
 
 **Figure 3.12: State chart diagram**

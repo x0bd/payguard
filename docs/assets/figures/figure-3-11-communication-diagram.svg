@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1000" viewBox="0 0 1700 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.11: Communication diagram</title>
+  <desc id="desc">Communication diagram showing numbered messages between PayGuard dashboard, API, database, feature builder, machine learning model, and alert service.</desc>
+  <defs>
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
+    </pattern>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+
+  <rect width="1700" height="1000" fill="#f2f3f1" />
+  <rect width="1700" height="1000" fill="url(#dot-grid)" opacity="0.95" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="92" font-size="36" font-weight="850" fill="#101010">PayGuard Communication Diagram</text>
+    <text x="96" y="128" font-size="18" font-weight="500" fill="#666666">Numbered messages exchanged during transaction scoring and alert creation</text>
+
+    <g filter="url(#card-shadow)">
+      <rect x="110" y="412" width="260" height="104" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="338" cy="464" r="7" fill="#16a34a" />
+      <text x="240" y="455" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Dashboard</text>
+      <text x="240" y="486" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">user interface</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="560" y="412" width="260" height="104" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="592" cy="464" r="7" fill="#16a34a" />
+      <text x="690" y="455" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">APIController</text>
+      <text x="690" y="486" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">Flask API</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1010" y="174" width="260" height="104" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="1042" cy="226" r="7" fill="#16a34a" />
+      <text x="1140" y="217" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">FeatureBuilder</text>
+      <text x="1140" y="248" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">prepares features</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1340" y="412" width="260" height="104" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="1372" cy="464" r="7" fill="#16a34a" />
+      <text x="1470" y="455" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">ML Model</text>
+      <text x="1470" y="486" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">risk prediction</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1010" y="688" width="260" height="104" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="1042" cy="740" r="7" fill="#16a34a" />
+      <text x="1140" y="731" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">DatabaseService</text>
+      <text x="1140" y="762" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">SQLite records</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="560" y="688" width="260" height="104" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="592" cy="740" r="7" fill="#16a34a" />
+      <text x="690" y="731" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">AlertService</text>
+      <text x="690" y="762" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">creates alert</text>
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="4.5" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M370 464 C440 464, 490 464, 560 464" />
+      <path d="M820 430 C900 346, 936 266, 1010 226" />
+      <path d="M1270 226 C1344 272, 1394 350, 1448 412" />
+      <path d="M1390 516 C1320 584, 1242 648, 1190 688" />
+      <path d="M1010 740 C946 740, 884 740, 820 740" />
+      <path d="M690 688 C690 622, 690 582, 690 516" />
+      <path d="M560 494 C488 526, 426 498, 370 478" />
+    </g>
+
+    <g font-size="14" font-weight="850" fill="#111111">
+      <rect x="392" y="430" width="146" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="465" y="452" text-anchor="middle">1. score request</text>
+
+      <rect x="846" y="304" width="150" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="921" y="326" text-anchor="middle">2. build features</text>
+
+      <rect x="1290" y="306" width="130" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1355" y="328" text-anchor="middle">3. predict</text>
+
+      <rect x="1262" y="590" width="150" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1337" y="612" text-anchor="middle">4. save result</text>
+
+      <rect x="862" y="706" width="126" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="925" y="728" text-anchor="middle">5. alert data</text>
+
+      <rect x="704" y="584" width="130" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="769" y="606" text-anchor="middle">6. create alert</text>
+
+      <rect x="388" y="510" width="150" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="463" y="532" text-anchor="middle">7. return result</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="110" y="838" width="522" height="70" rx="22" fill="#ffffff" stroke="#e5e5e5" />
+      <text x="140" y="880" font-size="16" font-weight="750" fill="#666666">The numbers show the order of communication during one transaction scoring workflow.</text>
+    </g>
+  </g>
+</svg>
