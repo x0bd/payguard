@@ -787,7 +787,11 @@ Several UML-style diagrams are used to explain how PayGuard is structured and ho
 
 **Figure 3.11: Communication diagram**
 
+![Figure 3.11: Communication diagram](assets/figures/figure-3-11-communication-diagram.svg)
+
 **Figure 3.12: State chart diagram**
+
+![Figure 3.12: State chart diagram](assets/figures/figure-3-12-state-chart.svg)
 
 **Table 3.19: Alert states**
 
@@ -810,6 +814,8 @@ The transaction scoring process requires a valid transaction, an available datab
 
 **Figure 3.13: Transaction scoring flowchart**
 
+![Figure 3.13: Transaction scoring flowchart](assets/figures/figure-3-13-scoring-flowchart.svg)
+
 ### 3.15.2 Alert Review Process
 
 The alert review process begins when a finance officer or fraud analyst opens the alerts page. The user selects an alert, reviews the transaction details and risk reason, then updates the alert status. The system stores the updated status so that the alert history can be reviewed later.
@@ -829,7 +835,11 @@ The main dashboard areas will include:
 
 **Figure 3.14: Dashboard wireframe**
 
+![Figure 3.14: Dashboard wireframe](assets/figures/figure-3-14-dashboard-wireframe.svg)
+
 **Figure 3.15: Alerts page wireframe**
+
+![Figure 3.15: Alerts page wireframe](assets/figures/figure-3-15-alerts-wireframe.svg)
 
 **Table 3.20: User interface features**
 

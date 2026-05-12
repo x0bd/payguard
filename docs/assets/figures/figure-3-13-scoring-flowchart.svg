@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1100" viewBox="0 0 1700 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.13: Transaction scoring flowchart</title>
+  <desc id="desc">Flowchart showing PayGuard transaction scoring from user input through validation, feature building, model prediction, alert creation, storage, and result display.</desc>
+  <defs>
+    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
+    </pattern>
+    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    </marker>
+  </defs>
+
+  <rect width="1700" height="1100" fill="#f2f3f1" />
+  <rect width="1700" height="1100" fill="url(#dot-grid)" opacity="0.95" />
+
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="96" y="92" font-size="36" font-weight="850" fill="#101010">PayGuard Transaction Scoring Flowchart</text>
+    <text x="96" y="128" font-size="18" font-weight="500" fill="#666666">Processing flow from transaction submission to dashboard result</text>
+
+    <g filter="url(#card-shadow)">
+      <rect x="675" y="176" width="350" height="86" rx="43" fill="#111111" />
+      <text x="850" y="228" text-anchor="middle" font-size="24" font-weight="850" fill="#ffffff">Start</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="318" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="666" cy="362" r="7" fill="#16a34a" />
+      <text x="850" y="355" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">User submits transaction</text>
+      <text x="850" y="384" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">account, amount, type, device, location</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <path d="M850 462 L1064 562 L850 662 L636 562 Z" fill="#ffffff" stroke="#dedede" />
+      <circle cx="702" cy="562" r="7" fill="#16a34a" />
+      <text x="850" y="555" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Input valid?</text>
+      <text x="850" y="584" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">required fields and amount checked</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1190" y="518" width="340" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <text x="1360" y="555" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Return validation error</text>
+      <text x="1360" y="584" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">user corrects input</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="724" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="666" cy="768" r="7" fill="#16a34a" />
+      <text x="850" y="761" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Retrieve account history</text>
+      <text x="850" y="790" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">previous transactions from SQLite</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="874" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="666" cy="918" r="7" fill="#16a34a" />
+      <text x="850" y="911" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Build model features</text>
+      <text x="850" y="940" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">amount, velocity, time, device, location</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="122" y="874" width="380" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <circle cx="158" cy="918" r="7" fill="#16a34a" />
+      <text x="312" y="911" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Model predicts risk</text>
+      <text x="312" y="940" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">fraud label and probability</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <path d="M312 662 L516 762 L312 862 L108 762 Z" fill="#ffffff" stroke="#dedede" />
+      <circle cx="170" cy="762" r="7" fill="#16a34a" />
+      <text x="312" y="755" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Risk above</text>
+      <text x="312" y="784" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">threshold?</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="122" y="518" width="380" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <text x="312" y="555" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Create alert record</text>
+      <text x="312" y="584" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">risk level, reason, status open</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="518" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <text x="850" y="555" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Save transaction and result</text>
+      <text x="850" y="584" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">store score, alert and metadata</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="350" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" opacity="0" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="176" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" opacity="0" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="724" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" opacity="0" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="172" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" opacity="0" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="630" y="166" width="440" height="88" rx="24" fill="#ffffff" stroke="#dedede" opacity="0" />
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1190" y="724" width="340" height="88" rx="24" fill="#ffffff" stroke="#dedede" />
+      <text x="1360" y="761" text-anchor="middle" font-size="22" font-weight="850" fill="#111111">Display dashboard result</text>
+      <text x="1360" y="790" text-anchor="middle" font-size="15" font-weight="650" fill="#666666">risk score, level, reason</text>
+    </g>
+
+    <g filter="url(#card-shadow)">
+      <rect x="1212" y="874" width="296" height="76" rx="38" fill="#111111" />
+      <text x="1360" y="921" text-anchor="middle" font-size="24" font-weight="850" fill="#ffffff">End</text>
+    </g>
+
+    <g fill="none" stroke="#111111" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)">
+      <path d="M850 262 V318" />
+      <path d="M850 406 V462" />
+      <path d="M1064 562 H1190" />
+      <path d="M850 662 V724" />
+      <path d="M850 812 V874" />
+      <path d="M630 918 H502" />
+      <path d="M312 874 V862" />
+      <path d="M312 662 V606" />
+      <path d="M502 562 H630" />
+      <path d="M516 762 C628 734, 712 650, 800 606" />
+      <path d="M1070 562 H1190" />
+      <path d="M1360 606 V724" />
+      <path d="M1360 812 V874" />
+      <path d="M1190 562 H1070" />
+    </g>
+
+    <g font-size="14" font-weight="850" fill="#111111">
+      <rect x="1084" y="528" width="64" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="1116" y="550" text-anchor="middle">No</text>
+      <rect x="870" y="676" width="66" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="903" y="698" text-anchor="middle">Yes</text>
+      <rect x="360" y="622" width="66" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="393" y="644" text-anchor="middle">Yes</text>
+      <rect x="528" y="728" width="64" height="34" rx="17" fill="#ffffff" stroke="#e9e9e9" />
+      <text x="560" y="750" text-anchor="middle">No</text>
+    </g>
+  </g>
+</svg>
