@@ -933,6 +933,8 @@ The main architectural layers are shown in Table 4.1.
 
 **Figure 4.1: System architecture diagram**
 
+![Figure 4.1: System architecture diagram](assets/figures/figure-4-1-system-architecture.svg)
+
 ## 4.4 System Component Design
 
 PayGuard is divided into major components with clear responsibilities, making the prototype easier to understand, test, and improve.
@@ -983,6 +985,8 @@ The generator includes three main fraud patterns, shown in Table 4.4.
 | rapid_burst | Many transactions happen close together. | Simulates fast fund movement. |
 
 **Figure 4.2: Data generation flow diagram**
+
+![Figure 4.2: Data generation flow diagram](assets/figures/figure-4-2-data-generation-flow.svg)
 
 ## 4.6 Machine Learning Design
 
@@ -1054,6 +1058,8 @@ The result shows that the prototype can learn the generated fraud patterns. Howe
 
 **Figure 4.3: Machine learning pipeline diagram**
 
+![Figure 4.3: Machine learning pipeline diagram](assets/figures/figure-4-3-machine-learning-pipeline.svg)
+
 ## 4.7 Backend API Design
 
 The backend is designed as a Flask API and acts as the central controller of the system. It validates requests, communicates with SQLite, loads the saved model, builds scoring features, creates alerts, and returns JSON responses to the frontend. During startup, it initialises the database and reports whether the model is available.
@@ -1101,6 +1107,8 @@ The backend also converts the fraud score into a risk level. The current alert t
 The backend also generates an alert reason from important feature signals such as unusual amount, transaction velocity, device change, location change, or rapid repeat activity.
 
 **Figure 4.4: Backend scoring sequence diagram**
+
+![Figure 4.4: Backend scoring sequence diagram](assets/figures/figure-4-4-backend-scoring-sequence.svg)
 
 ## 4.8 Database Design
 
@@ -1169,6 +1177,8 @@ The `model_runs` table supports future model history tracking. The current proto
 
 **Figure 4.5: Database relationship diagram**
 
+![Figure 4.5: Database relationship diagram](assets/figures/figure-4-5-database-relationship.svg)
+
 ## 4.9 Alert Lifecycle Design
 
 Alerts help users focus on transactions that need review. An alert is created when a transaction is scored, and its status depends on the predicted risk and later user action.
@@ -1184,6 +1194,8 @@ The implemented backend uses three alert status values.
 | resolved | The alert has been reviewed and marked as resolved. |
 
 **Figure 4.6: Alert lifecycle diagram**
+
+![Figure 4.6: Alert lifecycle diagram](assets/figures/figure-4-6-alert-lifecycle.svg)
 
 ## 4.10 Frontend User Interface Design
 
@@ -1277,6 +1289,8 @@ The processing steps are:
 
 **Figure 4.11: Transaction scoring flowchart**
 
+![Figure 4.11: Transaction scoring flowchart](assets/figures/figure-4-11-transaction-scoring-flowchart.svg)
+
 ## 4.13 Security and Control Design
 
 Although PayGuard is a prototype, the design includes basic controls for safer use and future improvement.
@@ -1314,6 +1328,8 @@ The simplified stack was selected to make future hosting easier. The frontend is
 | Dataset | Synthetic CSV data stored in the data folder. |
 
 **Figure 4.12: Deployment diagram**
+
+![Figure 4.12: Deployment diagram](assets/figures/figure-4-12-deployment-diagram.svg)
 
 ## 4.15 Chapter Summary
 
