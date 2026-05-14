@@ -1,29 +1,29 @@
 {
   "selected_model": {
     "model_name": "random_forest",
-    "precision": 0.45394736842105265,
-    "recall": 0.8697478991596639,
-    "f1": 0.5965417867435159,
-    "roc_auc": 0.9911901674873265,
+    "precision": 0.45532831001076424,
+    "recall": 0.8886554621848739,
+    "f1": 0.602135231316726,
+    "roc_auc": 0.9913217269604311,
     "train_rows": 79574,
     "test_rows": 19894
   },
   "all_models": [
     {
       "model_name": "random_forest",
-      "precision": 0.45394736842105265,
-      "recall": 0.8697478991596639,
-      "f1": 0.5965417867435159,
-      "roc_auc": 0.9911901674873265,
+      "precision": 0.45532831001076424,
+      "recall": 0.8886554621848739,
+      "f1": 0.602135231316726,
+      "roc_auc": 0.9913217269604311,
       "train_rows": 79574,
       "test_rows": 19894
     },
     {
       "model_name": "logistic_regression",
-      "precision": 0.3751004016064257,
+      "precision": 0.3744987971130714,
       "recall": 0.9810924369747899,
-      "f1": 0.5427077280650784,
-      "roc_auc": 0.9898202611974856,
+      "f1": 0.5420777713290772,
+      "roc_auc": 0.9898229659563896,
       "train_rows": 79574,
       "test_rows": 19894
     }
@@ -61,6 +61,6 @@
   },
   "artifacts": {
     "best_model_path": "..\\models\\fraud_model.joblib",
-    "versioned_model_path": "..\\models\\fraud_model_random_forest_20260315T182310Z.joblib"
+    "versioned_model_path": "..\\models\\fraud_model_random_forest_20260514T083232Z.joblib"
   }
 }

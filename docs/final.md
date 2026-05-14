@@ -143,20 +143,20 @@ The purpose is to show that PayGuard is based on existing research and can be de
 
 ## 2.2 Definition of Terms
 
-| Term | Meaning in this study |
-|---|---|
-| Mobile money | Sending, receiving, storing or paying money using a mobile device. |
-| Digital finance | Use of mobile wallets, portals, online banking and databases for financial services. |
-| Fraud | Dishonest activity used to gain money, services or access. |
-| Fraud detection | Identifying transactions or behaviour that may indicate fraud. |
-| Transaction | A record of money movement, such as a fee payment or transfer. |
-| Risk score | A model value showing how suspicious a transaction is. |
-| Alert | A system notification created when a transaction is risky. |
-| Machine learning | Computer systems learning patterns from data to make predictions. |
-| Supervised learning | Training a model using examples with known labels. |
-| Synthetic data | Artificial data that imitates real data without real personal records. |
-| Class imbalance | When one class is much larger than another, such as normal transactions versus fraud. |
-| Concept drift | When fraud patterns change and older models become less accurate. |
+| Term                | Meaning in this study                                                                 |
+| ------------------- | ------------------------------------------------------------------------------------- |
+| Mobile money        | Sending, receiving, storing or paying money using a mobile device.                    |
+| Digital finance     | Use of mobile wallets, portals, online banking and databases for financial services.  |
+| Fraud               | Dishonest activity used to gain money, services or access.                            |
+| Fraud detection     | Identifying transactions or behaviour that may indicate fraud.                        |
+| Transaction         | A record of money movement, such as a fee payment or transfer.                        |
+| Risk score          | A model value showing how suspicious a transaction is.                                |
+| Alert               | A system notification created when a transaction is risky.                            |
+| Machine learning    | Computer systems learning patterns from data to make predictions.                     |
+| Supervised learning | Training a model using examples with known labels.                                    |
+| Synthetic data      | Artificial data that imitates real data without real personal records.                |
+| Class imbalance     | When one class is much larger than another, such as normal transactions versus fraud. |
+| Concept drift       | When fraud patterns change and older models become less accurate.                     |
 
 ## 2.3 Mobile Money and Institutional Digital Finance
 
@@ -170,14 +170,14 @@ Mobile money fraud can target customers, agents, institutions or payment infrast
 
 **Table 2.1: Common mobile money fraud methods**
 
-| Fraud method | Description | Possible indicator in the system |
-|---|---|---|
-| Social engineering | User is tricked into sending money or revealing details. | Unusual transfer from a quiet account. |
-| SIM swap fraud | Fraudster controls the victim's mobile number. | New device, location or transaction pattern. |
-| Account takeover | Unauthorised person accesses an account. | Unfamiliar device or location. |
-| Smurfing | Large value is split into smaller transactions. | Many transactions in a short period. |
-| Fake payment confirmation | False message or receipt is used as proof. | Payment missing from official records. |
-| Agent or insider abuse | Trusted person misuses access. | Repeated suspicious linked patterns. |
+| Fraud method              | Description                                              | Possible indicator in the system             |
+| ------------------------- | -------------------------------------------------------- | -------------------------------------------- |
+| Social engineering        | User is tricked into sending money or revealing details. | Unusual transfer from a quiet account.       |
+| SIM swap fraud            | Fraudster controls the victim's mobile number.           | New device, location or transaction pattern. |
+| Account takeover          | Unauthorised person accesses an account.                 | Unfamiliar device or location.               |
+| Smurfing                  | Large value is split into smaller transactions.          | Many transactions in a short period.         |
+| Fake payment confirmation | False message or receipt is used as proof.               | Payment missing from official records.       |
+| Agent or insider abuse    | Trusted person misuses access.                           | Repeated suspicious linked patterns.         |
 
 These methods show why one simple rule is not enough. Fraud may only become visible when amount, time, device, location and account history are considered together.
 
@@ -213,13 +213,13 @@ Synthetic data is useful because it allows realistic transaction records to be c
 
 **Table 2.2: Comparison between real data and synthetic data**
 
-| Area | Real transaction data | Synthetic transaction data |
-|---|---|---|
-| Privacy | Contains sensitive user information. | No real personal records. |
-| Access | Difficult to obtain. | Generated by the researcher. |
-| Legal risk | Requires approvals and controls. | Lower prototype risk. |
-| Realism | More accurate real behaviour. | Depends on simulation quality. |
-| Reproducibility | May not be shareable. | Can be regenerated. |
+| Area            | Real transaction data                | Synthetic transaction data     |
+| --------------- | ------------------------------------ | ------------------------------ |
+| Privacy         | Contains sensitive user information. | No real personal records.      |
+| Access          | Difficult to obtain.                 | Generated by the researcher.   |
+| Legal risk      | Requires approvals and controls.     | Lower prototype risk.          |
+| Realism         | More accurate real behaviour.        | Depends on simulation quality. |
+| Reproducibility | May not be shareable.                | Can be regenerated.            |
 
 Synthetic data is not a perfect replacement for real data, so PayGuard should be treated as a research prototype until tested with approved real-world data.
 
@@ -231,15 +231,15 @@ For PayGuard, the following feature groups are important:
 
 **Table 2.3: Proposed feature groups for PayGuard**
 
-| Feature group | Examples | Reason for use |
-|---|---|---|
-| Amount features | Amount, log amount, difference from average. | Detects unusual values. |
-| Time features | Hour, day, night flag. | Detects unusual timing. |
-| Velocity features | Transactions in last hour or day. | Detects rapid activity. |
-| Account history features | Prior average, account age, previous count. | Compares with normal behaviour. |
-| Device features | Device change, known or unknown device. | Detects possible compromise. |
-| Location features | Location change and city. | Detects suspicious access. |
-| Transaction type | Cash-in, cash-out, transfer and payments. | Captures different risk levels. |
+| Feature group            | Examples                                     | Reason for use                  |
+| ------------------------ | -------------------------------------------- | ------------------------------- |
+| Amount features          | Amount, log amount, difference from average. | Detects unusual values.         |
+| Time features            | Hour, day, night flag.                       | Detects unusual timing.         |
+| Velocity features        | Transactions in last hour or day.            | Detects rapid activity.         |
+| Account history features | Prior average, account age, previous count.  | Compares with normal behaviour. |
+| Device features          | Device change, known or unknown device.      | Detects possible compromise.    |
+| Location features        | Location change and city.                    | Detects suspicious access.      |
+| Transaction type         | Cash-in, cash-out, transfer and payments.    | Captures different risk levels. |
 
 Good features are central to PayGuard because weak features can produce poor predictions even when the algorithm is strong.
 
@@ -249,13 +249,13 @@ Fraud detection usually faces class imbalance because legitimate transactions ar
 
 **Table 2.4: Evaluation metrics for fraud detection**
 
-| Metric | Meaning | Importance |
-|---|---|---|
-| Accuracy | Percentage of correct predictions. | Misleading when fraud is rare. |
-| Precision | How many flagged transactions were fraud. | Shows alert quality. |
-| Recall | How many fraud cases were detected. | Shows fraud capture. |
-| F1-score | Balance of precision and recall. | Useful when both errors matter. |
-| ROC-AUC | Ranking ability across thresholds. | Helps compare models. |
+| Metric    | Meaning                                   | Importance                      |
+| --------- | ----------------------------------------- | ------------------------------- |
+| Accuracy  | Percentage of correct predictions.        | Misleading when fraud is rare.  |
+| Precision | How many flagged transactions were fraud. | Shows alert quality.            |
+| Recall    | How many fraud cases were detected.       | Shows fraud capture.            |
+| F1-score  | Balance of precision and recall.          | Useful when both errors matter. |
+| ROC-AUC   | Ranking ability across thresholds.        | Helps compare models.           |
 
 Cost-sensitive learning is also important because missed fraud may cause financial loss, while false alerts increase investigation workload (Bahnsen et al., 2013; Bahnsen, Aouada and Stojanovic, 2017).
 
@@ -269,14 +269,14 @@ Several algorithms can be used for fraud detection. Table 2.5 summarises those m
 
 **Table 2.5: Reviewed machine learning algorithms**
 
-| Algorithm | Strengths | Weaknesses | Relevance to PayGuard |
-|---|---|---|---|
-| Logistic Regression | Simple, fast and interpretable. | Weak on complex patterns. | Baseline model. |
-| Decision Tree | Understandable and non-linear. | Can overfit. | Explains decision logic. |
-| Random Forest | Handles non-linear patterns and reduces overfitting. | Less interpretable. | Main prototype candidate. |
-| Support Vector Machine | Works on complex boundaries. | Slower and harder to tune. | Comparison method. |
-| Neural Network | Learns complex patterns. | Needs more data and explanation. | Future extension. |
-| XGBoost | Strong on tabular data. | Needs tuning and explanation. | Future benchmark. |
+| Algorithm              | Strengths                                            | Weaknesses                       | Relevance to PayGuard     |
+| ---------------------- | ---------------------------------------------------- | -------------------------------- | ------------------------- |
+| Logistic Regression    | Simple, fast and interpretable.                      | Weak on complex patterns.        | Baseline model.           |
+| Decision Tree          | Understandable and non-linear.                       | Can overfit.                     | Explains decision logic.  |
+| Random Forest          | Handles non-linear patterns and reduces overfitting. | Less interpretable.              | Main prototype candidate. |
+| Support Vector Machine | Works on complex boundaries.                         | Slower and harder to tune.       | Comparison method.        |
+| Neural Network         | Learns complex patterns.                             | Needs more data and explanation. | Future extension.         |
+| XGBoost                | Strong on tabular data.                              | Needs tuning and explanation.    | Future benchmark.         |
 
 Chen and Guestrin (2016) introduced XGBoost as a scalable tree boosting system. It is strong for tabular data, but the first PayGuard prototype uses simpler scikit-learn models because they are easier to implement, explain and evaluate in a capstone context.
 
@@ -286,18 +286,18 @@ The following studies relate to fraud detection, mobile money simulation, transa
 
 **Table 2.6: Summary of related studies**
 
-| Author(s) | Study focus | Key finding | Relevance to PayGuard |
-|---|---|---|---|
-| Phua et al. (2010) | Data mining fraud detection. | Uses classification, clustering and anomaly detection. | Supports supervised and hybrid approaches. |
-| Whitrow et al. (2009) | Transaction aggregation. | Behavioural features improve detection. | Supports history and velocity features. |
-| Bahnsen et al. (2013) | Cost-sensitive fraud detection. | Mistakes have different costs. | Supports cost-aware metrics. |
-| Dal Pozzolo et al. (2015) | Concept drift and delayed labels. | Models need updating. | Supports retraining and feedback. |
-| Lopez-Rojas, Elmir and Axelsson (2016) | PaySim simulator. | Synthetic mobile money data supports research. | Supports PayGuard synthetic data. |
-| Abdallah, Maarof and Zainal (2016) | Fraud detection survey. | Needs algorithmic and system design. | Supports end-to-end design. |
-| Carcillo et al. (2018) | Streaming fraud framework. | Real-time detection needs scalable design. | Supports future streaming. |
-| Carcillo et al. (2019) | Hybrid fraud detection. | Combined methods can improve detection. | Supports anomaly detection extension. |
-| Chen and Guestrin (2016) | XGBoost. | Boosted trees work well on structured data. | Supports future benchmarking. |
-| Lebichot et al. (2021) | Incremental learning. | Models can adapt over time. | Supports future model refresh. |
+| Author(s)                              | Study focus                       | Key finding                                            | Relevance to PayGuard                      |
+| -------------------------------------- | --------------------------------- | ------------------------------------------------------ | ------------------------------------------ |
+| Phua et al. (2010)                     | Data mining fraud detection.      | Uses classification, clustering and anomaly detection. | Supports supervised and hybrid approaches. |
+| Whitrow et al. (2009)                  | Transaction aggregation.          | Behavioural features improve detection.                | Supports history and velocity features.    |
+| Bahnsen et al. (2013)                  | Cost-sensitive fraud detection.   | Mistakes have different costs.                         | Supports cost-aware metrics.               |
+| Dal Pozzolo et al. (2015)              | Concept drift and delayed labels. | Models need updating.                                  | Supports retraining and feedback.          |
+| Lopez-Rojas, Elmir and Axelsson (2016) | PaySim simulator.                 | Synthetic mobile money data supports research.         | Supports PayGuard synthetic data.          |
+| Abdallah, Maarof and Zainal (2016)     | Fraud detection survey.           | Needs algorithmic and system design.                   | Supports end-to-end design.                |
+| Carcillo et al. (2018)                 | Streaming fraud framework.        | Real-time detection needs scalable design.             | Supports future streaming.                 |
+| Carcillo et al. (2019)                 | Hybrid fraud detection.           | Combined methods can improve detection.                | Supports anomaly detection extension.      |
+| Chen and Guestrin (2016)               | XGBoost.                          | Boosted trees work well on structured data.            | Supports future benchmarking.              |
+| Lebichot et al. (2021)                 | Incremental learning.             | Models can adapt over time.                            | Supports future model refresh.             |
 
 ## 2.12 Research Gap
 
@@ -305,13 +305,13 @@ The literature shows that many studies focus on credit card fraud, while fewer f
 
 **Table 2.7: Research gap and PayGuard contribution**
 
-| Research gap | PayGuard contribution |
-|---|---|
-| Limited availability of real labelled institutional mobile money data. | Uses synthetic data with controlled fraud patterns. |
-| Many studies focus on model accuracy only. | Includes data pipeline, model, API and dashboard workflow. |
-| Rule-based systems cannot easily adapt to changing fraud behaviour. | Uses supervised learning and risk scores to detect patterns. |
-| Fraud detection systems may not support human review clearly. | Provides alerts and transaction summaries for investigation. |
-| Few capstone-level systems show end-to-end fraud monitoring. | Builds a complete prototype from data generation to UI monitoring. |
+| Research gap                                                           | PayGuard contribution                                              |
+| ---------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Limited availability of real labelled institutional mobile money data. | Uses synthetic data with controlled fraud patterns.                |
+| Many studies focus on model accuracy only.                             | Includes data pipeline, model, API and dashboard workflow.         |
+| Rule-based systems cannot easily adapt to changing fraud behaviour.    | Uses supervised learning and risk scores to detect patterns.       |
+| Fraud detection systems may not support human review clearly.          | Provides alerts and transaction summaries for investigation.       |
+| Few capstone-level systems show end-to-end fraud monitoring.           | Builds a complete prototype from data generation to UI monitoring. |
 
 PayGuard addresses this gap by building a practical institutional digital finance fraud detection prototype using synthetic data and machine learning.
 
@@ -325,25 +325,25 @@ PayGuard is technically feasible because it uses available open-source technolog
 
 **Table 2.8: Software requirements**
 
-| Software | Purpose | Availability |
-|---|---|---|
-| Python 3 | Data, model training and backend API. | Open-source. |
-| Flask | REST API development. | Open-source. |
-| SQLite | Local transaction and alert storage. | Built into many Python environments. |
-| pandas and NumPy | Data cleaning and feature engineering. | Open-source. |
-| scikit-learn | Model training and evaluation. | Open-source. |
-| joblib | Saving and loading model artefacts. | Open-source. |
-| React and TypeScript | Frontend dashboard. | Open-source. |
-| Git and GitHub | Version control and storage. | Freely available. |
+| Software             | Purpose                                | Availability                         |
+| -------------------- | -------------------------------------- | ------------------------------------ |
+| Python 3             | Data, model training and backend API.  | Open-source.                         |
+| Flask                | REST API development.                  | Open-source.                         |
+| SQLite               | Local transaction and alert storage.   | Built into many Python environments. |
+| pandas and NumPy     | Data cleaning and feature engineering. | Open-source.                         |
+| scikit-learn         | Model training and evaluation.         | Open-source.                         |
+| joblib               | Saving and loading model artefacts.    | Open-source.                         |
+| React and TypeScript | Frontend dashboard.                    | Open-source.                         |
+| Git and GitHub       | Version control and storage.           | Freely available.                    |
 
 **Table 2.9: Hardware requirements**
 
-| Hardware | Minimum requirement | Purpose |
-|---|---|---|
-| Laptop or desktop computer | 8GB RAM, dual-core processor, 256GB storage. | Development and testing. |
-| Recommended machine | 16GB RAM, quad-core processor, SSD. | Faster training and development. |
-| Internet access | Stable connection. | Downloads and research. |
-| Backup storage | External drive or cloud repository. | Protecting project files. |
+| Hardware                   | Minimum requirement                          | Purpose                          |
+| -------------------------- | -------------------------------------------- | -------------------------------- |
+| Laptop or desktop computer | 8GB RAM, dual-core processor, 256GB storage. | Development and testing.         |
+| Recommended machine        | 16GB RAM, quad-core processor, SSD.          | Faster training and development. |
+| Internet access            | Stable connection.                           | Downloads and research.          |
+| Backup storage             | External drive or cloud repository.          | Protecting project files.        |
 
 PayGuard can be built on a normal development machine and does not require expensive servers. Production use would require stronger hosting, database and security controls.
 
@@ -353,14 +353,14 @@ PayGuard is economically feasible because most tools are open-source. The main c
 
 **Table 2.10: Estimated development cost**
 
-| Item | Estimated cost | Comment |
-|---|---:|---|
-| Development tools | USD 0 | Open-source tools. |
-| Hosting during development | USD 0 | Local machine. |
-| Internet and research access | USD 30 | Downloads and references. |
-| Backup storage | USD 10 | External or cloud backup. |
-| Testing and documentation | USD 20 | Review and optional tests. |
-| Total estimated cost | USD 60 | Prototype cost only. |
+| Item                         | Estimated cost | Comment                    |
+| ---------------------------- | -------------: | -------------------------- |
+| Development tools            |          USD 0 | Open-source tools.         |
+| Hosting during development   |          USD 0 | Local machine.             |
+| Internet and research access |         USD 30 | Downloads and references.  |
+| Backup storage               |         USD 10 | External or cloud backup.  |
+| Testing and documentation    |         USD 20 | Review and optional tests. |
+| Total estimated cost         |         USD 60 | Prototype cost only.       |
 
 The project is affordable because it does not require paid software licences and may reduce the time needed to identify suspicious transactions.
 
@@ -387,13 +387,13 @@ For this research, PayGuard uses synthetic data, reducing privacy risk because r
 
 **Table 2.11: Legal and ethical considerations**
 
-| Issue | Risk | Control measure |
-|---|---|---|
-| Personal data exposure | Real users may be identified. | Use synthetic data and data minimisation. |
-| False accusation | Legitimate transaction may be flagged. | Use human review. |
-| Unauthorised access | Dashboard may expose records. | Add login and roles. |
-| Model bias | Some patterns may be unfairly flagged. | Monitor false positives. |
-| Data retention | Old records may be stored too long. | Define retention policy. |
+| Issue                  | Risk                                   | Control measure                           |
+| ---------------------- | -------------------------------------- | ----------------------------------------- |
+| Personal data exposure | Real users may be identified.          | Use synthetic data and data minimisation. |
+| False accusation       | Legitimate transaction may be flagged. | Use human review.                         |
+| Unauthorised access    | Dashboard may expose records.          | Add login and roles.                      |
+| Model bias             | Some patterns may be unfairly flagged. | Monitor false positives.                  |
+| Data retention         | Old records may be stored too long.    | Define retention policy.                  |
 
 ### 2.13.5 Schedule Feasibility
 
@@ -401,28 +401,28 @@ Schedule feasibility considers whether the project can be completed within the a
 
 **Table 2.12: Proposed work plan**
 
-| Phase | Activity | Duration | Expected output |
-|---|---|---:|---|
-| Phase 1 | Research and literature review | 2 weeks | Chapter 2 and references. |
-| Phase 2 | Requirements and design | 2 weeks | Requirements and diagrams. |
-| Phase 3 | Synthetic data generator | 1 week | Transaction dataset. |
-| Phase 4 | Feature engineering and model training | 2 weeks | Trained model and metrics. |
-| Phase 5 | Backend API development | 2 weeks | Flask API. |
-| Phase 6 | Frontend dashboard development | 2 weeks | React dashboard. |
-| Phase 7 | Testing and documentation | 2 weeks | Tested prototype and write-up. |
+| Phase   | Activity                               | Duration | Expected output                |
+| ------- | -------------------------------------- | -------: | ------------------------------ |
+| Phase 1 | Research and literature review         |  2 weeks | Chapter 2 and references.      |
+| Phase 2 | Requirements and design                |  2 weeks | Requirements and diagrams.     |
+| Phase 3 | Synthetic data generator               |   1 week | Transaction dataset.           |
+| Phase 4 | Feature engineering and model training |  2 weeks | Trained model and metrics.     |
+| Phase 5 | Backend API development                |  2 weeks | Flask API.                     |
+| Phase 6 | Frontend dashboard development         |  2 weeks | React dashboard.               |
+| Phase 7 | Testing and documentation              |  2 weeks | Tested prototype and write-up. |
 
 **Table 2.13: Gantt chart table placeholder**
 
-| Activity | Week 1 | Week 2 | Week 3 | Week 4 | Week 5 | Week 6 | Week 7 | Week 8 | Week 9 | Week 10 | Week 11 | Week 12 | Week 13 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Research and literature review | X | X |  |  |  |  |  |  |  |  |  |  |  |
-| Requirements and design |  |  | X | X |  |  |  |  |  |  |  |  |  |
-| Synthetic data generation |  |  |  |  | X |  |  |  |  |  |  |  |  |
-| Model training |  |  |  |  |  | X | X |  |  |  |  |  |  |
-| Backend API |  |  |  |  |  |  | X | X |  |  |  |  |  |
-| Frontend dashboard |  |  |  |  |  |  |  | X | X |  |  |  |  |
-| Testing |  |  |  |  |  |  |  |  |  | X | X |  |  |
-| Final documentation |  |  |  |  |  |  |  |  |  |  | X | X | X |
+| Activity                       | Week 1 | Week 2 | Week 3 | Week 4 | Week 5 | Week 6 | Week 7 | Week 8 | Week 9 | Week 10 | Week 11 | Week 12 | Week 13 |
+| ------------------------------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------- | ------- | ------- | ------- |
+| Research and literature review | X      | X      |        |        |        |        |        |        |        |         |         |         |         |
+| Requirements and design        |        |        | X      | X      |        |        |        |        |        |         |         |         |         |
+| Synthetic data generation      |        |        |        |        | X      |        |        |        |        |         |         |         |         |
+| Model training                 |        |        |        |        |        | X      | X      |        |        |         |         |         |         |
+| Backend API                    |        |        |        |        |        |        | X      | X      |        |         |         |         |         |
+| Frontend dashboard             |        |        |        |        |        |        |        | X      | X      |         |         |         |         |
+| Testing                        |        |        |        |        |        |        |        |        |        | X       | X       |         |         |
+| Final documentation            |        |        |        |        |        |        |        |        |        |         | X       | X       | X       |
 
 **Figure 2.1: Gantt chart**
 
@@ -438,15 +438,15 @@ PayGuard follows an iterative prototype approach, where the system is built in s
 
 **Table 2.14: Development stages**
 
-| Stage | Description |
-|---|---|
-| Planning | Identify problem, objectives, scope and tools. |
-| Data preparation | Generate synthetic transaction records. |
-| Model development | Train and evaluate models. |
-| Backend development | Build APIs for scoring, alerts and metrics. |
-| Frontend development | Build dashboard pages. |
-| Testing | Test model, API and interface behaviour. |
-| Documentation | Write dissertation and project notes. |
+| Stage                | Description                                    |
+| -------------------- | ---------------------------------------------- |
+| Planning             | Identify problem, objectives, scope and tools. |
+| Data preparation     | Generate synthetic transaction records.        |
+| Model development    | Train and evaluate models.                     |
+| Backend development  | Build APIs for scoring, alerts and metrics.    |
+| Frontend development | Build dashboard pages.                         |
+| Testing              | Test model, API and interface behaviour.       |
+| Documentation        | Write dissertation and project notes.          |
 
 ## 2.15 Chapter Conclusion
 
@@ -474,12 +474,12 @@ The methods used are summarised in Table 3.1.
 
 **Table 3.1: Information gathering methods**
 
-| Method | Purpose |
-|---|---|
-| Interviews | To understand how finance users verify payments, detect suspicious transactions, and respond to fraud concerns. |
-| Questionnaires | To collect structured feedback on payment verification delays, manual checking, fraud awareness, and preferred dashboard features. |
-| Observation | To study how digital payment records are received, checked, confirmed, and stored. |
-| Document review | To review fraud detection literature, mobile money risks, machine learning studies, and previous dissertation structures. |
+| Method             | Purpose                                                                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Interviews         | To understand how finance users verify payments, detect suspicious transactions, and respond to fraud concerns.                                |
+| Questionnaires     | To collect structured feedback on payment verification delays, manual checking, fraud awareness, and preferred dashboard features.             |
+| Observation        | To study how digital payment records are received, checked, confirmed, and stored.                                                             |
+| Document review    | To review fraud detection literature, mobile money risks, machine learning studies, and previous dissertation structures.                      |
 | Prototype analysis | To identify the practical components required, including data generation, model training, backend APIs, database storage, and dashboard views. |
 
 These methods showed that manual payment verification can become slow when transaction volumes increase. They also showed that users need a system that can highlight suspicious transactions, provide clear risk information, and support human review.
@@ -498,13 +498,13 @@ The process works but it has limitations. It does not automatically analyse acco
 
 **Table 3.5: Existing system description**
 
-| Area | Current approach |
-|---|---|
-| Payment receipt | Digital payment records are received from payment channels. |
-| Verification | Finance staff manually compare payment information. |
-| Fraud checking | Suspicious transactions are identified through experience or simple rules. |
-| Record keeping | Records may be stored in spreadsheets, portals or finance systems. |
-| Reporting | Reports are generated manually or from existing transaction records. |
+| Area            | Current approach                                                           |
+| --------------- | -------------------------------------------------------------------------- |
+| Payment receipt | Digital payment records are received from payment channels.                |
+| Verification    | Finance staff manually compare payment information.                        |
+| Fraud checking  | Suspicious transactions are identified through experience or simple rules. |
+| Record keeping  | Records may be stored in spreadsheets, portals or finance systems.         |
+| Reporting       | Reports are generated manually or from existing transaction records.       |
 
 ### 3.3.2 Weaknesses of the Existing System
 
@@ -512,15 +512,15 @@ The existing system has several weaknesses that justify the development of PayGu
 
 **Table 3.6: Weaknesses of the existing system**
 
-| Weakness | Effect on the institution |
-|---|---|
-| Manual checking is slow | Suspicious transactions may be identified late. |
-| No automatic risk scoring | Users may not know which transactions need urgent attention. |
-| Limited behaviour analysis | Unusual patterns may be missed. |
-| High workload | Finance officers spend more time checking transactions. |
-| Rule-based checks are not flexible | Fraudsters may change methods and avoid detection. |
-| Poor prioritisation | All transactions may appear equal even when some are riskier. |
-| Delayed reporting | Management may receive fraud information late. |
+| Weakness                           | Effect on the institution                                     |
+| ---------------------------------- | ------------------------------------------------------------- |
+| Manual checking is slow            | Suspicious transactions may be identified late.               |
+| No automatic risk scoring          | Users may not know which transactions need urgent attention.  |
+| Limited behaviour analysis         | Unusual patterns may be missed.                               |
+| High workload                      | Finance officers spend more time checking transactions.       |
+| Rule-based checks are not flexible | Fraudsters may change methods and avoid detection.            |
+| Poor prioritisation                | All transactions may appear equal even when some are riskier. |
+| Delayed reporting                  | Management may receive fraud information late.                |
 
 These weaknesses show that a more automated and intelligent monitoring system is required.
 
@@ -536,14 +536,14 @@ The main actors in the current system are shown in Table 3.7.
 
 **Table 3.7: Current system actors and functions**
 
-| Actor | Function in current process |
-|---|---|
-| Student/Guardian | Makes payment through mobile money or digital channel. |
-| Mobile Money Platform | Processes the payment and produces transaction details. |
-| Finance Officer | Checks payment information and verifies records. |
-| Administrator | Supervises payment confirmation and record updates. |
-| Institutional Records System | Stores payment status and student account details. |
-| IT Support | Assists when there are technical issues with digital systems. |
+| Actor                        | Function in current process                                   |
+| ---------------------------- | ------------------------------------------------------------- |
+| Student/Guardian             | Makes payment through mobile money or digital channel.        |
+| Mobile Money Platform        | Processes the payment and produces transaction details.       |
+| Finance Officer              | Checks payment information and verifies records.              |
+| Administrator                | Supervises payment confirmation and record updates.           |
+| Institutional Records System | Stores payment status and student account details.            |
+| IT Support                   | Assists when there are technical issues with digital systems. |
 
 These actors show that the current process depends heavily on human checking. PayGuard is proposed to support them with automated fraud detection assistance.
 
@@ -574,15 +574,15 @@ The proposed workflow is as follows:
 
 **Table 3.8: Advantages of PayGuard**
 
-| Advantage | Explanation |
-|---|---|
-| Faster fraud detection | Transactions can be scored automatically. |
-| Better prioritisation | High-risk transactions are shown first. |
-| Reduced manual workload | Users do not need to inspect every transaction equally. |
-| Improved reporting | Dashboard metrics give quick summaries. |
-| Audit trail | Alerts and transaction scores can be stored for later review. |
+| Advantage               | Explanation                                                    |
+| ----------------------- | -------------------------------------------------------------- |
+| Faster fraud detection  | Transactions can be scored automatically.                      |
+| Better prioritisation   | High-risk transactions are shown first.                        |
+| Reduced manual workload | Users do not need to inspect every transaction equally.        |
+| Improved reporting      | Dashboard metrics give quick summaries.                        |
+| Audit trail             | Alerts and transaction scores can be stored for later review.  |
 | Privacy during research | Synthetic data allows development without exposing real users. |
-| Scalability | The system can be improved for larger datasets in future. |
+| Scalability             | The system can be improved for larger datasets in future.      |
 
 ## 3.7 Evaluation of Alternatives
 
@@ -594,11 +594,11 @@ The third option was to develop PayGuard as an in-house prototype using open-sou
 
 **Table 3.9: Alternative comparison table**
 
-| Alternative | Estimated cost | Flexibility | Suitability for research | Decision |
-|---|---:|---|---|---|
-| Maintain current manual system | Low | Low | Poor | Rejected |
-| Buy commercial system | High | Medium | Medium | Rejected |
-| Develop PayGuard prototype | Medium/Low | High | High | Accepted |
+| Alternative                    | Estimated cost | Flexibility | Suitability for research | Decision |
+| ------------------------------ | -------------: | ----------- | ------------------------ | -------- |
+| Maintain current manual system |            Low | Low         | Poor                     | Rejected |
+| Buy commercial system          |           High | Medium      | Medium                   | Rejected |
+| Develop PayGuard prototype     |     Medium/Low | High        | High                     | Accepted |
 
 The researcher selected the development of PayGuard as the best alternative because it is more suitable for the project objectives, research scope and available resources.
 
@@ -610,45 +610,45 @@ Requirement analysis for PayGuard is divided into functional requirements, non-f
 
 **Table 3.10: Functional requirements**
 
-| ID | Requirement | Description |
-|---|---|---|
-| FR1 | User dashboard | The system shall provide a dashboard showing fraud metrics, alerts and recent transactions. |
-| FR2 | Transaction capture | The system shall store transaction details such as account, amount, type, currency, time, device and location. |
-| FR3 | Fraud scoring | The system shall analyse transactions and produce a fraud risk score. |
-| FR4 | Alert creation | The system shall create an alert when a transaction is considered suspicious. |
-| FR5 | Alert management | The system shall allow users to view, filter and update alert status. |
-| FR6 | Transaction history | The system shall allow users to view transactions by account or by recent activity. |
-| FR7 | Account profile | The system shall show account-level summaries such as transaction count, average amount and alert count. |
-| FR8 | Model training | The system shall train a machine learning model using labelled synthetic transaction data. |
-| FR9 | Metrics display | The system shall display useful metrics such as total transactions, open alerts and fraud rate. |
-| FR10 | Data persistence | The system shall store transactions and alerts in a database. |
+| ID   | Requirement         | Description                                                                                                    |
+| ---- | ------------------- | -------------------------------------------------------------------------------------------------------------- |
+| FR1  | User dashboard      | The system shall provide a dashboard showing fraud metrics, alerts and recent transactions.                    |
+| FR2  | Transaction capture | The system shall store transaction details such as account, amount, type, currency, time, device and location. |
+| FR3  | Fraud scoring       | The system shall analyse transactions and produce a fraud risk score.                                          |
+| FR4  | Alert creation      | The system shall create an alert when a transaction is considered suspicious.                                  |
+| FR5  | Alert management    | The system shall allow users to view, filter and update alert status.                                          |
+| FR6  | Transaction history | The system shall allow users to view transactions by account or by recent activity.                            |
+| FR7  | Account profile     | The system shall show account-level summaries such as transaction count, average amount and alert count.       |
+| FR8  | Model training      | The system shall train a machine learning model using labelled synthetic transaction data.                     |
+| FR9  | Metrics display     | The system shall display useful metrics such as total transactions, open alerts and fraud rate.                |
+| FR10 | Data persistence    | The system shall store transactions and alerts in a database.                                                  |
 
 ### 3.8.2 Non-Functional Requirements
 
 **Table 3.11: Non-functional requirements**
 
-| ID | Requirement | Description |
-|---|---|---|
-| NFR1 | Usability | The system interface should be simple and easy to understand. |
-| NFR2 | Performance | The system should score prototype transactions within a reasonable time. |
-| NFR3 | Reliability | The system should not lose stored transaction and alert records during normal use. |
-| NFR4 | Maintainability | The code should be organised so that features can be updated easily. |
-| NFR5 | Security | The system should validate input and restrict unauthorised access in future production deployment. |
-| NFR6 | Privacy | The prototype should use synthetic data to avoid exposing real personal information. |
-| NFR7 | Portability | The system should run on common development machines using open-source tools. |
-| NFR8 | Scalability | The design should allow future migration to stronger databases and production infrastructure. |
+| ID   | Requirement     | Description                                                                                        |
+| ---- | --------------- | -------------------------------------------------------------------------------------------------- |
+| NFR1 | Usability       | The system interface should be simple and easy to understand.                                      |
+| NFR2 | Performance     | The system should score prototype transactions within a reasonable time.                           |
+| NFR3 | Reliability     | The system should not lose stored transaction and alert records during normal use.                 |
+| NFR4 | Maintainability | The code should be organised so that features can be updated easily.                               |
+| NFR5 | Security        | The system should validate input and restrict unauthorised access in future production deployment. |
+| NFR6 | Privacy         | The prototype should use synthetic data to avoid exposing real personal information.               |
+| NFR7 | Portability     | The system should run on common development machines using open-source tools.                      |
+| NFR8 | Scalability     | The design should allow future migration to stronger databases and production infrastructure.      |
 
 ### 3.8.3 User Requirements
 
 **Table 3.12: User requirements**
 
-| User | Requirement |
-|---|---|
-| Finance officer | View recent transactions and identify suspicious payments. |
-| Fraud analyst | Review alerts, risk scores and reasons for suspicion. |
-| Administrator | Monitor system usage and supervise alert resolution. |
-| IT support | Maintain the backend, database and model files. |
-| Researcher/developer | Generate data, train models and test the prototype. |
+| User                 | Requirement                                                |
+| -------------------- | ---------------------------------------------------------- |
+| Finance officer      | View recent transactions and identify suspicious payments. |
+| Fraud analyst        | Review alerts, risk scores and reasons for suspicion.      |
+| Administrator        | Monitor system usage and supervise alert resolution.       |
+| IT support           | Maintain the backend, database and model files.            |
+| Researcher/developer | Generate data, train models and test the prototype.        |
 
 The user should be able to access the dashboard, inspect suspicious transactions and update alert status after investigation.
 
@@ -660,16 +660,16 @@ A use case diagram shows the interaction between users and the system. It helps 
 
 **Table 3.13: Use case descriptions**
 
-| Use case | Actor | Description |
-|---|---|---|
-| View dashboard | Finance Officer, Administrator | User views key fraud metrics and recent alerts. |
-| Score transaction | Finance Officer, Fraud Analyst | User submits or receives a transaction for risk scoring. |
-| View alerts | Finance Officer, Fraud Analyst | User views suspicious transactions requiring review. |
-| Update alert status | Fraud Analyst | User marks alert as open, closed or resolved. |
-| View transactions | Finance Officer | User checks stored transaction records. |
-| View account profile | Fraud Analyst | User analyses behaviour of one account. |
-| Generate synthetic data | Developer/Researcher | Researcher creates data for testing and training. |
-| Train model | Developer/Researcher | Researcher trains and saves the fraud detection model. |
+| Use case                | Actor                          | Description                                              |
+| ----------------------- | ------------------------------ | -------------------------------------------------------- |
+| View dashboard          | Finance Officer, Administrator | User views key fraud metrics and recent alerts.          |
+| Score transaction       | Finance Officer, Fraud Analyst | User submits or receives a transaction for risk scoring. |
+| View alerts             | Finance Officer, Fraud Analyst | User views suspicious transactions requiring review.     |
+| Update alert status     | Fraud Analyst                  | User marks alert as open, closed or resolved.            |
+| View transactions       | Finance Officer                | User checks stored transaction records.                  |
+| View account profile    | Fraud Analyst                  | User analyses behaviour of one account.                  |
+| Generate synthetic data | Developer/Researcher           | Researcher creates data for testing and training.        |
+| Train model             | Developer/Researcher           | Researcher trains and saves the fraud detection model.   |
 
 ## 3.10 Activity Diagram
 
@@ -705,12 +705,12 @@ The entity relationship diagram shows the database structure and relationships b
 
 **Table 3.14: Main database entities**
 
-| Entity | Description | Key fields |
-|---|---|---|
-| Account profiles | Derived account summaries calculated from transaction and alert records. | account_id, total_transactions, fraud_rate, open_alerts |
-| Transactions | Stores payment transaction details. | transaction_id, account_id, amount, type, timestamp, risk_score |
-| Alerts | Stores suspicious transaction alerts. | alert_id, transaction_id, risk_score, status, reason |
-| ModelRuns | Stores model training information. | model_id, model_name, metrics, trained_at |
+| Entity           | Description                                                              | Key fields                                                      |
+| ---------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| Account profiles | Derived account summaries calculated from transaction and alert records. | account_id, total_transactions, fraud_rate, open_alerts         |
+| Transactions     | Stores payment transaction details.                                      | transaction_id, account_id, amount, type, timestamp, risk_score |
+| Alerts           | Stores suspicious transaction alerts.                                    | alert_id, transaction_id, risk_score, status, reason            |
+| ModelRuns        | Stores model training information.                                       | model_id, model_name, metrics, trained_at                       |
 
 ## 3.13 Data Dictionary
 
@@ -718,42 +718,42 @@ The data dictionary explains the important fields that will be stored in the sys
 
 **Table 3.15: Transactions table**
 
-| Field name | Data type | Description |
-|---|---|---|
-| transaction_id | Integer/Text | Unique transaction identifier. |
-| account_id | Text | Account linked to the transaction. |
-| amount | Decimal | Transaction amount. |
-| currency | Text | Currency used, for example USD or ZWL. |
-| transaction_type | Text | Type of transaction such as payment, transfer or cash-out. |
-| timestamp | DateTime | Date and time of transaction. |
-| device_id | Text | Device used for the transaction. |
-| location | Text | Location linked to the transaction. |
-| is_fraud | Integer | Label showing whether transaction is fraud in synthetic data. |
-| risk_score | Decimal | Fraud probability or risk score produced by the model. |
+| Field name       | Data type    | Description                                                   |
+| ---------------- | ------------ | ------------------------------------------------------------- |
+| transaction_id   | Integer/Text | Unique transaction identifier.                                |
+| account_id       | Text         | Account linked to the transaction.                            |
+| amount           | Decimal      | Transaction amount.                                           |
+| currency         | Text         | Currency used, for example USD or ZWL.                        |
+| transaction_type | Text         | Type of transaction such as payment, transfer or cash-out.    |
+| timestamp        | DateTime     | Date and time of transaction.                                 |
+| device_id        | Text         | Device used for the transaction.                              |
+| location         | Text         | Location linked to the transaction.                           |
+| is_fraud         | Integer      | Label showing whether transaction is fraud in synthetic data. |
+| risk_score       | Decimal      | Fraud probability or risk score produced by the model.        |
 
 **Table 3.16: Alerts table**
 
-| Field name | Data type | Description |
-|---|---|---|
-| alert_id | Integer/Text | Unique alert identifier. |
-| transaction_id | Integer/Text | Transaction that triggered the alert. |
-| risk_score | Decimal | Risk score linked to the alert. |
-| alert_type | Text | Category of suspicious behaviour. |
-| reason | Text | Explanation of why the alert was created. |
-| status | Text | Open, closed or resolved. |
-| created_at | DateTime | Time when alert was created. |
-| resolved_at | DateTime | Time when alert was resolved. |
+| Field name     | Data type    | Description                               |
+| -------------- | ------------ | ----------------------------------------- |
+| alert_id       | Integer/Text | Unique alert identifier.                  |
+| transaction_id | Integer/Text | Transaction that triggered the alert.     |
+| risk_score     | Decimal      | Risk score linked to the alert.           |
+| alert_type     | Text         | Category of suspicious behaviour.         |
+| reason         | Text         | Explanation of why the alert was created. |
+| status         | Text         | Open, closed or resolved.                 |
+| created_at     | DateTime     | Time when alert was created.              |
+| resolved_at    | DateTime     | Time when alert was resolved.             |
 
 **Table 3.17: ModelRuns table**
 
-| Field name | Data type | Description |
-|---|---|---|
-| model_id | Integer/Text | Unique model run identifier. |
-| model_name | Text | Name of the trained model. |
-| algorithm | Text | Algorithm used, for example logistic regression or random forest. |
-| metrics_json | Text | Stored evaluation metrics. |
-| model_path | Text | Location of saved model artefact. |
-| trained_at | DateTime | Date and time when model was trained. |
+| Field name   | Data type    | Description                                                       |
+| ------------ | ------------ | ----------------------------------------------------------------- |
+| model_id     | Integer/Text | Unique model run identifier.                                      |
+| model_name   | Text         | Name of the trained model.                                        |
+| algorithm    | Text         | Algorithm used, for example logistic regression or random forest. |
+| metrics_json | Text         | Stored evaluation metrics.                                        |
+| model_path   | Text         | Location of saved model artefact.                                 |
+| trained_at   | DateTime     | Date and time when model was trained.                             |
 
 ## 3.14 UML and Interaction Diagrams
 
@@ -765,17 +765,17 @@ Several UML-style diagrams are used to explain how PayGuard is structured and ho
 
 **Table 3.18: Proposed classes/modules**
 
-| Class/module | Responsibility |
-|---|---|
-| Transaction | Holds transaction details. |
-| Alert | Holds alert information and status. |
-| AccountProfile | Holds account behaviour summary. |
-| FeatureBuilder | Converts transaction history into model features. |
-| FraudScorer | Uses the trained model to score transactions. |
-| ModelLoader | Loads the saved machine learning model. |
-| DatabaseService | Saves and retrieves database records. |
-| APIController | Handles requests from the dashboard. |
-| DashboardService | Provides metrics for display. |
+| Class/module     | Responsibility                                    |
+| ---------------- | ------------------------------------------------- |
+| Transaction      | Holds transaction details.                        |
+| Alert            | Holds alert information and status.               |
+| AccountProfile   | Holds account behaviour summary.                  |
+| FeatureBuilder   | Converts transaction history into model features. |
+| FraudScorer      | Uses the trained model to score transactions.     |
+| ModelLoader      | Loads the saved machine learning model.           |
+| DatabaseService  | Saves and retrieves database records.             |
+| APIController    | Handles requests from the dashboard.              |
+| DashboardService | Provides metrics for display.                     |
 
 **Figure 3.9: Object diagram**
 
@@ -795,14 +795,14 @@ Several UML-style diagrams are used to explain how PayGuard is structured and ho
 
 **Table 3.19: Alert states**
 
-| State | Meaning |
-|---|---|
-| Created | Alert has been generated by the system. |
-| Open | Alert is waiting for review. |
-| Under Review | Analyst is investigating the alert. |
-| Resolved | Alert has been investigated and resolved. |
-| Closed | Alert is closed and no further action is needed. |
-| Archived | Old alert is kept for record purposes. |
+| State        | Meaning                                          |
+| ------------ | ------------------------------------------------ |
+| Created      | Alert has been generated by the system.          |
+| Open         | Alert is waiting for review.                     |
+| Under Review | Analyst is investigating the alert.              |
+| Resolved     | Alert has been investigated and resolved.        |
+| Closed       | Alert is closed and no further action is needed. |
+| Archived     | Old alert is kept for record purposes.           |
 
 ## 3.15 Process Design
 
@@ -843,14 +843,14 @@ The main dashboard areas will include:
 
 **Table 3.20: User interface features**
 
-| Feature | Description |
-|---|---|
-| User friendly | Clear labels, simple menus and readable tables. |
-| Consistent | Similar layout across dashboard pages. |
-| Informative | Shows risk scores, alerts and transaction summaries. |
-| Actionable | Allows users to update alert status. |
-| Maintainable | Interface can be extended with new pages in future. |
-| Responsive | Can be improved to work on different screen sizes. |
+| Feature       | Description                                          |
+| ------------- | ---------------------------------------------------- |
+| User friendly | Clear labels, simple menus and readable tables.      |
+| Consistent    | Similar layout across dashboard pages.               |
+| Informative   | Shows risk scores, alerts and transaction summaries. |
+| Actionable    | Allows users to update alert status.                 |
+| Maintainable  | Interface can be extended with new pages in future.  |
+| Responsive    | Can be improved to work on different screen sizes.   |
 
 ## 3.17 System Controls and Security
 
@@ -858,15 +858,15 @@ System controls and security are important because PayGuard handles financial tr
 
 **Table 3.21: System controls**
 
-| Control area | Control method |
-|---|---|
-| Input validation | Check required fields, data types, timestamps, and transaction amounts. |
-| Processing control | Score transactions using the correct feature set and loaded model. |
-| Database control | Store transactions, alerts, and model information in structured tables. |
-| Error handling | Return clear messages when model loading, validation, or database operations fail. |
-| Access control | Add user accounts and role-based permissions in a future production version. |
-| Backup | Maintain database and model backup copies. |
-| Privacy | Use synthetic data during research and apply data minimisation if real data is used later. |
+| Control area       | Control method                                                                             |
+| ------------------ | ------------------------------------------------------------------------------------------ |
+| Input validation   | Check required fields, data types, timestamps, and transaction amounts.                    |
+| Processing control | Score transactions using the correct feature set and loaded model.                         |
+| Database control   | Store transactions, alerts, and model information in structured tables.                    |
+| Error handling     | Return clear messages when model loading, validation, or database operations fail.         |
+| Access control     | Add user accounts and role-based permissions in a future production version.               |
+| Backup             | Maintain database and model backup copies.                                                 |
+| Privacy            | Use synthetic data during research and apply data minimisation if real data is used later. |
 
 ## 3.18 Testing Requirements
 
@@ -874,14 +874,14 @@ Testing requirements define how the system will be checked during implementation
 
 **Table 3.22: Testing requirements**
 
-| Test type | Purpose |
-|---|---|
-| Unit testing | Check individual functions such as feature building and validation. |
-| Integration testing | Check that frontend, backend, database and model work together. |
-| Model evaluation | Check fraud detection performance using precision, recall, F1 and ROC-AUC. |
-| Interface testing | Check whether dashboard pages display correct data. |
-| API testing | Check endpoints for transactions, scoring, alerts and metrics. |
-| User acceptance testing | Check whether users can understand and operate the system. |
+| Test type               | Purpose                                                                    |
+| ----------------------- | -------------------------------------------------------------------------- |
+| Unit testing            | Check individual functions such as feature building and validation.        |
+| Integration testing     | Check that frontend, backend, database and model work together.            |
+| Model evaluation        | Check fraud detection performance using precision, recall, F1 and ROC-AUC. |
+| Interface testing       | Check whether dashboard pages display correct data.                        |
+| API testing             | Check endpoints for transactions, scoring, alerts and metrics.             |
+| User acceptance testing | Check whether users can understand and operate the system.                 |
 
 ## 3.19 Chapter Conclusion
 
@@ -923,13 +923,13 @@ The main architectural layers are shown in Table 4.1.
 
 **Table 4.1: PayGuard system architecture layers**
 
-| Layer | Main technology | Purpose |
-|---|---|---|
-| Presentation layer | React, TypeScript, Vite, Tailwind CSS, shadcn/ui | Displays the dashboard, forms, tables, charts, alerts, and account lookup screens. |
-| API layer | Flask | Receives frontend requests, validates input, returns JSON responses, and connects the frontend to the database and model. |
-| Data layer | SQLite | Stores transactions, alerts, and model run records. |
-| Machine learning layer | pandas, NumPy, scikit-learn, joblib | Builds features, trains models, saves the selected model, and scores new transactions. |
-| Data generation layer | Python, pandas, NumPy | Generates synthetic mobile money transactions and fraud patterns for development and testing. |
+| Layer                  | Main technology                                  | Purpose                                                                                                                   |
+| ---------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Presentation layer     | React, TypeScript, Vite, Tailwind CSS, shadcn/ui | Displays the dashboard, forms, tables, charts, alerts, and account lookup screens.                                        |
+| API layer              | Flask                                            | Receives frontend requests, validates input, returns JSON responses, and connects the frontend to the database and model. |
+| Data layer             | SQLite                                           | Stores transactions, alerts, and model run records.                                                                       |
+| Machine learning layer | pandas, NumPy, scikit-learn, joblib              | Builds features, trains models, saves the selected model, and scores new transactions.                                    |
+| Data generation layer  | Python, pandas, NumPy                            | Generates synthetic mobile money transactions and fraud patterns for development and testing.                             |
 
 **Figure 4.1: System architecture diagram**
 
@@ -941,14 +941,14 @@ PayGuard is divided into major components with clear responsibilities, making th
 
 **Table 4.2: Main PayGuard components**
 
-| Component | Description | Main responsibility |
-|---|---|---|
-| Synthetic transaction generator | Python script that creates sample mobile money transactions. | Generates normal transactions and injects fraud patterns for testing. |
-| Feature engineering module | Python module in the machine learning package. | Converts raw transaction records into model-ready features. |
-| Training pipeline | Python training script. | Trains candidate models and saves the best fraud detection model. |
-| Flask API | Backend application. | Handles health checks, transactions, scoring, alerts, account profiles, and metrics. |
-| SQLite database | Local relational database. | Stores transactions, alerts, and model run metadata. |
-| React dashboard | Web frontend. | Allows users to monitor metrics, score transactions, view alerts, view transactions, and search account profiles. |
+| Component                       | Description                                                  | Main responsibility                                                                                               |
+| ------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
+| Synthetic transaction generator | Python script that creates sample mobile money transactions. | Generates normal transactions and injects fraud patterns for testing.                                             |
+| Feature engineering module      | Python module in the machine learning package.               | Converts raw transaction records into model-ready features.                                                       |
+| Training pipeline               | Python training script.                                      | Trains candidate models and saves the best fraud detection model.                                                 |
+| Flask API                       | Backend application.                                         | Handles health checks, transactions, scoring, alerts, account profiles, and metrics.                              |
+| SQLite database                 | Local relational database.                                   | Stores transactions, alerts, and model run metadata.                                                              |
+| React dashboard                 | Web frontend.                                                | Allows users to monitor metrics, score transactions, view alerts, view transactions, and search account profiles. |
 
 The components communicate through structured data. The frontend sends HTTP requests to the backend, the backend queries SQLite, and the model receives prepared features before returning a prediction and risk score.
 
@@ -960,29 +960,29 @@ The synthetic dataset includes the fields shown in Table 4.3.
 
 **Table 4.3: Synthetic transaction fields**
 
-| Field | Description |
-|---|---|
-| account_id | Unique prototype account identifier. |
+| Field            | Description                                                                      |
+| ---------------- | -------------------------------------------------------------------------------- |
+| account_id       | Unique prototype account identifier.                                             |
 | transaction_type | Type such as cash_in, cash_out, bill_payment, p2p_transfer, or merchant_payment. |
-| amount | Transaction amount. |
-| currency | Transaction currency, mainly USD or ZWL. |
-| device_id | Device used for the transaction. |
-| location | Transaction location. |
-| created_at | Transaction date and time. |
-| is_fraud | Synthetic normal or fraud label. |
-| fraud_score | Synthetic risk score later supported by model scoring. |
-| metadata_json | Extra JSON details such as source and pattern. |
-| fraud_pattern | Fraud pattern name. |
+| amount           | Transaction amount.                                                              |
+| currency         | Transaction currency, mainly USD or ZWL.                                         |
+| device_id        | Device used for the transaction.                                                 |
+| location         | Transaction location.                                                            |
+| created_at       | Transaction date and time.                                                       |
+| is_fraud         | Synthetic normal or fraud label.                                                 |
+| fraud_score      | Synthetic risk score later supported by model scoring.                           |
+| metadata_json    | Extra JSON details such as source and pattern.                                   |
+| fraud_pattern    | Fraud pattern name.                                                              |
 
 The generator includes three main fraud patterns, shown in Table 4.4.
 
 **Table 4.4: Fraud patterns used in PayGuard data generation**
 
-| Fraud pattern | Description | Design reason |
-|---|---|---|
-| amount_spike | Amount is much larger than normal. | Detects unusual values. |
-| device_location_change | New device and different location. | Simulates suspicious access. |
-| rapid_burst | Many transactions happen close together. | Simulates fast fund movement. |
+| Fraud pattern          | Description                              | Design reason                 |
+| ---------------------- | ---------------------------------------- | ----------------------------- |
+| amount_spike           | Amount is much larger than normal.       | Detects unusual values.       |
+| device_location_change | New device and different location.       | Simulates suspicious access.  |
+| rapid_burst            | Many transactions happen close together. | Simulates fast fund movement. |
 
 **Figure 4.2: Data generation flow diagram**
 
@@ -1003,56 +1003,56 @@ The feature engineering module validates required columns, cleans transaction fi
 
 **Table 4.5: Numeric machine learning features**
 
-| Feature | Description |
-|---|---|
-| amount | Original transaction amount. |
-| amount_log | Log-transformed amount. |
-| hour | Transaction hour. |
-| day_of_week | Transaction day of week. |
-| is_weekend | Weekend indicator. |
-| is_night | Late-night indicator. |
-| account_prior_tx_count | Previous account transaction count. |
-| account_prior_avg_amount | Previous account average amount. |
-| amount_to_prior_avg_ratio | Current amount compared with prior average. |
-| amount_delta_from_prior_avg | Difference from prior average. |
-| account_age_hours | Time since the account's first transaction. |
-| seconds_since_prev_tx | Time since previous account transaction. |
-| tx_count_last_1h | Transactions in the last hour. |
-| tx_count_last_24h | Transactions in the last 24 hours. |
-| device_change | Device change indicator. |
-| location_change | Location change indicator. |
+| Feature                     | Description                                 |
+| --------------------------- | ------------------------------------------- |
+| amount                      | Original transaction amount.                |
+| amount_log                  | Log-transformed amount.                     |
+| hour                        | Transaction hour.                           |
+| day_of_week                 | Transaction day of week.                    |
+| is_weekend                  | Weekend indicator.                          |
+| is_night                    | Late-night indicator.                       |
+| account_prior_tx_count      | Previous account transaction count.         |
+| account_prior_avg_amount    | Previous account average amount.            |
+| amount_to_prior_avg_ratio   | Current amount compared with prior average. |
+| amount_delta_from_prior_avg | Difference from prior average.              |
+| account_age_hours           | Time since the account's first transaction. |
+| seconds_since_prev_tx       | Time since previous account transaction.    |
+| tx_count_last_1h            | Transactions in the last hour.              |
+| tx_count_last_24h           | Transactions in the last 24 hours.          |
+| device_change               | Device change indicator.                    |
+| location_change             | Location change indicator.                  |
 
 **Table 4.6: Categorical machine learning features**
 
-| Feature | Description |
-|---|---|
+| Feature          | Description                       |
+| ---------------- | --------------------------------- |
 | transaction_type | Type of mobile money transaction. |
-| currency | Currency used in the transaction. |
-| location | Transaction location. |
+| currency         | Currency used in the transaction. |
+| location         | Transaction location.             |
 
 Two candidate models are trained: logistic regression as a baseline and random forest as the stronger model for learning more complex fraud patterns.
 
 **Table 4.7: Candidate machine learning models**
 
-| Model | Purpose in PayGuard |
-|---|---|
-| Logistic regression | Provides a simple baseline model for comparison. |
-| Random forest | Provides the main selected model for scoring because it handles non-linear fraud patterns better. |
+| Model               | Purpose in PayGuard                                                                               |
+| ------------------- | ------------------------------------------------------------------------------------------------- |
+| Logistic regression | Provides a simple baseline model for comparison.                                                  |
+| Random forest       | Provides the main selected model for scoring because it handles non-linear fraud patterns better. |
 
 The training pipeline uses a train-test split and evaluates models using precision, recall, F1-score, and ROC-AUC. The selected model is saved as `fraud_model.joblib` so that Flask can load it during API startup. The current report selected random forest on a synthetic dataset of 99,468 rows.
 
 **Table 4.8: Current model training summary**
 
-| Item | Value |
-|---|---|
+| Item           | Value         |
+| -------------- | ------------- |
 | Selected model | random_forest |
-| Dataset rows | 99,468 |
-| Fraud rows | 2,380 |
-| Fraud rate | 2.39 percent |
-| Precision | 0.4539 |
-| Recall | 0.8697 |
-| F1-score | 0.5965 |
-| ROC-AUC | 0.9912 |
+| Dataset rows   | 99,468        |
+| Fraud rows     | 2,380         |
+| Fraud rate     | 2.39 percent  |
+| Precision      | 0.4539        |
+| Recall         | 0.8697        |
+| F1-score       | 0.5965        |
+| ROC-AUC        | 0.9912        |
 
 The result shows that the prototype can learn the generated fraud patterns. However, because the data is synthetic, the results are treated as academic prototype results, not production banking evidence.
 
@@ -1066,43 +1066,43 @@ The backend is designed as a Flask API and acts as the central controller of the
 
 **Table 4.9: PayGuard API endpoint design**
 
-| Endpoint | Method | Purpose |
-|---|---|---|
-| `/api/health` | GET | Checks API status, database connection, and model loading status. |
-| `/api/transactions` | POST | Creates and stores a transaction record. |
-| `/api/transactions` | GET | Returns recent transactions, optionally filtered by account ID. |
-| `/api/score` | POST | Scores a transaction using the fraud model, stores the transaction, and creates an alert. |
-| `/api/alerts` | GET | Returns alert records, with optional filters for status and minimum risk. |
-| `/api/alerts/<alert_id>` | GET | Returns details for one alert. |
-| `/api/alerts/<alert_id>` | PATCH | Updates the status of an alert. |
-| `/api/accounts/<account_id>` | GET | Returns an account profile summary calculated from stored transactions and alerts. |
-| `/api/accounts/<account_id>/transactions` | GET | Returns transaction history for a selected account. |
-| `/api/metrics` | GET | Returns dashboard metrics such as total transactions, fraud rate, open alerts, and alert breakdown. |
+| Endpoint                                  | Method | Purpose                                                                                             |
+| ----------------------------------------- | ------ | --------------------------------------------------------------------------------------------------- |
+| `/api/health`                             | GET    | Checks API status, database connection, and model loading status.                                   |
+| `/api/transactions`                       | POST   | Creates and stores a transaction record.                                                            |
+| `/api/transactions`                       | GET    | Returns recent transactions, optionally filtered by account ID.                                     |
+| `/api/score`                              | POST   | Scores a transaction using the fraud model, stores the transaction, and creates an alert.           |
+| `/api/alerts`                             | GET    | Returns alert records, with optional filters for status and minimum risk.                           |
+| `/api/alerts/<alert_id>`                  | GET    | Returns details for one alert.                                                                      |
+| `/api/alerts/<alert_id>`                  | PATCH  | Updates the status of an alert.                                                                     |
+| `/api/accounts/<account_id>`              | GET    | Returns an account profile summary calculated from stored transactions and alerts.                  |
+| `/api/accounts/<account_id>/transactions` | GET    | Returns transaction history for a selected account.                                                 |
+| `/api/metrics`                            | GET    | Returns dashboard metrics such as total transactions, fraud rate, open alerts, and alert breakdown. |
 
 The scoring endpoint is the most important backend process. It validates a submitted transaction, retrieves account history, builds features, runs the model, stores the transaction, creates an alert, and returns the result to the dashboard.
 
 **Table 4.10: Required transaction input fields for scoring**
 
-| Field | Purpose |
-|---|---|
-| account_id | Identifies the account being scored. |
-| transaction_type | Describes the type of transaction. |
-| amount | Provides the amount to be analysed. |
-| currency | Identifies the currency. |
-| device_id | Helps detect device changes. |
-| location | Helps detect location changes. |
-| created_at | Optional timestamp; if absent, the backend uses the current time. |
+| Field            | Purpose                                                           |
+| ---------------- | ----------------------------------------------------------------- |
+| account_id       | Identifies the account being scored.                              |
+| transaction_type | Describes the type of transaction.                                |
+| amount           | Provides the amount to be analysed.                               |
+| currency         | Identifies the currency.                                          |
+| device_id        | Helps detect device changes.                                      |
+| location         | Helps detect location changes.                                    |
+| created_at       | Optional timestamp; if absent, the backend uses the current time. |
 
 The backend also converts the fraud score into a risk level. The current alert threshold is 0.65. If the predicted label is fraud or the risk score reaches the threshold, the alert is opened for review.
 
 **Table 4.11: Risk level design**
 
 | Risk score range | Risk level |
-|---|---|
-| 0.90 and above | critical |
-| 0.75 to 0.89 | high |
-| 0.55 to 0.74 | medium |
-| Below 0.55 | low |
+| ---------------- | ---------- |
+| 0.90 and above   | critical   |
+| 0.75 to 0.89     | high       |
+| 0.55 to 0.74     | medium     |
+| Below 0.55       | low        |
 
 The backend also generates an alert reason from important feature signals such as unusual amount, transaction velocity, device change, location change, or rapid repeat activity.
 
@@ -1116,11 +1116,11 @@ PayGuard uses SQLite because it is lightweight and suitable for a local academic
 
 **Table 4.12: Database tables**
 
-| Table | Purpose |
-|---|---|
+| Table        | Purpose                                                                                                  |
+| ------------ | -------------------------------------------------------------------------------------------------------- |
 | transactions | Stores all transaction records, including amount, account, type, location, fraud label, and fraud score. |
-| alerts | Stores fraud alert records linked to scored transactions. |
-| model_runs | Stores model training metadata for future tracking of model versions and metrics. |
+| alerts       | Stores fraud alert records linked to scored transactions.                                                |
+| model_runs   | Stores model training metadata for future tracking of model versions and metrics.                        |
 
 ### 4.8.1 Transactions Table
 
@@ -1128,20 +1128,20 @@ The `transactions` table stores records from the synthetic dataset, manual trans
 
 **Table 4.13: Transactions table design**
 
-| Field | Data type | Description |
-|---|---|---|
-| id | INTEGER | Primary key for each transaction. |
-| account_id | TEXT | Account linked to the transaction. |
-| transaction_type | TEXT | Type of transaction. |
-| amount | REAL | Transaction amount. |
-| currency | TEXT | Transaction currency. |
-| device_id | TEXT | Device used for the transaction. |
-| location | TEXT | Transaction location. |
-| created_at | TEXT | Transaction date and time. |
-| is_fraud | INTEGER | Fraud label or predicted fraud flag, stored as 0 or 1. |
-| fraud_score | REAL | Fraud risk score between 0 and 1. |
-| metadata_json | TEXT | Extra metadata stored as JSON text. |
-| inserted_at | TEXT | Time when the record was inserted into the database. |
+| Field            | Data type | Description                                            |
+| ---------------- | --------- | ------------------------------------------------------ |
+| id               | INTEGER   | Primary key for each transaction.                      |
+| account_id       | TEXT      | Account linked to the transaction.                     |
+| transaction_type | TEXT      | Type of transaction.                                   |
+| amount           | REAL      | Transaction amount.                                    |
+| currency         | TEXT      | Transaction currency.                                  |
+| device_id        | TEXT      | Device used for the transaction.                       |
+| location         | TEXT      | Transaction location.                                  |
+| created_at       | TEXT      | Transaction date and time.                             |
+| is_fraud         | INTEGER   | Fraud label or predicted fraud flag, stored as 0 or 1. |
+| fraud_score      | REAL      | Fraud risk score between 0 and 1.                      |
+| metadata_json    | TEXT      | Extra metadata stored as JSON text.                    |
+| inserted_at      | TEXT      | Time when the record was inserted into the database.   |
 
 ### 4.8.2 Alerts Table
 
@@ -1149,16 +1149,16 @@ The `alerts` table stores suspicious transaction alerts, with each alert linked 
 
 **Table 4.14: Alerts table design**
 
-| Field | Data type | Description |
-|---|---|---|
-| id | INTEGER | Primary key for each alert. |
-| transaction_id | INTEGER | Foreign key linked to the transactions table. |
-| risk_score | REAL | Risk score that triggered or described the alert. |
-| alert_type | TEXT | Alert category such as low_risk, medium_risk, high_risk, or critical_risk. |
-| reason | TEXT | Human-readable reason explaining why the alert was created. |
-| status | TEXT | Alert status, such as open, closed, or resolved. |
-| created_at | TEXT | Date and time when the alert was created. |
-| resolved_at | TEXT | Date and time when the alert was resolved, if applicable. |
+| Field          | Data type | Description                                                                |
+| -------------- | --------- | -------------------------------------------------------------------------- |
+| id             | INTEGER   | Primary key for each alert.                                                |
+| transaction_id | INTEGER   | Foreign key linked to the transactions table.                              |
+| risk_score     | REAL      | Risk score that triggered or described the alert.                          |
+| alert_type     | TEXT      | Alert category such as low_risk, medium_risk, high_risk, or critical_risk. |
+| reason         | TEXT      | Human-readable reason explaining why the alert was created.                |
+| status         | TEXT      | Alert status, such as open, closed, or resolved.                           |
+| created_at     | TEXT      | Date and time when the alert was created.                                  |
+| resolved_at    | TEXT      | Date and time when the alert was resolved, if applicable.                  |
 
 ### 4.8.3 Model Runs Table
 
@@ -1166,14 +1166,14 @@ The `model_runs` table supports future model history tracking. The current proto
 
 **Table 4.15: Model runs table design**
 
-| Field | Data type | Description |
-|---|---|---|
-| id | INTEGER | Primary key for each model run. |
-| model_name | TEXT | Name of the trained model. |
-| model_version | TEXT | Version or identifier for the model. |
-| metrics_json | TEXT | Evaluation results stored as JSON text. |
-| notes | TEXT | Extra notes about the model run. |
-| created_at | TEXT | Date and time when the model run was recorded. |
+| Field         | Data type | Description                                    |
+| ------------- | --------- | ---------------------------------------------- |
+| id            | INTEGER   | Primary key for each model run.                |
+| model_name    | TEXT      | Name of the trained model.                     |
+| model_version | TEXT      | Version or identifier for the model.           |
+| metrics_json  | TEXT      | Evaluation results stored as JSON text.        |
+| notes         | TEXT      | Extra notes about the model run.               |
+| created_at    | TEXT      | Date and time when the model run was recorded. |
 
 **Figure 4.5: Database relationship diagram**
 
@@ -1187,11 +1187,11 @@ The implemented backend uses three alert status values.
 
 **Table 4.16: Alert lifecycle states**
 
-| State | Meaning |
-|---|---|
-| open | The alert is active and requires review. |
-| closed | The alert has been dismissed or closed without further action. |
-| resolved | The alert has been reviewed and marked as resolved. |
+| State    | Meaning                                                        |
+| -------- | -------------------------------------------------------------- |
+| open     | The alert is active and requires review.                       |
+| closed   | The alert has been dismissed or closed without further action. |
+| resolved | The alert has been reviewed and marked as resolved.            |
 
 **Figure 4.6: Alert lifecycle diagram**
 
@@ -1210,12 +1210,12 @@ The application has a sidebar navigation menu with four main views:
 
 **Table 4.17: Frontend views**
 
-| View | Purpose |
-|---|---|
-| Dashboard | Shows key metrics, risk trend, alert distribution, and live transaction scoring form. |
-| Alerts | Shows alert records, filters, alert details, and alert status actions. |
+| View         | Purpose                                                                                        |
+| ------------ | ---------------------------------------------------------------------------------------------- |
+| Dashboard    | Shows key metrics, risk trend, alert distribution, and live transaction scoring form.          |
+| Alerts       | Shows alert records, filters, alert details, and alert status actions.                         |
 | Transactions | Shows recent transactions with filtering by account, type, location, device, and fraud status. |
-| Accounts | Allows users to search for an account and view profile metrics and transaction history. |
+| Accounts     | Allows users to search for an account and view profile metrics and transaction history.        |
 
 ### 4.10.1 Dashboard View
 
@@ -1223,24 +1223,28 @@ The dashboard view is the main monitoring screen. It displays key indicators suc
 
 The dashboard also includes a live scoring form. When a user submits transaction details, the frontend calls `/api/score` and displays the risk score, risk level, alert status, reason, and key feature signals.
 
+![alt text](image.png)
 **Figure 4.7: Dashboard screenshot**
 
 ### 4.10.2 Alerts View
 
 The alerts view allows users to review suspicious transactions using search and filters for account ID, alert type, reason, status, and risk level. Alerts are shown in a table, and selecting one opens a detail drawer with transaction information and status actions.
 
+![alt text](image-1.png)
 **Figure 4.8: Alerts page screenshot**
 
 ### 4.10.3 Transactions View
 
 The transactions view shows recent database records. Users can search by account, location, or device, and filter by transaction type or fraud status. This helps users inspect whether flagged records appear in the stored transaction history.
 
+![alt text](image-2.png)
 **Figure 4.9: Transactions page screenshot**
 
 ### 4.10.4 Accounts View
 
 The accounts view allows users to search for an account ID and view account-level statistics, alerts, risk values, and transaction history. The backend calculates the profile from SQLite records, avoiding duplicated account data while still supporting behaviour analysis.
 
+![alt text](image-3.png)
 **Figure 4.10: Account lookup screenshot**
 
 ## 4.11 Input and Output Design
@@ -1249,24 +1253,24 @@ Input design covers information entered into the system, while output design cov
 
 **Table 4.18: Main system inputs**
 
-| Input | Source | Purpose |
-|---|---|---|
+| Input                        | Source                  | Purpose                                                                    |
+| ---------------------------- | ----------------------- | -------------------------------------------------------------------------- |
 | Synthetic dataset parameters | Developer or researcher | Controls number of accounts, number of days, random seed, and output path. |
-| Transaction scoring form | Dashboard user | Sends a transaction to the backend for fraud scoring. |
-| Alert filters | Alerts page user | Filters alert records by status, risk, type, or search term. |
-| Transaction filters | Transactions page user | Filters recent transaction records. |
-| Account ID search | Accounts page user | Retrieves account profile and transaction history. |
+| Transaction scoring form     | Dashboard user          | Sends a transaction to the backend for fraud scoring.                      |
+| Alert filters                | Alerts page user        | Filters alert records by status, risk, type, or search term.               |
+| Transaction filters          | Transactions page user  | Filters recent transaction records.                                        |
+| Account ID search            | Accounts page user      | Retrieves account profile and transaction history.                         |
 
 **Table 4.19: Main system outputs**
 
-| Output | Description |
-|---|---|
-| Fraud risk score | Numerical score showing how risky the transaction appears. |
-| Predicted label | Indicates whether the model classified the transaction as fraud or normal. |
-| Risk level | Human-readable level such as low, medium, high, or critical. |
-| Alert record | Stored review item created after scoring. |
-| Dashboard metrics | Summary values such as total transactions, fraud rate, and open alerts. |
-| Account profile | Summary of account behaviour and transaction history. |
+| Output            | Description                                                                |
+| ----------------- | -------------------------------------------------------------------------- |
+| Fraud risk score  | Numerical score showing how risky the transaction appears.                 |
+| Predicted label   | Indicates whether the model classified the transaction as fraud or normal. |
+| Risk level        | Human-readable level such as low, medium, high, or critical.               |
+| Alert record      | Stored review item created after scoring.                                  |
+| Dashboard metrics | Summary values such as total transactions, fraud rate, and open alerts.    |
+| Account profile   | Summary of account behaviour and transaction history.                      |
 
 ## 4.12 Processing Design
 
@@ -1297,17 +1301,17 @@ Although PayGuard is a prototype, the design includes basic controls for safer u
 
 **Table 4.20: Security and control design**
 
-| Control | Description |
-|---|---|
-| Input validation | Required fields such as account ID, transaction type, and amount are checked before processing. |
-| Amount validation | Negative amounts are rejected. |
-| Currency validation | Currency must be a three-letter code. |
-| Timestamp validation | Transaction time must be valid ISO-8601 format if provided. |
-| Database constraints | SQLite checks are used for non-negative amount and valid fraud labels. |
-| Foreign key constraint | Alerts are linked to transactions using a foreign key. |
-| Error handling | API errors return clear JSON responses instead of silent failures. |
-| Synthetic data | Real personal financial records are not used during prototype development. |
-| Human review | Fraud alerts support human investigation and do not automatically punish users. |
+| Control                | Description                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------- |
+| Input validation       | Required fields such as account ID, transaction type, and amount are checked before processing. |
+| Amount validation      | Negative amounts are rejected.                                                                  |
+| Currency validation    | Currency must be a three-letter code.                                                           |
+| Timestamp validation   | Transaction time must be valid ISO-8601 format if provided.                                     |
+| Database constraints   | SQLite checks are used for non-negative amount and valid fraud labels.                          |
+| Foreign key constraint | Alerts are linked to transactions using a foreign key.                                          |
+| Error handling         | API errors return clear JSON responses instead of silent failures.                              |
+| Synthetic data         | Real personal financial records are not used during prototype development.                      |
+| Human review           | Fraud alerts support human investigation and do not automatically punish users.                 |
 
 For production use, stronger controls would be required, including login, role-based access, encrypted storage, audit logs, secure hosting, and integration controls for real mobile money providers.
 
@@ -1319,13 +1323,13 @@ The simplified stack was selected to make future hosting easier. The frontend is
 
 **Table 4.21: Development deployment design**
 
-| Part | Local design |
-|---|---|
+| Part     | Local design                                         |
+| -------- | ---------------------------------------------------- |
 | Frontend | Vite development server serving the React dashboard. |
-| Backend | Flask application serving `/api` endpoints. |
-| Database | SQLite database stored in the data folder. |
-| Model | Saved joblib model stored in the models folder. |
-| Dataset | Synthetic CSV data stored in the data folder. |
+| Backend  | Flask application serving `/api` endpoints.          |
+| Database | SQLite database stored in the data folder.           |
+| Model    | Saved joblib model stored in the models folder.      |
+| Dataset  | Synthetic CSV data stored in the data folder.        |
 
 **Figure 4.12: Deployment diagram**
 
@@ -1357,19 +1361,19 @@ PayGuard was developed using open-source tools suitable for a final year softwar
 
 **Table 5.1: Development environment**
 
-| Item | Description |
-|---|---|
-| Operating system | Windows development environment. |
-| Backend language | Python. |
-| Backend framework | Flask. |
-| Database | SQLite. |
-| Frontend framework | React with TypeScript. |
-| Build tool | Vite. |
-| Styling | Tailwind CSS and shadcn/ui components. |
-| Machine learning libraries | pandas, NumPy, scikit-learn, joblib. |
-| Version control | Git. |
-| Dataset storage | CSV files in the data folder. |
-| Model storage | joblib model files in the models folder. |
+| Item                       | Description                              |
+| -------------------------- | ---------------------------------------- |
+| Operating system           | Windows development environment.         |
+| Backend language           | Python.                                  |
+| Backend framework          | Flask.                                   |
+| Database                   | SQLite.                                  |
+| Frontend framework         | React with TypeScript.                   |
+| Build tool                 | Vite.                                    |
+| Styling                    | Tailwind CSS and shadcn/ui components.   |
+| Machine learning libraries | pandas, NumPy, scikit-learn, joblib.     |
+| Version control            | Git.                                     |
+| Dataset storage            | CSV files in the data folder.            |
+| Model storage              | joblib model files in the models folder. |
 
 The backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. The frontend dependencies include React, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
 
@@ -1396,19 +1400,20 @@ The project was organised into separate folders so each part could be maintained
 
 **Table 5.2: Project folder structure**
 
-| Folder or file | Purpose |
-|---|---|
-| frontend | React dashboard application. |
-| backend | Flask API, database code, generator, training script, and ML modules. |
-| backend/ml | Feature engineering module. |
-| data | Generated CSV files and SQLite database. |
-| models | Trained model and training report. |
-| docs | Dissertation and project notes. |
-| README.md | Setup and run instructions. |
-| plan.md | Implementation progress tracker. |
+| Folder or file | Purpose                                                               |
+| -------------- | --------------------------------------------------------------------- |
+| frontend       | React dashboard application.                                          |
+| backend        | Flask API, database code, generator, training script, and ML modules. |
+| backend/ml     | Feature engineering module.                                           |
+| data           | Generated CSV files and SQLite database.                              |
+| models         | Trained model and training report.                                    |
+| docs           | Dissertation and project notes.                                       |
+| README.md      | Setup and run instructions.                                           |
+| plan.md        | Implementation progress tracker.                                      |
 
 This structure separates frontend code, backend code, generated data, models, and documentation, making the project easier to understand and demonstrate.
 
+![alt text](image-4.png)
 **Figure 5.1: Project structure screenshot**
 
 ## 5.5 Backend Implementation
@@ -1444,18 +1449,18 @@ The backend exposes API endpoints for the frontend dashboard.
 
 **Table 5.3: Implemented backend endpoints**
 
-| Endpoint | Method | Implementation result |
-|---|---|---|
-| `/api/health` | GET | Returns service, database, and model status. |
-| `/api/transactions` | POST | Validates and saves a transaction. |
-| `/api/transactions` | GET | Returns recent transactions. |
-| `/api/score` | POST | Scores a transaction and creates an alert. |
-| `/api/alerts` | GET | Returns alerts with filters. |
-| `/api/alerts/<alert_id>` | GET | Returns one alert. |
-| `/api/alerts/<alert_id>` | PATCH | Updates alert status. |
-| `/api/accounts/<account_id>` | GET | Returns account metrics. |
-| `/api/accounts/<account_id>/transactions` | GET | Returns account history. |
-| `/api/metrics` | GET | Returns dashboard metrics. |
+| Endpoint                                  | Method | Implementation result                        |
+| ----------------------------------------- | ------ | -------------------------------------------- |
+| `/api/health`                             | GET    | Returns service, database, and model status. |
+| `/api/transactions`                       | POST   | Validates and saves a transaction.           |
+| `/api/transactions`                       | GET    | Returns recent transactions.                 |
+| `/api/score`                              | POST   | Scores a transaction and creates an alert.   |
+| `/api/alerts`                             | GET    | Returns alerts with filters.                 |
+| `/api/alerts/<alert_id>`                  | GET    | Returns one alert.                           |
+| `/api/alerts/<alert_id>`                  | PATCH  | Updates alert status.                        |
+| `/api/accounts/<account_id>`              | GET    | Returns account metrics.                     |
+| `/api/accounts/<account_id>/transactions` | GET    | Returns account history.                     |
+| `/api/metrics`                            | GET    | Returns dashboard metrics.                   |
 
 ### 5.5.4 Fraud Scoring Implementation
 
@@ -1477,6 +1482,7 @@ The scoring process is:
 
 The response includes the transaction ID, alert ID, predicted label, risk score, risk level, alert status, key features, reason, and model name.
 
+![alt text](image-5.png)
 **Figure 5.2: Backend scoring screenshot**
 
 ## 5.6 Database Implementation
@@ -1491,16 +1497,17 @@ The implemented database contains three tables: `transactions`, `alerts`, and `m
 
 **Table 5.4: Implemented database tables**
 
-| Table | Implementation purpose |
-|---|---|
+| Table        | Implementation purpose                          |
+| ------------ | ----------------------------------------------- |
 | transactions | Stores seeded, manual, and scored transactions. |
-| alerts | Stores alert records from scoring. |
-| model_runs | Supports future model metadata. |
+| alerts       | Stores alert records from scoring.              |
+| model_runs   | Supports future model metadata.                 |
 
 ### 5.6.2 Database Seeding
 
 A seeding script was implemented in `backend/seed_db_from_csv.py`. It loads transaction records from CSV, validates required columns, cleans data types, and inserts records into SQLite. It also supports truncation so the prototype can be reset during testing and demonstrations.
 
+![alt text](image-6.png)
 **Figure 5.3: Database seeding screenshot**
 
 ## 5.7 Synthetic Data Implementation
@@ -1509,25 +1516,26 @@ The synthetic data generator was implemented in `backend/generate_data.py`. It c
 
 **Table 5.5: Implemented fraud pattern injectors**
 
-| Fraud injector | Implementation description |
-|---|---|
-| Amount spike | Increases selected transaction amounts above account baseline. |
-| Device/location change | Changes device and location to simulate suspicious access. |
-| Rapid burst | Creates several transactions close together. |
+| Fraud injector         | Implementation description                                     |
+| ---------------------- | -------------------------------------------------------------- |
+| Amount spike           | Increases selected transaction amounts above account baseline. |
+| Device/location change | Changes device and location to simulate suspicious access.     |
+| Rapid burst            | Creates several transactions close together.                   |
 
 The generated dataset is saved as `data/transactions.csv`, with a smaller `data/sample_transactions.csv` for demonstrations. The full dataset contained 99,468 transactions, including 2,380 fraud transactions, giving a 2.39 percent fraud rate suitable for demonstrating class imbalance.
 
 **Table 5.6: Generated dataset summary**
 
-| Item | Result |
-|---|---|
-| Full dataset rows | 99,468 |
-| Fraud rows | 2,380 |
-| Fraud rate | 2.39 percent |
-| Fraud patterns | amount_spike, device_location_change, rapid_burst |
-| Quick demo dataset | 600 rows |
-| Quick demo fraud rows | 12 rows |
+| Item                  | Result                                            |
+| --------------------- | ------------------------------------------------- |
+| Full dataset rows     | 99,468                                            |
+| Fraud rows            | 2,380                                             |
+| Fraud rate            | 2.39 percent                                      |
+| Fraud patterns        | amount_spike, device_location_change, rapid_burst |
+| Quick demo dataset    | 600 rows                                          |
+| Quick demo fraud rows | 12 rows                                           |
 
+![alt text](image-7.png)
 **Figure 5.4: Synthetic data generation screenshot**
 
 ## 5.8 Machine Learning Implementation
@@ -1540,14 +1548,14 @@ Feature engineering was implemented in `backend/ml/features.py`. It loads transa
 
 **Table 5.7: Implemented feature groups**
 
-| Feature group | Example implementation |
-|---|---|
-| Time features | hour, day_of_week, is_weekend, is_night. |
-| Amount features | amount, amount_log, amount ratio and delta. |
-| Account history features | prior count, prior average, account age. |
-| Velocity features | previous interval, last 1h count, last 24h count. |
-| Device and location features | device_change, location_change. |
-| Categorical features | transaction_type, currency, location. |
+| Feature group                | Example implementation                            |
+| ---------------------------- | ------------------------------------------------- |
+| Time features                | hour, day_of_week, is_weekend, is_night.          |
+| Amount features              | amount, amount_log, amount ratio and delta.       |
+| Account history features     | prior count, prior average, account age.          |
+| Velocity features            | previous interval, last 1h count, last 24h count. |
+| Device and location features | device_change, location_change.                   |
+| Categorical features         | transaction_type, currency, location.             |
 
 These features help the model compare a transaction with previous account behaviour.
 
@@ -1564,13 +1572,14 @@ The pipeline scales numeric features and encodes categorical features before tra
 
 **Table 5.8: Model training results**
 
-| Model | Precision | Recall | F1-score | ROC-AUC |
-|---|---:|---:|---:|---:|
-| Random forest | 0.4539 | 0.8697 | 0.5965 | 0.9912 |
-| Logistic regression | 0.3751 | 0.9811 | 0.5427 | 0.9898 |
+| Model               | Precision | Recall | F1-score | ROC-AUC |
+| ------------------- | --------: | -----: | -------: | ------: |
+| Random forest       |    0.4539 | 0.8697 |   0.5965 |  0.9912 |
+| Logistic regression |    0.3751 | 0.9811 |   0.5427 |  0.9898 |
 
 Random forest was selected because it gave the best overall balance of ROC-AUC, F1-score, and recall on the synthetic dataset.
 
+![alt text](image-8.png)
 **Figure 5.5: Model training screenshot**
 
 ## 5.9 Frontend Implementation
@@ -1619,19 +1628,23 @@ The accounts view retrieves an account profile with transaction totals, fraud co
 
 **Table 5.9: Implemented frontend views**
 
-| View | Main implementation result |
-|---|---|
-| Dashboard | Metrics, charts, and live scoring. |
-| Alerts | Alert table, filters, drawer, and actions. |
+| View         | Main implementation result                     |
+| ------------ | ---------------------------------------------- |
+| Dashboard    | Metrics, charts, and live scoring.             |
+| Alerts       | Alert table, filters, drawer, and actions.     |
 | Transactions | Recent transactions, filters, and risk labels. |
-| Accounts | Account lookup, risk profile, and history. |
+| Accounts     | Account lookup, risk profile, and history.     |
 
+![alt text](image-9.png)
 **Figure 5.6: Dashboard screenshot**
 
+![alt text](image-10.png)
 **Figure 5.7: Alerts screenshot**
 
+![alt text](image-11.png)
 **Figure 5.8: Transactions screenshot**
 
+![alt text](image-12.png)
 **Figure 5.9: Accounts screenshot**
 
 ## 5.10 Frontend and Backend Integration
@@ -1669,13 +1682,13 @@ The following testing categories were used:
 
 **Table 5.10: Testing strategy**
 
-| Test area | Purpose |
-|---|---|
-| Dataset validation | Confirm required columns, labels, and class balance. |
-| Database seeding | Confirm CSV records load into SQLite. |
-| Model training | Confirm models train and produce metrics. |
-| API testing | Confirm endpoints return expected responses. |
-| Frontend testing | Confirm dashboard builds and displays screens. |
+| Test area           | Purpose                                                       |
+| ------------------- | ------------------------------------------------------------- |
+| Dataset validation  | Confirm required columns, labels, and class balance.          |
+| Database seeding    | Confirm CSV records load into SQLite.                         |
+| Model training      | Confirm models train and produce metrics.                     |
+| API testing         | Confirm endpoints return expected responses.                  |
+| Frontend testing    | Confirm dashboard builds and displays screens.                |
 | Integration testing | Confirm frontend, backend, database, and model work together. |
 
 ## 5.12 Test Cases
@@ -1684,23 +1697,23 @@ The main system test cases are shown in Table 5.11.
 
 **Table 5.11: PayGuard test cases**
 
-| Test ID | Test description | Expected result | Actual result | Status |
-|---|---|---|---|---|
-| TC01 | Generate synthetic dataset. | Valid CSV is created. | Dataset generated. | Passed |
-| TC02 | Validate fraud balance. | Normal and fraud records exist. | 99,468 rows and 2,380 fraud rows. | Passed |
-| TC03 | Seed SQLite from CSV. | Transactions are inserted. | Database seeded. | Passed |
-| TC04 | Train models. | Models train successfully. | Both models evaluated. | Passed |
-| TC05 | Save best model. | Model artifact is saved. | `fraud_model.joblib` created. | Passed |
-| TC06 | Check health endpoint. | API returns service status. | `/api/health` passed. | Passed |
-| TC07 | Create transaction. | Valid transaction is stored. | Record inserted. | Passed |
-| TC08 | Reject invalid payload. | API returns validation error. | Error returned. | Passed |
-| TC09 | Score transaction. | API returns risk result and alert. | Score and alert returned. | Passed |
-| TC10 | Fetch alerts. | API returns latest alerts. | Alerts returned. | Passed |
-| TC11 | Fetch metrics. | API returns dashboard metrics. | Summaries returned. | Passed |
-| TC12 | Update alert status. | Status can be changed. | Endpoint worked. | Passed |
-| TC13 | Account profile lookup. | API returns profile and history. | Profile returned. | Passed |
-| TC14 | Frontend build. | React dashboard builds. | Build completed. | Passed |
-| TC15 | Dashboard scoring. | User submits and sees result. | Live score returned. | Passed |
+| Test ID | Test description            | Expected result                    | Actual result                     | Status |
+| ------- | --------------------------- | ---------------------------------- | --------------------------------- | ------ |
+| TC01    | Generate synthetic dataset. | Valid CSV is created.              | Dataset generated.                | Passed |
+| TC02    | Validate fraud balance.     | Normal and fraud records exist.    | 99,468 rows and 2,380 fraud rows. | Passed |
+| TC03    | Seed SQLite from CSV.       | Transactions are inserted.         | Database seeded.                  | Passed |
+| TC04    | Train models.               | Models train successfully.         | Both models evaluated.            | Passed |
+| TC05    | Save best model.            | Model artifact is saved.           | `fraud_model.joblib` created.     | Passed |
+| TC06    | Check health endpoint.      | API returns service status.        | `/api/health` passed.             | Passed |
+| TC07    | Create transaction.         | Valid transaction is stored.       | Record inserted.                  | Passed |
+| TC08    | Reject invalid payload.     | API returns validation error.      | Error returned.                   | Passed |
+| TC09    | Score transaction.          | API returns risk result and alert. | Score and alert returned.         | Passed |
+| TC10    | Fetch alerts.               | API returns latest alerts.         | Alerts returned.                  | Passed |
+| TC11    | Fetch metrics.              | API returns dashboard metrics.     | Summaries returned.               | Passed |
+| TC12    | Update alert status.        | Status can be changed.             | Endpoint worked.                  | Passed |
+| TC13    | Account profile lookup.     | API returns profile and history.   | Profile returned.                 | Passed |
+| TC14    | Frontend build.             | React dashboard builds.            | Build completed.                  | Passed |
+| TC15    | Dashboard scoring.          | User submits and sees result.      | Live score returned.              | Passed |
 
 The test results show that the prototype satisfies the main functional requirements.
 
@@ -1710,16 +1723,16 @@ API testing confirmed that backend routes return JSON responses for health check
 
 **Table 5.12: API testing summary**
 
-| Endpoint | Test purpose | Result |
-|---|---|---|
-| `GET /api/health` | Check service readiness. | Passed. |
-| `POST /api/transactions` | Store a transaction. | Passed. |
-| `GET /api/transactions` | Retrieve transaction records. | Passed. |
-| `POST /api/score` | Score a transaction and create alert. | Passed. |
-| `GET /api/alerts` | Retrieve alerts. | Passed. |
-| `GET /api/metrics` | Retrieve dashboard metrics. | Passed. |
-| `PATCH /api/alerts/<alert_id>` | Update alert status. | Passed. |
-| `GET /api/accounts/<account_id>` | Retrieve account profile. | Passed. |
+| Endpoint                         | Test purpose                          | Result  |
+| -------------------------------- | ------------------------------------- | ------- |
+| `GET /api/health`                | Check service readiness.              | Passed. |
+| `POST /api/transactions`         | Store a transaction.                  | Passed. |
+| `GET /api/transactions`          | Retrieve transaction records.         | Passed. |
+| `POST /api/score`                | Score a transaction and create alert. | Passed. |
+| `GET /api/alerts`                | Retrieve alerts.                      | Passed. |
+| `GET /api/metrics`               | Retrieve dashboard metrics.           | Passed. |
+| `PATCH /api/alerts/<alert_id>`   | Update alert status.                  | Passed. |
+| `GET /api/accounts/<account_id>` | Retrieve account profile.             | Passed. |
 
 The API responses support the dashboard and confirm that the backend controls the main fraud monitoring workflow.
 
@@ -1731,12 +1744,12 @@ Random forest was selected as the final model and achieved the following synthet
 
 **Table 5.13: Selected model evaluation**
 
-| Metric | Value |
-|---|---:|
+| Metric    |  Value |
+| --------- | -----: |
 | Precision | 0.4539 |
-| Recall | 0.8697 |
-| F1-score | 0.5965 |
-| ROC-AUC | 0.9912 |
+| Recall    | 0.8697 |
+| F1-score  | 0.5965 |
+| ROC-AUC   | 0.9912 |
 
 The recall value shows that the model detected many synthetic fraud cases, while the precision value shows that some alerts may be false positives. This is acceptable for a decision-support prototype. The ROC-AUC value shows strong ranking ability on synthetic data, but not proof of production performance.
 
@@ -1746,13 +1759,13 @@ Frontend testing checked whether the dashboard built successfully and connected 
 
 **Table 5.14: Frontend testing summary**
 
-| Test area | Expected result | Actual result | Status |
-|---|---|---|---|
-| Dashboard view | Metrics, charts, and scoring form display. | Dashboard displayed correctly. | Passed |
-| Alerts view | Table, filters, drawer, and actions work. | Alerts could be reviewed. | Passed |
-| Transactions view | Records and filters are shown. | Table displayed records. | Passed |
-| Accounts view | Lookup returns profile and history. | Metrics and records returned. | Passed |
-| Frontend build | Application builds. | Build completed. | Passed |
+| Test area         | Expected result                            | Actual result                  | Status |
+| ----------------- | ------------------------------------------ | ------------------------------ | ------ |
+| Dashboard view    | Metrics, charts, and scoring form display. | Dashboard displayed correctly. | Passed |
+| Alerts view       | Table, filters, drawer, and actions work.  | Alerts could be reviewed.      | Passed |
+| Transactions view | Records and filters are shown.             | Table displayed records.       | Passed |
+| Accounts view     | Lookup returns profile and history.        | Metrics and records returned.  | Passed |
+| Frontend build    | Application builds.                        | Build completed.               | Passed |
 
 The frontend was designed to be simple and operational, without requiring users to understand the internal model.
 
@@ -1775,14 +1788,14 @@ The end-to-end flow followed these steps:
 
 **Table 5.15: End-to-end verification**
 
-| Integration point | Expected result | Result |
-|---|---|---|
-| Frontend to backend health check | Proxy reaches Flask API. | Passed. |
-| Metrics loading | Dashboard receives `/api/metrics`. | Passed. |
-| Alert loading | Dashboard receives `/api/alerts`. | Passed. |
-| Live scoring | Form sends to `/api/score`. | Passed. |
-| Database persistence | Transaction and alert are stored. | Passed. |
-| Dashboard refresh | Metrics and alerts update. | Passed. |
+| Integration point                | Expected result                    | Result  |
+| -------------------------------- | ---------------------------------- | ------- |
+| Frontend to backend health check | Proxy reaches Flask API.           | Passed. |
+| Metrics loading                  | Dashboard receives `/api/metrics`. | Passed. |
+| Alert loading                    | Dashboard receives `/api/alerts`.  | Passed. |
+| Live scoring                     | Form sends to `/api/score`.        | Passed. |
+| Database persistence             | Transaction and alert are stored.  | Passed. |
+| Dashboard refresh                | Metrics and alerts update.         | Passed. |
 
 The integration test confirmed that PayGuard works as a complete prototype rather than disconnected modules.
 
@@ -1794,15 +1807,15 @@ The Chapter 1 objectives were compared with the implemented system to confirm wh
 
 **Table 5.16: Validation against project objectives**
 
-| Objective | Implementation evidence | Status |
-|---|---|---|
-| Design a mobile money fraud detection system. | System architecture, backend, database, model, and dashboard were implemented. | Achieved |
-| Generate synthetic mobile money transaction data. | Data generator created full and sample transaction datasets. | Achieved |
-| Identify transaction features for fraud detection. | Feature engineering module created amount, time, velocity, account history, device, and location features. | Achieved |
-| Train and evaluate supervised machine learning models. | Logistic regression and random forest models were trained and evaluated. | Achieved |
-| Develop backend scoring and alert storage. | Flask API implemented `/api/score` and alert persistence. | Achieved |
-| Design a dashboard for transactions, alerts, and risk levels. | React dashboard implemented Dashboard, Alerts, Transactions, and Accounts views. | Achieved |
-| Reduce manual work needed to identify suspicious transactions. | Dashboard highlights risk scores and alerts for review. | Achieved at prototype level |
+| Objective                                                      | Implementation evidence                                                                                    | Status                      |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | --------------------------- |
+| Design a mobile money fraud detection system.                  | System architecture, backend, database, model, and dashboard were implemented.                             | Achieved                    |
+| Generate synthetic mobile money transaction data.              | Data generator created full and sample transaction datasets.                                               | Achieved                    |
+| Identify transaction features for fraud detection.             | Feature engineering module created amount, time, velocity, account history, device, and location features. | Achieved                    |
+| Train and evaluate supervised machine learning models.         | Logistic regression and random forest models were trained and evaluated.                                   | Achieved                    |
+| Develop backend scoring and alert storage.                     | Flask API implemented `/api/score` and alert persistence.                                                  | Achieved                    |
+| Design a dashboard for transactions, alerts, and risk levels.  | React dashboard implemented Dashboard, Alerts, Transactions, and Accounts views.                           | Achieved                    |
+| Reduce manual work needed to identify suspicious transactions. | Dashboard highlights risk scores and alerts for review.                                                    | Achieved at prototype level |
 
 The validation shows that the main objectives were achieved within prototype scope.
 
@@ -1812,14 +1825,14 @@ Several implementation challenges were encountered.
 
 **Table 5.17: Implementation challenges and solutions**
 
-| Challenge | Effect | Solution |
-|---|---|---|
-| Lack of real financial data | Real mobile money records could not be used for privacy reasons. | Synthetic transaction data was generated. |
-| Fraud class imbalance | Fraud records are fewer than normal records. | Metrics such as recall, F1-score, and ROC-AUC were used instead of accuracy alone. |
-| Connecting model scoring to API | The model needed account history to build features. | Backend retrieves account history before scoring new transactions. |
-| Explaining risk results to users | Users need understandable reasons, not only numbers. | Backend returns key features and human-readable alert reasons. |
-| Frontend and backend integration | The dashboard needed to call the Flask API smoothly. | Vite proxy and API helper functions were implemented. |
-| Prototype security limits | Full authentication and role controls were outside current scope. | Security limitations were documented for future improvement. |
+| Challenge                        | Effect                                                            | Solution                                                                           |
+| -------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Lack of real financial data      | Real mobile money records could not be used for privacy reasons.  | Synthetic transaction data was generated.                                          |
+| Fraud class imbalance            | Fraud records are fewer than normal records.                      | Metrics such as recall, F1-score, and ROC-AUC were used instead of accuracy alone. |
+| Connecting model scoring to API  | The model needed account history to build features.               | Backend retrieves account history before scoring new transactions.                 |
+| Explaining risk results to users | Users need understandable reasons, not only numbers.              | Backend returns key features and human-readable alert reasons.                     |
+| Frontend and backend integration | The dashboard needed to call the Flask API smoothly.              | Vite proxy and API helper functions were implemented.                              |
+| Prototype security limits        | Full authentication and role controls were outside current scope. | Security limitations were documented for future improvement.                       |
 
 These challenges helped improve the final system design.
 
@@ -1849,15 +1862,15 @@ The PayGuard implementation is divided into backend, database, machine learning,
 
 **Table 6.1: PayGuard implementation overview**
 
-| System part | Implementation status | Purpose |
-|---|---|---|
-| Backend API | Implemented | Handles transactions, scoring, alerts, metrics, and accounts. |
-| SQLite database | Implemented | Stores transactions, alerts, and model run information. |
-| Synthetic data generator | Implemented | Creates mobile-money-style datasets. |
-| Machine learning model | Implemented | Produces fraud risk predictions. |
-| React dashboard | Implemented | Displays metrics, alerts, transactions, accounts, and scoring form. |
-| End-to-end integration | Implemented | Connects frontend, backend, database, and model. |
-| Cloud deployment | Future improvement | Can be added later after production requirements are confirmed. |
+| System part              | Implementation status | Purpose                                                             |
+| ------------------------ | --------------------- | ------------------------------------------------------------------- |
+| Backend API              | Implemented           | Handles transactions, scoring, alerts, metrics, and accounts.       |
+| SQLite database          | Implemented           | Stores transactions, alerts, and model run information.             |
+| Synthetic data generator | Implemented           | Creates mobile-money-style datasets.                                |
+| Machine learning model   | Implemented           | Produces fraud risk predictions.                                    |
+| React dashboard          | Implemented           | Displays metrics, alerts, transactions, accounts, and scoring form. |
+| End-to-end integration   | Implemented           | Connects frontend, backend, database, and model.                    |
+| Cloud deployment         | Future improvement    | Can be added later after production requirements are confirmed.     |
 
 **Figure 6.1: Implementation overview diagram**
 
@@ -1867,14 +1880,14 @@ Before PayGuard can run, the required software must be installed. The project us
 
 **Table 6.2: Installation requirements**
 
-| Requirement | Purpose |
-|---|---|
-| Python | Runs the API, generator, seeding script, and training script. |
-| Node.js | Runs the React frontend environment. |
-| npm or pnpm | Installs frontend dependencies. |
-| Git | Supports project version control. |
-| Web browser | Opens and uses the PayGuard dashboard. |
-| Internet access | Required when installing packages and dependencies. |
+| Requirement     | Purpose                                                       |
+| --------------- | ------------------------------------------------------------- |
+| Python          | Runs the API, generator, seeding script, and training script. |
+| Node.js         | Runs the React frontend environment.                          |
+| npm or pnpm     | Installs frontend dependencies.                               |
+| Git             | Supports project version control.                             |
+| Web browser     | Opens and uses the PayGuard dashboard.                        |
+| Internet access | Required when installing packages and dependencies.           |
 
 Backend dependencies include Flask, pandas, NumPy, scikit-learn, joblib, and python-dotenv. Frontend dependencies include React, TypeScript, Vite, Tailwind CSS, shadcn/ui, React Icons, and Recharts.
 
@@ -1892,11 +1905,11 @@ Backend setup:
 
 **Table 6.3: Backend setup commands**
 
-| Step | Command |
-|---|---|
-| Open folder | `cd backend` |
-| Create venv | `python -m venv .venv` |
-| Activate venv | `.venv\Scripts\Activate.ps1` |
+| Step             | Command                           |
+| ---------------- | --------------------------------- |
+| Open folder      | `cd backend`                      |
+| Create venv      | `python -m venv .venv`            |
+| Activate venv    | `.venv\Scripts\Activate.ps1`      |
 | Install packages | `pip install -r requirements.txt` |
 
 After installation, the system can generate data, train models, seed the database, and run the API.
@@ -1915,12 +1928,12 @@ Frontend setup:
 
 **Table 6.4: Frontend setup commands**
 
-| Step | Command |
-|---|---|
-| Open folder | `cd frontend` |
-| Install packages | `npm install` |
-| Start dev server | `npm run dev` |
-| Build app | `npm run build` |
+| Step             | Command         |
+| ---------------- | --------------- |
+| Open folder      | `cd frontend`   |
+| Install packages | `npm install`   |
+| Start dev server | `npm run dev`   |
+| Build app        | `npm run build` |
 
 During development, Vite proxies relative `/api` requests to Flask at `http://127.0.0.1:5000`.
 
@@ -1939,11 +1952,11 @@ Data preparation:
 
 **Table 6.5: Data preparation commands**
 
-| Step | Command |
-|---|---|
-| Generate full dataset | `python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv` |
-| Seed full dataset | `python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate` |
-| Seed quick demo dataset | `python seed_db_from_csv.py --csv ..\data\sample_transactions.csv --truncate` |
+| Step                    | Command                                                                                        |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| Generate full dataset   | `python generate_data.py --accounts 420 --days 45 --seed 42 --output ..\data\transactions.csv` |
+| Seed full dataset       | `python seed_db_from_csv.py --csv ..\data\transactions.csv --truncate`                         |
+| Seed quick demo dataset | `python seed_db_from_csv.py --csv ..\data\sample_transactions.csv --truncate`                  |
 
 The full dataset is used for training and full demonstration, while the sample dataset supports quick demos.
 
@@ -1961,10 +1974,10 @@ After training, the selected model is saved as `fraud_model.joblib`, with a repo
 
 **Table 6.6: Model training outputs**
 
-| Output | Description |
-|---|---|
-| `fraud_model.joblib` | Main trained model loaded by the backend API. |
-| Versioned model file | Timestamped model copy for tracking model versions. |
+| Output                 | Description                                                               |
+| ---------------------- | ------------------------------------------------------------------------- |
+| `fraud_model.joblib`   | Main trained model loaded by the backend API.                             |
+| Versioned model file   | Timestamped model copy for tracking model versions.                       |
 | `training_report.json` | Stores model metrics, dataset summary, selected model, and feature lists. |
 
 The current selected model is random forest because it performed better overall than logistic regression on the synthetic test dataset.
@@ -1977,11 +1990,11 @@ The SQLite database is initialised automatically by the backend database layer. 
 
 **Table 6.7: Database implementation files**
 
-| File | Purpose |
-|---|---|
-| `backend/db.py` | Defines database schema and database helper functions. |
-| `backend/seed_db_from_csv.py` | Loads CSV transactions into SQLite. |
-| `data/payguard.db` | SQLite database file created during local use. |
+| File                          | Purpose                                                |
+| ----------------------------- | ------------------------------------------------------ |
+| `backend/db.py`               | Defines database schema and database helper functions. |
+| `backend/seed_db_from_csv.py` | Loads CSV transactions into SQLite.                    |
+| `data/payguard.db`            | SQLite database file created during local use.         |
 
 The database should be seeded before using the dashboard for transaction browsing or account lookup.
 
@@ -2001,12 +2014,12 @@ Once running, the health endpoint confirms that the service, database, and model
 
 **Table 6.8: Backend readiness checks**
 
-| Check | Expected result |
-|---|---|
-| API service | Returns status ok. |
-| Database | Reports database connected. |
-| Model | Reports model loaded. |
-| Timestamp | Returns API response time. |
+| Check       | Expected result             |
+| ----------- | --------------------------- |
+| API service | Returns status ok.          |
+| Database    | Reports database connected. |
+| Model       | Reports model loaded.       |
+| Timestamp   | Returns API response time.  |
 
 **Figure 6.6: Backend health check screenshot**
 
@@ -2020,12 +2033,12 @@ The browser opens the local dashboard URL shown by Vite. The dashboard should be
 
 **Table 6.9: Dashboard screens available after startup**
 
-| Screen | Purpose |
-|---|---|
-| Dashboard | Metrics, charts, and live scoring. |
-| Alerts | Suspicious alerts and review actions. |
-| Transactions | Recent records and filters. |
-| Accounts | Account profiles and history. |
+| Screen       | Purpose                               |
+| ------------ | ------------------------------------- |
+| Dashboard    | Metrics, charts, and live scoring.    |
+| Alerts       | Suspicious alerts and review actions. |
+| Transactions | Recent records and filters.           |
+| Accounts     | Account profiles and history.         |
 
 **Figure 6.7: Dashboard startup screenshot**
 
@@ -2035,16 +2048,16 @@ The full PayGuard prototype should be run in the correct order so all components
 
 **Table 6.10: Full run order**
 
-| Step | Action | Reason |
-|---|---|---|
-| 1 | Install backend dependencies. | Prepares Python environment. |
-| 2 | Install frontend dependencies. | Prepares React dashboard. |
-| 3 | Generate synthetic dataset. | Creates training and seed data. |
-| 4 | Train fraud model. | Creates saved scoring model. |
-| 5 | Seed SQLite database. | Loads dashboard records. |
-| 6 | Start Flask backend. | Makes API endpoints available. |
-| 7 | Start React frontend. | Opens dashboard interface. |
-| 8 | Score a transaction. | Confirms end-to-end workflow. |
+| Step | Action                         | Reason                          |
+| ---- | ------------------------------ | ------------------------------- |
+| 1    | Install backend dependencies.  | Prepares Python environment.    |
+| 2    | Install frontend dependencies. | Prepares React dashboard.       |
+| 3    | Generate synthetic dataset.    | Creates training and seed data. |
+| 4    | Train fraud model.             | Creates saved scoring model.    |
+| 5    | Seed SQLite database.          | Loads dashboard records.        |
+| 6    | Start Flask backend.           | Makes API endpoints available.  |
+| 7    | Start React frontend.          | Opens dashboard interface.      |
+| 8    | Score a transaction.           | Confirms end-to-end workflow.   |
 
 Recommended backend sequence:
 
@@ -2078,14 +2091,14 @@ Training should cover:
 
 **Table 6.11: User training plan**
 
-| Training area | User should learn |
-|---|---|
-| Dashboard overview | Understand metrics and risk summaries. |
-| Transaction scoring | Enter details and read results. |
-| Alert review | Open alerts, read reasons, and update status. |
-| Transaction search | Filter records by account, type, device, location, or fraud status. |
-| Account lookup | Review account-level risk information. |
-| Responsible use | Treat alerts as review warnings, not proof of fraud. |
+| Training area       | User should learn                                                   |
+| ------------------- | ------------------------------------------------------------------- |
+| Dashboard overview  | Understand metrics and risk summaries.                              |
+| Transaction scoring | Enter details and read results.                                     |
+| Alert review        | Open alerts, read reasons, and update status.                       |
+| Transaction search  | Filter records by account, type, device, location, or fraud status. |
+| Account lookup      | Review account-level risk information.                              |
+| Responsible use     | Treat alerts as review warnings, not proof of fraud.                |
 
 **Figure 6.9: User training screenshot**
 
@@ -2097,13 +2110,13 @@ Future cloud deployment can be considered after the prototype is complete. The f
 
 **Table 6.12: Deployment options**
 
-| Deployment option | Suitability | Notes |
-|---|---|---|
-| Local development machine | Current prototype. | Easy for demonstration. |
-| Local network deployment | Small internal demos. | Requires reachable backend host. |
-| Static frontend hosting | Frontend only. | Requires backend API URL. |
-| Cloud/serverless backend | Future option. | Requires database and model planning. |
-| Production deployment | Future improvement. | Requires security and governance. |
+| Deployment option         | Suitability           | Notes                                 |
+| ------------------------- | --------------------- | ------------------------------------- |
+| Local development machine | Current prototype.    | Easy for demonstration.               |
+| Local network deployment  | Small internal demos. | Requires reachable backend host.      |
+| Static frontend hosting   | Frontend only.        | Requires backend API URL.             |
+| Cloud/serverless backend  | Future option.        | Requires database and model planning. |
+| Production deployment     | Future improvement.   | Requires security and governance.     |
 
 **Figure 6.10: Deployment options diagram**
 
@@ -2113,16 +2126,16 @@ Maintenance is required to keep PayGuard useful and reliable. Since it includes 
 
 **Table 6.13: Maintenance activities**
 
-| Activity | Frequency | Purpose |
-|---|---|---|
-| Backup database | Weekly during active use | Protect records. |
-| Review alerts | Daily during active monitoring | Confirm investigation. |
-| Retrain model | When new data or patterns exist | Keep detection relevant. |
-| Review model metrics | After each training run | Check performance. |
-| Update dependencies | Periodically | Keep software compatible. |
-| Review API errors | During testing and demos | Detect issues early. |
-| Improve usability | As users give feedback | Improve dashboard use. |
-| Document changes | After major updates | Keep docs accurate. |
+| Activity             | Frequency                       | Purpose                   |
+| -------------------- | ------------------------------- | ------------------------- |
+| Backup database      | Weekly during active use        | Protect records.          |
+| Review alerts        | Daily during active monitoring  | Confirm investigation.    |
+| Retrain model        | When new data or patterns exist | Keep detection relevant.  |
+| Review model metrics | After each training run         | Check performance.        |
+| Update dependencies  | Periodically                    | Keep software compatible. |
+| Review API errors    | During testing and demos        | Detect issues early.      |
+| Improve usability    | As users give feedback          | Improve dashboard use.    |
+| Document changes     | After major updates             | Keep docs accurate.       |
 
 ## 6.15 Model Maintenance
 
@@ -2146,13 +2159,13 @@ Because PayGuard stores transaction and alert information in SQLite, `data/paygu
 
 **Table 6.14: Backup and recovery plan**
 
-| Item | Backup method | Recovery method |
-|---|---|---|
-| SQLite database | Copy `data/payguard.db`. | Restore it into the data folder. |
-| Generated CSV data | Keep CSV copies. | Reseed database if needed. |
-| Model artifacts | Backup model files. | Restore into models folder. |
-| Training report | Backup report JSON. | Restore for comparison. |
-| Source code | Commit changes using Git. | Restore from repository history. |
+| Item               | Backup method             | Recovery method                  |
+| ------------------ | ------------------------- | -------------------------------- |
+| SQLite database    | Copy `data/payguard.db`.  | Restore it into the data folder. |
+| Generated CSV data | Keep CSV copies.          | Reseed database if needed.       |
+| Model artifacts    | Backup model files.       | Restore into models folder.      |
+| Training report    | Backup report JSON.       | Restore for comparison.          |
+| Source code        | Commit changes using Git. | Restore from repository history. |
 
 If the database is lost, it can be recreated by rerunning the seeding script with the generated CSV dataset.
 
@@ -2173,15 +2186,15 @@ The review also showed areas for production improvement, including authenticatio
 
 **Table 6.15: Post-implementation review**
 
-| Review area | Result |
-|---|---|
-| Data generation | Worked using synthetic data. |
-| Model training | Worked and selected random forest. |
-| Backend API | Worked for health, transactions, scoring, alerts, metrics, and accounts. |
-| Database | Worked using SQLite. |
-| Frontend dashboard | Worked with all main views. |
-| Integration | Worked from scoring to alert creation. |
-| Production readiness | Not production ready because it is a prototype. |
+| Review area          | Result                                                                   |
+| -------------------- | ------------------------------------------------------------------------ |
+| Data generation      | Worked using synthetic data.                                             |
+| Model training       | Worked and selected random forest.                                       |
+| Backend API          | Worked for health, transactions, scoring, alerts, metrics, and accounts. |
+| Database             | Worked using SQLite.                                                     |
+| Frontend dashboard   | Worked with all main views.                                              |
+| Integration          | Worked from scoring to alert creation.                                   |
+| Production readiness | Not production ready because it is a prototype.                          |
 
 ## 6.18 Implementation Limitations
 
@@ -2189,14 +2202,14 @@ The system implementation has limitations that should be acknowledged.
 
 **Table 6.16: Implementation limitations**
 
-| Limitation | Explanation |
-|---|---|
-| Synthetic data only | No real institutional mobile money data. |
-| Local SQLite database | Suitable for prototype, not large production. |
-| Limited authentication | No full login or role management. |
+| Limitation                       | Explanation                                       |
+| -------------------------------- | ------------------------------------------------- |
+| Synthetic data only              | No real institutional mobile money data.          |
+| Local SQLite database            | Suitable for prototype, not large production.     |
+| Limited authentication           | No full login or role management.                 |
 | No real mobile money integration | No EcoCash, bank API, or live payment connection. |
-| Prototype model performance | Results are based on simulated data. |
-| Manual screenshot insertion | Figures are planned but not inserted yet. |
+| Prototype model performance      | Results are based on simulated data.              |
+| Manual screenshot insertion      | Figures are planned but not inserted yet.         |
 
 These limitations are acceptable for the academic prototype and guide future improvements.
 
@@ -2230,15 +2243,15 @@ The objectives stated in Chapter 1 were reviewed to determine whether the projec
 
 **Table 7.1: Objectives achieved**
 
-| Objective | Achievement |
-|---|---|
-| To design a mobile money fraud detection system for institutional digital finance. | Achieved. The system architecture, backend, database, model, and dashboard were designed and implemented. |
-| To generate synthetic mobile money transaction data for system development and testing. | Achieved. Synthetic transaction data was generated with normal and fraudulent patterns. |
-| To identify transaction features that can help separate normal transactions from suspicious transactions. | Achieved. Features such as amount ratio, velocity, account history, device change, and location change were implemented. |
-| To train and evaluate supervised machine learning models for fraud detection. | Achieved. Logistic regression and random forest models were trained and evaluated. |
-| To develop a backend system that can score transactions and store alerts. | Achieved. Flask endpoints were implemented for transaction scoring and alert storage. |
-| To design a dashboard that allows users to view transactions, alerts, and fraud risk levels. | Achieved. The React dashboard includes Dashboard, Alerts, Transactions, and Accounts views. |
-| To support finance staff by reducing the amount of manual work needed when identifying suspicious transactions. | Achieved at prototype level. The system highlights risky transactions and provides alerts for review. |
+| Objective                                                                                                       | Achievement                                                                                                              |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| To design a mobile money fraud detection system for institutional digital finance.                              | Achieved. The system architecture, backend, database, model, and dashboard were designed and implemented.                |
+| To generate synthetic mobile money transaction data for system development and testing.                         | Achieved. Synthetic transaction data was generated with normal and fraudulent patterns.                                  |
+| To identify transaction features that can help separate normal transactions from suspicious transactions.       | Achieved. Features such as amount ratio, velocity, account history, device change, and location change were implemented. |
+| To train and evaluate supervised machine learning models for fraud detection.                                   | Achieved. Logistic regression and random forest models were trained and evaluated.                                       |
+| To develop a backend system that can score transactions and store alerts.                                       | Achieved. Flask endpoints were implemented for transaction scoring and alert storage.                                    |
+| To design a dashboard that allows users to view transactions, alerts, and fraud risk levels.                    | Achieved. The React dashboard includes Dashboard, Alerts, Transactions, and Accounts views.                              |
+| To support finance staff by reducing the amount of manual work needed when identifying suspicious transactions. | Achieved at prototype level. The system highlights risky transactions and provides alerts for review.                    |
 
 The project achieved its main objectives within prototype scope.
 
@@ -2272,18 +2285,18 @@ PayGuard can be improved in future versions.
 
 **Table 7.2: Future enhancements**
 
-| Enhancement | Description |
-|---|---|
-| Real anonymised data | Use approved real data after removing personal information. |
-| User authentication | Add login for finance officers, analysts, and administrators. |
-| Role-based access control | Give users permissions based on responsibility. |
-| Cloud database | Replace SQLite with PostgreSQL or another managed database. |
-| Real-time notifications | Add email, SMS, or dashboard alerts for high-risk cases. |
-| Advanced models | Test XGBoost, anomaly detection, or neural networks. |
-| Explainability tools | Show clearer reasons for risk predictions. |
-| Audit trail | Record alert review, resolution, and dismissal actions. |
-| Live payment integration | Connect to real systems only after legal and security approval. |
-| Model monitoring | Track performance and concept drift. |
+| Enhancement               | Description                                                     |
+| ------------------------- | --------------------------------------------------------------- |
+| Real anonymised data      | Use approved real data after removing personal information.     |
+| User authentication       | Add login for finance officers, analysts, and administrators.   |
+| Role-based access control | Give users permissions based on responsibility.                 |
+| Cloud database            | Replace SQLite with PostgreSQL or another managed database.     |
+| Real-time notifications   | Add email, SMS, or dashboard alerts for high-risk cases.        |
+| Advanced models           | Test XGBoost, anomaly detection, or neural networks.            |
+| Explainability tools      | Show clearer reasons for risk predictions.                      |
+| Audit trail               | Record alert review, resolution, and dismissal actions.         |
+| Live payment integration  | Connect to real systems only after legal and security approval. |
+| Model monitoring          | Track performance and concept drift.                            |
 
 These enhancements would make PayGuard stronger, safer, and closer to real-world use.
 
@@ -2309,34 +2322,34 @@ The project shows that automated fraud detection can support finance departments
 
 # References
 
-Abdallah, A., Maarof, M.A. and Zainal, A. (2016) 'Fraud detection system: a survey', *Journal of Network and Computer Applications*, 68, pp. 90-113.
+Abdallah, A., Maarof, M.A. and Zainal, A. (2016) 'Fraud detection system: a survey', _Journal of Network and Computer Applications_, 68, pp. 90-113.
 
-Bahnsen, A.C., Aouada, D., Stojanovic, A. and Ottersten, B. (2013) 'Cost sensitive credit card fraud detection using Bayes minimum risk', in *Proceedings of the 12th IEEE International Conference on Machine Learning and Applications*. IEEE, pp. 333-338.
+Bahnsen, A.C., Aouada, D., Stojanovic, A. and Ottersten, B. (2013) 'Cost sensitive credit card fraud detection using Bayes minimum risk', in _Proceedings of the 12th IEEE International Conference on Machine Learning and Applications_. IEEE, pp. 333-338.
 
-Bahnsen, A.C., Aouada, D. and Stojanovic, A. (2017) 'Example-dependent cost-sensitive decision trees', *Expert Systems with Applications*, 69, pp. 105-117.
+Bahnsen, A.C., Aouada, D. and Stojanovic, A. (2017) 'Example-dependent cost-sensitive decision trees', _Expert Systems with Applications_, 69, pp. 105-117.
 
-Carcillo, F., Dal Pozzolo, G., Le Borgne, Y.-A., Caelen, O., Mazzer, Y. and Bontempi, G. (2018) 'SCARFF: a scalable framework for streaming credit card fraud detection with Spark', *Information Fusion*, 41, pp. 182-194.
+Carcillo, F., Dal Pozzolo, G., Le Borgne, Y.-A., Caelen, O., Mazzer, Y. and Bontempi, G. (2018) 'SCARFF: a scalable framework for streaming credit card fraud detection with Spark', _Information Fusion_, 41, pp. 182-194.
 
-Carcillo, F., Le Borgne, Y.-A., Caelen, O., Kessaci, Y., Oblé, F. and Bontempi, G. (2019) 'Combining unsupervised and supervised learning in credit card fraud detection', *Information Sciences*, 557, pp. 317-331.
+Carcillo, F., Le Borgne, Y.-A., Caelen, O., Kessaci, Y., Oblé, F. and Bontempi, G. (2019) 'Combining unsupervised and supervised learning in credit card fraud detection', _Information Sciences_, 557, pp. 317-331.
 
-Chen, T. and Guestrin, C. (2016) 'XGBoost: A scalable tree boosting system', in *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*. New York: ACM, pp. 785-794.
+Chen, T. and Guestrin, C. (2016) 'XGBoost: A scalable tree boosting system', in _Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining_. New York: ACM, pp. 785-794.
 
-Dal Pozzolo, G., Boracchi, G., Caelen, O., Alippi, C. and Bontempi, G. (2015) 'Credit card fraud detection and concept drift adaptation with delayed supervised information', in *Proceedings of the International Joint Conference on Neural Networks*. IEEE.
+Dal Pozzolo, G., Boracchi, G., Caelen, O., Alippi, C. and Bontempi, G. (2015) 'Credit card fraud detection and concept drift adaptation with delayed supervised information', in _Proceedings of the International Joint Conference on Neural Networks_. IEEE.
 
-Government of Zimbabwe (2018) *Education 5.0 policy framework*. Harare: Government of Zimbabwe.
+Government of Zimbabwe (2018) _Education 5.0 policy framework_. Harare: Government of Zimbabwe.
 
-Lebichot, B., Paldino, G.M., Siblini, W., He-Guelton, L., Oblé, F. and Bontempi, G. (2021) 'Incremental learning strategies for credit cards fraud detection', *International Journal of Data Science and Analytics*, 12(3), pp. 165-174.
+Lebichot, B., Paldino, G.M., Siblini, W., He-Guelton, L., Oblé, F. and Bontempi, G. (2021) 'Incremental learning strategies for credit cards fraud detection', _International Journal of Data Science and Analytics_, 12(3), pp. 165-174.
 
-Lopez-Rojas, E.A., Elmir, A. and Axelsson, S. (2016) 'PaySim: A financial mobile money simulator for fraud detection', in *Proceedings of the 28th European Modeling and Simulation Symposium*. Larnaca, Cyprus.
+Lopez-Rojas, E.A., Elmir, A. and Axelsson, S. (2016) 'PaySim: A financial mobile money simulator for fraud detection', in _Proceedings of the 28th European Modeling and Simulation Symposium_. Larnaca, Cyprus.
 
-Makori, J. (2019) *Mobile money fraud in Africa: vulnerabilities and mitigation*. Bibliographic details to be verified.
+Makori, J. (2019) _Mobile money fraud in Africa: vulnerabilities and mitigation_. Bibliographic details to be verified.
 
-OECD (2017) *Enhancing financial consumer protection amid rapid technological change*. Paris: OECD Publishing.
+OECD (2017) _Enhancing financial consumer protection amid rapid technological change_. Paris: OECD Publishing.
 
-Phua, C., Lee, V., Smith, K. and Gayler, R. (2010) 'A comprehensive survey of data mining-based fraud detection research', *arXiv preprint*, arXiv:1009.6119.
+Phua, C., Lee, V., Smith, K. and Gayler, R. (2010) 'A comprehensive survey of data mining-based fraud detection research', _arXiv preprint_, arXiv:1009.6119.
 
-University of Zimbabwe (2020) *Mobile financial crime detection framework*. Harare: University of Zimbabwe. Bibliographic details to be verified.
+University of Zimbabwe (2020) _Mobile financial crime detection framework_. Harare: University of Zimbabwe. Bibliographic details to be verified.
 
-Whitrow, C., Hand, D.J., Juszczak, P., Weston, D. and Adams, N.M. (2009) 'Transaction aggregation as a strategy for credit card fraud detection', *Data Mining and Knowledge Discovery*, 18(1), pp. 30-55.
+Whitrow, C., Hand, D.J., Juszczak, P., Weston, D. and Adams, N.M. (2009) 'Transaction aggregation as a strategy for credit card fraud detection', _Data Mining and Knowledge Discovery_, 18(1), pp. 30-55.
 
-Zimbabwe (2021) *Cyber and Data Protection Act [Chapter 12:07]*. Harare: Government of Zimbabwe.
+Zimbabwe (2021) _Cyber and Data Protection Act [Chapter 12:07]_. Harare: Government of Zimbabwe.
