@@ -1878,6 +1878,8 @@ The PayGuard implementation is divided into backend, database, machine learning,
 
 **Figure 6.1: Implementation overview diagram**
 
+![Figure 6.1: Implementation overview diagram](assets/figures/figure-6-1-implementation-overview.svg)
+
 ## 6.3 System Installation Requirements
 
 Before PayGuard can run, the required software must be installed. The project uses separate backend and frontend setup steps.
@@ -2123,6 +2125,8 @@ Future cloud deployment can be considered after the prototype is complete. The f
 | Production deployment     | Future improvement.   | Requires security and governance.     |
 
 **Figure 6.10: Deployment options diagram**
+
+![Figure 6.10: Deployment options diagram](assets/figures/figure-6-10-deployment-options.svg)
 
 ## 6.14 Maintenance Plan
 

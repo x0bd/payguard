@@ -1,62 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1000" viewBox="0 0 1700 1000" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="950" viewBox="0 0 1600 950" role="img" aria-labelledby="title desc">
   <title id="title">Figure 4.5: Database relationship diagram</title>
-  <desc id="desc">Database relationship diagram showing transactions, alerts and model_runs tables, with alerts linked to transactions by transaction_id.</desc>
+  <desc id="desc">A transparent Microsoft Word style database relationship diagram for the PayGuard SQLite schema.</desc>
   <defs>
-    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#d9ddd7"/></pattern>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.12"/></filter>
     <style>
-      .bg { fill: #f5f6f3; }
-      .panel { fill: #ffffff; stroke: #e3e5e0; stroke-width: 2; filter: url(#shadow); }
-      .table { fill: #ffffff; stroke: #dfe3dc; stroke-width: 2; }
-      .head { fill: #111111; }
-      .ink { fill: #111111; font-family: Inter, Arial, sans-serif; }
-      .muted { fill: #6f756c; font-family: Inter, Arial, sans-serif; }
-      .mono { fill: #111111; font-family: "JetBrains Mono", "Courier New", monospace; }
-      .line { stroke: #111111; stroke-width: 4; fill: none; stroke-linecap: round; }
-      .green { fill: #16a34a; }
+      .title { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #4b5563; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .table { fill: #ffffff; stroke: #111827; stroke-width: 2.4; }
+      .blue { fill: #1e9bf0; stroke: #0f6fb5; stroke-width: 2; }
+      .green { fill: #39b54a; stroke: #258a35; stroke-width: 2; }
+      .purple { fill: #6b35d8; stroke: #4e22ad; stroke-width: 2; }
+      .note { fill: #ffffff; stroke: #e65b34; stroke-width: 2; stroke-dasharray: 8 6; }
+      .textLight { fill: #ffffff; font-family: Calibri, Arial, sans-serif; font-size: 22px; font-weight: 700; }
+      .field { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 600; }
+      .small { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
+      .rel { stroke: #111827; stroke-width: 2.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .sep { stroke: #d1d5db; stroke-width: 1.5; }
     </style>
   </defs>
-  <rect class="bg" width="1700" height="1000"/><rect width="1700" height="1000" fill="url(#dots)" opacity="0.85"/>
-  <text x="120" y="96" class="ink" font-size="34" font-weight="800">Database Relationship Diagram</text>
-  <text x="120" y="132" class="muted" font-size="18">SQLite schema used by the PayGuard prototype</text>
-  <rect x="120" y="190" width="1460" height="690" rx="34" class="panel"/>
 
-  <g>
-    <rect x="210" y="290" width="390" height="410" rx="28" class="table"/>
-    <path d="M210 318 Q210 290 238 290 H572 Q600 290 600 318 V365 H210 Z" class="head"/>
-    <text x="250" y="341" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">transactions</text>
-    <text x="250" y="406" class="mono" font-size="15">PK id</text>
-    <text x="250" y="438" class="mono" font-size="15">account_id</text>
-    <text x="250" y="470" class="mono" font-size="15">transaction_type</text>
-    <text x="250" y="502" class="mono" font-size="15">amount, currency</text>
-    <text x="250" y="534" class="mono" font-size="15">device_id, location</text>
-    <text x="250" y="566" class="mono" font-size="15">created_at</text>
-    <text x="250" y="598" class="mono" font-size="15">is_fraud</text>
-    <text x="250" y="630" class="mono" font-size="15">fraud_score</text>
-    <text x="250" y="662" class="mono" font-size="15">metadata_json</text>
+  <text x="90" y="86" class="title">PayGuard Database Relationship Diagram</text>
+  <text x="90" y="124" class="subtitle">Physical SQLite tables used to store transactions, alerts and model training metadata</text>
+
+  <g id="transactions">
+    <rect x="105" y="205" width="430" height="500" rx="8" class="table"/>
+    <rect x="105" y="205" width="430" height="58" rx="8" class="blue"/>
+    <rect x="105" y="247" width="430" height="16" class="blue"/>
+    <text x="320" y="243" class="textLight" text-anchor="middle">transactions</text>
+    <text x="135" y="305" class="field">PK id</text>
+    <line x1="125" y1="325" x2="515" y2="325" class="sep"/>
+    <text x="135" y="358" class="field">account_id</text>
+    <text x="135" y="393" class="field">transaction_type</text>
+    <text x="135" y="428" class="field">amount, currency</text>
+    <text x="135" y="463" class="field">device_id, location</text>
+    <text x="135" y="498" class="field">created_at</text>
+    <text x="135" y="533" class="field">is_fraud</text>
+    <text x="135" y="568" class="field">fraud_score</text>
+    <text x="135" y="603" class="field">metadata_json</text>
+    <text x="135" y="638" class="field">inserted_at</text>
   </g>
 
-  <g>
-    <rect x="1110" y="330" width="390" height="330" rx="28" class="table"/>
-    <path d="M1110 358 Q1110 330 1138 330 H1472 Q1500 330 1500 358 V405 H1110 Z" class="head"/>
-    <text x="1150" y="381" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">alerts</text>
-    <text x="1150" y="446" class="mono" font-size="15">PK id</text>
-    <text x="1150" y="478" class="mono" font-size="15">FK transaction_id</text>
-    <text x="1150" y="510" class="mono" font-size="15">risk_score</text>
-    <text x="1150" y="542" class="mono" font-size="15">alert_type</text>
-    <text x="1150" y="574" class="mono" font-size="15">reason, status</text>
-    <text x="1150" y="606" class="mono" font-size="15">created_at, resolved_at</text>
+  <g id="alerts">
+    <rect x="1035" y="250" width="430" height="380" rx="8" class="table"/>
+    <rect x="1035" y="250" width="430" height="58" rx="8" class="green"/>
+    <rect x="1035" y="292" width="430" height="16" class="green"/>
+    <text x="1250" y="288" class="textLight" text-anchor="middle">alerts</text>
+    <text x="1065" y="350" class="field">PK id</text>
+    <line x1="1055" y1="370" x2="1445" y2="370" class="sep"/>
+    <text x="1065" y="403" class="field">FK transaction_id</text>
+    <text x="1065" y="438" class="field">risk_score</text>
+    <text x="1065" y="473" class="field">alert_type</text>
+    <text x="1065" y="508" class="field">reason</text>
+    <text x="1065" y="543" class="field">status</text>
+    <text x="1065" y="578" class="field">created_at, resolved_at</text>
   </g>
 
-  <g>
-    <rect x="660" y="705" width="370" height="125" rx="28" class="table"/>
-    <path d="M660 733 Q660 705 688 705 H1002 Q1030 705 1030 733 V770 H660 Z" class="head"/>
-    <text x="700" y="756" fill="#ffffff" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800">model_runs</text>
-    <text x="700" y="805" class="mono" font-size="15">model_name, version, metrics_json</text>
+  <g id="model-runs">
+    <rect x="585" y="735" width="430" height="150" rx="8" class="table"/>
+    <rect x="585" y="735" width="430" height="58" rx="8" class="purple"/>
+    <rect x="585" y="777" width="430" height="16" class="purple"/>
+    <text x="800" y="773" class="textLight" text-anchor="middle">model_runs</text>
+    <text x="615" y="835" class="field">PK id</text>
+    <line x1="605" y1="855" x2="995" y2="855" class="sep"/>
+    <text x="615" y="882" class="field">model_name, version, metrics_json, notes</text>
   </g>
 
-  <path d="M600 495 H1110" class="line"/>
-  <circle cx="635" cy="495" r="10" class="green"/>
-  <text x="790" y="478" class="mono" font-size="15">one transaction</text>
-  <text x="790" y="530" class="mono" font-size="15">zero or more alerts</text>
+  <path d="M535 455 H1035" class="rel"/>
+  <text x="590" y="433" class="small">one transaction</text>
+  <text x="845" y="433" class="small">zero or many alerts</text>
+  <text x="650" y="492" class="small">alerts.transaction_id references transactions.id</text>
+
+  <line x1="560" y1="432" x2="560" y2="478" class="rel"/>
+  <line x1="1010" y1="432" x2="1035" y2="455" class="rel"/>
+  <line x1="1010" y1="478" x2="1035" y2="455" class="rel"/>
+  <line x1="1010" y1="425" x2="1010" y2="485" class="rel"/>
+
+  <rect x="590" y="205" width="380" height="96" rx="8" class="note"/>
+  <text x="780" y="242" class="small" text-anchor="middle">Account profiles are not stored as a table.</text>
+  <text x="780" y="270" class="small" text-anchor="middle">They are calculated from transactions and alerts.</text>
+
+  <path d="M535 345 C610 310 670 285 735 300" class="rel" stroke-dasharray="8 6"/>
+  <path d="M1035 385 C945 330 865 310 805 300" class="rel" stroke-dasharray="8 6"/>
 </svg>

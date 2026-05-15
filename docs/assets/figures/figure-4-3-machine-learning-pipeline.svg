@@ -77,19 +77,7 @@
   <path d="M1405 700 H1380" class="line"/>
   <path d="M1405 700 H1380" class="line"/>
   <path d="M1405 700 H1380" class="line"/>
-  <path d="M1405 700 H1380" class="line"/>
-  <path d="M1405 700 H1380" class="line"/>
-  <path d="M1405 700 H1380" class="line"/>
-  <path d="M1405 700 H1380" class="line"/>
-  <path d="M1405 700 H1382" class="line"/>
-  <path d="M1405 700 H1385" class="line"/>
-  <path d="M1405 700 H1388" class="line"/>
   <path d="M1405 700 H1390" class="line"/>
-  <path d="M1405 700 H1390" class="line"/>
-  <path d="M1405 700 H1390" class="line"/>
-  <path d="M1405 700 H1390" class="line"/>
-  <path d="M1405 700 H1390" class="line"/>
-  <path d="M1235 785 C1265 850 1405 850 1458 835" class="line"/>
-  <text x="1295" y="835" class="small">Yes</text>
+  <text x="1360" y="680" class="small">Yes</text>
   <path d="M1500 720 V793" class="line"/>
 </svg>

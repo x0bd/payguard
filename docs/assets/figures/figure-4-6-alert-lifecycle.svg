@@ -1,55 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
   <title id="title">Figure 4.6: Alert lifecycle diagram</title>
-  <desc id="desc">Alert lifecycle diagram showing scored transaction creation, open alert state, review action, and transition to resolved or closed.</desc>
+  <desc id="desc">A transparent Microsoft Word style lifecycle diagram showing how PayGuard alerts move through review states.</desc>
   <defs>
-    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10 Z" fill="#111111"/></marker>
-    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#d9ddd7"/></pattern>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#000000" flood-opacity="0.12"/></filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#111827"/>
+    </marker>
     <style>
-      .bg { fill: #f5f6f3; }
-      .panel { fill: #ffffff; stroke: #e3e5e0; stroke-width: 2; filter: url(#shadow); }
-      .state { fill: #ffffff; stroke: #dfe3dc; stroke-width: 2; }
-      .dark { fill: #111111; }
-      .ink { fill: #111111; font-family: Inter, Arial, sans-serif; }
-      .muted { fill: #6f756c; font-family: Inter, Arial, sans-serif; }
-      .mono { fill: #111111; font-family: "JetBrains Mono", "Courier New", monospace; }
-      .line { stroke: #111111; stroke-width: 4; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
-      .green { fill: #16a34a; }
+      .title { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #4b5563; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .startEnd { fill: #1e9bf0; stroke: #0f6fb5; stroke-width: 2; }
+      .state { fill: #39b54a; stroke: #258a35; stroke-width: 2; }
+      .review { fill: #f9b21a; stroke: #c8890d; stroke-width: 2; }
+      .terminal { fill: #6b35d8; stroke: #4e22ad; stroke-width: 2; }
+      .closed { fill: #e92b8b; stroke: #b91c6b; stroke-width: 2; }
+      .note { fill: #ffffff; stroke: #e65b34; stroke-width: 2; stroke-dasharray: 8 6; }
+      .textLight { fill: #ffffff; font-family: Calibri, Arial, sans-serif; font-size: 21px; font-weight: 700; }
+      .textDark { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 700; }
+      .small { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
+      .line { stroke: #111827; stroke-width: 2.5; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
     </style>
   </defs>
-  <rect class="bg" width="1600" height="900"/><rect width="1600" height="900" fill="url(#dots)" opacity="0.85"/>
-  <text x="120" y="96" class="ink" font-size="34" font-weight="800">Alert Lifecycle</text>
-  <text x="120" y="132" class="muted" font-size="18">States used when a suspicious transaction is created and reviewed</text>
-  <rect x="120" y="185" width="1360" height="620" rx="34" class="panel"/>
 
-  <circle cx="220" cy="485" r="18" class="dark"/>
-  <rect x="315" y="410" width="255" height="150" rx="28" class="state"/>
-  <text x="367" y="462" class="ink" font-size="22" font-weight="800">Scored Transaction</text>
-  <text x="367" y="498" class="muted" font-size="15">Risk score returned</text>
-  <text x="367" y="524" class="muted" font-size="15">Alert condition checked</text>
+  <text x="90" y="86" class="title">PayGuard Alert Lifecycle Diagram</text>
+  <text x="90" y="124" class="subtitle">How an alert is created, reviewed and completed in the prototype</text>
 
-  <rect x="690" y="410" width="230" height="150" rx="28" class="state"/>
-  <text x="765" y="462" class="ink" font-size="24" font-weight="800">Open</text>
-  <text x="735" y="498" class="muted" font-size="15">Requires review</text>
-  <circle cx="805" cy="526" r="10" class="green"/>
+  <circle cx="170" cy="440" r="42" class="startEnd"/>
+  <text x="170" y="448" class="textLight" text-anchor="middle">Start</text>
 
-  <rect x="1050" y="305" width="230" height="140" rx="28" class="state"/>
-  <text x="1110" y="357" class="ink" font-size="24" font-weight="800">Resolved</text>
-  <text x="1090" y="393" class="muted" font-size="15">Reviewed and handled</text>
+  <rect x="300" y="380" width="260" height="120" rx="35" class="state"/>
+  <text x="430" y="426" class="textLight" text-anchor="middle">Alert Created</text>
+  <text x="430" y="456" class="textLight" text-anchor="middle">by Scoring</text>
 
-  <rect x="1050" y="535" width="230" height="140" rx="28" class="state"/>
-  <text x="1122" y="587" class="ink" font-size="24" font-weight="800">Closed</text>
-  <text x="1088" y="623" class="muted" font-size="15">Dismissed or ended</text>
+  <rect x="700" y="380" width="260" height="120" rx="35" class="review"/>
+  <text x="830" y="426" class="textDark" text-anchor="middle">Open</text>
+  <text x="830" y="456" class="textDark" text-anchor="middle">Awaiting Review</text>
 
-  <circle cx="1385" cy="485" r="22" fill="none" stroke="#111111" stroke-width="5"/>
-  <circle cx="1385" cy="485" r="12" class="dark"/>
+  <rect x="1110" y="245" width="260" height="120" rx="35" class="terminal"/>
+  <text x="1240" y="291" class="textLight" text-anchor="middle">Resolved</text>
+  <text x="1240" y="321" class="textLight" text-anchor="middle">Action Taken</text>
 
-  <path d="M240 485 H305" class="line"/>
-  <path d="M570 485 H680" class="line"/>
-  <path d="M920 485 C990 485 995 375 1040 375" class="line"/>
-  <path d="M920 485 C990 485 995 605 1040 605" class="line"/>
-  <path d="M1280 375 C1340 375 1330 455 1360 475" class="line"/>
-  <path d="M1280 605 C1340 605 1330 515 1360 495" class="line"/>
-  <text x="952" y="395" class="mono" font-size="14">resolve</text>
-  <text x="955" y="622" class="mono" font-size="14">close</text>
+  <rect x="1110" y="535" width="260" height="120" rx="35" class="closed"/>
+  <text x="1240" y="581" class="textLight" text-anchor="middle">Closed</text>
+  <text x="1240" y="611" class="textLight" text-anchor="middle">Dismissed</text>
+
+  <circle cx="1475" cy="440" r="30" fill="#ffffff" stroke="#111827" stroke-width="4"/>
+  <circle cx="1475" cy="440" r="17" fill="#111827"/>
+
+  <path d="M212 440 H290" class="line"/>
+  <text x="226" y="420" class="small">risk score reaches threshold</text>
+
+  <path d="M560 440 H690" class="line"/>
+  <text x="590" y="420" class="small">record saved</text>
+
+  <path d="M960 440 C1030 420 1065 335 1100 305" class="line"/>
+  <text x="990" y="360" class="small">review confirms issue</text>
+
+  <path d="M960 440 C1035 475 1065 560 1100 595" class="line"/>
+  <text x="990" y="545" class="small">false positive or no action</text>
+
+  <path d="M1370 305 C1430 330 1458 390 1468 420" class="line"/>
+  <path d="M1370 595 C1430 565 1458 490 1468 460" class="line"/>
+
+  <path d="M830 500 C830 590 700 615 610 555 C560 522 598 475 700 460" class="line"/>
+  <text x="620" y="625" class="small">kept open for further investigation</text>
+
+  <rect x="530" y="725" width="570" height="76" rx="8" class="note"/>
+  <text x="815" y="756" class="textDark" text-anchor="middle">Lifecycle rule</text>
+  <text x="815" y="784" class="small" text-anchor="middle">Only open alerts remain active; resolved and closed alerts are completed outcomes.</text>
 </svg>
