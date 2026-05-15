@@ -1,7 +1,5 @@
 # PayGuard Final Documentation Draft
 
-This draft contains Chapters 1 to 3 of the PayGuard project report. It follows the documentation rule that actual figures and screenshots should not be inserted yet. Where a figure is required, the draft only describes what the figure should show so that the correct diagrams and screenshots can be added later.
-
 ---
 
 # Chapter 1: Introduction
@@ -410,19 +408,6 @@ Schedule feasibility considers whether the project can be completed within the a
 | Phase 5 | Backend API development                |  2 weeks | Flask API.                     |
 | Phase 6 | Frontend dashboard development         |  2 weeks | React dashboard.               |
 | Phase 7 | Testing and documentation              |  2 weeks | Tested prototype and write-up. |
-
-**Table 2.13: Gantt chart table placeholder**
-
-| Activity                       | Week 1 | Week 2 | Week 3 | Week 4 | Week 5 | Week 6 | Week 7 | Week 8 | Week 9 | Week 10 | Week 11 | Week 12 | Week 13 |
-| ------------------------------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------- | ------- | ------- | ------- |
-| Research and literature review | X      | X      |        |        |        |        |        |        |        |         |         |         |         |
-| Requirements and design        |        |        | X      | X      |        |        |        |        |        |         |         |         |         |
-| Synthetic data generation      |        |        |        |        | X      |        |        |        |        |         |         |         |         |
-| Model training                 |        |        |        |        |        | X      | X      |        |        |         |         |         |         |
-| Backend API                    |        |        |        |        |        |        | X      | X      |        |         |         |         |         |
-| Frontend dashboard             |        |        |        |        |        |        |        | X      | X      |         |         |         |         |
-| Testing                        |        |        |        |        |        |        |        |        |        | X       | X       |         |         |
-| Final documentation            |        |        |        |        |        |        |        |        |        |         | X       | X       | X       |
 
 **Figure 2.1: Gantt chart**
 
@@ -1668,6 +1653,7 @@ The integration flow is:
 7. Backend scores the transaction and creates an alert.
 8. Frontend refreshes metrics and alerts.
 
+![alt text](image-13.png)
 **Figure 5.10: Frontend-backend integration screenshot**
 
 ## 5.11 Testing Strategy
@@ -1803,6 +1789,7 @@ The end-to-end flow followed these steps:
 
 The integration test confirmed that PayGuard works as a complete prototype rather than disconnected modules.
 
+![alt text](image-14.png)
 **Figure 5.11: End-to-end demonstration screenshot**
 
 ## 5.17 Validation Against Objectives
@@ -1920,7 +1907,8 @@ Backend setup:
 
 After installation, the system can generate data, train models, seed the database, and run the API.
 
-**Figure 6.2: Backend setup screenshot**
+![alt text](image-15.png)
+**Figure 6.2: Backend setup code screenshot**
 
 ## 6.5 Frontend Installation Procedure
 
@@ -1943,7 +1931,8 @@ Frontend setup:
 
 During development, Vite proxies relative `/api` requests to Flask at `http://127.0.0.1:5000`.
 
-**Figure 6.3: Frontend setup screenshot**
+![alt text](image-16.png)
+**Figure 6.3: Frontend setup code screenshot**
 
 ## 6.6 Data Preparation Procedure
 
@@ -1966,7 +1955,8 @@ Data preparation:
 
 The full dataset is used for training and full demonstration, while the sample dataset supports quick demos.
 
-**Figure 6.4: Data preparation screenshot**
+![alt text](image-17.png)
+**Figure 6.4: Data preparation code screenshot**
 
 ## 6.7 Model Training Procedure
 
@@ -1988,7 +1978,8 @@ After training, the selected model is saved as `fraud_model.joblib`, with a repo
 
 The current selected model is random forest because it performed better overall than logistic regression on the synthetic test dataset.
 
-**Figure 6.5: Model training screenshot**
+![alt image](image-18.png)
+**Figure 6.5: Model training code screenshot**
 
 ## 6.8 Database Initialisation and Seeding
 
@@ -2027,6 +2018,7 @@ Once running, the health endpoint confirms that the service, database, and model
 | Model       | Reports model loaded.       |
 | Timestamp   | Returns API response time.  |
 
+![alt text](image-19.png)
 **Figure 6.6: Backend health check screenshot**
 
 ## 6.10 Running the Frontend Dashboard
@@ -2046,7 +2038,8 @@ The browser opens the local dashboard URL shown by Vite. The dashboard should be
 | Transactions | Recent records and filters.           |
 | Accounts     | Account profiles and history.         |
 
-**Figure 6.7: Dashboard startup screenshot**
+![alt text](image-20.png)
+**Figure 6.7: Dashboard startup code screenshot**
 
 ## 6.11 End-to-End Run Order
 
@@ -2077,6 +2070,7 @@ Frontend sequence:
 1. `cd frontend`
 2. `npm run dev`
 
+![alt text](image-21.png)
 **Figure 6.8: End-to-end run screenshot**
 
 ## 6.12 User Training Plan
