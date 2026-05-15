@@ -1,107 +1,119 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
   <title id="title">Figure 2.1: Gantt chart</title>
-  <desc id="desc">A clean Gantt chart showing the PayGuard project activities across thirteen weeks.</desc>
+  <desc id="desc">A transparent Microsoft Word style Gantt chart showing PayGuard project activities across thirteen weeks.</desc>
   <defs>
-    <pattern id="dot-grid" width="24" height="24" patternUnits="userSpaceOnUse">
-      <circle cx="2" cy="2" r="1.4" fill="#d8d8d8" opacity="0.72" />
-    </pattern>
-    <filter id="card-shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#111111" flood-opacity="0.08" />
-    </filter>
+    <style>
+      .title { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #4b5563; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .label { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 21px; font-weight: 600; }
+      .small { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 600; }
+      .bartext { fill: #ffffff; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 700; }
+      .grid { stroke: #d7dce2; stroke-width: 1.5; }
+      .axis { stroke: #111827; stroke-width: 2; }
+      .green { fill: #39b54a; }
+      .blue { fill: #1e9bf0; }
+      .orange { fill: #f9b21a; }
+      .purple { fill: #6b35d8; }
+      .pink { fill: #e92b8b; }
+    </style>
   </defs>
 
-  <rect width="1600" height="900" fill="#f2f3f1" />
-  <rect width="1600" height="900" fill="url(#dot-grid)" opacity="0.95" />
+  <text x="90" y="86" class="title">PayGuard Project Gantt Chart</text>
+  <text x="90" y="124" class="subtitle">Planned implementation schedule across thirteen project weeks</text>
 
-  <g font-family="Inter, Arial, sans-serif">
-    <text x="110" y="92" font-size="34" font-weight="800" fill="#101010">PayGuard Project Gantt Chart</text>
-    <text x="110" y="126" font-size="18" font-weight="500" fill="#6a6a6a">Planned implementation schedule across 13 project weeks</text>
+  <g transform="translate(90 180)">
+    <rect x="0" y="0" width="1420" height="58" rx="8" class="blue"/>
+    <text x="24" y="37" fill="#ffffff" font-family="Calibri, Arial, sans-serif" font-size="22" font-weight="700">Activity</text>
 
-    <g filter="url(#card-shadow)">
-      <rect x="86" y="170" width="1428" height="610" rx="28" fill="#ffffff" />
-      <rect x="86" y="170" width="1428" height="610" rx="28" fill="none" stroke="#e7e7e7" />
+    <g fill="#ffffff" font-family="Calibri, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+      <text x="388" y="37">W1</text>
+      <text x="466" y="37">W2</text>
+      <text x="544" y="37">W3</text>
+      <text x="622" y="37">W4</text>
+      <text x="700" y="37">W5</text>
+      <text x="778" y="37">W6</text>
+      <text x="856" y="37">W7</text>
+      <text x="934" y="37">W8</text>
+      <text x="1012" y="37">W9</text>
+      <text x="1090" y="37">W10</text>
+      <text x="1168" y="37">W11</text>
+      <text x="1246" y="37">W12</text>
+      <text x="1324" y="37">W13</text>
     </g>
 
-    <g transform="translate(126 220)">
-      <rect x="0" y="0" width="1350" height="52" rx="18" fill="#f6f6f6" />
-      <text x="22" y="33" font-size="16" font-weight="750" fill="#141414">Activity</text>
+    <line x1="0" y1="58" x2="1420" y2="58" class="axis"/>
+    <line x1="342" y1="0" x2="342" y2="566" class="axis"/>
 
-      <g font-size="14" font-weight="750" fill="#343434" text-anchor="middle">
-        <text x="374" y="33">W1</text>
-        <text x="448" y="33">W2</text>
-        <text x="522" y="33">W3</text>
-        <text x="596" y="33">W4</text>
-        <text x="670" y="33">W5</text>
-        <text x="744" y="33">W6</text>
-        <text x="818" y="33">W7</text>
-        <text x="892" y="33">W8</text>
-        <text x="966" y="33">W9</text>
-        <text x="1040" y="33">W10</text>
-        <text x="1114" y="33">W11</text>
-        <text x="1188" y="33">W12</text>
-        <text x="1262" y="33">W13</text>
-      </g>
+    <g class="grid">
+      <line x1="381" y1="58" x2="381" y2="566"/>
+      <line x1="459" y1="58" x2="459" y2="566"/>
+      <line x1="537" y1="58" x2="537" y2="566"/>
+      <line x1="615" y1="58" x2="615" y2="566"/>
+      <line x1="693" y1="58" x2="693" y2="566"/>
+      <line x1="771" y1="58" x2="771" y2="566"/>
+      <line x1="849" y1="58" x2="849" y2="566"/>
+      <line x1="927" y1="58" x2="927" y2="566"/>
+      <line x1="1005" y1="58" x2="1005" y2="566"/>
+      <line x1="1083" y1="58" x2="1083" y2="566"/>
+      <line x1="1161" y1="58" x2="1161" y2="566"/>
+      <line x1="1239" y1="58" x2="1239" y2="566"/>
+      <line x1="1317" y1="58" x2="1317" y2="566"/>
+      <line x1="1395" y1="58" x2="1395" y2="566"/>
+    </g>
 
-      <g stroke="#e8e8e8" stroke-width="1">
-        <line x1="338" y1="0" x2="338" y2="512" />
-        <line x1="412" y1="0" x2="412" y2="512" />
-        <line x1="486" y1="0" x2="486" y2="512" />
-        <line x1="560" y1="0" x2="560" y2="512" />
-        <line x1="634" y1="0" x2="634" y2="512" />
-        <line x1="708" y1="0" x2="708" y2="512" />
-        <line x1="782" y1="0" x2="782" y2="512" />
-        <line x1="856" y1="0" x2="856" y2="512" />
-        <line x1="930" y1="0" x2="930" y2="512" />
-        <line x1="1004" y1="0" x2="1004" y2="512" />
-        <line x1="1078" y1="0" x2="1078" y2="512" />
-        <line x1="1152" y1="0" x2="1152" y2="512" />
-        <line x1="1226" y1="0" x2="1226" y2="512" />
-        <line x1="1300" y1="0" x2="1300" y2="512" />
-      </g>
+    <g class="grid">
+      <line x1="0" y1="122" x2="1420" y2="122"/>
+      <line x1="0" y1="186" x2="1420" y2="186"/>
+      <line x1="0" y1="250" x2="1420" y2="250"/>
+      <line x1="0" y1="314" x2="1420" y2="314"/>
+      <line x1="0" y1="378" x2="1420" y2="378"/>
+      <line x1="0" y1="442" x2="1420" y2="442"/>
+      <line x1="0" y1="506" x2="1420" y2="506"/>
+      <line x1="0" y1="566" x2="1420" y2="566"/>
+    </g>
 
-      <g stroke="#efefef" stroke-width="1">
-        <line x1="0" y1="104" x2="1350" y2="104" />
-        <line x1="0" y1="160" x2="1350" y2="160" />
-        <line x1="0" y1="216" x2="1350" y2="216" />
-        <line x1="0" y1="272" x2="1350" y2="272" />
-        <line x1="0" y1="328" x2="1350" y2="328" />
-        <line x1="0" y1="384" x2="1350" y2="384" />
-        <line x1="0" y1="440" x2="1350" y2="440" />
-        <line x1="0" y1="496" x2="1350" y2="496" />
-      </g>
+    <g class="label">
+      <text x="24" y="100">Research and literature review</text>
+      <text x="24" y="164">Requirements and design</text>
+      <text x="24" y="228">Synthetic data generation</text>
+      <text x="24" y="292">Feature engineering and model training</text>
+      <text x="24" y="356">Backend API development</text>
+      <text x="24" y="420">Frontend dashboard development</text>
+      <text x="24" y="484">Testing</text>
+      <text x="24" y="548">Final documentation</text>
+    </g>
 
-      <g font-size="16" font-weight="700" fill="#151515">
-        <text x="22" y="91">Research and literature review</text>
-        <text x="22" y="147">Requirements and design</text>
-        <text x="22" y="203">Synthetic data generation</text>
-        <text x="22" y="259">Model training</text>
-        <text x="22" y="315">Backend API</text>
-        <text x="22" y="371">Frontend dashboard</text>
-        <text x="22" y="427">Testing</text>
-        <text x="22" y="483">Final documentation</text>
-      </g>
+    <g>
+      <rect x="358" y="77" width="148" height="34" rx="6" class="green"/>
+      <rect x="514" y="141" width="148" height="34" rx="6" class="green"/>
+      <rect x="670" y="205" width="70" height="34" rx="6" class="orange"/>
+      <rect x="748" y="269" width="148" height="34" rx="6" class="green"/>
+      <rect x="826" y="333" width="148" height="34" rx="6" class="green"/>
+      <rect x="904" y="397" width="148" height="34" rx="6" class="green"/>
+      <rect x="1060" y="461" width="148" height="34" rx="6" class="purple"/>
+      <rect x="1138" y="525" width="226" height="34" rx="6" class="pink"/>
+    </g>
 
-      <g>
-        <rect x="356" y="70" width="136" height="28" rx="14" fill="#16a34a" />
-        <rect x="504" y="126" width="136" height="28" rx="14" fill="#16a34a" />
-        <rect x="652" y="182" width="62" height="28" rx="14" fill="#16a34a" />
-        <rect x="726" y="238" width="136" height="28" rx="14" fill="#16a34a" />
-        <rect x="800" y="294" width="136" height="28" rx="14" fill="#16a34a" />
-        <rect x="874" y="350" width="136" height="28" rx="14" fill="#16a34a" />
-        <rect x="1022" y="406" width="136" height="28" rx="14" fill="#16a34a" />
-        <rect x="1096" y="462" width="210" height="28" rx="14" fill="#16a34a" />
-      </g>
+    <g text-anchor="middle" class="bartext">
+      <text x="432" y="100">2 weeks</text>
+      <text x="588" y="164">2 weeks</text>
+      <text x="705" y="228">1 week</text>
+      <text x="822" y="292">2 weeks</text>
+      <text x="900" y="356">2 weeks</text>
+      <text x="978" y="420">2 weeks</text>
+      <text x="1134" y="484">2 weeks</text>
+      <text x="1251" y="548">3 weeks</text>
+    </g>
 
-      <g font-size="12" font-weight="800" fill="#ffffff" text-anchor="middle">
-        <text x="424" y="90">2 weeks</text>
-        <text x="572" y="146">2 weeks</text>
-        <text x="683" y="202">1 week</text>
-        <text x="794" y="258">2 weeks</text>
-        <text x="868" y="314">2 weeks</text>
-        <text x="942" y="370">2 weeks</text>
-        <text x="1090" y="426">2 weeks</text>
-        <text x="1201" y="482">3 weeks</text>
-      </g>
+    <g transform="translate(0 630)">
+      <circle cx="16" cy="0" r="8" class="green"/>
+      <text x="34" y="6" class="small">Development task</text>
+      <circle cx="230" cy="0" r="8" class="orange"/>
+      <text x="248" y="6" class="small">Data preparation</text>
+      <circle cx="470" cy="0" r="8" class="purple"/>
+      <text x="488" y="6" class="small">Testing</text>
+      <circle cx="630" cy="0" r="8" class="pink"/>
+      <text x="648" y="6" class="small">Documentation</text>
     </g>
   </g>
 </svg>

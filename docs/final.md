@@ -658,6 +658,8 @@ A use case diagram shows the interaction between users and the system. It helps 
 
 **Figure 3.3: Use case diagram**
 
+![Figure 3.3: Use case diagram](assets/figures/figure-3-3-use-case-diagram.svg)
+
 **Table 3.13: Use case descriptions**
 
 | Use case                | Actor                          | Description                                              |
