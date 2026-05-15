@@ -679,6 +679,8 @@ An activity diagram shows the step-by-step flow of activities in the system.
 
 **Figure 3.4: Activity diagram**
 
+![Figure 3.4: Activity diagram](assets/figures/figure-3-4-activity-diagram.svg)
+
 The activity flow helps explain how PayGuard processes a transaction from input to output.
 
 ## 3.11 Data Flow Diagram
