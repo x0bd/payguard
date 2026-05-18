@@ -3,20 +3,20 @@
   <desc id="desc">A transparent Microsoft Word style context diagram showing the existing manual or semi-manual payment monitoring process.</desc>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M2 2 L10 6 L2 10 Z" fill="#111827"/>
+      <path d="M2 2 L10 6 L2 10 Z" fill="#111111"/>
     </marker>
     <style>
-      .title { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
-      .subtitle { fill: #4b5563; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
-      .entity { fill: #1e9bf0; stroke: #0f6fb5; stroke-width: 2; }
-      .process { fill: #39b54a; stroke: #258a35; stroke-width: 2; }
-      .store { fill: #f9b21a; stroke: #c8890d; stroke-width: 2; }
-      .note { fill: #ffffff; stroke: #e65b34; stroke-width: 2; stroke-dasharray: 8 6; }
-      .textLight { fill: #ffffff; font-family: Calibri, Arial, sans-serif; font-size: 22px; font-weight: 700; }
-      .textDark { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 600; }
-      .small { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
-      .line { stroke: #111827; stroke-width: 2.4; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
-      .plainLine { stroke: #111827; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .entity { fill: #f2f2f2; stroke: #111111; stroke-width: 2; }
+      .process { fill: #ffffff; stroke: #111111; stroke-width: 2; }
+      .store { fill: #e6e6e6; stroke: #111111; stroke-width: 2; }
+      .note { fill: #ffffff; stroke: #111111; stroke-width: 2; stroke-dasharray: 8 6; }
+      .textLight { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 22px; font-weight: 700; }
+      .textDark { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 600; }
+      .small { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
+      .line { stroke: #111111; stroke-width: 2.4; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .plainLine { stroke: #111111; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     </style>
   </defs>
 
@@ -75,6 +75,6 @@
     <text x="986" y="716" class="small">compiled reports</text>
 
     <line x1="810" y1="250" x2="810" y2="318" class="plainLine"/>
-    <polygon points="810,330 802,314 818,314" fill="#111827"/>
+    <polygon points="810,330 802,314 818,314" fill="#111111"/>
   </g>
 </svg>

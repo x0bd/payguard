@@ -2,9 +2,9 @@
   <title id="title">Figure 6.1: Implementation overview diagram</title>
   <desc id="desc">A transparent Microsoft Word style implementation overview diagram showing how the PayGuard project was built and connected.</desc>
   <defs>
-    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10 Z" fill="#111827"/></marker>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2 2 L10 6 L2 10 Z" fill="#111111"/></marker>
     <style>
-      .title{fill:#111827;font-family:Calibri,Arial,sans-serif;font-size:40px;font-weight:700}.subtitle{fill:#4b5563;font-family:Calibri,Arial,sans-serif;font-size:22px}.green{fill:#39b54a;stroke:#258a35;stroke-width:2}.blue{fill:#1e9bf0;stroke:#0f6fb5;stroke-width:2}.orange{fill:#f9b21a;stroke:#c8890d;stroke-width:2}.purple{fill:#6b35d8;stroke:#4e22ad;stroke-width:2}.pink{fill:#e92b8b;stroke:#b91c6b;stroke-width:2}.output{fill:#fff;stroke:#111827;stroke-width:2.4}.textLight{fill:#fff;font-family:Calibri,Arial,sans-serif;font-size:20px;font-weight:700}.textDark{fill:#111827;font-family:Calibri,Arial,sans-serif;font-size:19px;font-weight:700}.small{fill:#111827;font-family:Calibri,Arial,sans-serif;font-size:17px;font-weight:600}.line{stroke:#111827;stroke-width:2.5;fill:none;marker-end:url(#arrow);stroke-linecap:round;stroke-linejoin:round}
+      .title{fill:#111111;font-family:Calibri,Arial,sans-serif;font-size:40px;font-weight:700}.subtitle{fill:#333333;font-family:Calibri,Arial,sans-serif;font-size:22px}.green{fill:#ffffff;stroke:#111111;stroke-width:2}.blue{fill:#f2f2f2;stroke:#111111;stroke-width:2}.orange{fill:#e6e6e6;stroke:#111111;stroke-width:2}.purple{fill:#f7f7f7;stroke:#111111;stroke-width:2}.pink{fill:#eeeeee;stroke:#111111;stroke-width:2}.output{fill:#ffffff;stroke:#111111;stroke-width:2.4}.textLight { fill: #111111;font-family:Calibri,Arial,sans-serif;font-size:20px;font-weight:700}.textDark{fill:#111111;font-family:Calibri,Arial,sans-serif;font-size:19px;font-weight:700}.small{fill:#111111;font-family:Calibri,Arial,sans-serif;font-size:17px;font-weight:600}.line{stroke:#111111;stroke-width:2.5;fill:none;marker-end:url(#arrow);stroke-linecap:round;stroke-linejoin:round}
     </style>
   </defs>
   <text x="90" y="86" class="title">PayGuard Implementation Overview</text>
