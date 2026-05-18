@@ -6,9 +6,9 @@
       .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
       .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
       .table { fill: #ffffff; stroke: #111111; stroke-width: 2.4; }
-      .blue { fill: #eaf2ff; stroke: #111111; stroke-width: 2; }
-      .green { fill: #eaf7ee; stroke: #111111; stroke-width: 2; }
-      .purple { fill: #eef2ff; stroke: #111111; stroke-width: 2; }
+      .blue { fill: #eaf2ff; stroke: none; }
+      .green { fill: #eaf7ee; stroke: none; }
+      .purple { fill: #eef2ff; stroke: none; }
       .note { fill: #ffffff; stroke: #111111; stroke-width: 2; stroke-dasharray: 8 6; }
       .textLight { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 22px; font-weight: 700; }
       .field { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 600; }
@@ -24,10 +24,8 @@
   <g id="transactions">
     <rect x="105" y="205" width="430" height="500" rx="8" class="table"/>
     <rect x="105" y="205" width="430" height="58" rx="8" class="blue"/>
-    <rect x="105" y="247" width="430" height="16" class="blue"/>
     <text x="320" y="243" class="textLight" text-anchor="middle">transactions</text>
     <text x="135" y="305" class="field">PK id</text>
-    <line x1="125" y1="325" x2="515" y2="325" class="sep"/>
     <text x="135" y="358" class="field">account_id</text>
     <text x="135" y="393" class="field">transaction_type</text>
     <text x="135" y="428" class="field">amount, currency</text>
@@ -42,10 +40,8 @@
   <g id="alerts">
     <rect x="1035" y="250" width="430" height="380" rx="8" class="table"/>
     <rect x="1035" y="250" width="430" height="58" rx="8" class="green"/>
-    <rect x="1035" y="292" width="430" height="16" class="green"/>
     <text x="1250" y="288" class="textLight" text-anchor="middle">alerts</text>
     <text x="1065" y="350" class="field">PK id</text>
-    <line x1="1055" y1="370" x2="1445" y2="370" class="sep"/>
     <text x="1065" y="403" class="field">FK transaction_id</text>
     <text x="1065" y="438" class="field">risk_score</text>
     <text x="1065" y="473" class="field">alert_type</text>
@@ -57,10 +53,8 @@
   <g id="model-runs">
     <rect x="585" y="735" width="430" height="150" rx="8" class="table"/>
     <rect x="585" y="735" width="430" height="58" rx="8" class="purple"/>
-    <rect x="585" y="777" width="430" height="16" class="purple"/>
     <text x="800" y="773" class="textLight" text-anchor="middle">model_runs</text>
     <text x="615" y="835" class="field">PK id</text>
-    <line x1="605" y1="855" x2="995" y2="855" class="sep"/>
     <text x="615" y="882" class="field">model_name, version, metrics_json, notes</text>
   </g>
 
