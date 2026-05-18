@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1000" viewBox="0 0 1700 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.11: Communication diagram</title>
+  <desc id="desc">A transparent Microsoft Word style communication diagram showing numbered interactions between PayGuard objects during transaction scoring.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#111827"/>
+    </marker>
+    <style>
+      .title { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #4b5563; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .node { fill: #ffffff; stroke: #111827; stroke-width: 2.3; }
+      .headBlue { fill: #1e9bf0; stroke: #0f6fb5; stroke-width: 2; }
+      .headGreen { fill: #39b54a; stroke: #258a35; stroke-width: 2; }
+      .headOrange { fill: #f9b21a; stroke: #c8890d; stroke-width: 2; }
+      .headPurple { fill: #6b35d8; stroke: #4e22ad; stroke-width: 2; }
+      .headPink { fill: #e92b8b; stroke: #b91c6b; stroke-width: 2; }
+      .textLight { fill: #ffffff; font-family: Calibri, Arial, sans-serif; font-size: 19px; font-weight: 700; }
+      .textDark { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 700; }
+      .msg { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 16px; font-weight: 600; }
+      .line { stroke: #111827; stroke-width: 2.35; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .return { stroke: #111827; stroke-width: 2.2; fill: none; marker-end: url(#arrow); stroke-dasharray: 8 6; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <text x="90" y="86" class="title">PayGuard Communication Diagram</text>
+  <text x="90" y="124" class="subtitle">Numbered object interactions during a transaction scoring request</text>
+
+  <g id="user">
+    <rect x="90" y="430" width="260" height="90" rx="8" class="node"/>
+    <rect x="90" y="430" width="260" height="44" rx="8" class="headBlue"/>
+    <rect x="90" y="458" width="260" height="16" class="headBlue"/>
+    <text x="220" y="462" class="textLight" text-anchor="middle">financeUser</text>
+    <text x="220" y="503" class="textDark" text-anchor="middle">Finance User</text>
+  </g>
+
+  <g id="dashboard">
+    <rect x="455" y="260" width="280" height="100" rx="8" class="node"/>
+    <rect x="455" y="260" width="280" height="44" rx="8" class="headGreen"/>
+    <rect x="455" y="288" width="280" height="16" class="headGreen"/>
+    <text x="595" y="292" class="textLight" text-anchor="middle">dashboard</text>
+    <text x="595" y="333" class="textDark" text-anchor="middle">React Dashboard</text>
+  </g>
+
+  <g id="api">
+    <rect x="810" y="430" width="280" height="100" rx="8" class="node"/>
+    <rect x="810" y="430" width="280" height="44" rx="8" class="headOrange"/>
+    <rect x="810" y="458" width="280" height="16" class="headOrange"/>
+    <text x="950" y="462" class="textLight" text-anchor="middle">apiController</text>
+    <text x="950" y="503" class="textDark" text-anchor="middle">Flask API</text>
+  </g>
+
+  <g id="database">
+    <rect x="1245" y="230" width="285" height="100" rx="8" class="node"/>
+    <rect x="1245" y="230" width="285" height="44" rx="8" class="headPurple"/>
+    <rect x="1245" y="258" width="285" height="16" class="headPurple"/>
+    <text x="1387" y="262" class="textLight" text-anchor="middle">databaseService</text>
+    <text x="1387" y="303" class="textDark" text-anchor="middle">SQLite Database</text>
+  </g>
+
+  <g id="scorer">
+    <rect x="455" y="670" width="280" height="100" rx="8" class="node"/>
+    <rect x="455" y="670" width="280" height="44" rx="8" class="headPink"/>
+    <rect x="455" y="698" width="280" height="16" class="headPink"/>
+    <text x="595" y="702" class="textLight" text-anchor="middle">fraudScorer</text>
+    <text x="595" y="743" class="textDark" text-anchor="middle">Fraud Scorer</text>
+  </g>
+
+  <g id="model">
+    <rect x="1245" y="670" width="285" height="100" rx="8" class="node"/>
+    <rect x="1245" y="670" width="285" height="44" rx="8" class="headBlue"/>
+    <rect x="1245" y="698" width="285" height="16" class="headBlue"/>
+    <text x="1387" y="702" class="textLight" text-anchor="middle">model</text>
+    <text x="1387" y="743" class="textDark" text-anchor="middle">Fraud Model</text>
+  </g>
+
+  <path d="M350 445 C405 380 420 340 455 320" class="line"/>
+  <text x="255" y="370" class="msg">1: enter transaction details</text>
+
+  <path d="M735 330 C805 365 840 400 900 430" class="line"/>
+  <text x="755" y="355" class="msg">2: submitScoreRequest()</text>
+
+  <path d="M1090 455 C1165 390 1210 330 1245 285" class="line"/>
+  <text x="1115" y="365" class="msg">3: getAccountHistory()</text>
+
+  <path d="M1245 305 C1160 365 1110 420 1090 475" class="return"/>
+  <text x="1125" y="425" class="msg">4: history rows</text>
+
+  <path d="M810 505 C735 565 670 625 620 670" class="line"/>
+  <text x="620" y="590" class="msg">5: build features and score()</text>
+
+  <path d="M735 725 H1245" class="line"/>
+  <text x="915" y="704" class="msg">6: predict(featureVector)</text>
+
+  <path d="M1245 745 H735" class="return"/>
+  <text x="920" y="774" class="msg">7: label and probability</text>
+
+  <path d="M620 670 C700 610 770 550 810 505" class="return"/>
+  <text x="690" y="635" class="msg">8: risk result</text>
+
+  <path d="M1090 500 C1180 505 1240 435 1320 330" class="line"/>
+  <text x="1165" y="515" class="msg">9: save transaction and alert</text>
+
+  <path d="M810 465 C690 405 625 375 595 360" class="return"/>
+  <text x="635" y="430" class="msg">10: JSON response</text>
+
+  <path d="M455 335 C390 390 350 430 350 475" class="return"/>
+  <text x="235" y="560" class="msg">11: display risk score, level and reason</text>
+
+  <text x="90" y="860" class="msg">Note: solid arrows show requests or writes; dashed arrows show returned data.</text>
+</svg>

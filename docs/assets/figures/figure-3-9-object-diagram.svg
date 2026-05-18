@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="950" viewBox="0 0 1600 950" role="img" aria-labelledby="title desc">
+  <title id="title">Figure 3.9: Object diagram</title>
+  <desc id="desc">A transparent Microsoft Word style object diagram showing example PayGuard runtime objects and links.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2 2 L10 6 L2 10 Z" fill="#111827"/>
+    </marker>
+    <style>
+      .title { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #4b5563; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .objectBox { fill: #ffffff; stroke: #111827; stroke-width: 2.3; }
+      .headBlue { fill: #1e9bf0; stroke: #0f6fb5; stroke-width: 2; }
+      .headGreen { fill: #39b54a; stroke: #258a35; stroke-width: 2; }
+      .headOrange { fill: #f9b21a; stroke: #c8890d; stroke-width: 2; }
+      .headPurple { fill: #6b35d8; stroke: #4e22ad; stroke-width: 2; }
+      .headPink { fill: #e92b8b; stroke: #b91c6b; stroke-width: 2; }
+      .textLight { fill: #ffffff; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 700; }
+      .field { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
+      .small { fill: #111827; font-family: Calibri, Arial, sans-serif; font-size: 16px; font-weight: 600; }
+      .line { stroke: #111827; stroke-width: 2.4; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .link { stroke: #111827; stroke-width: 2.2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .dash { stroke: #111827; stroke-width: 2.1; fill: none; marker-end: url(#arrow); stroke-dasharray: 8 6; stroke-linecap: round; stroke-linejoin: round; }
+      .sep { stroke: #d1d5db; stroke-width: 1.4; }
+    </style>
+  </defs>
+
+  <text x="90" y="86" class="title">PayGuard Object Diagram</text>
+  <text x="90" y="124" class="subtitle">Example runtime objects created when a transaction is scored and reviewed</text>
+
+  <g id="transaction-object">
+    <rect x="95" y="220" width="360" height="230" rx="8" class="objectBox"/>
+    <rect x="95" y="220" width="360" height="48" rx="8" class="headBlue"/>
+    <rect x="95" y="250" width="360" height="18" class="headBlue"/>
+    <text x="275" y="252" class="textLight" text-anchor="middle">tx09218 : Transaction</text>
+    <line x1="95" y1="312" x2="455" y2="312" class="sep"/>
+    <text x="125" y="295" class="field">id = 9218</text>
+    <text x="125" y="340" class="field">account_id = ACC-1042</text>
+    <text x="125" y="372" class="field">amount = 850.00</text>
+    <text x="125" y="404" class="field">transaction_type = p2p_transfer</text>
+    <text x="125" y="436" class="field">fraud_score = 0.94</text>
+  </g>
+
+  <g id="alert-object">
+    <rect x="625" y="220" width="360" height="230" rx="8" class="objectBox"/>
+    <rect x="625" y="220" width="360" height="48" rx="8" class="headGreen"/>
+    <rect x="625" y="250" width="360" height="18" class="headGreen"/>
+    <text x="805" y="252" class="textLight" text-anchor="middle">alert10041 : Alert</text>
+    <line x1="625" y1="312" x2="985" y2="312" class="sep"/>
+    <text x="655" y="295" class="field">id = 10041</text>
+    <text x="655" y="340" class="field">transaction_id = 9218</text>
+    <text x="655" y="372" class="field">risk_score = 0.94</text>
+    <text x="655" y="404" class="field">status = open</text>
+    <text x="655" y="436" class="field">reason = high amount + new device</text>
+  </g>
+
+  <g id="profile-object">
+    <rect x="1145" y="220" width="360" height="230" rx="8" class="objectBox"/>
+    <rect x="1145" y="220" width="360" height="48" rx="8" class="headOrange"/>
+    <rect x="1145" y="250" width="360" height="18" class="headOrange"/>
+    <text x="1325" y="252" class="textLight" text-anchor="middle">profile1042 : AccountProfile</text>
+    <line x1="1145" y1="312" x2="1505" y2="312" class="sep"/>
+    <text x="1175" y="295" class="field">account_id = ACC-1042</text>
+    <text x="1175" y="340" class="field">total_transactions = 73</text>
+    <text x="1175" y="372" class="field">open_alerts = 2</text>
+    <text x="1175" y="404" class="field">average_risk = 0.42</text>
+    <text x="1175" y="436" class="field">derived_from = transactions + alerts</text>
+  </g>
+
+  <g id="scorer-object">
+    <rect x="350" y="620" width="340" height="190" rx="8" class="objectBox"/>
+    <rect x="350" y="620" width="340" height="48" rx="8" class="headPurple"/>
+    <rect x="350" y="650" width="340" height="18" class="headPurple"/>
+    <text x="520" y="652" class="textLight" text-anchor="middle">scorer : FraudScorer</text>
+    <line x1="350" y1="712" x2="690" y2="712" class="sep"/>
+    <text x="380" y="695" class="field">model_loaded = true</text>
+    <text x="380" y="740" class="field">threshold = 0.65</text>
+    <text x="380" y="772" class="field">selected_model = random_forest</text>
+  </g>
+
+  <g id="db-object">
+    <rect x="900" y="620" width="340" height="190" rx="8" class="objectBox"/>
+    <rect x="900" y="620" width="340" height="48" rx="8" class="headPink"/>
+    <rect x="900" y="650" width="340" height="18" class="headPink"/>
+    <text x="1070" y="652" class="textLight" text-anchor="middle">db : DatabaseService</text>
+    <line x1="900" y1="712" x2="1240" y2="712" class="sep"/>
+    <text x="930" y="695" class="field">database = payguard.db</text>
+    <text x="930" y="740" class="field">stores transactions</text>
+    <text x="930" y="772" class="field">stores alerts and model runs</text>
+  </g>
+
+  <path d="M455 335 H615" class="link"/>
+  <text x="485" y="315" class="small">triggers</text>
+  <text x="492" y="365" class="small">1 transaction to 0..* alerts</text>
+
+  <path d="M985 335 H1135" class="dash"/>
+  <text x="1015" y="315" class="small">contributes to</text>
+
+  <path d="M1325 450 C1265 545 1195 580 1100 615" class="dash"/>
+  <text x="1198" y="535" class="small">derived summary</text>
+
+  <path d="M520 620 C475 530 390 485 305 455" class="line"/>
+  <text x="378" y="525" class="small">scores</text>
+
+  <path d="M690 705 H890" class="line"/>
+  <text x="735" y="685" class="small">stores result through</text>
+
+  <path d="M1070 620 C990 545 905 500 805 455" class="line"/>
+  <text x="910" y="535" class="small">persists alert</text>
+
+  <path d="M900 720 C720 620 575 515 455 405" class="line"/>
+  <text x="620" y="585" class="small">persists transaction</text>
+
+  <path d="M985 405 C1040 480 1145 545 1265 620" class="line"/>
+  <text x="1080" y="505" class="small">read by account lookup</text>
+</svg>
