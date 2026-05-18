@@ -1,0 +1,888 @@
+
+
+--- PAGE 1 ---
+Contents
+CHAPTER 1 ...................................................................................................................................... 4
+1.0 Introduction ................................................................................................................................. 4
+1.1 Background of the Study ............................................................................................................ 4
+1.2 Statement of the Problem ........................................................................................................... 5
+1.3 Objectives of the Study ............................................................................................................... 5
+1.4 Hypotheses ................................................................................................................................... 5
+1.5 Justification of the Research ...................................................................................................... 5
+1.6 Assumptions of the Study ........................................................................................................... 6
+1.7 Delimitations of the Study .......................................................................................................... 6
+1.8 Limitations of the Study ............................................................................................................. 6
+1.9 Definition of Terms ..................................................................................................................... 6
+CHAPTER 2 ...................................................................................................................................... 7
+LITERATURE REVIEW ................................................................................................................ 7
+2.1 Introduction ................................................................................................................................. 7
+2.2 Theoretical Literature Review ................................................................................................... 7
+2.3 Empirical Literature Review ..................................................................................................... 8
+2.4 Summary, Research Gap, and Significance .............................................................................. 8
+CHAPTER 3 .................................................................................................................................... 10
+FEASIBILITY STUDY .................................................................................................................. 10
+3.0 Introduction ............................................................................................................................... 10
+3.1 Economic Feasibility ................................................................................................................. 10
+3.2 Technical Feasibility ................................................................................................................. 10
+3.3 Operational Feasibility ............................................................................................................. 11
+3.4 Organizational Feasibility ........................................................................................................ 11
+3.5 Schedule Feasibility .................................................................................................................. 11
+3.6 Project Plan ............................................................................................................................... 11
+3.6.1 Gantt Chart ............................................................................................................................ 12
+3.7 Conclusion ................................................................................................................................. 12
+CHAPTER 4 .................................................................................................................................... 13
+REQUIREMENTS ANALYSIS..................................................................................................... 13
+4.0 Introduction ............................................................................................................................... 13
+4.1 INFORMATION GATHERING METHODOLOGIES ....................................................... 13
+4.1.1 Interviews................................................................................................................................ 13
+4.1.2 Questionnaires ........................................................................................................................ 14
+
+--- PAGE 2 ---
+4.1.3 OBSERVATION .................................................................................................................... 14
+4.1 Analysis of the Current System ............................................................................................... 15
+4.2 Functional Requirements ......................................................................................................... 15
+4.3 Non-Functional Requirements ................................................................................................. 16
+4.4 DATA ANALYSIS .................................................................................................................... 16
+4.4.1 Data Flow Diagram ................................................................................................................ 16
+4.4.2 Use Case .................................................................................................................................. 18
+4.5 Conclusion ................................................................................................................................. 18
+CHAPTER 5 .................................................................................................................................... 19
+SYSTEM DESIGN .......................................................................................................................... 19
+5.0 Introduction ............................................................................................................................... 19
+5.2.1 Interface Diagram .................................................................................................................. 19
+5.1 Database Tables ........................................................................................................................ 20
+5.1.1 Admins table ........................................................................................................................... 20
+5.1.2 Hospital Table ........................................................................................................................ 20
+5.2 Data Flow Diagrams (DFDs) .................................................................................................... 22
+5.2.1 .................................................................................................................................................. 22
+5.3 System Architecture Design ..................................................................................................... 28
+5.1.2 Component Diagram.............................................................................................................. 30
+5.2 Input Design .............................................................................................................................. 30
+5.3 Process Design ........................................................................................................................... 30
+5.3.1 User Flow Flowchart .............................................................................................................. 32
+5.3.2 Sequence Diagram ..................................................................... Error! Bookmark not defined.
+5.4 Output Design............................................................................................................................ 33
+5.5 Database Design (Entity Structure) ......................................................................................... 28
+5.5.1 Entity Relationship Diagram ................................................................................................ 28
+5.6 Security and Control Design .................................................................................................... 33
+5.7 Interface Design ........................................................................................................................ 19
+5.8 Hardware and Software Platform ........................................................................................... 33
+5.9 Operational Design Considerations ......................................................................................... 34
+5.10 Conclusion ............................................................................................................................... 35
+CHAPTER 6 .................................................................................................................................... 36
+CODING AND TESTING .............................................................................................................. 36
+6.0 Introduction ............................................................................................................................... 36
+6.1 Coding (Programming Phase) .................................................................................................. 36
+6.2 Testing ........................................................................................................................................ 36
+
+--- PAGE 3 ---
+6.3 Program Testing ........................................................................................................................ 37
+6.4 System Testing ........................................................................................................................... 37
+6.5 User Acceptance Testing .......................................................................................................... 37
+6.6 Conclusion ................................................................................................................................. 38
+CHAPTER 7 .................................................................................................................................... 39
+IMPLEMENTATION AND POST-IMPLEMENTATION PLAN ............................................ 39
+7.0 Introduction ............................................................................................................................... 39
+7.1 System Implementation ............................................................................................................ 41
+7.2 Changeover Strategy ................................................................................................................ 41
+7.3 Documentation .......................................................................................................................... 42
+7.4 Maintenance and Post-Implementation Plan ......................................................................... 42
+7.5 Conclusion ................................................................................................................................. 43
+CHAPTER 8 .................................................................................................................................... 44
+8.0 Introduction ............................................................................................................................... 44
+8.1 Summary of the Study .............................................................................................................. 44
+8.2 Summary of Major Findings .................................................................................................... 44
+8.3 Significance of the Findings ..................................................................................................... 45
+8.4 Conclusions ................................................................................................................................ 45
+8.5 Recommendations ..................................................................................................................... 46
+8.5.1 Recommendations from the Research Findings .................................................................. 46
+8.5.2 Recommendations for Further Research ............................................................................. 46
+8.5.3 Recommendations for Practice and Policy .......................................................................... 46
+8.6 Final Statement ......................................................................................................................... 46
+
+--- PAGE 4 ---
+CHAPTER 1
+1.0 Introduction
+Health information management is central to effective healthcare delivery, as it supports
+patient care, reporting, and evidence-based planning. In maternity services, accurate birth
+records are particularly important because they provide legal proof of birth and essential data
+for monitoring maternal and child health outcomes, including live births and stillbirths.
+Despite global advances in digital and digitalised health record systems, Nyanga District
+Hospital continues to rely on handwritten birth registers. These paper-based records are
+vulnerable to damage, loss, illegibility, and slow retrieval, which negatively affects
+efficiency, data quality, and service delivery. This study focuses on the development of a
+Digitalised Birth Record Management System for Nyanga District Hospital. The proposed
+system aims to digitise birth records, improve accuracy through automated validation, and
+provide a dashboard that presents real-time summaries and trends. The dashboard will enable
+healthcare workers and management to easily view key indicators such as monthly birth rates,
+live births, stillbirths, delivery outcomes, and workload trends, thereby supporting faster
+reporting and informed decision-making. By integrating digital records with intelligent
+analytics and visualisation, the study seeks to strengthen birth record management and
+enhance maternity care services.
+1.1 Background of the Study
+At Nyanga District Hospital, birth registration and record management are carried out using
+physical handwritten birth record registers in the maternity ward and the Health Information
+Office. Whenever there is a need to verify or retrieve birth information, healthcare workers
+physically search through the registers to locate the required records. The records stored are
+from 1968 to the present.
+Information relating to mothers and newborn babies is recorded in physical books and
+registers. Some newborn babies are issued birth records while others are not, depending on
+the mother’s decision or circumstances at the time of delivery. When a register becomes full,
+it is transferred to the Health Information Office for storage. However, the registers are kept
+without a proper filing order, making it difficult to trace old records when needed.
+
+--- PAGE 5 ---
+The physical system also faces challenges such as torn pages, faded ink, unclear handwriting,
+misplaced registers, and missing information. In cases where a record is missing, it is usually
+left unresolved or a letter is written to the Registry Department to request the missing
+information. These challenges affect the accuracy, accessibility, and management of birth
+records at the hospital
+1.2 Statement of the Problem
+The current system failed to overcome the following
+ Birth records are recorded using handwritten registers, which are prone to torn pages,
+faded ink, unclear handwriting, and missing information.
+ Paper-based registers are easily damaged or lost, putting important birth information
+at risk.
+ Healthcare workers spend excessive time writing and managing paperwork instead of
+focusing on patient care.
+ Retrieving specific birth records is slow and inefficient due to the accumulation of
+records over many years.
+1.3 Objectives of the Study
+1. To design and implement Digitalised Birth Record Management System.
+2. To provide a dashboard that displays real-time reports and trends.
+1.4 Hypotheses
+H₀ The proposed system would solve the problem of issuing birth records at Nyanga District
+:
+Hospital by 85%
+H₁: The proposed system would not solve the problem of issuing birth records at Nyanga
+District Hospital.
+1.5 Justification of the Research
+This study is justified because effective birth record management is essential to healthcare
+delivery. Previous studies have largely focused on general electronic health records,
+overlooking digitalised birth record systems in district hospitals. Improving birth record
+
+--- PAGE 6 ---
+management benefits healthcare workers, hospital management, parents, and policymakers.
+The study also contributes academically by addressing a neglected research area and
+practically by proposing a usable solution.
+1.6 Assumptions of the Study
+The study assumes that participants provide honest response, that basic infrastructure is
+available, and that healthcare workers are willing to adopt new technologies.
+1.7 Delimitations of the Study
+The study is limited to birth record management at Nyanga District Hospital. It focused on
+maternity ward records and healthcare workers involved in birth registration. Other hospital
+departments and national systems are excluded.
+1.8 Limitations of the Study
+Limitations include time constraints, limited access to older records, and varying levels of
+computer literacy. These are addressed through focused data collection and a simple system
+design.
+1.9 Definition of Terms
+ Digitalised Birth Record Management System: An electronic system for recording
+and retrieving birth information.
+ Birth Records: Official information recorded at the time of birth.
+ Data Accuracy: The correctness and completeness of recorded information.
+
+--- PAGE 7 ---
+CHAPTER 2
+LITERATURE REVIEW
+2.0 Introduction
+The purpose of this chapter is to critically examine existing literature relevant to Digitalised
+Birth Record Management System. According to Creswell (2014), an effective literature
+review should justify the research problem, compare existing viewpoints, and demonstrate
+how the current study contributes new knowledge. The reviewed literature is assessed for
+relevance, credibility, and consistency, with emphasis placed on recent studies where
+available. Rather than merely describing previous work, this chapter compares and contrasts
+scholarly arguments in order to position the present study within the broader research debate.
+2.1 Theoretical Literature Review
+2.1.1 Birth Registration and Record Management Systems
+The design and implementation of a digitalised birth record management system to replace
+handwritten registers. Literature consistently describes birth registration as a core component
+of health information systems and civil registration. UNICEF (2019) states that accurate birth
+records are essential for legal identity and access to social services. AbouZahr et al. (2015)
+agree that reliable birth data supports planning and evaluation of maternal and child health
+services.
+However, several scholars contend that manual, paper-based systems undermine data quality
+and service efficiency. WHO (2018) notes that handwritten registers are prone to loss,
+physical damage, illegibility, and transcription errors. While these systems are inexpensive
+and easy to use, their limitations become pronounced as records accumulate over time. The
+literature therefore supports the need to replace physical systems with digital alternatives,
+directly justifying the first objective of this study.
+2.1.2 Digital Health Record Systems
+Digital health record systems are widely viewed as an improvement over physical record
+keeping. Laudon and Laudon (2020) state that digital systems enhance efficiency by
+
+--- PAGE 8 ---
+improving storage, retrieval, and reporting of health data. Ozair et al. (2015) agree that
+electronic records reduce paperwork and improve accessibility of patient information.
+Despite these advantages, the literature also highlights critical weaknesses. Katuu (2016)
+contends that many digital systems merely replicate physical processes in electronic form,
+thereby perpetuating errors associated with physical data entry. This suggests that digitisation
+alone is insufficient to guarantee accuracy and reliability. These findings support the study’s
+second objective, which seeks to improve accuracy and speed of birth data management
+beyond basic digitisation.
+2.2 Empirical Literature Review
+Empirical studies provide practical evidence on the performance of digitalised health
+information systems. Fraser et al. (2017) found that electronic health record systems
+significantly reduced data retrieval time and improved reporting efficiency in hospital
+settings. Mutale et al. (2018) similarly reported improvements in data completeness and
+timeliness following the implementation of digital systems in district hospitals.
+Studies focusing on digitalised systems report stronger outcomes. Zhou et al. (2019) observed
+that AI-supported validation mechanisms reduced data entry errors and improved record
+reliability. However, most empirical studies focus on general electronic health records rather
+than birth-specific record management systems. In the African and rural hospital context,
+empirical evidence on Digitalised Birth Record Management System remains limited,
+indicating a clear research gap.
+2.3 Summary, Research Gap, and Significance
+The reviewed literature demonstrates broad agreement that physical birth record systems are
+inefficient and prone to error, while digital systems offer improvements in efficiency but do
+not fully resolve accuracy challenges. The literature further contends that digitalised systems
+provide superior outcomes through automated validation, analytics, and decision support.
+Research Gap
+Despite extensive research on electronic health records studies in healthcare, there is limited
+empirical research focusing specifically on Digitalised Birth Record Management Systems in
+
+--- PAGE 9 ---
+district hospitals within developing countries. This gap justifies the present study at Nyanga
+District Hospital.
+Significance of the Study
+The study is significant to healthcare workers by reducing administrative workload and
+improving record accuracy. Hospital management benefits from real-time dashboards that
+support planning and reporting. Academically, the study contributes to literature on AI
+applications in birth record management, an under-researched area in district hospital
+settings.
+
+--- PAGE 10 ---
+CHAPTER 3
+FEASIBILITY STUDY
+3.0 Introduction
+A feasibility study assesses the workability of the proposed system in terms of cost,
+technology, operations, time, organizational alignment, and social acceptance.
+The purpose is not to solve the problem at this stage, but to determine whether
+implementation is realistic and beneficial. The findings guide management in deciding
+whether to proceed with the project.
+3.1 Economic Feasibility
+The researcher examined the cost-benefit analysis of the project, which assesses whether it is
+possible to implement the project and determine whether the project can be attained within
+the firm’s budget constraints.
+3.1.1 Benefits of the proposed system
+Tangible benefits
+ Reduced administrative works
+ Diminish wasted inventory.
+ Reduced stationery costs through computerization.
+ Improve cash flow.
+Intangible benefits
+ Reduced pitfalls.
+ Increased employee motivation through reduced stress from less work.
+ Improved data integrity and system reliability.
+3.2 Technical Feasibility
+The researcher assessed whether it is technically possible to carry out a project before taking
+up the project, plan and prepare for every step of the operation.
+
+--- PAGE 11 ---
+Nyanga District Hospital has basic ICT infrastructure, including electricity and computers.
+The proposed system requires standard hardware and commonly used database and software
+development tools.
+3.3 Operational Feasibility
+The researcher carried out the study to analyse and determine whether the needs of the
+organization can be met by completing the project. A user-friendly system is required so that
+it can be quickly accepted.
+3.4 Organizational Feasibility
+Organizational feasibility evaluates whether the system aligns with institutional goals.
+The hospital aims to improve service delivery, data accuracy, and reporting efficiency. The
+proposed system supports these objectives by enhancing record management and enabling
+data-driven decision-making. Thus, the system is consistent with the hospital’s strategic
+direction and is organizationally feasible.
+3.5 Schedule Feasibility
+The researcher calculated and continually re-examined whether it is possible to complete all
+amount and scope of work lying ahead, utilizing the given number of resources, within
+required period of time.
+3.6 Project Plan
+This is a roadmap for a digitalised system that efficiently capture, store and manage birth
+records accurately and securely.
+
+--- PAGE 12 ---
+3.6.1 Gantt Chart
+3.7 Conclusion
+The feasibility analysis confirms that the proposed Digitalised Birth Record Management
+System is economically viable, technically achievable, operationally practical,
+organizationally aligned, schedule realistic, and socially acceptable.
+
+--- PAGE 13 ---
+CHAPTER 4
+REQUIREMENTS ANALYSIS
+4.0 Introduction
+The researcher points out what users required in the proposed system and gave an insight of
+the operations of the current system, how processes are linked within the current system and
+how activities are going to be coordinated in the proposed system. The researcher used a set
+of gathering methodologies to collect data. The researcher analysed collected data
+highlighting the strengths and weaknesses of the current system and alternative solutions to
+the systems weaknesses.
+4.1 Information gathering methodologies
+4.1.1 Interviews
+On two June two thousand and twenty-five the researcher asked questions to thirty staff
+members regarding their opinion on the efficiency and effectiveness of the current system
+and their desired changes. Interviews were carried in a space of one week, and all the staff
+members were interviewed in their offices. Notes were taken down during all interview
+sessions. The developer chose to interview midwifery, maternity nurses and administrative
+staff members separately so as to enable the gathering of all information from different levels
+and sources related to the line of birth registration and record, operations and activities
+undertaken by the by the hospital. A variety of questions were open-ended questions, closed-
+ended questions, and range of response questions. Interviews were documented and recorded
+during and after the process of interviewing.
+Benefits
+ Managed to clarify misconceptions about the current system
+ Body expressions were notable during interviews, which made it easier to see which
+areas of the current system they were most uncomfortable with.
+ The researcher obtained first-hand information.
+
+--- PAGE 14 ---
+Drawbacks
+ Some of the interviewees failed to corporate and therefore did not give the interviewer
+enough time to gather all required information.
+ Some questions were not answered correctly due to Ministry of Health law of
+confidentiality.
+4.1.2 Questionnaires
+On 9 June two thousand and twenty-five the researcher gave questionnaires to all staff
+members at the company. The purpose is to preview into the already existing system through
+the users’ opinion. Questionnaires were to be returned in four days’ time.
+Benefits
+ Questionnaires supply standard answers because the respondents were matching
+exactly to what the researcher needed to know.
+ Questionnaires saved time.
+ They were easy to arrange as compared to interviews.
+ Since questions were the same it was easy to make conclusions.
+Disadvantages
+ Partially or poorly completed answers were provided as the respondent failed to
+understand some questions and also because there were no follow up questions that
+offered clarification.
+ Pre-coded answers can be frustrating for the respondent thus deterring from
+answering them.
+4.1.3 Observation
+The researcher simply observed all activities that takes place at the company and managed to
+have the look and feel of what was actually transpiring throughout the firm.
+Benefits
+ Information obtained was from the actual site where problems were identified.
+
+--- PAGE 15 ---
+ Observations provided with a direct and fast source of information.
+ The look and feel of current system enabled the information to be collected with less
+biased.
+Disadvantages
+ Findings are not accurate since the methodology used is based on assumptions based
+on human behaviour.
+ As the members were aware that they were being observed, they likely changed their
+behaviour, which caused some of the data to be distorted.
+ The method needs more personal commitment.
+4.1 Analysis of the Current System
+Birth records are physically recorded in handwritten registers in the maternity ward. Registers
+are physically stored and retrieved when parents request confirmation of birth. Monthly
+statistics are generated through physical counting.
+ Who records the data? Nurses and maternity ward staff.
+ Who retrieves and issues records? Health ICT Officers and Health Information
+Officers.
+ Problem: Some parents delay collecting birth records for many years (e.g., births
+from 1997, 2004, 2013, 2016). Over time, registers become worn out, pages tear, ink
+fades, and records may be lost.
+This leads to delays, administrative burden, and risk of missing data. Given the importance of
+birth documentation in Zimbabwe, this presents serious operational challenges.
+4.2 Functional Requirements
+The system shall:
+1. Capture and store birth details electronically.
+2. Validate entries to reduce errors.
+3. Allow authorised users to search and retrieve records instantly.
+4. Generate automated monthly and annual reports.
+
+--- PAGE 16 ---
+5. Provide a dashboard showing total births, live births, stillbirths, and trends.
+6. Ensure secure login and data backup.
+4.3 Non-Functional Requirements
+The system must:
+ Be user-friendly and easy to learn.
+ Operate on available hospital computers.
+ Ensure data security and confidentiality.
+ Function reliably with minimal downtime.
+ Be cost-effective and sustainable within Zimbabwe’s economic environment.
+4.4 DATA ANALYSIS
+The developer revealed processes and activities that are performed in the current system.
+4.4.1 Data Flow Diagram
+
+--- PAGE 17 ---
+
+
+--- PAGE 18 ---
+4.4.2 Use Case
+4.5 Conclusion
+The current physical system is inefficient and vulnerable to data loss. The proposed digital
+system addresses these weaknesses through secure storage, instant retrieval, automated
+validation, and real-time reporting.
+
+--- PAGE 19 ---
+CHAPTER 5
+SYSTEM DESIGN
+5.0 Introduction
+This chapter presents the design of the Digitalised Birth Record Management SystemRecord
+Management System for Nyanga District Hospital. The approved requirements from Chapter
+Four are transformed into a clear system design that explains how the system will operate.
+The logical design developed during analysis is now converted into a physical design,
+detailing inputs, outputs, databases, processes, security controls, and system structure. This
+design serves as the blueprint for system development.
+5.1 Interface Design
+The system interface will be:
+ Simple and user-friendly
+ Menu-driven
+ Designed for users with basic computer skills
+Screens will include login pages, data entry forms, search functions, and dashboard views.
+5.1.1 Interface Diagram
+
+--- PAGE 20 ---
+5.1 Database Tables
+5.1.1 Admins table
+Column Name Data Type Constraints Description
+Id INT PK, AUTO_INCREMENT, NOT Unique admin identifier
+NULL
+Username VARCHAR(100) UNIQUE, NOT NULL Admin login username
+password_hash VARCHAR(255) NOT NULL Bcrypt hashed password
+Email VARCHAR(150) UNIQUE, NOT NULL Admin email address
+created_at DATETIME DEFAULT Account creation timestamp
+CURRENT_TIMESTAMP
+last_login DATETIME NULLABLE Last successful login time
+is_active TINYINT(1) DEFAULT 1 1=Active, 0=Disabled account
+5.1.2 Hospital Table
+Column Name Data Type Constraints Description
+Id INT PK, AUTO_INCREMENT, NOT Unique facility identifier
+NULL
+Name VARCHAR(200) NOT NULL Official hospital name
+Location VARCHAR(200) NOT NULL Physical address / town
+Province VARCHAR(100) NOT NULL Province (e.g. Manicaland)
+District VARCHAR(100) NOT NULL District name
+Phone VARCHAR(20) NULLABLE Contact phone number
+Email VARCHAR(150) NULLABLE Official email address
+created_at DATETIME DEFAULT Registration timestamp
+CURRENT_TIMESTAMP
+is_active TINYINT(1) DEFAULT 1 Facility active status
+5.1.3 Users Table
+Column Name Data Type Constraints Description
+Id INT PK, AUTO_INCREMENT, Unique staff user ID
+NOT NULL
+hospital_id INT FK → hospitals(id), NOT NULL Associated health facility
+Username VARCHAR(100) UNIQUE, NOT NULL Login username
+password_hash VARCHAR(255) NOT NULL Bcrypt hashed password
+full_name VARCHAR(200) NOT NULL Staff member full name
+Role ENUM NOT NULL 'nurse','ict_officer','hio','manager'
+
+--- PAGE 21 ---
+Email VARCHAR(150) NULLABLE Work email address
+Phone VARCHAR(20) NULLABLE Staff phone number
+is_active TINYINT(1) DEFAULT 1 1=Active, 0=Disabled
+created_at DATETIME DEFAULT Account creation time
+CURRENT_TIMESTAMP
+last_login DATETIME NULLABLE Last login timestamp
+5.1.4 Mothers Table
+Column Name Data Type Constraints Description
+Id INT PK, AUTO_INCREMENT, Unique mother admission ID
+NOT NULL
+hospital_id INT FK → hospitals(id), NOT Admitting hospital
+NULL
+reg_number VARCHAR(50) UNIQUE, NOT NULL Auto-generated registration number
+full_name VARCHAR(200) NOT NULL Mother's full legal name
+date_of_birth DATE NOT NULL Mother's date of birth
+national_id VARCHAR(30) NULLABLE National Identity Card number
+Address TEXT NULLABLE Residential address
+Phone VARCHAR(20) NULLABLE Contact phone number
+marital_status ENUM NULLABLE 'single','married','widowed','divorced'
+blood_group VARCHAR(5) NULLABLE Blood group (e.g. O+)
+admission_date DATE NOT NULL Date admitted to maternity ward
+Ward VARCHAR(50) NULLABLE Ward assigned to
+created_by INT FK → users(id), NOT NULL Nurse who captured the admission
+created_at DATETIME DEFAULT Record creation timestamp
+CURRENT_TIMESTAMP
+updated_at DATETIME ON UPDATE Last update timestamp
+CURRENT_TIMESTAMP
+5.1.5 Birth Table
+Column Name Data Type Constraints Description
+Id INT PK, AUTO_INCREMENT, NOT NULL Unique birth record ID
+mother_id INT FK → mothers(id), NOT NULL Mother linked to birth
+registered_by INT FK → users(id), NOT NULL Nurse who captured the birth
+approved_by INT FK → users(id), NULLABLE ICT Officer who approved record
+birth_date DATE NOT NULL Date of birth of newborn
+
+--- PAGE 22 ---
+birth_time TIME NOT NULL Time of birth
+newborn_nam VARCHAR NULLABLE Newborn name (if given at
+e (200) admission)
+Sex ENUM NOT NULL 'male','female','indeterminate'
+delivery_type ENUM NOT NULL 'normal','caesarean','assisted'
+Outcome ENUM NOT NULL 'live_birth','stillbirth','neonatal_dea
+th'
+gestational_age INT NULLABLE Gestational age in weeks
+weight_kg DECIMAL( NOT NULL Birth weight in kilograms
+4,2)
+apgar_score TINYINT NULLABLE APGAR score at birth (0–10)
+Complications TEXT NULLABLE Notes on delivery complications
+Status ENUM DEFAULT 'draft' 'draft','pending','approved','rejected
+','issued'
+ai_flags JSON NULLABLE AI validation flags and error
+messages
+rejection_reaso TEXT NULLABLE Reason for record rejection
+n
+approved_at DATETIME NULLABLE Approval timestamp
+issued_at DATETIME NULLABLE Certificate issue timestamp
+created_at DATETIME DEFAULT CURRENT_TIMESTAMP Record creation timestamp
+updated_at DATETIME ON UPDATE Last update timestamp
+CURRENT_TIMESTAMP
+5.2 Data Flow Diagrams (DFDs)
+5.2.1
+
+--- PAGE 23 ---
+5.2.2
+5.2.3
+
+--- PAGE 24 ---
+5.3 UML Diagrams
+5.3.1 Use Case Diagram
+5.3.2 Class Diagram
+
+--- PAGE 25 ---
+5.3.3 Sequence Diagram
+5.3.5 Activity diagram
+
+--- PAGE 26 ---
+
+
+--- PAGE 27 ---
+5.3.5 Communication Diagram
+5.3.5State Diagram
+
+--- PAGE 28 ---
+5.5 Database Design (Entity Structure)
+The system will use a structured database with key entities such as:
+ Mother
+ Newborn
+ Birth Record
+ User (Health ICT Officer, Nurse, Administrator)
+Each record will have unique identifiers to prevent duplication. A data dictionary will define
+each data field to ensure consistency and accuracy.
+5.5.1 Entity Relationship Diagram
+The database contains five core tables. hospitals is the top-level entity representing registered
+facilities. Each hospital has many users (staff) and many mothers (admissions). Each mother
+can have one or more births records. The admins table is independent and manages the super-
+administrator accounts.
+
+--- PAGE 29 ---
+Tables Primary Key Key Relationships Purpose
+admins id - Super administrator accounts
+hospitals id 1→N users, 1→N mothers Registered health facilities
+Users id N→1 hospitals Hospital staff accounts
+Mothers id N→1 hospitals, 1→N births Maternal admission records
+Births id N→1 mothers, N→1 users (x2) Birth registration records
+5.3 System Architecture Design
+The proposed system will operate as a computer-based application within the hospital
+network. It will consist of:
+ A user interface for data entry and retrieval
+ A central database for storing birth records
+ A reporting and dashboard module
+ An AI validation module for error detection
+The system will run on standard hospital computers and will not require expensive
+infrastructure, ensuring suitability within Zimbabwe’s economic environment.
+5.3.1 Deployment Diagram
+
+--- PAGE 30 ---
+5.1.2 Component Diagram
+5.2 Input Design
+Inputs refer to the data captured into the system. These include:
+ Mother’s details
+ Newborn details
+ Date and time of birth
+ Type of delivery
+ Birth outcome (live birth or stillbirth)
+Digital forms will mirror the current physical registers to ensure familiarity for users.
+Mandatory fields and automated validation rules will reduce incomplete or incorrect entries.
+5.3 Process Design
+The system will perform the following processes:
+1. Capture and validate birth data.
+2. Store records securely in the database.
+
+--- PAGE 31 ---
+3. Allow authorised users to search and retrieve records.
+4. Generate automated reports and statistical summaries.
+5. Display real-time trends on a dashboard.
+AI functionality will detect missing data, duplicate entries, and inconsistencies during data
+entry.
+5.3.1 Deployment Diagram
+
+--- PAGE 32 ---
+5.3.1 User Flow Flowchart
+Two parallel flows govern the system. The Hospital User flow (left) covers login, mother
+admission, birth capture, and the approval pipeline. The Admin flow (right) covers hospital
+registration approval, user creation, and system monitoring. Diamond shapes represent
+decision points; rounded rectangles are processes.
+
+--- PAGE 33 ---
+5.4 Output Design
+The system outputs will include:
+ Individual birth record retrieval
+ Monthly and annual statistical reports
+ Dashboard summaries showing:
+o Total births
+o Live births
+o Stillbirths
+o Delivery trends
+Outputs will be clear, printable, and suitable for management reporting and decision-making.
+5.6 Security and Control Design
+Security is critical due to the sensitive nature of birth records. The system will include:
+ Secure login authentication
+ Role-based access control
+ Data encryption
+ Regular data backups
+ Audit trails to track user activity
+Security risks will be assessed and managed before deployment.
+5.8 Hardware and Software Platform
+The system will operate on:
+ Standard desktop computers or laptops
+ A relational database management system
+ A secure local server or structured storage system
+The selected platform will be cost-effective, sustainable, and compatible with existing
+hospital resources.
+
+--- PAGE 34 ---
+5.8.1 Deployment Diagram
+5.9 Operational Design Considerations
+The design also addresses:
+ User training requirements
+ Backup procedures
+ System documentation
+ Maintenance and technical support
+ Staffing roles and responsibilities
+These considerations ensure smooth implementation and long-term sustainability.
+
+--- PAGE 35 ---
+5.10 Conclusion
+This chapter transformed the approved requirements into a structured system design. The
+logical design has been converted into a physical blueprint covering inputs, processes,
+outputs, database structure, security, and platform requirements.
+The design ensures that the proposed system is secure, practical, and aligned with the
+operational realities of Nyanga District Hospital. Upon approval, the project can proceed to
+the Development Phase.
+
+--- PAGE 36 ---
+CHAPTER 6
+CODING AND TESTING
+6.0 Introduction
+This chapter describes the implementation of the system design through coding and testing.
+At this stage, the approved system design is translated into a working software application.
+The objective is to develop a reliable, error-free system that meets the specified requirements.
+6.1 Coding (Programming Phase)
+Coding involves converting the system design specifications into computer programs using
+an appropriate programming language. The selected language and development tools were
+chosen based on system requirements, compatibility, cost-effectiveness, and sustainability
+within the hospital environment.
+The system was developed using a modular approach. Each module (data entry, validation,
+database management, reporting, and dashboard) was programmed separately to ensure:
+ Easier development and debugging
+ Improved maintenance
+ Flexibility for future upgrades
+Compilers and development tools were used to detect and remove syntax errors. Logical
+errors, which affect how the system behaves, were identified through careful testing and
+corrected accordingly.
+Well-structured and documented code was maintained to reduce future maintenance
+challenges.
+6.2 Testing
+Testing ensures that the developed system functions according to the specified requirements.
+It verifies accuracy, reliability, and performance before full deployment.
+
+--- PAGE 37 ---
+A structured test plan was developed and executed using prepared test data and later actual
+data.
+6.3 Program Testing
+Each module of the system was tested individually. This included:
+ Verifying data entry validation rules
+ Checking database storage accuracy
+ Testing report generation functions
+ Confirming correct dashboard calculations
+Errors identified during this stage were corrected through debugging. The objective was to
+ensure each program functioned correctly on its own.
+6.4 System Testing
+After individual modules were tested, they were integrated and tested as a complete system.
+System testing involved:.
+ Running the system using actual hospital data
+ Verifying that outputs matched expected results
+ Testing interaction between modules
+ Checking security controls and user access levels
+If discrepancies were identified, corrections were made and retesting was conducted until the
+system operated as expected.
+6.5 User Acceptance Testing
+Once technical testing confirmed system stability, users (nurses, Health ICT Officers, and
+Health Information Officers) were invited to test the system using real operational data.
+This ensured that:
+ The system met user expectations
+ Workflows were properly supported
+
+--- PAGE 38 ---
+ Outputs were accurate and acceptable
+Feedback from users was considered before final deployment.
+6.6 Conclusion
+The coding and testing phase transformed the system design into a functional and reliable
+application. Through modular development, structured program testing, system integration
+testing, and user acceptance testing, errors were identified and corrected.
+The system was confirmed to operate according to specified requirements and is ready for
+implementation.
+
+--- PAGE 39 ---
+CHAPTER 7
+IMPLEMENTATION AND POST-IMPLEMENTATION PLAN
+7.0 Introduction
+This chapter describes the deployment of the Digitalised Birth Record Management System
+and the activities required after installation. Implementation converts the developed system
+into practical use within Nyanga District Hospital.
+7.1.1 Deployment Diagrams (1 -3)
+
+--- PAGE 40 ---
+
+
+--- PAGE 41 ---
+7.2 System Implementation
+After user acceptance testing, the system is prepared for operational use. The key steps
+include:
+7.2.1 Acquisition and Installation
+ Installation of required hardware (computers, storage devices).
+ Setup of the database with defined security and backup procedures.
+ Installation of the application software on user machines.
+The system is configured to operate within existing hospital infrastructure to ensure cost-
+effectiveness and sustainability.
+7.2.2 Data Conversion
+Relevant data from the physical registers is entered into the new system where necessary.
+Proper validation is conducted to ensure accuracy during migration.
+Data security, access control, and recovery procedures are fully defined before full operation.
+7.2.3 User Training
+Training is conducted for nurses, Health ICT Officers, and Health Information Officers.
+Training focuses on:
+ Logging into the system
+ Capturing birth data
+ Searching and retrieving records
+ Generating reports and dashboard summaries
+The aim is to ensure confidence and smooth transition from physical to digital processes.
+7.3 Changeover Strategy
+To minimise operational risk, a Parallel Run Strategy is recommended.
+Under this approach:
+
+--- PAGE 42 ---
+ Both physical and digital systems operate simultaneously for a defined period.
+ Outputs from both systems are compared.
+ Errors are corrected before full migration.
+This approach reduces risk while maintaining service continuity.
+7.4 Documentation
+Proper documentation ensures system continuity and sustainability.
+7.4.1 User Documentation
+Provides clear instructions on:
+ System operation
+ Data entry procedures
+ Report generation
+ Common error messages
+7.4.2 System Documentation
+Includes:
+ System design details
+ Database structure
+ Program specifications
+ Data dictionary
+ Process descriptions
+This supports future upgrades and maintenance.
+7.5 Maintenance and Post-Implementation Plan
+Maintenance ensures the system continues to operate efficiently. It includes:
+ Correcting identified errors
+ Monitoring system performance
+ Regular data backups
+
+--- PAGE 43 ---
+ Updating security measures
+ Improving features where necessary
+Periodic system reviews will assess:
+ Performance efficiency
+ User satisfaction
+ Need for enhancements
+If major changes are required, a new development cycle may be initiated.
+7.6 Conclusion
+This chapter outlined the steps for system deployment, user training, changeover,
+documentation, and maintenance. Proper implementation and ongoing monitoring ensure that
+the system remains reliable, secure, and aligned with hospital needs.
+With successful implementation, the hospital transitions from a vulnerable physical system to
+a secure, efficient digital birth record management system.
+
+--- PAGE 44 ---
+CHAPTER 8
+SUMMARY, CONCLUSIONS AND RECOMMENDATIONS
+8.0 Introduction
+This chapter presents a summary of the study, the major findings, conclusions drawn from the
+research, and recommendations for future action and further research.
+8.1 Summary of the Study
+This dissertation investigated the development of the proposed system for Nyanga District
+Hospital. The aim was to replace the manual, paper-based birth registration system with a
+secure, efficient, and intelligent digital system.
+The study:
+ Examined weaknesses in the current physical system.
+ Reviewed literature on digital health records and AI in healthcare.
+ Conducted feasibility and requirements analysis.
+ Designed, developed, tested, and implemented a proposed system.
+The objectives were achieved through literature review, system analysis, design, coding, and
+system testing.
+8.2 Summary of Major Findings
+This study has shown that the current physical birth registration system is inefficient,
+vulnerable to data loss, and time-consuming.
+One of the most significant findings to emerge from this study is that delayed collection of
+birth records (for children born many years earlier) increases the risk of missing, damaged, or
+incomplete records.
+The study also found that:
+ Physical reporting increases administrative workload.
+ Retrieval of historical records is slow and unreliable.
+
+--- PAGE 45 ---
+ Lack of digital storage limits accurate statistical reporting.
+The results of this investigation show that a digital system with automated validation
+improves data accuracy, speeds up retrieval, and enhances reporting efficiency.
+These findings suggest that integrating digitalised system and dashboard reporting
+significantly strengthens birth record management in a district hospital setting.
+8.3 Significance of the Findings
+The findings contribute practically and academically.
+Practically, the study provides a cost-effective and sustainable digital solution suitable for the
+Zimbabwean healthcare environment. It addresses real operational challenges faced by
+nurses, Health ICT Officers, and Health Information Officers.
+Academically, the study contributes to knowledge on AI applications in birth record
+management, an area with limited research in district hospitals within developing countries.
+The study confirms that digital transformation in health information systems improves
+efficiency, data integrity, and decision-making.
+8.4 Conclusions
+Based on the findings, the following conclusions are drawn:
+ The physical birth registration system is inefficient and vulnerable to long-term data
+deterioration.
+ The proposed system effectively addresses these weaknesses.
+ The system improves accuracy, retrieval speed, and reporting capabilities.
+ The research hypothesis that the digital system improves accuracy is supported.
+The study confirms that transitioning to a secure digital system is both necessary and feasible
+for Nyanga District Hospital.
+
+--- PAGE 46 ---
+8.5 Recommendations
+8.5.1 Recommendations from the Research Findings
+This research has brought about the following recommendations:
+ The hospital should adopt and fully implement the proposed digital birth record
+management system.
+ Physical registers should be gradually phased out after a parallel run period.
+ Regular system maintenance and data backups should be enforced.
+8.5.2 Recommendations for Further Research
+It is recommended that further research be undertaken in the following areas:
+ Integration of the system with national civil registration systems.
+ Expansion of the system to other hospital departments.
+ Evaluation of long-term impact of AI validation on data quality.
+8.5.3 Recommendations for Practice and Policy
+The findings of this study have important implications for health policy and hospital
+management.
+ There is a definite need for district hospitals to prioritise digital record management
+systems.
+ Policymakers should support cost-effective digital health solutions suitable for
+resource-limited environments.
+ Training in digital health information management should be strengthened for
+healthcare staff.
+8.6 Final Statement
+This study demonstrates that a secure, digitalised system can significantly improve birth
+record management at Nyanga District Hospital. The transition from physical to digital
+processes is essential for improving efficiency, safeguarding data, and supporting informed
+healthcare planning.
