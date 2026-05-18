@@ -408,11 +408,11 @@ Use:
 
 ![Figure 5.6: Activity diagram](docs/assets/figures/figure-3-4-activity-diagram.svg)
 
-### 5.3.5 Communication Diagram
+### 5.3.5 Component Diagram
 
 Use:
 
-![Figure 5.7: Communication diagram](docs/assets/figures/figure-3-11-communication-diagram.svg)
+![Figure 5.7: Component diagram](docs/assets/figures/figure-6-1-implementation-overview.svg)
 
 ### 5.3.5 State Diagram
 
@@ -445,12 +445,6 @@ Use:
 Use:
 
 ![Figure 5.12: Deployment diagram](docs/assets/figures/figure-4-12-deployment-diagram.svg)
-
-### 5.1.2 Component Diagram
-
-Use:
-
-![Figure 5.13: Component diagram](docs/assets/figures/figure-6-1-implementation-overview.svg)
 
 ## 5.2 Input Design
 

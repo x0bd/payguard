@@ -13,7 +13,7 @@
 | Figure 3.8 | Class diagram | ........................................ | |
 | Figure 3.9 | Object diagram | ........................................ | |
 | Figure 3.10 | Sequence diagram | ........................................ | |
-| Figure 3.11 | Communication diagram | ........................................ | |
+| Figure 3.11 | Component diagram | ........................................ | |
 | Figure 3.12 | State chart diagram | ........................................ | |
 | Figure 3.13 | Transaction scoring flowchart | ........................................ | |
 | Figure 3.14 | Dashboard wireframe | ........................................ | |

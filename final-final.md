@@ -558,7 +558,7 @@ The data flow diagrams show how PayGuard receives transaction data, sends it for
 
 ## 5.3 UML Diagrams
 
-UML diagrams are used to show the behaviour and structure of the proposed system. They describe how users interact with PayGuard and how the system components communicate.
+UML diagrams are used to show the behaviour and structure of the proposed system. They describe how users interact with PayGuard and how the main system components are arranged.
 
 ### 5.3.1 Use Case Diagram
 
@@ -574,7 +574,7 @@ The class diagram shows the main system entities and their relationships. It inc
 
 ### 5.3.3 Sequence Diagram
 
-The sequence diagram shows the order of communication when a user submits a transaction for scoring. The frontend sends the transaction to the backend, the backend prepares features, the model predicts risk, and the database stores the result.
+The sequence diagram shows the order of interaction when a user submits a transaction for scoring. The frontend sends the transaction to the backend, the backend prepares features, the model predicts risk, and the database stores the result.
 
 ![Figure 5.7: Sequence diagram](docs/assets/figures/figure-3-10-sequence-diagram.svg)
 
@@ -584,11 +584,11 @@ The activity diagram shows the workflow followed when a transaction is reviewed.
 
 ![Figure 5.8: Activity diagram](docs/assets/figures/figure-3-4-activity-diagram.svg)
 
-### 5.3.5 Communication Diagram
+### 5.3.5 Component Diagram
 
-The communication diagram shows how the frontend, backend, database, and machine learning model exchange information during fraud scoring.
+The component diagram shows the main implementation components of PayGuard. It includes frontend views, API routes, the database layer, feature engineering module, model training module, and saved model artefacts.
 
-![Figure 5.9: Communication diagram](docs/assets/figures/figure-3-11-communication-diagram.svg)
+![Figure 5.9: Component diagram](docs/assets/figures/figure-6-1-implementation-overview.svg)
 
 ### 5.3.5 State Diagram
 
@@ -622,12 +622,6 @@ The deployment diagram shows how the frontend, backend, database, and model arte
 
 ![Figure 5.14: Deployment diagram](docs/assets/figures/figure-4-12-deployment-diagram.svg)
 
-### 5.1.2 Component Diagram
-
-The component diagram shows the main implementation components: frontend views, API routes, database layer, feature engineering module, training module, and model artefacts.
-
-![Figure 5.15: Component diagram](docs/assets/figures/figure-6-1-implementation-overview.svg)
-
 ## 5.2 Input Design
 
 The main inputs of PayGuard are transaction details. These include account ID, transaction type, amount, currency, device ID, location, and date. The dashboard also accepts filter inputs for searching transactions and reviewing alerts.
@@ -642,7 +636,7 @@ After scoring, the dashboard updates the displayed metrics. Users can then revie
 
 ### 5.3.1 User Flow Flowchart
 
-![Figure 5.16: Transaction scoring flowchart](docs/assets/figures/figure-3-13-scoring-flowchart.svg)
+![Figure 5.15: Transaction scoring flowchart](docs/assets/figures/figure-3-13-scoring-flowchart.svg)
 
 ## 5.4 Output Design
 
@@ -666,7 +660,7 @@ The prototype can be run locally using Python for the backend and Node.js for th
 
 The deployment design supports local prototype use and can be extended to a hosted environment in future.
 
-![Figure 5.17: Deployment options diagram](docs/assets/figures/figure-6-10-deployment-options.svg)
+![Figure 5.16: Deployment options diagram](docs/assets/figures/figure-6-10-deployment-options.svg)
 
 ## 5.9 Operational Design Considerations
 

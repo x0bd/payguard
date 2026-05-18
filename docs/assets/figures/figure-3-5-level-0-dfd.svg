@@ -8,10 +8,10 @@
     <style>
       .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
       .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
-      .entity { fill: #f2f2f2; stroke: #111111; stroke-width: 2; }
-      .process { fill: #ffffff; stroke: #111111; stroke-width: 2.5; }
-      .store { fill: #e6e6e6; stroke: #111111; stroke-width: 2; }
-      .model { fill: #f7f7f7; stroke: #111111; stroke-width: 2; }
+      .entity { fill: #eaf2ff; stroke: #111111; stroke-width: 2; }
+      .process { fill: #eaf7ee; stroke: #111111; stroke-width: 2.5; }
+      .store { fill: #fff2cc; stroke: #111111; stroke-width: 2; }
+      .model { fill: #eef2ff; stroke: #111111; stroke-width: 2; }
       .textLight { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 21px; font-weight: 700; }
       .textDark { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 700; }
       .small { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }

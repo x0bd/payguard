@@ -10,11 +10,11 @@
       .bartext { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 700; }
       .grid { stroke: #d0d0d0; stroke-width: 1.5; }
       .axis { stroke: #111111; stroke-width: 2; }
-      .green { fill: #ffffff; }
-      .blue { fill: #f2f2f2;  stroke: #111111; stroke-width: 2; }
-      .orange { fill: #e6e6e6;  stroke: #111111; stroke-width: 2; }
-      .purple { fill: #f7f7f7;  stroke: #111111; stroke-width: 2; }
-      .pink { fill: #eeeeee;  stroke: #111111; stroke-width: 2; }
+      .green { fill: #cfe9d8; stroke: #111111; stroke-width: 2; }
+      .blue { fill: #dce9fb; stroke: #111111; stroke-width: 2; }
+      .orange { fill: #ffe6a6; stroke: #111111; stroke-width: 2; }
+      .purple { fill: #dde3f8; stroke: #111111; stroke-width: 2; }
+      .pink { fill: #f3d5df; stroke: #111111; stroke-width: 2; }
     </style>
   </defs>
 
@@ -23,9 +23,9 @@
 
   <g transform="translate(90 180)">
     <rect x="0" y="0" width="1420" height="58" rx="8" class="blue"/>
-    <text x="24" y="37" fill="#ffffff" font-family="Calibri, Arial, sans-serif" font-size="22" font-weight="700">Activity</text>
+    <text x="24" y="37" fill="#111111" font-family="Calibri, Arial, sans-serif" font-size="22" font-weight="700">Activity</text>
 
-    <g fill="#ffffff" font-family="Calibri, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+    <g fill="#111111" font-family="Calibri, Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">
       <text x="388" y="37">W1</text>
       <text x="466" y="37">W2</text>
       <text x="544" y="37">W3</text>
