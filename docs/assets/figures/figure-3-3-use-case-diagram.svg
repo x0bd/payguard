@@ -1,108 +1,116 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
-  <title id="title">Figure 3.3: Use case diagram</title>
-  <desc id="desc">A transparent Microsoft Word style use case diagram showing how finance officers, fraud analysts, administrators and researchers interact with PayGuard.</desc>
+  <title id="title">Figure 4.4.2: Use case diagram</title>
+  <desc id="desc">Use case diagram showing main user interactions with the PayGuard fraud monitoring system.</desc>
   <defs>
     <style>
-      .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
-      .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
-      .boundary { fill: none; stroke: #111111; stroke-width: 2.5; }
-      .usecase { fill: #eaf7ee; stroke: #111111; stroke-width: 2; }
-      .support { fill: #eaf2ff; stroke: #111111; stroke-width: 2; }
+      .title     { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle  { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .boundary  { fill: none; stroke: #111111; stroke-width: 2.5; }
+      .usecase   { fill: #eaf7ee; stroke: #111111; stroke-width: 2; }
+      .support   { fill: #eaf2ff; stroke: #111111; stroke-width: 2; }
       .actorFill { fill: #f2f2f2; stroke: #111111; stroke-width: 2; }
-      .actorLine { stroke: #111111; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-      .assoc { stroke: #111111; stroke-width: 2.2; fill: none; stroke-linecap: round; }
+      .actorLine { stroke: #111111; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .assoc     { stroke: #111111; stroke-width: 2; fill: none; stroke-linecap: round; }
       .textLight { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 19px; font-weight: 700; }
-      .textDark { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 600; }
+      .textDark  { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 18px; font-weight: 600; }
     </style>
   </defs>
 
-  <text x="90" y="86" class="title">PayGuard Use Case Diagram</text>
-  <text x="90" y="124" class="subtitle">Main user interactions supported by the fraud monitoring prototype</text>
+  <text x="90" y="72"  class="title">PayGuard Use Case Diagram</text>
+  <text x="90" y="108" class="subtitle">Main user interactions supported by the fraud monitoring prototype</text>
 
-  <rect x="390" y="175" width="820" height="620" rx="8" class="boundary"/>
-  <text x="800" y="216" class="textDark" text-anchor="middle">PayGuard System</text>
+  <!-- System boundary -->
+  <rect x="380" y="152" width="850" height="672" rx="8" class="boundary"/>
+  <text x="805" y="190" class="textDark" text-anchor="middle">PayGuard System</text>
 
-  <g transform="translate(125 235)">
-    <circle cx="72" cy="0" r="32" class="actorFill"/>
-    <line x1="72" y1="32" x2="72" y2="115" class="actorLine"/>
-    <line x1="22" y1="70" x2="122" y2="70" class="actorLine"/>
-    <line x1="72" y1="115" x2="30" y2="180" class="actorLine"/>
-    <line x1="72" y1="115" x2="114" y2="180" class="actorLine"/>
-    <text x="72" y="225" class="textDark" text-anchor="middle">Finance Officer</text>
-  </g>
+  <!-- ── Use cases ─────────────────────────────────── -->
+  <!-- Left column  cx=600 -->
+  <ellipse cx="600" cy="268" rx="140" ry="44" class="usecase"/>
+  <text x="600" y="262" class="textLight" text-anchor="middle">View</text>
+  <text x="600" y="285" class="textLight" text-anchor="middle">Dashboard</text>
 
-  <g transform="translate(125 545)">
-    <circle cx="72" cy="0" r="32" class="actorFill"/>
-    <line x1="72" y1="32" x2="72" y2="115" class="actorLine"/>
-    <line x1="22" y1="70" x2="122" y2="70" class="actorLine"/>
-    <line x1="72" y1="115" x2="30" y2="180" class="actorLine"/>
-    <line x1="72" y1="115" x2="114" y2="180" class="actorLine"/>
-    <text x="72" y="225" class="textDark" text-anchor="middle">Fraud Analyst</text>
-  </g>
+  <ellipse cx="600" cy="398" rx="140" ry="44" class="usecase"/>
+  <text x="600" y="392" class="textLight" text-anchor="middle">Score</text>
+  <text x="600" y="415" class="textLight" text-anchor="middle">Transaction</text>
 
-  <g transform="translate(1295 245)">
-    <circle cx="72" cy="0" r="32" class="actorFill"/>
-    <line x1="72" y1="32" x2="72" y2="115" class="actorLine"/>
-    <line x1="22" y1="70" x2="122" y2="70" class="actorLine"/>
-    <line x1="72" y1="115" x2="30" y2="180" class="actorLine"/>
-    <line x1="72" y1="115" x2="114" y2="180" class="actorLine"/>
-    <text x="72" y="225" class="textDark" text-anchor="middle">Administrator</text>
-  </g>
+  <ellipse cx="600" cy="528" rx="140" ry="44" class="usecase"/>
+  <text x="600" y="522" class="textLight" text-anchor="middle">View</text>
+  <text x="600" y="545" class="textLight" text-anchor="middle">Alerts</text>
 
-  <g transform="translate(1295 560)">
-    <circle cx="72" cy="0" r="32" class="actorFill"/>
-    <line x1="72" y1="32" x2="72" y2="115" class="actorLine"/>
-    <line x1="22" y1="70" x2="122" y2="70" class="actorLine"/>
-    <line x1="72" y1="115" x2="30" y2="180" class="actorLine"/>
-    <line x1="72" y1="115" x2="114" y2="180" class="actorLine"/>
-    <text x="72" y="225" class="textDark" text-anchor="middle">Researcher</text>
-    <text x="72" y="248" class="textDark" text-anchor="middle">Developer</text>
-  </g>
+  <ellipse cx="600" cy="658" rx="140" ry="44" class="usecase"/>
+  <text x="600" y="652" class="textLight" text-anchor="middle">View Account</text>
+  <text x="600" y="675" class="textLight" text-anchor="middle">Profile</text>
 
-  <ellipse cx="620" cy="290" rx="145" ry="48" class="usecase"/>
-  <text x="620" y="285" class="textLight" text-anchor="middle">View</text>
-  <text x="620" y="310" class="textLight" text-anchor="middle">Dashboard</text>
+  <!-- Right column  cx=1010 -->
+  <ellipse cx="1010" cy="268" rx="140" ry="44" class="usecase"/>
+  <text x="1010" y="262" class="textLight" text-anchor="middle">View</text>
+  <text x="1010" y="285" class="textLight" text-anchor="middle">Transactions</text>
 
-  <ellipse cx="970" cy="290" rx="145" ry="48" class="usecase"/>
-  <text x="970" y="285" class="textLight" text-anchor="middle">View Model</text>
-  <text x="970" y="310" class="textLight" text-anchor="middle">Metrics</text>
+  <ellipse cx="1010" cy="398" rx="140" ry="44" class="usecase"/>
+  <text x="1010" y="392" class="textLight" text-anchor="middle">Update Alert</text>
+  <text x="1010" y="415" class="textLight" text-anchor="middle">Status</text>
 
-  <ellipse cx="620" cy="420" rx="145" ry="48" class="usecase"/>
-  <text x="620" y="415" class="textLight" text-anchor="middle">Score</text>
-  <text x="620" y="440" class="textLight" text-anchor="middle">Transaction</text>
+  <ellipse cx="1010" cy="528" rx="140" ry="44" class="usecase"/>
+  <text x="1010" y="522" class="textLight" text-anchor="middle">View Model</text>
+  <text x="1010" y="545" class="textLight" text-anchor="middle">Metrics</text>
 
-  <ellipse cx="970" cy="420" rx="145" ry="48" class="usecase"/>
-  <text x="970" y="415" class="textLight" text-anchor="middle">View</text>
-  <text x="970" y="440" class="textLight" text-anchor="middle">Transactions</text>
+  <ellipse cx="1010" cy="658" rx="140" ry="44" class="support"/>
+  <text x="1010" y="652" class="textDark" text-anchor="middle">Generate Data</text>
+  <text x="1010" y="675" class="textDark" text-anchor="middle">and Train Model</text>
 
-  <ellipse cx="620" cy="550" rx="145" ry="48" class="usecase"/>
-  <text x="620" y="545" class="textLight" text-anchor="middle">View</text>
-  <text x="620" y="570" class="textLight" text-anchor="middle">Alerts</text>
+  <!-- ── Actors ─────────────────────────────────────── -->
 
-  <ellipse cx="970" cy="550" rx="145" ry="48" class="usecase"/>
-  <text x="970" y="545" class="textLight" text-anchor="middle">Update Alert</text>
-  <text x="970" y="570" class="textLight" text-anchor="middle">Status</text>
+  <!-- Finance Officer  (top-left) -->
+  <circle cx="175" cy="290" r="28" class="actorFill"/>
+  <line x1="175" y1="318" x2="175" y2="385" class="actorLine"/>
+  <line x1="133" y1="348" x2="217" y2="348" class="actorLine"/>
+  <line x1="175" y1="385" x2="139" y2="441" class="actorLine"/>
+  <line x1="175" y1="385" x2="211" y2="441" class="actorLine"/>
+  <text x="175" y="468" class="textDark" text-anchor="middle">Finance Officer</text>
 
-  <ellipse cx="620" cy="680" rx="145" ry="48" class="usecase"/>
-  <text x="620" y="675" class="textLight" text-anchor="middle">View Account</text>
-  <text x="620" y="700" class="textLight" text-anchor="middle">Profile</text>
+  <!-- Fraud Analyst  (bottom-left) -->
+  <circle cx="175" cy="548" r="28" class="actorFill"/>
+  <line x1="175" y1="576" x2="175" y2="643" class="actorLine"/>
+  <line x1="133" y1="606" x2="217" y2="606" class="actorLine"/>
+  <line x1="175" y1="643" x2="139" y2="699" class="actorLine"/>
+  <line x1="175" y1="643" x2="211" y2="699" class="actorLine"/>
+  <text x="175" y="726" class="textDark" text-anchor="middle">Fraud Analyst</text>
 
-  <ellipse cx="970" cy="680" rx="145" ry="48" class="support"/>
-  <text x="970" y="675" class="textDark" text-anchor="middle">Generate Data</text>
-  <text x="970" y="700" class="textDark" text-anchor="middle">and Train Model</text>
+  <!-- Administrator  (top-right) -->
+  <circle cx="1425" cy="290" r="28" class="actorFill"/>
+  <line x1="1425" y1="318" x2="1425" y2="385" class="actorLine"/>
+  <line x1="1383" y1="348" x2="1467" y2="348" class="actorLine"/>
+  <line x1="1425" y1="385" x2="1389" y2="441" class="actorLine"/>
+  <line x1="1425" y1="385" x2="1461" y2="441" class="actorLine"/>
+  <text x="1425" y="468" class="textDark" text-anchor="middle">Administrator</text>
 
-  <line x1="270" y1="265" x2="475" y2="290" class="assoc"/>
-  <line x1="270" y1="320" x2="475" y2="420" class="assoc"/>
-  <line x1="270" y1="375" x2="475" y2="550" class="assoc"/>
-  <line x1="270" y1="405" x2="830" y2="420" class="assoc"/>
+  <!-- Researcher / Developer  (bottom-right) -->
+  <circle cx="1425" cy="548" r="28" class="actorFill"/>
+  <line x1="1425" y1="576" x2="1425" y2="643" class="actorLine"/>
+  <line x1="1383" y1="606" x2="1467" y2="606" class="actorLine"/>
+  <line x1="1425" y1="643" x2="1389" y2="699" class="actorLine"/>
+  <line x1="1425" y1="643" x2="1461" y2="699" class="actorLine"/>
+  <text x="1425" y="726" class="textDark" text-anchor="middle">Researcher</text>
+  <text x="1425" y="749" class="textDark" text-anchor="middle">or Developer</text>
 
-  <line x1="270" y1="585" x2="475" y2="550" class="assoc"/>
-  <line x1="270" y1="640" x2="825" y2="550" class="assoc"/>
-  <line x1="270" y1="695" x2="475" y2="680" class="assoc"/>
+  <!-- ── Association lines ──────────────────────────── -->
 
-  <line x1="1295" y1="275" x2="1115" y2="290" class="assoc"/>
-  <line x1="1295" y1="350" x2="1115" y2="550" class="assoc"/>
-  <line x1="1295" y1="405" x2="1115" y2="290" class="assoc"/>
+  <!-- Finance Officer → View Dashboard, Score Transaction, View Alerts -->
+  <line x1="217" y1="348" x2="460" y2="268" class="assoc"/>
+  <line x1="217" y1="348" x2="460" y2="398" class="assoc"/>
+  <line x1="217" y1="348" x2="460" y2="528" class="assoc"/>
 
-  <line x1="1295" y1="630" x2="1115" y2="680" class="assoc"/>
+  <!-- Fraud Analyst → View Alerts, View Account Profile -->
+  <line x1="217" y1="606" x2="460" y2="528" class="assoc"/>
+  <line x1="217" y1="606" x2="460" y2="658" class="assoc"/>
+
+  <!-- Administrator → View Transactions, Update Alert Status, View Model Metrics -->
+  <line x1="1383" y1="348" x2="1150" y2="268" class="assoc"/>
+  <line x1="1383" y1="348" x2="1150" y2="398" class="assoc"/>
+  <line x1="1383" y1="348" x2="1150" y2="528" class="assoc"/>
+
+  <!-- Researcher → View Model Metrics, Generate Data and Train Model -->
+  <line x1="1383" y1="606" x2="1150" y2="528" class="assoc"/>
+  <line x1="1383" y1="606" x2="1150" y2="658" class="assoc"/>
+
 </svg>
