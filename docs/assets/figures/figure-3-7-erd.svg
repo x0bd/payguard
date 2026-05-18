@@ -2,6 +2,9 @@
   <title id="title">Figure 3.7: Entity relationship diagram</title>
   <desc id="desc">A transparent Microsoft Word style entity relationship diagram showing PayGuard transactions, alerts and model runs.</desc>
   <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
+    </marker>
     <style>
       .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
       .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
@@ -87,5 +90,8 @@
     <path d="M540 355 H590" class="rel" stroke-dasharray="8 6"/>
     <path d="M900 315 H950 C970 315 980 330 980 350" class="rel" stroke-dasharray="8 6"/>
     <text x="595" y="390" class="note">profile summaries are calculated from stored records</text>
+
+    <path d="M930 705 C1060 690 1195 675 1195 630" class="rel" stroke-dasharray="8 6" marker-end="url(#arrow)"/>
+    <text x="720" y="676" class="note">model run records the model used for scoring</text>
   </g>
 </svg>

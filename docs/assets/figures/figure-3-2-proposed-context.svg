@@ -1,82 +1,103 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
-  <title id="title">Figure 3.2: Proposed PayGuard context diagram</title>
-  <desc id="desc">A transparent Microsoft Word style context diagram showing PayGuard as the proposed fraud detection and alerting system.</desc>
+  <title id="title">Figure 4.2: Proposed PayGuard context diagram</title>
+  <desc id="desc">Context diagram showing PayGuard as the proposed automated fraud detection and monitoring system.</desc>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
       <path d="M2 2 L10 6 L2 10 Z" fill="#111111"/>
     </marker>
     <style>
-      .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
-      .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
-      .entity { fill: #f2f2f2; stroke: #111111; stroke-width: 2; }
-      .system { fill: #ffffff; stroke: #111111; stroke-width: 2; }
-      .data { fill: #e6e6e6; stroke: #111111; stroke-width: 2; }
-      .output { fill: #f7f7f7; stroke: #111111; stroke-width: 2; }
-      .note { fill: #ffffff; stroke: #ffffff; stroke-width: 2; stroke-dasharray: 8 6; }
+      .title     { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
+      .subtitle  { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
+      .entity    { fill: #f2f2f2; stroke: #111111; stroke-width: 2; }
+      .system    { fill: #ffffff; stroke: #111111; stroke-width: 2; }
+      .data      { fill: #e6e6e6; stroke: #111111; stroke-width: 2; }
+      .output    { fill: #f7f7f7; stroke: #111111; stroke-width: 2; }
+      .note      { fill: #ffffff; stroke: #111111; stroke-width: 2; stroke-dasharray: 8 6; }
       .textLight { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 22px; font-weight: 700; }
-      .textDark { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 600; }
-      .small { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
-      .line { stroke: #111111; stroke-width: 2.4; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .textDark  { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 600; }
+      .small     { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 17px; font-weight: 600; }
+      .line      { stroke: #111111; stroke-width: 2.4; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
       .plainLine { stroke: #111111; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     </style>
   </defs>
 
-  <text x="90" y="86" class="title">Proposed PayGuard Context Diagram</text>
-  <text x="90" y="124" class="subtitle">Automated transaction scoring, alert creation and review support</text>
+  <!-- Heading -->
+  <text x="90" y="72" class="title">Proposed PayGuard Context Diagram</text>
+  <text x="90" y="108" class="subtitle">Automated transaction scoring, alert creation and review support</text>
 
-  <g transform="translate(0 10)">
-    <rect x="630" y="318" width="360" height="190" rx="14" class="system"/>
-    <text x="810" y="382" class="textLight" text-anchor="middle">PayGuard</text>
-    <text x="810" y="414" class="textLight" text-anchor="middle">Fraud Detection</text>
-    <text x="810" y="446" class="textLight" text-anchor="middle">System</text>
-    <text x="810" y="478" class="textLight" text-anchor="middle">0</text>
+  <!-- Main improvement note (dashed) -->
+  <rect x="650" y="168" width="320" height="80" rx="8" class="note"/>
+  <text x="810" y="203" class="textDark" text-anchor="middle">Main improvement</text>
+  <text x="810" y="228" class="small"     text-anchor="middle">faster risk scoring and alert review</text>
 
-    <rect x="105" y="250" width="275" height="100" rx="10" class="entity"/>
-    <text x="242" y="292" class="textLight" text-anchor="middle">Finance User</text>
-    <text x="242" y="322" class="textLight" text-anchor="middle">or Analyst</text>
+  <!-- Central system -->
+  <rect x="620" y="330" width="380" height="190" rx="14" class="system"/>
+  <text x="810" y="394" class="textLight" text-anchor="middle">PayGuard</text>
+  <text x="810" y="426" class="textLight" text-anchor="middle">Fraud Detection</text>
+  <text x="810" y="458" class="textLight" text-anchor="middle">System</text>
+  <text x="810" y="490" class="textLight" text-anchor="middle">0</text>
 
-    <rect x="105" y="555" width="275" height="100" rx="10" class="entity"/>
-    <text x="242" y="597" class="textLight" text-anchor="middle">Administrator</text>
-    <text x="242" y="627" class="textLight" text-anchor="middle">or Supervisor</text>
+  <!-- External entities -->
+  <rect x="90" y="376" width="280" height="100" rx="10" class="entity"/>
+  <text x="230" y="420" class="textLight" text-anchor="middle">Finance User</text>
+  <text x="230" y="449" class="textLight" text-anchor="middle">or Analyst</text>
 
-    <path d="M1218 225 L1495 225 L1465 330 L1188 330 Z" class="data"/>
-    <text x="1342" y="273" class="textDark" text-anchor="middle">Transaction Data</text>
-    <text x="1342" y="302" class="small" text-anchor="middle">synthetic payment records</text>
+  <rect x="90" y="572" width="280" height="100" rx="10" class="entity"/>
+  <text x="230" y="616" class="textLight" text-anchor="middle">Administrator</text>
+  <text x="230" y="645" class="textLight" text-anchor="middle">or Supervisor</text>
 
-    <rect x="1195" y="555" width="300" height="100" rx="10" class="output"/>
-    <text x="1345" y="598" class="textLight" text-anchor="middle">Dashboard Outputs</text>
-    <text x="1345" y="628" class="textLight" text-anchor="middle">scores, alerts, metrics</text>
+  <!-- Transaction Data (parallelogram, top-right) -->
+  <path d="M1200,218 L1490,218 L1460,308 L1170,308 Z" class="data"/>
+  <text x="1342" y="256" class="textDark" text-anchor="middle">Transaction Data</text>
+  <text x="1342" y="282" class="small"     text-anchor="middle">synthetic payment records</text>
 
-    <path d="M610 710 L1000 710 L1030 805 L640 805 Z" class="data"/>
-    <text x="820" y="753" class="textDark" text-anchor="middle">SQLite Storage</text>
-    <text x="820" y="782" class="small" text-anchor="middle">transactions, alerts, model runs</text>
+  <!-- Dashboard Outputs -->
+  <rect x="1210" y="572" width="290" height="100" rx="10" class="output"/>
+  <text x="1355" y="616" class="textLight" text-anchor="middle">Dashboard Outputs</text>
+  <text x="1355" y="645" class="textLight" text-anchor="middle">scores, alerts, metrics</text>
 
-    <rect x="655" y="155" width="310" height="88" rx="8" class="note"/>
-    <text x="810" y="193" class="textDark" text-anchor="middle">Main improvement</text>
-    <text x="810" y="222" class="small" text-anchor="middle">faster risk scoring and alert review</text>
+  <!-- SQLite Storage (parallelogram, bottom-centre) -->
+  <path d="M555,700 L1050,700 L1070,778 L535,778 Z" class="data"/>
+  <text x="802" y="734" class="textDark" text-anchor="middle">SQLite Storage</text>
+  <text x="802" y="758" class="small"    text-anchor="middle">transactions, alerts, model runs</text>
 
-    <path d="M380 300 H620" class="line"/>
-    <text x="438" y="280" class="small">transaction search and review</text>
+  <!-- ── Arrows ───────────────────────────────────────────────────────── -->
 
-    <path d="M630 440 H395 C350 440 335 555 380 605" class="line"/>
-    <text x="435" y="463" class="small">risk scores and alerts</text>
+  <!-- Improvement note → System (plain line + triangle) -->
+  <line x1="810" y1="248" x2="810" y2="322" class="plainLine"/>
+  <polygon points="810,330 802,314 818,314" fill="#111111"/>
 
-    <path d="M380 605 C510 650 560 560 630 492" class="line"/>
-    <text x="418" y="635" class="small">status updates</text>
+  <!-- Finance User → System  (transaction search and review) -->
+  <path d="M370 426 H620" class="line"/>
+  <text x="495" y="414" class="small" text-anchor="middle">transaction search and review</text>
 
-    <path d="M1188 278 H1000" class="line"/>
-    <text x="1030" y="258" class="small">new or stored transactions</text>
+  <!-- System → Admin  (risk scores and alerts)
+       Exits system left at y=452, bends at x=410, drops to y=622, enters Admin right -->
+  <path d="M620 452 H410 V622 H370" class="line"/>
+  <text x="425" y="525" class="small">risk scores and alerts</text>
 
-    <path d="M990 440 H1195" class="line"/>
-    <text x="1048" y="420" class="small">dashboard results</text>
+  <!-- Admin → System  (status updates)
+       Exits Admin right at y=644, bends at x=455, rises to y=474, enters system left -->
+  <path d="M370 644 H455 V474 H620" class="line"/>
+  <text x="412" y="632" class="small" text-anchor="middle">status updates</text>
 
-    <path d="M820 508 V700" class="line"/>
-    <text x="837" y="612" class="small">save records</text>
+  <!-- Transaction Data → System  (new or stored transactions)
+       Exits bottom-left of parallelogram at y=308, drops to y=420, enters system right -->
+  <path d="M1170 308 V420 H1000" class="line"/>
+  <text x="1186" y="362" class="small">new or stored transactions</text>
 
-    <path d="M1000 755 H1150 C1235 755 1282 680 1295 655" class="line"/>
-    <text x="1055" y="735" class="small">stored history</text>
+  <!-- System → Dashboard Outputs  (dashboard results)
+       Exits system right at y=452, bends at x=1120, drops to y=622, enters Dashboard left -->
+  <path d="M1000 452 H1120 V622 H1210" class="line"/>
+  <text x="1060" y="465" class="small" text-anchor="middle">dashboard results</text>
 
-    <line x1="810" y1="243" x2="810" y2="306" class="plainLine"/>
-    <polygon points="810,318 802,302 818,302" fill="#111111"/>
-  </g>
+  <!-- System → SQLite  (save records) -->
+  <path d="M810 520 V700" class="line"/>
+  <text x="828" y="612" class="small">save records</text>
+
+  <!-- SQLite → Dashboard Outputs  (stored history)
+       Exits SQLite right side at y=740, bends at x=1165, rises to y=644, enters Dashboard left -->
+  <path d="M1060 740 H1165 V644 H1210" class="line"/>
+  <text x="1113" y="728" class="small" text-anchor="middle">stored history</text>
+
 </svg>
