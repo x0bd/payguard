@@ -1,162 +1,125 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1050" viewBox="0 0 1700 1050" role="img" aria-labelledby="title desc">
   <title id="title">Figure 3.8: Class diagram</title>
-  <desc id="desc">A transparent Microsoft Word style class diagram showing PayGuard modules and their relationships.</desc>
+  <desc id="desc">A Microsoft Word style class diagram showing the main PayGuard user roles, domain classes and relationships.</desc>
   <defs>
-    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-      <path d="M2 2 L10 6 L2 10 Z" fill="#111111"/>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
     </marker>
     <style>
       .title { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 40px; font-weight: 700; }
       .subtitle { fill: #333333; font-family: Calibri, Arial, sans-serif; font-size: 22px; }
       .classBox { fill: #ffffff; stroke: #111111; stroke-width: 2.2; }
-      .headBlue { fill: #f2f2f2; stroke: #111111; stroke-width: 2; }
-      .headGreen { fill: #ffffff; stroke: #111111; stroke-width: 2; }
-      .headOrange { fill: #e6e6e6; stroke: #111111; stroke-width: 2; }
-      .headPurple { fill: #f7f7f7; stroke: #111111; stroke-width: 2; }
-      .headPink { fill: #eeeeee; stroke: #111111; stroke-width: 2; }
-      .textLight { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 20px; font-weight: 700; }
+      .roleHead { fill: #f2f2f2; stroke: none; }
+      .dataHead { fill: #eaf7ee; stroke: none; }
+      .modelHead { fill: #eef2ff; stroke: none; }
+      .name { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 21px; font-weight: 700; }
       .field { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 16px; font-weight: 600; }
       .small { fill: #111111; font-family: Calibri, Arial, sans-serif; font-size: 15px; font-weight: 600; }
-      .line { stroke: #111111; stroke-width: 2.2; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
-      .dash { stroke: #111111; stroke-width: 2; fill: none; marker-end: url(#arrow); stroke-dasharray: 8 6; stroke-linecap: round; stroke-linejoin: round; }
       .sep { stroke: #d0d0d0; stroke-width: 1.4; }
+      .rel { stroke: #111111; stroke-width: 2.2; fill: none; marker-end: url(#arrow); stroke-linecap: round; stroke-linejoin: round; }
+      .assoc { stroke: #111111; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
     </style>
   </defs>
 
   <text x="90" y="86" class="title">PayGuard Class Diagram</text>
-  <text x="90" y="124" class="subtitle">Main modules used to capture, score, store and display fraud monitoring data</text>
+  <text x="90" y="124" class="subtitle">Main user roles and system classes used to monitor and review fraudulent transactions</text>
 
-  <g id="api-controller">
-    <rect x="695" y="165" width="310" height="150" rx="8" class="classBox"/>
-    <rect x="695" y="165" width="310" height="46" rx="8" class="headBlue"/>
-    <rect x="695" y="195" width="310" height="16" class="headBlue"/>
-    <text x="850" y="197" class="textLight" text-anchor="middle">APIController</text>
-    <line x1="695" y1="255" x2="1005" y2="255" class="sep"/>
-    <text x="720" y="238" class="field">+ validateRequest()</text>
-    <text x="720" y="282" class="field">+ createTransaction()</text>
-    <text x="720" y="307" class="field">+ returnJsonResponse()</text>
+  <g id="finance-officer">
+    <rect x="90" y="190" width="310" height="190" rx="8" class="classBox"/>
+    <rect x="90" y="190" width="310" height="54" rx="8" class="roleHead"/>
+    <text x="245" y="225" class="name" text-anchor="middle">FinanceOfficer</text>
+    <line x1="90" y1="288" x2="400" y2="288" class="sep"/>
+    <text x="118" y="274" class="field">+ officer_id</text>
+    <text x="118" y="318" class="field">+ reviewTransaction()</text>
+    <text x="118" y="346" class="field">+ viewDashboard()</text>
   </g>
 
-  <g id="database-service">
-    <rect x="90" y="415" width="320" height="170" rx="8" class="classBox"/>
-    <rect x="90" y="415" width="320" height="46" rx="8" class="headPurple"/>
-    <rect x="90" y="445" width="320" height="16" class="headPurple"/>
-    <text x="250" y="447" class="textLight" text-anchor="middle">DatabaseService</text>
-    <line x1="90" y1="508" x2="410" y2="508" class="sep"/>
-    <text x="115" y="490" class="field">+ saveTransaction()</text>
-    <text x="115" y="535" class="field">+ saveAlert()</text>
-    <text x="115" y="560" class="field">+ getAccountHistory()</text>
+  <g id="fraud-analyst">
+    <rect x="495" y="190" width="310" height="190" rx="8" class="classBox"/>
+    <rect x="495" y="190" width="310" height="54" rx="8" class="roleHead"/>
+    <text x="650" y="225" class="name" text-anchor="middle">FraudAnalyst</text>
+    <line x1="495" y1="288" x2="805" y2="288" class="sep"/>
+    <text x="523" y="274" class="field">+ analyst_id</text>
+    <text x="523" y="318" class="field">+ investigateAlert()</text>
+    <text x="523" y="346" class="field">+ viewAccountProfile()</text>
   </g>
 
-  <g id="fraud-scorer">
-    <rect x="530" y="415" width="320" height="170" rx="8" class="classBox"/>
-    <rect x="530" y="415" width="320" height="46" rx="8" class="headGreen"/>
-    <rect x="530" y="445" width="320" height="16" class="headGreen"/>
-    <text x="690" y="447" class="textLight" text-anchor="middle">FraudScorer</text>
-    <line x1="530" y1="508" x2="850" y2="508" class="sep"/>
-    <text x="555" y="490" class="field">+ scoreTransaction()</text>
-    <text x="555" y="535" class="field">+ calculateRiskLevel()</text>
-    <text x="555" y="560" class="field">+ buildReason()</text>
+  <g id="administrator">
+    <rect x="900" y="190" width="310" height="190" rx="8" class="classBox"/>
+    <rect x="900" y="190" width="310" height="54" rx="8" class="roleHead"/>
+    <text x="1055" y="225" class="name" text-anchor="middle">Administrator</text>
+    <line x1="900" y1="288" x2="1210" y2="288" class="sep"/>
+    <text x="928" y="274" class="field">+ admin_id</text>
+    <text x="928" y="318" class="field">+ updateAlertStatus()</text>
+    <text x="928" y="346" class="field">+ viewModelMetrics()</text>
   </g>
 
-  <g id="dashboard-service">
-    <rect x="970" y="415" width="320" height="170" rx="8" class="classBox"/>
-    <rect x="970" y="415" width="320" height="46" rx="8" class="headPink"/>
-    <rect x="970" y="445" width="320" height="16" class="headPink"/>
-    <text x="1130" y="447" class="textLight" text-anchor="middle">DashboardService</text>
-    <line x1="970" y1="508" x2="1290" y2="508" class="sep"/>
-    <text x="995" y="490" class="field">+ getMetrics()</text>
-    <text x="995" y="535" class="field">+ getRecentAlerts()</text>
-    <text x="995" y="560" class="field">+ getAccountProfile()</text>
-  </g>
-
-  <g id="model-loader">
-    <rect x="1375" y="415" width="250" height="145" rx="8" class="classBox"/>
-    <rect x="1375" y="415" width="250" height="46" rx="8" class="headOrange"/>
-    <rect x="1375" y="445" width="250" height="16" class="headOrange"/>
-    <text x="1500" y="447" class="textLight" text-anchor="middle">ModelLoader</text>
-    <line x1="1375" y1="505" x2="1625" y2="505" class="sep"/>
-    <text x="1398" y="488" class="field">+ loadModel()</text>
-    <text x="1398" y="532" class="field">+ getModelStatus()</text>
+  <g id="researcher-developer">
+    <rect x="1305" y="190" width="310" height="190" rx="8" class="classBox"/>
+    <rect x="1305" y="190" width="310" height="54" rx="8" class="roleHead"/>
+    <text x="1460" y="225" class="name" text-anchor="middle">ResearcherDeveloper</text>
+    <line x1="1305" y1="288" x2="1615" y2="288" class="sep"/>
+    <text x="1333" y="274" class="field">+ developer_id</text>
+    <text x="1333" y="318" class="field">+ generateData()</text>
+    <text x="1333" y="346" class="field">+ trainModel()</text>
   </g>
 
   <g id="transaction">
-    <rect x="90" y="735" width="300" height="170" rx="8" class="classBox"/>
-    <rect x="90" y="735" width="300" height="46" rx="8" class="headBlue"/>
-    <rect x="90" y="765" width="300" height="16" class="headBlue"/>
-    <text x="240" y="767" class="textLight" text-anchor="middle">Transaction</text>
-    <line x1="90" y1="830" x2="390" y2="830" class="sep"/>
-    <text x="115" y="812" class="field">account_id, amount</text>
-    <text x="115" y="857" class="field">type, device, location</text>
-    <text x="115" y="882" class="field">fraud_score, is_fraud</text>
+    <rect x="210" y="645" width="350" height="220" rx="8" class="classBox"/>
+    <rect x="210" y="645" width="350" height="54" rx="8" class="dataHead"/>
+    <text x="385" y="680" class="name" text-anchor="middle">Transaction</text>
+    <line x1="210" y1="760" x2="560" y2="760" class="sep"/>
+    <text x="238" y="728" class="field">+ id, account_id</text>
+    <text x="238" y="754" class="field">+ amount, transaction_type</text>
+    <text x="238" y="790" class="field">+ fraud_score</text>
+    <text x="238" y="818" class="field">+ is_fraud</text>
+    <text x="238" y="846" class="field">+ created_at</text>
   </g>
 
   <g id="alert">
-    <rect x="475" y="735" width="300" height="170" rx="8" class="classBox"/>
-    <rect x="475" y="735" width="300" height="46" rx="8" class="headGreen"/>
-    <rect x="475" y="765" width="300" height="16" class="headGreen"/>
-    <text x="625" y="767" class="textLight" text-anchor="middle">Alert</text>
-    <line x1="475" y1="830" x2="775" y2="830" class="sep"/>
-    <text x="500" y="812" class="field">transaction_id</text>
-    <text x="500" y="857" class="field">risk_score, reason</text>
-    <text x="500" y="882" class="field">status, resolved_at</text>
+    <rect x="675" y="645" width="350" height="220" rx="8" class="classBox"/>
+    <rect x="675" y="645" width="350" height="54" rx="8" class="dataHead"/>
+    <text x="850" y="680" class="name" text-anchor="middle">Alert</text>
+    <line x1="675" y1="760" x2="1025" y2="760" class="sep"/>
+    <text x="703" y="728" class="field">+ id, transaction_id</text>
+    <text x="703" y="754" class="field">+ risk_score, alert_type</text>
+    <text x="703" y="790" class="field">+ reason</text>
+    <text x="703" y="818" class="field">+ status</text>
+    <text x="703" y="846" class="field">+ resolved_at</text>
   </g>
 
-  <g id="account-profile">
-    <rect x="860" y="735" width="300" height="170" rx="8" class="classBox"/>
-    <rect x="860" y="735" width="300" height="46" rx="8" class="headOrange"/>
-    <rect x="860" y="765" width="300" height="16" class="headOrange"/>
-    <text x="1010" y="767" class="textLight" text-anchor="middle">AccountProfile</text>
-    <line x1="860" y1="830" x2="1160" y2="830" class="sep"/>
-    <text x="885" y="812" class="field">account_id</text>
-    <text x="885" y="857" class="field">fraud_rate, open_alerts</text>
-    <text x="885" y="882" class="field">transaction_summary</text>
+  <g id="model-run">
+    <rect x="1140" y="645" width="350" height="220" rx="8" class="classBox"/>
+    <rect x="1140" y="645" width="350" height="54" rx="8" class="modelHead"/>
+    <text x="1315" y="680" class="name" text-anchor="middle">ModelRun</text>
+    <line x1="1140" y1="760" x2="1490" y2="760" class="sep"/>
+    <text x="1168" y="728" class="field">+ id, model_name</text>
+    <text x="1168" y="754" class="field">+ model_version</text>
+    <text x="1168" y="790" class="field">+ metrics_json</text>
+    <text x="1168" y="818" class="field">+ created_at</text>
+    <text x="1168" y="846" class="field">+ notes</text>
   </g>
 
-  <g id="feature-builder">
-    <rect x="1250" y="735" width="300" height="170" rx="8" class="classBox"/>
-    <rect x="1250" y="735" width="300" height="46" rx="8" class="headPurple"/>
-    <rect x="1250" y="765" width="300" height="16" class="headPurple"/>
-    <text x="1400" y="767" class="textLight" text-anchor="middle">FeatureBuilder</text>
-    <line x1="1250" y1="830" x2="1550" y2="830" class="sep"/>
-    <text x="1275" y="812" class="field">+ buildFeatures()</text>
-    <text x="1275" y="857" class="field">amount, velocity</text>
-    <text x="1275" y="882" class="field">device and location signals</text>
-  </g>
+  <path d="M245 380 V510 H315 V645" class="rel"/>
+  <text x="258" y="500" class="small">reviews</text>
 
-  <path d="M805 315 L300 410" class="line"/>
-  <text x="455" y="345" class="small">uses storage</text>
+  <path d="M650 380 V510 H760 V645" class="rel"/>
+  <text x="670" y="500" class="small">investigates</text>
 
-  <path d="M830 315 L700 405" class="line"/>
-  <text x="735" y="360" class="small">scores</text>
+  <path d="M1055 380 V500 H940 V645" class="rel"/>
+  <text x="930" y="490" class="small">updates status</text>
 
-  <path d="M875 315 L1110 405" class="line"/>
-  <text x="980" y="360" class="small">returns summaries</text>
+  <path d="M1460 380 V510 H1405 V645" class="rel"/>
+  <text x="1380" y="500" class="small">trains</text>
 
-  <path d="M850 315 C1050 330 1310 360 1465 410" class="line"/>
-  <text x="1175" y="335" class="small">checks model status</text>
+  <path d="M560 755 H675" class="rel"/>
+  <text x="592" y="734" class="small">creates</text>
+  <text x="577" y="783" class="small">1</text>
+  <text x="642" y="783" class="small">0..*</text>
 
-  <path d="M410 540 C315 620 260 675 240 725" class="line"/>
-  <text x="250" y="655" class="small">persists</text>
+  <path d="M1140 755 H1025" class="rel"/>
+  <text x="1052" y="734" class="small">scores</text>
 
-  <path d="M410 565 C470 655 545 700 610 725" class="line"/>
-  <text x="492" y="690" class="small">persists</text>
-
-  <path d="M850 500 H960" class="line"/>
-  <text x="875" y="480" class="small">risk result</text>
-
-  <path d="M780 585 C790 650 860 700 970 730" class="dash"/>
-  <text x="818" y="675" class="small">derives</text>
-
-  <path d="M690 585 C760 680 1105 700 1280 735" class="line"/>
-  <text x="980" y="690" class="small">uses features</text>
-
-  <path d="M1390 735 C1235 640 980 585 850 515" class="line"/>
-  <text x="1180" y="630" class="small">feature vector</text>
-
-  <path d="M1375 505 H860" class="line"/>
-  <text x="1085" y="488" class="small">trained model</text>
-
-  <path d="M390 820 H465" class="line"/>
-  <text x="406" y="800" class="small">triggers</text>
+  <path d="M1055 380 V440 H1215 V645" class="rel"/>
+  <text x="1132" y="430" class="small">views metrics</text>
 </svg>

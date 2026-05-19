@@ -232,7 +232,7 @@ Briefly describe the roadmap for building PayGuard.
 
 ### 3.6.1 Gantt Chart
 
-Use:
+Use a simplified class diagram showing the four main user roles and the three core system classes they interact with.
 
 ![Figure 3.1: Gantt chart](docs/assets/figures/figure-2-1-gantt-chart.svg)
 
@@ -392,7 +392,7 @@ Use:
 
 ### 5.3.2 Class Diagram
 
-Use:
+Use a simplified class diagram showing the four main user roles and the three core system classes they interact with.
 
 ![Figure 5.4: Class diagram](docs/assets/figures/figure-3-8-class-diagram.svg)
 

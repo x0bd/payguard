@@ -568,7 +568,7 @@ The use case diagram shows the main functions available to the user. These inclu
 
 ### 5.3.2 Class Diagram
 
-The class diagram shows the main system entities and their relationships. It includes transactions, alerts, model runs, account summaries, and the fraud scoring service.
+The class diagram shows the main user roles and core system classes. It links the Finance Officer, Fraud Analyst, Administrator, and Researcher/Developer roles to the transaction, alert, and model run classes they interact with.
 
 ![Figure 5.6: Class diagram](docs/assets/figures/figure-3-8-class-diagram.svg)
 
