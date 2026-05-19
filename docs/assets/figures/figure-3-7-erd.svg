@@ -72,8 +72,6 @@
     <path d="M540 430 H980" class="rel"/>
     <text x="575" y="412" class="note">1 transaction</text>
     <text x="840" y="412" class="note">0..* alerts</text>
-    <text x="690" y="463" class="note">alerts.transaction_id references transactions.id</text>
-
     <line x1="560" y1="430" x2="560" y2="405" class="rel"/>
     <line x1="560" y1="430" x2="560" y2="455" class="rel"/>
     <line x1="950" y1="415" x2="980" y2="430" class="rel"/>
